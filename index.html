@@ -3,55 +3,103 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HEKSEL GENESIS | Luxury Tech</title>
+    <title>HEKSEL GENESIS | NEO-KAI 01</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400;700&display=swap');
-        body { background-color: #050505; color: #ffffff; font-family: 'Inter', sans-serif; overflow-x: hidden; }
-        .glow-effect { box-shadow: 0 0 80px rgba(0, 110, 255, 0.25); }
-        .glass-card { background: rgba(255, 255, 255, 0.02); backdrop-filter: blur(15px); border: 1px solid rgba(255, 255, 255, 0.08); }
-        .hero-gradient { background: radial-gradient(circle at center, rgba(0, 70, 255, 0.12) 0%, transparent 75%); }
-        @keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
-        .animate-text { animation: slideUp 1.2s ease-out forwards; }
+        @import url('https://fonts.googleapis.com/css2?family=Syncopate:wght@400;700&family=Inter:wght@100;400;900&display=swap');
+        
+        body { 
+            background-color: #000; 
+            color: #fff; 
+            font-family: 'Inter', sans-serif; 
+            margin: 0;
+            overflow-x: hidden;
+        }
+
+        .neo-bg {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.8)), 
+                        url('https://images.unsplash.com/photo-1614850523296-d8c1af93d400?q=80&w=2070&auto=format&fit=crop'); /* Fundo tech de reserva */
+            background-size: cover;
+            background-position: center;
+            min-height: 100 screen;
+        }
+
+        .syncopate { font-family: 'Syncopate', sans-serif; }
+        
+        .neon-text-purple { color: #ff00ff; text-shadow: 0 0 15px #ff00ff; }
+        .neon-text-cyan { color: #00ffff; text-shadow: 0 0 15px #00ffff; }
+        
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .btn-gradient {
+            background: linear-gradient(90deg, #ff00ff, #00ffff);
+            transition: all 0.5s ease;
+        }
+        .btn-gradient:hover {
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.6);
+            transform: scale(1.05);
+        }
     </style>
 </head>
-<body class="hero-gradient min-h-screen">
-    <nav class="p-10 flex justify-between items-center max-w-7xl mx-auto">
-        <div class="text-2xl font-bold tracking-[0.4em] uppercase">HEKSEL <span class="font-light text-gray-400">GENESIS</span></div>
-        <div class="text-[10px] tracking-[0.3em] text-gray-500 uppercase font-bold">EST. 2026</div>
+<body class="neo-bg">
+
+    <nav class="p-8 flex justify-between items-center max-w-7xl mx-auto">
+        <div class="text-xl font-bold tracking-[0.5em] syncopate italic">HEKSEL</div>
+        <button class="text-[10px] tracking-widest border border-white/20 px-6 py-2 rounded-full uppercase">Acesso Limitado</button>
     </nav>
 
-    <main class="flex flex-col items-center justify-center pt-10 px-6 text-center">
-        <div class="animate-text">
-            <h2 class="text-blue-500 text-xs tracking-[0.6em] uppercase mb-6 font-bold">O Império Hafy</h2>
-            <h1 class="text-6xl md:text-9xl font-thin tracking-tighter mb-4 leading-none">HEKSEL</h1>
-            <h1 class="text-5xl md:text-8xl font-black tracking-tighter mb-12 text-white">GENESIS</h1>
-        </div>
+    <main class="max-w-7xl mx-auto px-10 py-20 grid md:grid-cols-2 gap-12 items-center">
+        
+        <div class="space-y-6">
+            <div class="inline-block px-4 py-1 border border-cyan-500/50 rounded-md">
+                <span class="text-cyan-400 text-[10px] tracking-[0.4em] uppercase font-bold">NEO-KAI 01 — SÉRIE GENESIS</span>
+            </div>
+            
+            <h1 class="text-7xl md:text-9xl font-black tracking-tighter leading-none syncopate uppercase">
+                HEKSEL<br><span class="neon-text-purple">GENESIS</span>
+            </h1>
 
-        <div class="w-full max-w-5xl aspect-video glass-card rounded-3xl glow-effect flex items-center justify-center mb-16 relative overflow-hidden animate-text" style="animation-delay: 0.3s;">
-             <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-             <span class="text-gray-500 text-sm tracking-[0.3em] uppercase italic">O Futuro Chegou nos Seus Pés</span>
-        </div>
-
-        <div class="animate-text" style="animation-delay: 0.6s;">
-            <p class="max-w-2xl text-gray-400 text-lg md:text-xl font-light mb-12 leading-relaxed">
-                A engenharia do tempo encontrou o design futurista. <br> Sinta o poder da <b>HEKSEL</b> em cada passo.
+            <p class="text-gray-400 text-lg font-light max-w-md italic leading-relaxed">
+                "Não é um tênis. É o argumento visual mais convincente de que o futuro já chegou — e você ainda não decidiu estar nele."
             </p>
 
-            <div class="glass-card px-16 py-8 rounded-full inline-block mb-16 hover:scale-105 transition-transform duration-700">
-                <div class="text-[10px] tracking-[0.5em] text-gray-500 mb-2 uppercase font-bold">Lançamento Mundial</div>
-                <div class="text-7xl font-thin tracking-[0.2em] text-white">14:15</div>
+            <div class="flex gap-8 py-6">
+                <div><span class="block text-4xl font-bold syncopate">77</span><span class="text-[8px] tracking-widest text-gray-500 uppercase">Pares</span></div>
+                <div><span class="block text-4xl font-bold syncopate">01</span><span class="text-[8px] tracking-widest text-gray-500 uppercase">Modelo</span></div>
+                <div><span class="block text-4xl font-bold syncopate">∞</span><span class="text-[8px] tracking-widest text-gray-500 uppercase">Dominação</span></div>
             </div>
 
-            <br>
-            <button class="bg-white text-black px-16 py-5 text-[10px] font-black tracking-[0.4em] uppercase hover:bg-blue-600 hover:text-white transition-all duration-500 rounded-full mb-20 shadow-lg">
-                Reservar meu Heksel Genesis
-            </button>
+            <div class="flex flex-col sm:flex-row gap-4">
+                <button class="btn-gradient px-12 py-5 text-[11px] font-black tracking-[0.3em] uppercase rounded-sm">
+                    Ir para a Fila
+                </button>
+                <button class="bg-transparent border border-white/20 px-12 py-5 text-[11px] font-black tracking-[0.3em] uppercase hover:bg-white hover:text-black transition-all">
+                    Ver Specs
+                </button>
+            </div>
         </div>
+
+        <div class="relative group">
+            <div class="absolute -inset-10 bg-purple-600/20 rounded-full blur-3xl group-hover:bg-cyan-600/20 transition-all duration-1000"></div>
+            <img src="https://i.ibb.co/LzNfGf0/heksel-shoe.png" alt="Heksel Genesis" class="relative z-10 w-full drop-shadow-[0_35px_35px_rgba(0,255,255,0.3)] animate-pulse">
+        </div>
+
     </main>
 
-    <footer class="pb-20 text-center">
-        <p class="text-[9px] text-gray-800 tracking-[0.5em] uppercase font-bold">© 2026 HEKSEL IMPERIUM | TECNOLOGIA E LUXO</p>
+    <section class="py-20 text-center">
+        <div class="glass-panel inline-block px-20 py-10 rounded-3xl">
+            <h3 class="text-gray-500 text-[10px] tracking-[0.8em] uppercase mb-4">Abertura do Portal</h3>
+            <div class="text-8xl md:text-[12rem] font-thin tracking-tighter syncopate neon-text-cyan">14:15</div>
+        </div>
+    </section>
+
+    <footer class="p-20 text-center border-t border-white/5">
+        <p class="text-[9px] text-gray-600 tracking-[0.5em] uppercase">© 2026 HEKSEL WORLDWIDE — NEXT RISK, NEXT LEVEL</p>
     </footer>
+
 </body>
 </html>
