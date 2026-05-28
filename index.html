@@ -402,6 +402,96 @@
         }
         .footer-socials a:hover { border-color: var(--cyan); color: var(--cyan); }
 
+        /* ── THEME CONTROLS ── */
+        body { transition: background 0.8s cubic-bezier(0.4,0,0.2,1), color 0.8s ease; }
+
+        #theme-panel {
+            position: fixed; bottom: 32px; right: 32px; z-index: 9000;
+            display: flex; flex-direction: column; align-items: flex-end; gap: 12px;
+        }
+
+        #btn-random {
+            width: 52px; height: 52px; border-radius: 50%;
+            border: 1px solid rgba(255,255,255,0.15);
+            background: rgba(10,10,14,0.85); backdrop-filter: blur(16px);
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer; transition: all 0.3s ease;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.5);
+            position: relative; overflow: hidden;
+        }
+        #btn-random::before {
+            content: ''; position: absolute; inset: 0; border-radius: 50%;
+            background: conic-gradient(from 0deg, #ff00cc, #9b30ff, #00f5ff, #ff00cc);
+            opacity: 0; transition: opacity 0.3s; z-index: 0;
+        }
+        #btn-random:hover::before { opacity: 1; }
+        #btn-random svg { position: relative; z-index: 1; transition: transform 0.5s ease; }
+        #btn-random:hover svg { transform: rotate(180deg); }
+        #btn-random .tip {
+            position: absolute; right: 64px; top: 50%; transform: translateY(-50%);
+            white-space: nowrap; font-family: 'Syncopate'; font-size: 7px; letter-spacing: 2px;
+            background: rgba(10,10,14,0.92); border: 1px solid rgba(255,255,255,0.1);
+            padding: 6px 12px; border-radius: 2px; color: rgba(255,255,255,0.5);
+            opacity: 0; pointer-events: none; transition: opacity 0.2s;
+        }
+        #btn-random:hover .tip { opacity: 1; }
+
+        #btn-theme {
+            width: 52px; height: 52px; border-radius: 50%;
+            border: 1px solid rgba(255,255,255,0.15);
+            background: rgba(10,10,14,0.85); backdrop-filter: blur(16px);
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer; transition: all 0.3s ease;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.5); position: relative;
+        }
+        #btn-theme:hover { border-color: rgba(255,255,255,0.35); transform: scale(1.08); }
+        #btn-theme .tip {
+            position: absolute; right: 64px; top: 50%; transform: translateY(-50%);
+            white-space: nowrap; font-family: 'Syncopate'; font-size: 7px; letter-spacing: 2px;
+            background: rgba(10,10,14,0.92); border: 1px solid rgba(255,255,255,0.1);
+            padding: 6px 12px; border-radius: 2px; color: rgba(255,255,255,0.5);
+            opacity: 0; pointer-events: none; transition: opacity 0.2s;
+        }
+        #btn-theme:hover .tip { opacity: 1; }
+
+        #color-picker-panel {
+            background: rgba(10,10,14,0.97); backdrop-filter: blur(24px);
+            border: 1px solid rgba(255,255,255,0.1); border-radius: 12px;
+            padding: 20px; width: 220px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.7);
+            opacity: 0; transform: translateY(12px) scale(0.96);
+            pointer-events: none; transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
+        }
+        #color-picker-panel.open {
+            opacity: 1; transform: translateY(0) scale(1); pointer-events: all;
+        }
+        #color-picker-panel h4 {
+            font-family: 'Syncopate'; font-size: 7px; letter-spacing: 3px;
+            color: rgba(255,255,255,0.35); margin-bottom: 16px; text-transform: uppercase;
+        }
+        .picker-row { display: flex; gap: 10px; align-items: center; margin-bottom: 12px; }
+        .picker-label { font-family: 'Syncopate'; font-size: 7px; letter-spacing: 2px; color: rgba(255,255,255,0.3); width: 52px; }
+        .color-input-wrap {
+            flex: 1; height: 36px; border-radius: 6px; overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.1); position: relative;
+        }
+        .color-input-wrap input[type="color"] {
+            width: 200%; height: 200%; border: none; outline: none;
+            cursor: pointer; position: absolute; top: -25%; left: -25%;
+        }
+        #btn-apply-color {
+            width: 100%; margin-top: 8px; padding: 10px;
+            background: linear-gradient(135deg, var(--purple), var(--pink));
+            border: none; color: #fff; font-family: 'Syncopate'; font-size: 7px;
+            letter-spacing: 2px; cursor: pointer; border-radius: 4px; transition: 0.3s;
+        }
+        #btn-apply-color:hover { opacity: 0.8; transform: translateY(-1px); }
+
+        #color-flash {
+            position: fixed; inset: 0; z-index: 8999; pointer-events: none;
+            opacity: 0; transition: opacity 0.12s ease;
+        }
+
         /* ── FADE-UP ANIMATION ── */
         @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
         .reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.7s ease, transform 0.7s ease; }
@@ -438,6 +528,51 @@
 <canvas id="particles-canvas"></canvas>
 
 <div class="scan-line"></div>
+
+<!-- COLOR FLASH -->
+<div id="color-flash"></div>
+
+<!-- THEME PANEL -->
+<div id="theme-panel">
+    <!-- Custom color picker (shown on double click) -->
+    <div id="color-picker-panel">
+        <h4>COR PERSONALIZADA</h4>
+        <div class="picker-row">
+            <span class="picker-label">FUNDO</span>
+            <div class="color-input-wrap">
+                <input type="color" id="pick-bg" value="#060608">
+            </div>
+        </div>
+        <div class="picker-row">
+            <span class="picker-label">TEXTO</span>
+            <div class="color-input-wrap">
+                <input type="color" id="pick-text" value="#ffffff">
+            </div>
+        </div>
+        <button id="btn-apply-color">APLICAR</button>
+    </div>
+
+    <!-- Random luxury color button -->
+    <button id="btn-random" title="">
+        <span class="tip">COR ALEATÓRIA</span>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/>
+            <polyline points="21 16 21 21 16 21"/><line x1="15" y1="15" x2="21" y2="21"/>
+        </svg>
+    </button>
+
+    <!-- Dark/Light toggle -->
+    <button id="btn-theme" title="">
+        <span class="tip">CLIQUE: TEMA · DUPLO: COR</span>
+        <svg id="theme-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="5"/>
+            <line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+            <line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+        </svg>
+    </button>
+</div>
 
 <!-- NAVBAR -->
 <nav id="navbar">
@@ -597,20 +732,24 @@
     </div>
 
     <div class="social-grid reveal">
+
+        <!-- ESQUERDA: tênis -->
         <div class="social-card">
             <a href="https://vt.tiktok.com/ZSxbdSUg9/" target="_blank" class="click-overlay"></a>
-            <video autoplay muted loop playsinline class="video-ad">
-                <source src="video-tiktok.mp4" type="video/mp4">
-            </video>
+            <img src="tenis.png" alt="Heksel Genesis NEO-KAI 01"
+                 class="video-ad"
+                 style="width:100%;height:460px;object-fit:cover;object-position:center;display:block;">
             <div class="social-card-footer">
                 <span class="social-platform" style="color: var(--cyan);">TIKTOK</span>
                 <span class="social-handle">@HAFAVILHA</span>
             </div>
         </div>
 
+        <!-- MEIO: vídeo instagram -->
         <div class="social-card">
             <a href="https://www.instagram.com/p/DY3QC7UzB7v/?igsh=dWFoejdpaTNvZ2Nl" target="_blank" class="click-overlay"></a>
-            <video autoplay muted loop playsinline class="video-ad">
+            <video autoplay muted loop playsinline
+                   style="width:100%;height:460px;object-fit:cover;display:block;">
                 <source src="video-insta.mp4" type="video/mp4">
             </video>
             <div class="social-card-footer">
@@ -619,16 +758,18 @@
             </div>
         </div>
 
+        <!-- DIREITA: relógio -->
         <div class="social-card">
             <a href="https://x.com/i/status/2059987935554830777" target="_blank" class="click-overlay"></a>
-            <video autoplay muted loop playsinline class="video-ad">
-                <source src="video-x.mp4" type="video/mp4">
-            </video>
+            <img src="relogio.png" alt="O tempo está passando — Heksel Genesis"
+                 class="video-ad"
+                 style="width:100%;height:460px;object-fit:cover;object-position:center;display:block;">
             <div class="social-card-footer">
                 <span class="social-platform" style="color: #fff;">X (TWITTER)</span>
                 <span class="social-handle">@HAFAVILHA</span>
             </div>
         </div>
+
     </div>
 </section>
 
@@ -768,6 +909,128 @@
         });
     }, { threshold: 0.1 });
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // ── THEME SYSTEM ──
+    const body = document.body;
+    const btnTheme = document.getElementById('btn-theme');
+    const btnRandom = document.getElementById('btn-random');
+    const pickerPanel = document.getElementById('color-picker-panel');
+    const flash = document.getElementById('color-flash');
+    const themeIcon = document.getElementById('theme-icon');
+
+    let isDark = true;
+    let pickerOpen = false;
+
+    // Moon icon SVG for dark mode
+    const moonSVG = `<circle cx="12" cy="12" r="5"/>
+            <line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+            <line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>`;
+    const sunSVG = `<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>`;
+
+    function applyTheme(bg, text) {
+        body.style.background = bg;
+        body.style.color = text;
+        // Update nav badge, stat labels, section labels to keep contrast
+        const isLight = isLightColor(bg);
+        document.documentElement.style.setProperty('--border', isLight ? 'rgba(0,0,0,0.1)' : 'rgba(255,255,255,0.08)');
+        themeIcon.innerHTML = isLight ? sunSVG : moonSVG;
+        isDark = !isLight;
+    }
+
+    function isLightColor(hex) {
+        const c = hex.replace('#','');
+        const r = parseInt(c.substr(0,2),16);
+        const g = parseInt(c.substr(2,2),16);
+        const b = parseInt(c.substr(4,2),16);
+        return (r*0.299 + g*0.587 + b*0.114) > 128;
+    }
+
+    function hexToRgb(hex) {
+        const c = hex.replace('#','');
+        return [parseInt(c.substr(0,2),16), parseInt(c.substr(2,2),16), parseInt(c.substr(4,2),16)];
+    }
+
+    function doFlash(color, cb) {
+        flash.style.background = color;
+        flash.style.opacity = '0.18';
+        setTimeout(() => { flash.style.opacity = '0'; if(cb) setTimeout(cb, 150); }, 120);
+    }
+
+    // ── Toggle dark/light on single click ──
+    let clickTimer = null;
+    btnTheme.addEventListener('click', () => {
+        clearTimeout(clickTimer);
+        clickTimer = setTimeout(() => {
+            if (isDark) {
+                doFlash('#ffffff', () => applyTheme('#f5f5f0', '#0a0a0e'));
+            } else {
+                doFlash('#000000', () => applyTheme('#060608', '#ffffff'));
+            }
+            pickerPanel.classList.remove('open');
+            pickerOpen = false;
+        }, 220);
+    });
+
+    // ── Open custom color picker on double click ──
+    btnTheme.addEventListener('dblclick', () => {
+        clearTimeout(clickTimer);
+        pickerOpen = !pickerOpen;
+        pickerPanel.classList.toggle('open', pickerOpen);
+    });
+
+    // ── Apply custom colors ──
+    document.getElementById('btn-apply-color').addEventListener('click', () => {
+        const bg = document.getElementById('pick-bg').value;
+        const text = document.getElementById('pick-text').value;
+        doFlash(bg, () => applyTheme(bg, text));
+        pickerPanel.classList.remove('open');
+        pickerOpen = false;
+    });
+
+    // ── Luxury random palettes ──
+    const luxuryPalettes = [
+        { bg: '#0d0d0d', text: '#e8e0d0' },   // Carbon noir
+        { bg: '#f0ece4', text: '#1a1612' },   // Ivory atelier
+        { bg: '#0a0f1e', text: '#c8d8ff' },   // Midnight sapphire
+        { bg: '#1a0a00', text: '#ffd08a' },   // Ember noir
+        { bg: '#03080d', text: '#7efff5' },   // Deep ocean
+        { bg: '#12001a', text: '#e8b4ff' },   // Dark amethyst
+        { bg: '#f7f3ed', text: '#2d1a00' },   // Parchment luxe
+        { bg: '#001a0f', text: '#a0ffcc' },   // Emerald vault
+        { bg: '#1a0010', text: '#ffb3d9' },   // Velvet rose
+        { bg: '#0f0f00', text: '#e8e000' },   // Obsidian gold
+        { bg: '#e8e4dc', text: '#0f0a1a' },   // Chalk couture
+        { bg: '#00121a', text: '#00e5ff' },   // Arctic neon
+        { bg: '#1a1200', text: '#d4af37' },   // Noir doré
+        { bg: '#0a001a', text: '#9b30ff' },   // Ultra violet
+        { bg: '#f5f0f7', text: '#1a0028' },   // Lavender blanc
+    ];
+
+    let lastPaletteIdx = -1;
+    btnRandom.addEventListener('click', () => {
+        let idx;
+        do { idx = Math.floor(Math.random() * luxuryPalettes.length); } while (idx === lastPaletteIdx);
+        lastPaletteIdx = idx;
+        const p = luxuryPalettes[idx];
+
+        // Spinning animation on the button
+        btnRandom.querySelector('svg').style.transform = 'rotate(360deg)';
+        setTimeout(() => { btnRandom.querySelector('svg').style.transform = 'rotate(0deg)'; }, 500);
+
+        doFlash(p.bg, () => applyTheme(p.bg, p.text));
+        pickerPanel.classList.remove('open');
+        pickerOpen = false;
+    });
+
+    // Close picker when clicking outside
+    document.addEventListener('click', e => {
+        if (!btnTheme.contains(e.target) && !pickerPanel.contains(e.target)) {
+            pickerPanel.classList.remove('open');
+            pickerOpen = false;
+        }
+    });
 </script>
 </body>
 </html>
