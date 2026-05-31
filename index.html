@@ -91,15 +91,19 @@ nav.scrolled{box-shadow:0 2px 30px rgba(0,0,0,.06)}
 
 /* LASER SCAN effect */
 .laser-wrap{position:relative;overflow:hidden}
-.laser{position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--cyan),transparent);opacity:0;transition:.2s;z-index:5}
+.laser{position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--cyan),transparent);opacity:.3;z-index:5;animation:laserscan 3s ease-in-out infinite}
 .perf-card:hover .laser{opacity:1;animation:laserscan 1.2s ease-in-out infinite}
-@keyframes laserscan{0%{top:0;opacity:.8}100%{top:100%;opacity:0}}
-.laser-corner{position:absolute;width:16px;height:16px;opacity:0;transition:.3s;z-index:6}
+@keyframes laserscan{0%{top:0;opacity:.6}100%{top:100%;opacity:0}}
+/* Laser corners — always visible, glow on hover */
+.laser-corner{position:absolute;width:18px;height:18px;opacity:.35;transition:.3s;z-index:6}
 .laser-corner.tl{top:12px;left:12px;border-top:2px solid var(--cyan);border-left:2px solid var(--cyan)}
 .laser-corner.tr{top:12px;right:12px;border-top:2px solid var(--cyan);border-right:2px solid var(--cyan)}
 .laser-corner.bl{bottom:12px;left:12px;border-bottom:2px solid var(--cyan);border-left:2px solid var(--cyan)}
 .laser-corner.br{bottom:12px;right:12px;border-bottom:2px solid var(--cyan);border-right:2px solid var(--cyan)}
-.perf-card:hover .laser-corner{opacity:1}
+.perf-card:hover .laser-corner{opacity:1;filter:drop-shadow(0 0 4px var(--cyan))}
+/* Product tile scan — always subtle */
+.prod-tile-scan{position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--cyan),transparent);opacity:.2;animation:laserscan 4s ease-in-out infinite}
+.prod-tile:hover .prod-tile-scan{opacity:1;animation:laserscan 1.4s ease-in-out infinite}
 
 .perf-card-body{padding:20px 24px 28px;flex:1;display:flex;flex-direction:column;border-top:1px solid rgba(255,255,255,.07)}
 .perf-card-tag{font-size:.6rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;margin-bottom:8px}
@@ -123,8 +127,6 @@ nav.scrolled{box-shadow:0 2px 30px rgba(0,0,0,.06)}
 .prod-tile-img-wrap{height:280px;display:flex;align-items:center;justify-content:center;padding:24px;position:relative;overflow:hidden}
 .prod-tile-img{max-height:220px;object-fit:contain;transition:transform .5s ease}
 .prod-tile:hover .prod-tile-img{transform:scale(1.08)}
-.prod-tile-scan{position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--cyan),transparent);opacity:0;transition:.2s}
-.prod-tile:hover .prod-tile-scan{opacity:1;animation:laserscan 1.4s ease-in-out infinite}
 .prod-tile-body{padding:20px 22px 24px;border-top:1px solid var(--border)}
 .prod-tile-line{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px}
 .prod-tile-name{font-family:'Syne',sans-serif;font-weight:800;font-size:.88rem;color:var(--ink)}
@@ -180,11 +182,12 @@ nav.scrolled{box-shadow:0 2px 30px rgba(0,0,0,.06)}
 .studio-dot{width:8px;height:8px;border-radius:50%}
 .studio-canvas{height:240px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
 .studio-canvas-shoe{max-height:180px;filter:drop-shadow(0 10px 30px rgba(0,200,255,.2));animation:float 5s ease-in-out infinite}
-.studio-stickers{position:absolute;inset:0;pointer-events:none}
-.sticker{position:absolute;font-size:clamp(14px,2vw,20px);animation:float 3s ease-in-out infinite}
+.studio-stickers{position:absolute;inset:0;pointer-events:none;z-index:3}
+.sticker{position:absolute;font-size:22px;filter:drop-shadow(0 0 6px rgba(0,200,255,.6));animation:float 3s ease-in-out infinite;user-select:none}
 .studio-bottom{padding:14px 16px;border-top:1px solid rgba(255,255,255,.06);display:flex;gap:8px}
-.studio-tool{flex:1;height:32px;border-radius:6px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;font-size:13px}
-.studio-tool.active-tool{background:rgba(0,200,255,.15);border-color:rgba(0,200,255,.3)}
+.studio-tool{flex:1;height:36px;border-radius:6px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center;font-size:16px;transition:.2s;cursor:pointer}
+.studio-tool:hover{background:rgba(255,255,255,.14);border-color:rgba(255,255,255,.2)}
+.studio-tool.active-tool{background:rgba(0,200,255,.2);border-color:rgba(0,200,255,.4);box-shadow:0 0 12px rgba(0,200,255,.2)}
 
 /* VIP / EMAIL SECTION */
 .vip-sec{padding:110px 5%;background:var(--ice)}
@@ -308,9 +311,12 @@ footer{background:var(--ink);padding:64px 5% 32px}
     <div class="h-acts">
       <a href="#collection" class="btn-dark" onclick="smooth('collection')">
         <span>EXPLORE ALL</span>
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
       </a>
-      <a href="#vip" class="btn-outline" onclick="smooth('vip')">Join Inner Circle</a>
+      <a href="#vip" class="btn-outline" onclick="smooth('vip')" style="display:inline-flex;align-items:center;gap:8px">
+        Join Inner Circle
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
     </div>
     <div style="display:flex;gap:32px;flex-wrap:wrap">
       <div><div style="font-family:'Syne',sans-serif;font-weight:800;font-size:1.2rem">50K+</div><div style="font-size:.68rem;color:var(--muted);letter-spacing:.08em;text-transform:uppercase">Builders</div></div>
@@ -615,7 +621,7 @@ footer{background:var(--ink);padding:64px 5% 32px}
       </div>
       <button class="btn-dark" onclick="openNotify('Heksel Studio')">
         <span>GET EARLY ACCESS</span>
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
       </button>
     </div>
     <div class="studio-visual">
@@ -629,19 +635,21 @@ footer{background:var(--ink);padding:64px 5% 32px}
         <div class="studio-canvas">
           <img src="1000027639-removebg-preview.png" class="studio-canvas-shoe" alt="Studio Preview">
           <div class="studio-stickers">
-            <span class="sticker" style="top:20%;left:15%;animation-delay:0s">⚡</span>
-            <span class="sticker" style="top:60%;right:12%;animation-delay:1s">🔥</span>
-            <span class="sticker" style="bottom:20%;left:20%;animation-delay:2s">✦</span>
+            <span class="sticker" style="top:14%;left:10%;animation-delay:0s;font-size:26px">⚡</span>
+            <span class="sticker" style="top:55%;right:8%;animation-delay:.8s;font-size:22px">🔥</span>
+            <span class="sticker" style="bottom:15%;left:18%;animation-delay:1.6s;font-size:20px">✦</span>
+            <span class="sticker" style="top:30%;right:16%;animation-delay:2.4s;font-size:18px">🎨</span>
+            <span class="sticker" style="bottom:30%;right:20%;animation-delay:.4s;font-size:16px">★</span>
           </div>
           <!-- Scan line over studio -->
           <div style="position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--cyan),transparent);opacity:.5;animation:laserscan 2s ease-in-out infinite"></div>
         </div>
         <div class="studio-bottom">
-          <div class="studio-tool active-tool">🎨</div>
-          <div class="studio-tool">✏️</div>
-          <div class="studio-tool">📐</div>
-          <div class="studio-tool">⚡</div>
-          <div class="studio-tool">💾</div>
+          <div class="studio-tool active-tool" title="Color">🎨</div>
+          <div class="studio-tool" title="Draw">✏️</div>
+          <div class="studio-tool" title="Sticker">⚡</div>
+          <div class="studio-tool" title="Scale">📐</div>
+          <div class="studio-tool" title="Save">💾</div>
         </div>
       </div>
     </div>
@@ -764,10 +772,21 @@ window.addEventListener('scroll',()=>document.getElementById('nav').classList.to
 // SMOOTH SCROLL
 function smooth(id){document.getElementById(id)?.scrollIntoView({behavior:'smooth',block:'start'});return false}
 
-// REVEAL
+// ROBUST REVEAL — works on all browsers + fallback
+function revealAll(){
+  document.querySelectorAll('.rv,.rl,.rr').forEach(el=>el.classList.add('on'));
+}
+// Fallback: if page is already scrolled or observer fails, reveal after 400ms
+setTimeout(revealAll, 2800);
+
 const obs=new IntersectionObserver(entries=>{
-  entries.forEach((e,i)=>{if(e.isIntersecting){setTimeout(()=>e.target.classList.add('on'),i*70);obs.unobserve(e.target)}});
-},{threshold:0.08});
+  entries.forEach((e,i)=>{
+    if(e.isIntersecting){
+      setTimeout(()=>e.target.classList.add('on'), i*60);
+      obs.unobserve(e.target);
+    }
+  });
+},{threshold:0.04, rootMargin:'0px 0px -40px 0px'});
 document.querySelectorAll('.rv,.rl,.rr').forEach(el=>obs.observe(el));
 
 // COLLECTION TABS
