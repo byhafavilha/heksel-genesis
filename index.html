@@ -277,10 +277,42 @@ nav.scrolled{box-shadow:0 2px 30px rgba(0,0,0,.06)}
 .home-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px}
 .home-card{position:relative;background:#0d0d10;overflow:hidden;min-height:500px;display:flex;flex-direction:column;transition:var(--trans)}
 .home-card:hover{transform:translateY(-4px)}
-.home-card-img-wrap{flex:1;display:flex;align-items:center;justify-content:center;padding:32px;position:relative}
-.home-card-img{max-height:260px;object-fit:contain;transition:transform .6s ease}
-.home-card:hover .home-card-img{transform:scale(1.06) translateY(-6px)}
-.home-card-glow{position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:80%;height:40%;background:radial-gradient(ellipse,rgba(201,168,76,.15),transparent 70%);filter:blur(20px)}
+.home-card-img-wrap{flex:1;display:flex;align-items:center;justify-content:center;padding:40px 32px 16px;position:relative;min-height:300px}
+.home-card-img{
+  max-height:260px;object-fit:contain;
+  filter:drop-shadow(0 40px 30px rgba(0,0,0,.45)) drop-shadow(0 10px 15px rgba(0,0,0,.3));
+  animation:shoe-hover 4s ease-in-out infinite;
+  position:relative;z-index:2;
+  transition:transform .6s ease,filter .6s ease;
+}
+.home-card:nth-child(1) .home-card-img{animation-delay:0s}
+.home-card:nth-child(2) .home-card-img{animation-delay:.8s}
+.home-card:nth-child(3) .home-card-img{animation-delay:1.6s}
+@keyframes shoe-hover{
+  0%,100%{transform:translateY(0) rotate(0deg);filter:drop-shadow(0 40px 30px rgba(0,0,0,.45)) drop-shadow(0 10px 15px rgba(0,0,0,.3))}
+  50%{transform:translateY(-18px) rotate(.5deg);filter:drop-shadow(0 55px 40px rgba(0,0,0,.25)) drop-shadow(0 20px 20px rgba(201,168,76,.15))}
+}
+.home-card:hover .home-card-img{
+  transform:translateY(-24px) scale(1.06);
+  filter:drop-shadow(0 60px 40px rgba(0,0,0,.2)) drop-shadow(0 0 30px rgba(201,168,76,.2));
+  animation-play-state:paused;
+}
+/* Shadow on floor — gives depth */
+.home-card-shadow{
+  position:absolute;bottom:8px;left:50%;transform:translateX(-50%);
+  width:60%;height:16px;
+  background:radial-gradient(ellipse,rgba(0,0,0,.35) 0%,transparent 70%);
+  filter:blur(6px);z-index:1;
+  animation:shadow-pulse 4s ease-in-out infinite;
+}
+.home-card:nth-child(1) .home-card-shadow{animation-delay:0s}
+.home-card:nth-child(2) .home-card-shadow{animation-delay:.8s}
+.home-card:nth-child(3) .home-card-shadow{animation-delay:1.6s}
+@keyframes shadow-pulse{
+  0%,100%{transform:translateX(-50%) scaleX(1);opacity:.7}
+  50%{transform:translateX(-50%) scaleX(.65);opacity:.3}
+}
+.home-card-glow{position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:80%;height:50%;background:radial-gradient(ellipse,rgba(201,168,76,.2),rgba(0,200,255,.08) 50%,transparent 75%);filter:blur(24px);z-index:0}
 .home-card-body{padding:24px 28px 28px;border-top:1px solid rgba(255,255,255,.06)}
 .home-card-tag{font-size:.6rem;font-weight:700;letter-spacing:.2em;color:rgba(201,168,76,.6);text-transform:uppercase;margin-bottom:8px;display:block}
 .home-card-name{font-family:'Syne',sans-serif;font-weight:800;font-size:1rem;color:white;margin-bottom:6px}
@@ -312,6 +344,11 @@ nav.scrolled{box-shadow:0 2px 30px rgba(0,0,0,.06)}
 .studio-canvas-shoe{max-height:180px;filter:drop-shadow(0 10px 30px rgba(0,200,255,.2));animation:float 5s ease-in-out infinite}
 .studio-stickers{position:absolute;inset:0;pointer-events:none;z-index:3}
 .sticker{position:absolute;font-size:22px;filter:drop-shadow(0 0 6px rgba(0,200,255,.6));animation:float 3s ease-in-out infinite;user-select:none}
+.s-color{transition:.2s;flex-shrink:0}
+.s-color:hover{transform:scale(1.3);box-shadow:0 0 10px rgba(255,255,255,.3)}
+.s-color.active-color{box-shadow:0 0 0 2px white,0 0 12px rgba(0,200,255,.5)}
+.s-sticker-pick{font-size:22px;cursor:pointer;padding:5px 7px;border-radius:8px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);transition:.2s;user-select:none}
+.s-sticker-pick:hover{background:rgba(0,200,255,.15);border-color:rgba(0,200,255,.3);transform:scale(1.2)}
 .studio-bottom{padding:14px 16px;border-top:1px solid rgba(255,255,255,.06);display:flex;gap:8px}
 .studio-tool{flex:1;height:36px;border-radius:6px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center;font-size:16px;transition:.2s;cursor:pointer}
 .studio-tool:hover{background:rgba(255,255,255,.14);border-color:rgba(255,255,255,.2)}
@@ -415,12 +452,14 @@ footer{background:var(--ink);padding:64px 5% 32px}
 
 /* REVEAL */
 @keyframes fadeup{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:none}}
-.rv{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease}
+.rv{opacity:0;transform:translateY(28px);transition:opacity .6s ease,transform .6s ease}
 .rv.on{opacity:1;transform:none}
-.rl{opacity:0;transform:translateX(-28px);transition:opacity .7s ease,transform .7s ease}
+.rl{opacity:0;transform:translateX(-28px);transition:opacity .6s ease,transform .6s ease}
 .rl.on{opacity:1;transform:none}
-.rr{opacity:0;transform:translateX(28px);transition:opacity .7s ease,transform .7s ease}
+.rr{opacity:0;transform:translateX(28px);transition:opacity .6s ease,transform .6s ease}
 .rr.on{opacity:1;transform:none}
+/* Safety net — force reveal after 1s regardless */
+.rv-safe,.rl-safe,.rr-safe{opacity:1!important;transform:none!important}
 
 /* MODAL SYSTEM */
 .backdrop{display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);backdrop-filter:blur(8px);z-index:900}
@@ -514,7 +553,7 @@ footer{background:var(--ink);padding:64px 5% 32px}
   <div class="eco-inner rv">
     <span class="eco-tag">DIGITAL PRESENCE</span>
     <h2 class="eco-title">JOIN THE<br><span class="eco-grad">ECOSYSTEM.</span></h2>
-    <p class="eco-sub">Siga <strong>@heksel.genesis</strong> e faça parte do círculo íntimo.</p>
+    <p class="eco-sub">Siga <strong>@hafavilha.hafy.oficial</strong> e faça parte do círculo íntimo.</p>
 
     <div class="eco-socials">
 
@@ -808,6 +847,7 @@ footer{background:var(--ink);padding:64px 5% 32px}
       <div class="home-card-img-wrap">
         <div class="home-card-glow"></div>
         <img src="1000027648-removebg-preview.png" class="home-card-img" alt="NEO-WAI Slide">
+        <div class="home-card-shadow"></div>
       </div>
       <div class="home-card-body">
         <span class="home-card-tag">NEO-WAI 01 · SLIDES</span>
@@ -821,6 +861,7 @@ footer{background:var(--ink);padding:64px 5% 32px}
       <div class="home-card-img-wrap">
         <div class="home-card-glow"></div>
         <img src="1000027649-removebg-preview.png" class="home-card-img" alt="NEO-WAI Flip">
+        <div class="home-card-shadow"></div>
       </div>
       <div class="home-card-body">
         <span class="home-card-tag">NEO-WAI 01 · FLIP</span>
@@ -834,6 +875,7 @@ footer{background:var(--ink);padding:64px 5% 32px}
       <div class="home-card-img-wrap">
         <div class="home-card-glow"></div>
         <img src="1000027651-removebg-preview.png" class="home-card-img" alt="NEO-LAI Slipper">
+        <div class="home-card-shadow"></div>
       </div>
       <div class="home-card-body">
         <span class="home-card-tag">NEO-LAI 01 · SLIPPER</span>
@@ -872,25 +914,75 @@ footer{background:var(--ink);padding:64px 5% 32px}
           <div class="studio-dot" style="background:#febc2e"></div>
           <div class="studio-dot" style="background:#28c840"></div>
           <span style="font-family:'Space Mono',monospace;font-size:.6rem;color:rgba(255,255,255,.2);margin-left:8px">HEKSEL STUDIO v1.0</span>
+          <span id="studio-mode-label" style="margin-left:auto;font-family:'Space Mono',monospace;font-size:.55rem;color:var(--cyan);letter-spacing:.08em">COLOR MODE</span>
         </div>
-        <div class="studio-canvas">
-          <img src="1000027639-removebg-preview.png" class="studio-canvas-shoe" alt="Studio Preview">
-          <div class="studio-stickers">
+
+        <!-- STATUS BAR -->
+        <div id="studio-status" style="padding:6px 14px;background:rgba(0,200,255,.06);border-bottom:1px solid rgba(255,255,255,.05);font-family:'Space Mono',monospace;font-size:.55rem;color:rgba(0,200,255,.6);min-height:24px;transition:.3s">
+          Select a tool to start customizing ↓
+        </div>
+
+        <!-- COLOR PANEL -->
+        <div id="panel-color" style="display:none;padding:10px 14px;border-bottom:1px solid rgba(255,255,255,.06)">
+          <div style="font-size:.58rem;color:rgba(255,255,255,.3);letter-spacing:.1em;margin-bottom:8px;font-family:'Space Mono',monospace">SHOE COLOR</div>
+          <div style="display:flex;gap:7px;flex-wrap:wrap">
+            <div class="s-color" onclick="applyShoeColor('#0d0d0f','#0d0d0f','ONYX BLACK')" style="background:#0d0d0f;width:26px;height:26px;border-radius:50%;border:2px solid rgba(255,255,255,.15);cursor:pointer"></div>
+            <div class="s-color" onclick="applyShoeColor('#f3ead8','sepia(1) saturate(0.5)','SAND BEIGE')" style="background:#f3ead8;width:26px;height:26px;border-radius:50%;border:2px solid rgba(255,255,255,.15);cursor:pointer"></div>
+            <div class="s-color" onclick="applyShoeColor('#cc0000','hue-rotate(0deg) saturate(2)','FIRE RED')" style="background:#cc0000;width:26px;height:26px;border-radius:50%;border:2px solid rgba(255,255,255,.15);cursor:pointer"></div>
+            <div class="s-color" onclick="applyShoeColor('#1a3fbf','hue-rotate(200deg) saturate(2)','ROYAL BLUE')" style="background:#1a3fbf;width:26px;height:26px;border-radius:50%;border:2px solid rgba(255,255,255,.15);cursor:pointer"></div>
+            <div class="s-color" onclick="applyShoeColor('#6b2fa0','hue-rotate(270deg) saturate(2)','ULTRA VIOLET')" style="background:#6b2fa0;width:26px;height:26px;border-radius:50%;border:2px solid rgba(255,255,255,.15);cursor:pointer"></div>
+            <div class="s-color" onclick="applyShoeColor('#c9a84c','sepia(1) saturate(2) hue-rotate(10deg)','GOLD')" style="background:#c9a84c;width:26px;height:26px;border-radius:50%;border:2px solid rgba(255,255,255,.15);cursor:pointer"></div>
+            <div class="s-color" onclick="applyShoeColor('#111','hue-rotate(150deg) saturate(3)','NEON GREEN')" style="background:#39ff14;width:26px;height:26px;border-radius:50%;border:2px solid rgba(255,255,255,.15);cursor:pointer"></div>
+            <div class="s-color" onclick="applyShoeColor('#00c8ff','hue-rotate(175deg) saturate(3)','CYAN ICE')" style="background:#00c8ff;width:26px;height:26px;border-radius:50%;border:2px solid rgba(255,255,255,.15);cursor:pointer"></div>
+          </div>
+        </div>
+
+        <!-- STICKER PANEL -->
+        <div id="panel-sticker" style="display:none;padding:10px 14px;border-bottom:1px solid rgba(255,255,255,.06)">
+          <div style="font-size:.58rem;color:rgba(255,255,255,.3);letter-spacing:.1em;margin-bottom:8px;font-family:'Space Mono',monospace">ADD STICKER</div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <span class="s-sticker-pick" onclick="addSticker('⚡')">⚡</span>
+            <span class="s-sticker-pick" onclick="addSticker('🔥')">🔥</span>
+            <span class="s-sticker-pick" onclick="addSticker('👑')">👑</span>
+            <span class="s-sticker-pick" onclick="addSticker('✦')">✦</span>
+            <span class="s-sticker-pick" onclick="addSticker('🎨')">🎨</span>
+            <span class="s-sticker-pick" onclick="addSticker('💎')">💎</span>
+            <span class="s-sticker-pick" onclick="addSticker('🚀')">🚀</span>
+            <span class="s-sticker-pick" onclick="addSticker('★')">★</span>
+          </div>
+        </div>
+
+        <!-- SCALE PANEL -->
+        <div id="panel-scale" style="display:none;padding:10px 14px;border-bottom:1px solid rgba(255,255,255,.06)">
+          <div style="font-size:.58rem;color:rgba(255,255,255,.3);letter-spacing:.1em;margin-bottom:8px;font-family:'Space Mono',monospace">SHOE SIZE</div>
+          <input type="range" min="60" max="130" value="100" oninput="scaleShoe(this.value)"
+            style="width:100%;accent-color:var(--cyan);height:4px">
+          <div style="display:flex;justify-content:space-between;margin-top:4px">
+            <span style="font-size:.55rem;color:rgba(255,255,255,.2);font-family:'Space Mono',monospace">SMALL</span>
+            <span id="scale-val" style="font-size:.55rem;color:var(--cyan);font-family:'Space Mono',monospace">100%</span>
+            <span style="font-size:.55rem;color:rgba(255,255,255,.2);font-family:'Space Mono',monospace">LARGE</span>
+          </div>
+        </div>
+
+        <!-- CANVAS -->
+        <div class="studio-canvas" id="studio-canvas">
+          <img src="1000027639-removebg-preview.png" class="studio-canvas-shoe" id="studio-shoe" alt="Studio Preview">
+          <div class="studio-stickers" id="studio-sticker-layer">
             <span class="sticker" style="top:14%;left:10%;animation-delay:0s;font-size:26px">⚡</span>
             <span class="sticker" style="top:55%;right:8%;animation-delay:.8s;font-size:22px">🔥</span>
             <span class="sticker" style="bottom:15%;left:18%;animation-delay:1.6s;font-size:20px">✦</span>
             <span class="sticker" style="top:30%;right:16%;animation-delay:2.4s;font-size:18px">🎨</span>
             <span class="sticker" style="bottom:30%;right:20%;animation-delay:.4s;font-size:16px">★</span>
           </div>
-          <!-- Scan line over studio -->
           <div style="position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--cyan),transparent);opacity:.5;animation:laserscan 2s ease-in-out infinite"></div>
         </div>
+
         <div class="studio-bottom">
-          <div class="studio-tool active-tool" title="Color">🎨</div>
-          <div class="studio-tool" title="Draw">✏️</div>
-          <div class="studio-tool" title="Sticker">⚡</div>
-          <div class="studio-tool" title="Scale">📐</div>
-          <div class="studio-tool" title="Save">💾</div>
+          <div class="studio-tool active-tool" id="tool-color" title="Color" onclick="activateTool('color')">🎨</div>
+          <div class="studio-tool" id="tool-draw" title="Draw" onclick="activateTool('draw')">✏️</div>
+          <div class="studio-tool" id="tool-sticker" title="Sticker" onclick="activateTool('sticker')">⚡</div>
+          <div class="studio-tool" id="tool-scale" title="Scale" onclick="activateTool('scale')">📐</div>
+          <div class="studio-tool" id="tool-save" title="Save" onclick="studioSave()">💾</div>
         </div>
       </div>
     </div>
@@ -1097,9 +1189,10 @@ function smooth(id){document.getElementById(id)?.scrollIntoView({behavior:'smoot
 function revealAll(){
   document.querySelectorAll('.rv,.rl,.rr').forEach(el=>el.classList.add('on'));
 }
-// Fallback: if page is already scrolled or observer fails, reveal after 400ms
-setTimeout(revealAll, 2800);
+// Instant reveal for what's already visible
+revealAll();
 
+// Then observe for scroll reveals
 const obs=new IntersectionObserver(entries=>{
   entries.forEach((e,i)=>{
     if(e.isIntersecting){
@@ -1107,8 +1200,13 @@ const obs=new IntersectionObserver(entries=>{
       obs.unobserve(e.target);
     }
   });
-},{threshold:0.04, rootMargin:'0px 0px -40px 0px'});
-document.querySelectorAll('.rv,.rl,.rr').forEach(el=>obs.observe(el));
+},{threshold:0.01, rootMargin:'50px 0px 0px 0px'});
+document.querySelectorAll('.rv,.rl,.rr').forEach(el=>{
+  el.classList.remove('on'); // reset first
+  obs.observe(el);
+});
+// Hard fallback at 800ms — nothing stays hidden
+setTimeout(revealAll, 800);
 
 // COLLECTION TABS
 function switchTab(tab){
@@ -1150,7 +1248,133 @@ function submitNotify(){
   setTimeout(()=>{window.open('https://wa.me/5553991855262?text='+encodeURIComponent(msg),'_blank')},1200);
 }
 
-// NOTIFY TAB SWITCH
+// ── HEKSEL STUDIO ──
+let currentTool = 'color';
+let shoeScale = 100;
+let stickerCount = 0;
+
+function activateTool(tool){
+  currentTool = tool;
+  // Reset all tool buttons
+  ['color','draw','sticker','scale'].forEach(t=>{
+    const el = document.getElementById('tool-'+t);
+    if(el){ el.classList.remove('active-tool'); }
+  });
+  document.getElementById('tool-'+tool)?.classList.add('active-tool');
+
+  // Hide all panels
+  ['panel-color','panel-sticker','panel-scale'].forEach(p=>{
+    const el = document.getElementById(p);
+    if(el) el.style.display='none';
+  });
+
+  const status = document.getElementById('studio-status');
+  const modeLabel = document.getElementById('studio-mode-label');
+
+  if(tool==='color'){
+    document.getElementById('panel-color').style.display='block';
+    status.textContent = '🎨 Pick a color to apply to the shoe';
+    modeLabel.textContent = 'COLOR MODE';
+  } else if(tool==='draw'){
+    status.textContent = '✏️ Draw mode — coming in Studio v2.0';
+    modeLabel.textContent = 'DRAW MODE';
+    // Flash the shoe
+    const shoe = document.getElementById('studio-shoe');
+    shoe.style.filter='drop-shadow(0 0 20px rgba(0,200,255,.8))';
+    setTimeout(()=>{ shoe.style.filter='drop-shadow(0 10px 30px rgba(0,200,255,.2))'; },600);
+  } else if(tool==='sticker'){
+    document.getElementById('panel-sticker').style.display='block';
+    status.textContent = '⚡ Choose a sticker to add to the shoe';
+    modeLabel.textContent = 'STICKER MODE';
+  } else if(tool==='scale'){
+    document.getElementById('panel-scale').style.display='block';
+    status.textContent = '📐 Drag slider to resize the shoe';
+    modeLabel.textContent = 'SCALE MODE';
+  }
+}
+
+function applyShoeColor(hex, filter, name){
+  const shoe = document.getElementById('studio-shoe');
+  shoe.style.filter = `drop-shadow(0 10px 30px rgba(0,200,255,.3)) ${filter==='#0d0d0f' ? 'brightness(.3)' : 'sepia(0)'}`;
+
+  // Apply a CSS filter trick based on color
+  const filterMap = {
+    'ONYX BLACK': 'brightness(0.15) contrast(1.2)',
+    'SAND BEIGE': 'sepia(.5) saturate(.8) brightness(1.1)',
+    'FIRE RED': 'hue-rotate(330deg) saturate(2.5) brightness(.9)',
+    'ROYAL BLUE': 'hue-rotate(195deg) saturate(2.5) brightness(.85)',
+    'ULTRA VIOLET': 'hue-rotate(260deg) saturate(2.5) brightness(.8)',
+    'GOLD': 'sepia(1) saturate(2.5) hue-rotate(15deg)',
+    'NEON GREEN': 'hue-rotate(90deg) saturate(3) brightness(1.1)',
+    'CYAN ICE': 'hue-rotate(175deg) saturate(3) brightness(1.05)',
+  };
+  shoe.style.filter = (filterMap[name]||'none') + ' drop-shadow(0 20px 30px rgba(0,0,0,.4))';
+  shoe.style.transition = 'filter .5s ease';
+
+  // Highlight active color
+  document.querySelectorAll('.s-color').forEach(c=>c.classList.remove('active-color'));
+  event.target.classList.add('active-color');
+
+  const status = document.getElementById('studio-status');
+  status.textContent = `✅ Applied: ${name}`;
+  status.style.color = hex;
+  setTimeout(()=>{ status.style.color='rgba(0,200,255,.6)'; },2000);
+}
+
+function addSticker(emoji){
+  const layer = document.getElementById('studio-sticker-layer');
+  const span = document.createElement('span');
+  stickerCount++;
+  const positions = [
+    {top:'15%',left:'8%'},{top:'50%',right:'6%'},{bottom:'12%',left:'14%'},
+    {top:'25%',right:'10%'},{bottom:'25%',left:'50%'},{top:'65%',left:'30%'},
+  ];
+  const pos = positions[stickerCount % positions.length];
+  Object.assign(span.style, {
+    position:'absolute', fontSize:'24px', userSelect:'none',
+    animation:`float ${2+Math.random()*2}s ease-in-out infinite`,
+    animationDelay: `${Math.random()*2}s`,
+    filter:'drop-shadow(0 0 6px rgba(0,200,255,.5))',
+    cursor:'pointer', zIndex:'10',
+    ...pos
+  });
+  span.textContent = emoji;
+  span.title = 'Click to remove';
+  span.onclick = ()=>{ span.style.transform='scale(0)'; setTimeout(()=>span.remove(), 300); };
+  span.style.transition = 'transform .3s';
+  layer.appendChild(span);
+
+  document.getElementById('studio-status').textContent = `✅ Added ${emoji} — click sticker to remove`;
+}
+
+function scaleShoe(val){
+  shoeScale = val;
+  document.getElementById('studio-shoe').style.transform = `scale(${val/100})`;
+  document.getElementById('scale-val').textContent = `${val}%`;
+  document.getElementById('studio-status').textContent = `📐 Size: ${val}% — drag to adjust`;
+}
+
+function studioSave(){
+  const tool = document.getElementById('tool-save');
+  tool.classList.add('active-tool');
+  tool.textContent = '⏳';
+  document.getElementById('studio-status').textContent = '💾 Saving your design...';
+  document.getElementById('studio-mode-label').textContent = 'SAVING...';
+  setTimeout(()=>{
+    tool.textContent = '✅';
+    document.getElementById('studio-status').textContent = '🎉 Design saved! Join Early Access to order it.';
+    document.getElementById('studio-mode-label').textContent = 'SAVED!';
+    setTimeout(()=>{
+      tool.textContent = '💾';
+      tool.classList.remove('active-tool');
+      openNotify('Heksel Studio — Custom Build');
+    }, 1800);
+  }, 1200);
+}
+
+// Activate color tool by default on load
+document.addEventListener('DOMContentLoaded', ()=>activateTool('color'));
+</script>
 function switchNotifyTab(tab){
   const emailPanel=document.getElementById('notify-email-panel');
   const waPanel=document.getElementById('notify-wa-panel');
