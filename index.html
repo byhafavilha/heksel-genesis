@@ -62,6 +62,114 @@ nav.scrolled{box-shadow:0 2px 30px rgba(0,0,0,.06)}
 .hero-shoe{width:100%;max-width:620px;filter:drop-shadow(0 30px 60px rgba(0,0,0,.1));animation:float 7s ease-in-out infinite;border-radius:20px}
 @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-16px)}}
 
+/* SOCIAL ECOSYSTEM */
+.social-eco{
+  padding:80px 5% 72px;
+  background:linear-gradient(180deg,var(--white) 0%,var(--ice) 100%);
+  border-bottom:1px solid var(--border);
+  margin-top:0;
+}
+.eco-inner{text-align:center;max-width:900px;margin:0 auto}
+.eco-tag{
+  font-size:.62rem;font-weight:700;letter-spacing:.22em;
+  text-transform:uppercase;color:var(--cyan);
+  display:block;margin-bottom:14px;
+}
+.eco-title{
+  font-family:'Syne',sans-serif;font-weight:800;
+  font-size:clamp(2.2rem,5vw,4rem);
+  line-height:.95;letter-spacing:-.03em;
+  color:var(--ink);margin-bottom:16px;
+}
+.eco-grad{
+  background:linear-gradient(135deg,var(--cyan) 0%,var(--purple) 60%,#ff2d78 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.eco-sub{
+  font-size:.92rem;color:var(--muted);margin-bottom:52px;
+  font-weight:300;letter-spacing:.02em;line-height:1.6;
+}
+.eco-sub strong{color:var(--ink);font-weight:600}
+
+/* Social buttons */
+.eco-socials{
+  display:flex;justify-content:center;
+  gap:20px;flex-wrap:wrap;margin-bottom:52px;
+}
+.eco-btn{
+  display:flex;flex-direction:column;align-items:center;gap:10px;
+  padding:28px 32px;border-radius:18px;
+  border:1.5px solid var(--border);
+  background:var(--white);
+  text-decoration:none;color:var(--ink);
+  transition:all .4s cubic-bezier(.4,0,.2,1);
+  position:relative;overflow:hidden;
+  min-width:140px;
+  animation:eco-float 3s ease-in-out infinite;
+}
+.eco-btn:nth-child(1){animation-delay:0s}
+.eco-btn:nth-child(2){animation-delay:.5s}
+.eco-btn:nth-child(3){animation-delay:1s}
+.eco-btn:nth-child(4){animation-delay:1.5s}
+@keyframes eco-float{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-7px)}
+}
+.eco-btn::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,var(--clr1,#00c8ff),var(--clr2,#8b5cf6));
+  opacity:0;transition:opacity .4s;
+}
+.eco-btn:hover{
+  border-color:transparent;
+  box-shadow:0 20px 50px rgba(0,0,0,.12);
+  transform:translateY(-10px) scale(1.04) !important;
+  animation-play-state:paused;
+}
+.eco-btn:hover::before{opacity:1}
+.eco-btn:hover .eco-icon-wrap,
+.eco-btn:hover .eco-label,
+.eco-btn:hover .eco-handle{
+  color:white;position:relative;z-index:1;
+}
+.eco-icon-wrap{
+  width:48px;height:48px;
+  display:flex;align-items:center;justify-content:center;
+  position:relative;z-index:1;transition:.3s;
+}
+.eco-icon-wrap svg{width:28px;height:28px;color:var(--ink);transition:.3s}
+.eco-btn:hover .eco-icon-wrap svg{color:white}
+.eco-label{
+  font-family:'Syne',sans-serif;font-weight:800;
+  font-size:.65rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--ink);
+  position:relative;z-index:1;transition:.3s;
+}
+.eco-handle{
+  font-size:.68rem;color:var(--muted);
+  position:relative;z-index:1;transition:.3s;
+  letter-spacing:.02em;
+}
+
+/* Stats row */
+.eco-stats{
+  display:flex;justify-content:center;
+  align-items:center;gap:0;
+}
+.eco-stat{text-align:center;padding:0 40px}
+.eco-stat-num{
+  font-family:'Syne',sans-serif;font-weight:800;
+  font-size:1.4rem;color:var(--ink);display:block;margin-bottom:4px;
+}
+.eco-stat-lbl{
+  font-size:.65rem;color:var(--muted);
+  letter-spacing:.12em;text-transform:uppercase;
+}
+.eco-stat-div{
+  width:1px;height:36px;background:var(--border);
+  flex-shrink:0;
+}
+
 /* TICKER */
 .ticker{overflow:hidden;border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:14px 0;background:var(--ink)}
 .ticker-track{display:flex;width:max-content;animation:tick 24s linear infinite}
@@ -207,7 +315,58 @@ nav.scrolled{box-shadow:0 2px 30px rgba(0,0,0,.06)}
 .vip-submit:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(201,168,76,.4)}
 .vip-fine{font-size:.65rem;color:var(--muted);letter-spacing:.04em}
 
-/* VIP SUCCESS */
+/* VIP DUAL CHOICE */
+.vip-choice-grid{
+  display:grid;grid-template-columns:1fr auto 1fr;
+  gap:0;align-items:stretch;
+  max-width:680px;margin:0 auto 0;
+  text-align:left;
+}
+.vip-choice-card{
+  background:white;border:1.5px solid var(--border);
+  border-radius:16px;padding:24px;
+  transition:all .3s ease;
+}
+.vip-choice-card:hover{border-color:var(--gold);box-shadow:0 12px 40px rgba(201,168,76,.12)}
+.vip-choice-card--wa:hover{border-color:#25d366;box-shadow:0 12px 40px rgba(37,211,102,.12)}
+.vip-choice-header{display:flex;align-items:flex-start;gap:14px;margin-bottom:18px}
+.vip-choice-icon{font-size:28px;flex-shrink:0;margin-top:2px}
+.vip-choice-title{font-family:'Syne',sans-serif;font-weight:800;font-size:.92rem;color:var(--ink);margin-bottom:4px}
+.vip-choice-desc{font-size:.72rem;color:var(--muted);line-height:1.5}
+.vip-choice-form{display:flex;flex-direction:column;gap:10px}
+
+/* OR divider */
+.vip-choice-or{
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  padding:0 20px;gap:10px;
+}
+.vip-or-line{flex:1;width:1px;background:var(--border)}
+.vip-or-text{
+  font-family:'Syne',sans-serif;font-weight:800;
+  font-size:.65rem;letter-spacing:.15em;
+  color:var(--muted);padding:6px 10px;
+  border:1.5px solid var(--border);border-radius:50px;
+  background:var(--ice);
+}
+
+/* WhatsApp group button */
+.vip-wa-btn{
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  width:100%;padding:13px;border-radius:10px;
+  background:#25d366;color:white;
+  font-family:'Syne',sans-serif;font-weight:800;
+  font-size:.72rem;letter-spacing:.08em;
+  text-decoration:none;transition:.3s;
+  box-shadow:0 4px 20px rgba(37,211,102,.25);
+}
+.vip-wa-btn:hover{background:#1db954;transform:translateY(-2px);box-shadow:0 8px 28px rgba(37,211,102,.4)}
+
+@media(max-width:680px){
+  .vip-choice-grid{grid-template-columns:1fr}
+  .vip-choice-or{flex-direction:row;padding:16px 0}
+  .vip-or-line{flex:1;height:1px;width:auto}
+}
 .vip-success{display:none;animation:fadeup .6s forwards}
 .vip-success-inner{background:white;border:1px solid rgba(201,168,76,.3);border-radius:16px;padding:36px;box-shadow:0 20px 60px rgba(201,168,76,.1);text-align:center}
 .vip-badge{display:inline-block;background:linear-gradient(135deg,var(--gold),var(--gold-light));border-radius:50px;padding:8px 24px;font-family:'Syne',sans-serif;font-weight:800;font-size:.78rem;letter-spacing:.2em;color:#1a0;margin-bottom:16px}
@@ -327,6 +486,68 @@ footer{background:var(--ink);padding:64px 5% 32px}
   <div class="hero-stage">
     <div class="hero-glow"></div>
     <img src="1000027639-removebg-preview.png" alt="NEO-KAI Performance" class="hero-shoe">
+  </div>
+</section>
+
+<!-- SOCIAL ECOSYSTEM -->
+<section class="social-eco">
+  <div class="eco-inner rv">
+    <span class="eco-tag">DIGITAL PRESENCE</span>
+    <h2 class="eco-title">JOIN THE<br><span class="eco-grad">ECOSYSTEM.</span></h2>
+    <p class="eco-sub">Siga <strong>@heksel.genesis</strong> e faça parte do círculo íntimo.</p>
+
+    <div class="eco-socials">
+
+      <a href="https://www.instagram.com/hafavilha" target="_blank" class="eco-btn" style="--clr1:#e1306c;--clr2:#833ab4">
+        <div class="eco-icon-wrap">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+        </div>
+        <span class="eco-label">INSTAGRAM</span>
+        <span class="eco-handle">@hafavilha</span>
+      </a>
+
+      <a href="https://vt.tiktok.com/ZSxbdSUg9/" target="_blank" class="eco-btn" style="--clr1:#00f2ea;--clr2:#ff0050">
+        <div class="eco-icon-wrap">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.32 6.32 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.78 1.52V6.75a4.85 4.85 0 01-1.01-.06z"/></svg>
+        </div>
+        <span class="eco-label">TIKTOK</span>
+        <span class="eco-handle">@hafavilha</span>
+      </a>
+
+      <a href="https://wa.me/5553991855262" target="_blank" class="eco-btn" style="--clr1:#25d366;--clr2:#128c7e">
+        <div class="eco-icon-wrap">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+        </div>
+        <span class="eco-label">WHATSAPP</span>
+        <span class="eco-handle">Falar com o Fundador</span>
+      </a>
+
+      <a href="https://x.com/hafavilha" target="_blank" class="eco-btn" style="--clr1:#1da1f2;--clr2:#0d8bd9">
+        <div class="eco-icon-wrap">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.73-8.835L1.254 2.25H8.08l4.259 5.63zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+        </div>
+        <span class="eco-label">X (TWITTER)</span>
+        <span class="eco-handle">@hafavilha</span>
+      </a>
+
+    </div>
+
+    <div class="eco-stats">
+      <div class="eco-stat">
+        <span class="eco-stat-num">50K+</span>
+        <span class="eco-stat-lbl">Seguidores</span>
+      </div>
+      <div class="eco-stat-div"></div>
+      <div class="eco-stat">
+        <span class="eco-stat-num">4</span>
+        <span class="eco-stat-lbl">Plataformas</span>
+      </div>
+      <div class="eco-stat-div"></div>
+      <div class="eco-stat">
+        <span class="eco-stat-num">24/7</span>
+        <span class="eco-stat-lbl">Comunidade Ativa</span>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -668,11 +889,58 @@ footer{background:var(--ink);padding:64px 5% 32px}
       <div class="vip-perk"><div class="vip-perk-icon">🔒</div><div class="vip-perk-label">Exclusive Drops</div></div>
       <div class="vip-perk"><div class="vip-perk-icon">💬</div><div class="vip-perk-label">Founder Line</div></div>
     </div>
-    <div class="vip-form">
-      <input class="vip-input" id="vip-email" type="email" placeholder="your@email.com">
-      <button class="vip-submit" onclick="submitVIP()">JOIN NOW</button>
+
+    <!-- CHOICE LABEL -->
+    <p style="font-family:'Syne',sans-serif;font-size:.65rem;font-weight:700;letter-spacing:.2em;color:var(--muted);text-transform:uppercase;margin-bottom:20px">Escolha como entrar</p>
+
+    <!-- DUAL CHOICE CARDS -->
+    <div class="vip-choice-grid">
+
+      <!-- OPTION 1: EMAIL -->
+      <div class="vip-choice-card" id="card-email">
+        <div class="vip-choice-header">
+          <div class="vip-choice-icon">📧</div>
+          <div>
+            <div class="vip-choice-title">Via Email</div>
+            <div class="vip-choice-desc">Receba atualizações exclusivas direto no Gmail</div>
+          </div>
+        </div>
+        <div class="vip-choice-form">
+          <input class="vip-input" id="vip-email" type="email" placeholder="seu@gmail.com">
+          <button class="vip-submit" onclick="submitVIPEmail()">ENTRAR VIA EMAIL →</button>
+        </div>
+      </div>
+
+      <!-- DIVIDER -->
+      <div class="vip-choice-or">
+        <div class="vip-or-line"></div>
+        <span class="vip-or-text">OU</span>
+        <div class="vip-or-line"></div>
+      </div>
+
+      <!-- OPTION 2: WHATSAPP GROUP -->
+      <div class="vip-choice-card vip-choice-card--wa" id="card-whatsapp">
+        <div class="vip-choice-header">
+          <div class="vip-choice-icon">💬</div>
+          <div>
+            <div class="vip-choice-title">Fila de Espera</div>
+            <div class="vip-choice-desc">Entre no grupo oficial do WhatsApp agora</div>
+          </div>
+        </div>
+        <div style="margin:16px 0;padding:12px;background:rgba(37,211,102,.06);border-radius:10px;border:1px solid rgba(37,211,102,.2)">
+          <div style="font-size:.7rem;color:#25d366;font-family:'Syne',sans-serif;font-weight:700;letter-spacing:.1em;margin-bottom:4px">🟢 GRUPO ATIVO</div>
+          <div style="font-size:.75rem;color:var(--muted)">HEKSEL — Fila de Espera Oficial</div>
+        </div>
+        <a href="https://chat.whatsapp.com/G5q3H5MuJSyCmdAOEcf78T?s=cl&p=a&mlu=2" target="_blank" class="vip-wa-btn" id="wa-group-btn">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+          ENTRAR NO GRUPO AGORA
+        </a>
+        <p style="font-size:.62rem;color:var(--muted);margin-top:10px;text-align:center">Acesso imediato · Grupo gratuito · Sair quando quiser</p>
+      </div>
+
     </div>
-    <p class="vip-fine">No spam. Ever. Unsubscribe anytime. 🇧🇷 Designed in Brazil.</p>
+
+    <p class="vip-fine" style="margin-top:28px">No spam. Ever. Unsubscribe anytime. 🇧🇷 Designed in Brazil.</p>
   </div>
   <!-- SUCCESS STATE -->
   <div class="vip-success" id="vip-success">
@@ -740,16 +1008,49 @@ footer{background:var(--ink);padding:64px 5% 32px}
       <div class="modal-title" id="notify-modal-title">Get Notified</div>
       <button class="modal-close" onclick="closeAll()">×</button>
     </div>
-    <p style="font-size:.82rem;color:var(--muted);margin-bottom:20px;line-height:1.7">Be the first to know when this drops. We'll send you a direct notification with your VIP link.</p>
+    <p style="font-size:.78rem;color:var(--muted);margin-bottom:20px;line-height:1.7">Seja o primeiro a saber quando esse modelo chegar. Escolha como quer receber a notificação:</p>
+
     <div id="notify-form">
-      <input class="m-input" id="notify-name" placeholder="Your name">
-      <input class="m-input" id="notify-email" type="email" placeholder="your@email.com">
-      <button class="m-submit gold" onclick="submitNotify()">🔔 NOTIFY ME</button>
+      <!-- Choice tabs -->
+      <div style="display:flex;gap:8px;margin-bottom:18px">
+        <button id="tab-email" onclick="switchNotifyTab('email')"
+          style="flex:1;padding:10px;border-radius:8px;border:1.5px solid var(--ink);background:var(--ink);color:white;font-family:'Syne',sans-serif;font-weight:700;font-size:.68rem;letter-spacing:.08em;transition:.2s">
+          📧 EMAIL
+        </button>
+        <button id="tab-wa" onclick="switchNotifyTab('wa')"
+          style="flex:1;padding:10px;border-radius:8px;border:1.5px solid var(--border);background:transparent;color:var(--ink);font-family:'Syne',sans-serif;font-weight:700;font-size:.68rem;letter-spacing:.08em;transition:.2s">
+          💬 WHATSAPP
+        </button>
+      </div>
+
+      <!-- EMAIL PANEL -->
+      <div id="notify-email-panel">
+        <input class="m-input" id="notify-name" placeholder="Seu nome">
+        <input class="m-input" id="notify-email" type="email" placeholder="seu@gmail.com">
+        <button class="m-submit gold" onclick="submitNotify()">🔔 ME AVISA NO EMAIL</button>
+      </div>
+
+      <!-- WHATSAPP PANEL -->
+      <div id="notify-wa-panel" style="display:none">
+        <div style="background:#f0fdf4;border:1px solid rgba(37,211,102,.25);border-radius:12px;padding:16px;margin-bottom:16px;text-align:center">
+          <div style="font-size:.65rem;font-weight:700;letter-spacing:.1em;color:#25d366;font-family:'Syne',sans-serif;margin-bottom:6px">🟢 GRUPO ATIVO — FILA DE ESPERA</div>
+          <div style="font-size:.78rem;color:var(--muted);line-height:1.6">Entre no grupo oficial da HEKSEL e receba alertas em tempo real sobre o drop, preços e lançamento.</div>
+        </div>
+        <a href="https://chat.whatsapp.com/G5q3H5MuJSyCmdAOEcf78T?s=cl&p=a&mlu=2" target="_blank"
+           style="display:flex;align-items:center;justify-content:center;gap:10px;width:100%;padding:14px;background:#25d366;border-radius:10px;color:white;font-family:'Syne',sans-serif;font-weight:800;font-size:.75rem;letter-spacing:.08em;text-decoration:none;transition:.3s;box-shadow:0 4px 20px rgba(37,211,102,.25)"
+           onmouseover="this.style.background='#1db954'" onmouseout="this.style.background='#25d366'"
+           onclick="closeAll()">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+          ENTRAR NO GRUPO DA FILA
+        </a>
+        <p style="font-size:.62rem;color:var(--muted);text-align:center;margin-top:10px">Gratuito · Sair quando quiser · Grupo oficial</p>
+      </div>
     </div>
+
     <div class="m-success" id="notify-success">
       <div style="font-size:32px;margin-bottom:10px">⚡</div>
-      <div style="font-family:'Syne',sans-serif;font-weight:800;font-size:1rem;margin-bottom:6px">You're on the list!</div>
-      <div style="font-size:.78rem;color:var(--muted)">We'll hit you up the moment it drops.</div>
+      <div style="font-family:'Syne',sans-serif;font-weight:800;font-size:1rem;margin-bottom:6px">Você está na lista!</div>
+      <div style="font-size:.78rem;color:var(--muted)">Te avisamos assim que o drop acontecer. 🇧🇷</div>
     </div>
   </div>
 </div>
@@ -829,10 +1130,27 @@ function submitNotify(){
   setTimeout(()=>{window.open('https://wa.me/5553991855262?text='+encodeURIComponent(msg),'_blank')},1200);
 }
 
-// VIP SUBMIT
-function submitVIP(){
+// NOTIFY TAB SWITCH
+function switchNotifyTab(tab){
+  const emailPanel=document.getElementById('notify-email-panel');
+  const waPanel=document.getElementById('notify-wa-panel');
+  const tabEmail=document.getElementById('tab-email');
+  const tabWa=document.getElementById('tab-wa');
+  if(tab==='email'){
+    emailPanel.style.display='block';waPanel.style.display='none';
+    tabEmail.style.background='var(--ink)';tabEmail.style.color='white';tabEmail.style.borderColor='var(--ink)';
+    tabWa.style.background='transparent';tabWa.style.color='var(--ink)';tabWa.style.borderColor='var(--border)';
+  } else {
+    emailPanel.style.display='none';waPanel.style.display='block';
+    tabWa.style.background='#25d366';tabWa.style.color='white';tabWa.style.borderColor='#25d366';
+    tabEmail.style.background='transparent';tabEmail.style.color='var(--ink)';tabEmail.style.borderColor='var(--border)';
+  }
+}
+
+// VIP EMAIL SUBMIT
+function submitVIPEmail(){
   const email=document.getElementById('vip-email').value.trim();
-  if(!email||!email.includes('@')){alert('Please enter a valid email!');return}
+  if(!email||!email.includes('@')){alert('Por favor, insira um email válido!');return}
   document.getElementById('vip-form-area').style.display='none';
   document.getElementById('vip-success').style.display='block';
   document.getElementById('vip-success').style.animation='fadeup .6s forwards';
