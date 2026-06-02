@@ -537,7 +537,7 @@ footer{background:var(--ink);padding:64px 5% 32px}
       </a>
     </div>
     <div style="display:flex;gap:32px;flex-wrap:wrap">
-      <div><div style="font-family:'Syne',sans-serif;font-weight:800;font-size:1.2rem">50K+</div><div style="font-size:.68rem;color:var(--muted);letter-spacing:.08em;text-transform:uppercase">Builders</div></div>
+      <div><div style="font-family:'Syne',sans-serif;font-weight:800;font-size:1.2rem">1K+</div><div style="font-size:.68rem;color:var(--muted);letter-spacing:.08em;text-transform:uppercase">Builders</div></div>
       <div><div style="font-family:'Syne',sans-serif;font-weight:800;font-size:1.2rem">3</div><div style="font-size:.68rem;color:var(--muted);letter-spacing:.08em;text-transform:uppercase">Lines</div></div>
       <div><div style="font-family:'Syne',sans-serif;font-weight:800;font-size:1.2rem">01</div><div style="font-size:.68rem;color:var(--muted);letter-spacing:.08em;text-transform:uppercase">Drop</div></div>
     </div>
@@ -593,7 +593,7 @@ footer{background:var(--ink);padding:64px 5% 32px}
 
     <div class="eco-stats">
       <div class="eco-stat">
-        <span class="eco-stat-num">50K+</span>
+        <span class="eco-stat-num">1K+</span>
         <span class="eco-stat-lbl">Seguidores</span>
       </div>
       <div class="eco-stat-div"></div>
@@ -1374,7 +1374,8 @@ function studioSave(){
 
 // Activate color tool by default on load
 document.addEventListener('DOMContentLoaded', ()=>activateTool('color'));
-</script>
+
+// ── NOTIFICATION TABS & VIP EMAIL ──
 function switchNotifyTab(tab){
   const emailPanel=document.getElementById('notify-email-panel');
   const waPanel=document.getElementById('notify-wa-panel');
@@ -1402,5 +1403,83 @@ function submitVIPEmail(){
   setTimeout(()=>{window.open('https://wa.me/5553991855262?text='+encodeURIComponent(msg),'_blank')},1500);
 }
 </script>
+
+<!-- MOBILE RESPONSIVENESS -->
+<style>
+@media screen and (max-width: 1024px){
+  nav{ height:56px; padding:0 3%; }
+  .nav-links{ gap:16px; }
+  .nav-links a{ font-size:.65rem; }
+  .nav-brand img{ height:24px; width:24px; }
+  .nav-name{ font-size:.9rem; }
+  .hero{ grid-template-columns:1fr; padding:70px 3% 40px; gap:30px; }
+  .h-title{ font-size:clamp(2rem,5vw,3.5rem); }
+  .h-sub{ max-width:100%; font-size:.95rem; }
+  .hero-shoe{ max-width:100%; }
+  .social-eco{ padding:60px 3% 50px; }
+  .eco-title{ font-size:clamp(2rem,6vw,4rem); }
+  .eco-socials{ grid-template-columns:repeat(2,1fr); gap:12px; }
+  .studio-container{ grid-template-columns:1fr; height:auto; }
+  .studio-canvas{ min-height:400px; }
+  .studio-panel{ width:100%; max-width:100%; }
+}
+
+@media screen and (max-width: 768px){
+  *{ cursor:auto; }
+  nav{ height:52px; padding:0 2%; }
+  .nav-links{ display:none; }
+  .nav-brand img{ height:20px; width:20px; }
+  .nav-name{ font-size:.8rem; }
+  .nav-btn{ padding:6px 12px; font-size:.6rem; }
+  .hero{ min-height:auto; padding:65px 2% 30px; gap:20px; }
+  .h-title{ font-size:clamp(1.8rem,5vw,2.8rem); line-height:1; }
+  .h-tag{ font-size:.6rem; }
+  .h-sub{ font-size:.9rem; margin-bottom:20px; }
+  .h-acts{ gap:10px; }
+  .btn-dark, .btn-outline{ padding:12px 18px; font-size:.68rem; }
+  .hero-shoe{ max-width:90vw; }
+  .hero::before{ width:150%; right:-25%; }
+  .social-eco{ padding:40px 2% 30px; }
+  .eco-tag{ font-size:.65rem; margin-bottom:12px; }
+  .eco-title{ font-size:clamp(1.6rem,4vw,2.5rem); margin-bottom:12px; }
+  .eco-sub{ font-size:.95rem; margin-bottom:30px; }
+  .eco-socials{ grid-template-columns:repeat(2,1fr); gap:10px; }
+  .eco-btn{ padding:24px 12px; min-height:160px; border-radius:12px; }
+  .collections{ padding:50px 2%; }
+  .col-grid{ grid-template-columns:1fr; }
+  .col-card{ border-radius:12px; }
+  .studio{ padding:50px 2%; }
+  .studio-container{ grid-template-columns:1fr; gap:20px; }
+  .studio-canvas{ min-height:350px; }
+  .studio-panel{ width:100%; max-height:200px; overflow-y:auto; }
+  .studio-tools{ flex-wrap:wrap; gap:8px; }
+  .studio-tool{ padding:8px 12px; font-size:.7rem; }
+  .notify-sec{ padding:40px 2%; }
+  .notify-title{ font-size:clamp(1.6rem,4vw,2.5rem); }
+  .notify-subtitle{ font-size:.95rem; }
+  footer{ padding:30px 2%; }
+  .ft-grid{ grid-template-columns:1fr; }
+  .ft-col{ text-align:center; }
+  #cur, #cur-ring{ display:none !important; }
+}
+
+@media screen and (max-width: 480px){
+  nav{ height:48px; }
+  .nav-brand img{ height:18px; }
+  .nav-name{ font-size:.75rem; }
+  .hero{ padding:55px 2% 20px; gap:15px; }
+  .h-title{ font-size:clamp(1.4rem,4vw,2.2rem); }
+  .h-sub{ font-size:.85rem; }
+  .h-acts{ flex-direction:column; }
+  .btn-dark, .btn-outline{ width:100%; justify-content:center; padding:10px 16px; font-size:.65rem; }
+  .eco-socials{ grid-template-columns:1fr; }
+  .eco-btn{ padding:20px 12px; min-height:140px; border-radius:10px; }
+  .col-card{ border-radius:10px; }
+  .studio-container{ gap:15px; }
+  .studio-canvas{ min-height:300px; }
+  .eco-title, .notify-title{ font-size:clamp(1.2rem,3.5vw,2rem); }
+}
+</style>
+
 </body>
 </html>
