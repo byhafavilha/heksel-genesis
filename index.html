@@ -6,1231 +6,1387 @@
 <title>HEKSEL IMPERIUM — The NEO Collection</title>
 <link rel="icon" href="1000027280.png" type="image/png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Montserrat:wght@300;400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --white:#ffffff;--off-white:#fafaf9;--pearl:#f8f7f5;--ink:#0a0a0b;--muted:#8b8b8b;
-  --silver:#d4af37;--gold:#c9a84c;--platinum:#e8e8e8;
-  --black-light:#1a1a1a;--glass:rgba(255,255,255,0.85);
-  --glass-dark:rgba(10,10,11,0.08);--trans:.5s cubic-bezier(.2,.5,.2,1);
-  --ease-smooth:cubic-bezier(.25,.46,.45,.94);
+  --white:#ffffff;--ice:#f5f6f8;--ink:#0d0d0f;--muted:#6b7280;
+  --border:#e5e7eb;--cyan:#00c8ff;--purple:#8b5cf6;--gold:#c9a84c;
+  --gold-light:#f0cc7a;--neon-green:#39ff14;--red:#ff2d2d;--blue:#2563eb;
+  --glass:rgba(255,255,255,0.75);--trans:.4s cubic-bezier(.4,0,.2,1);
 }
 html{scroll-behavior:smooth}
-body{
-  font-family:'Montserrat',sans-serif;
-  background:var(--white);
-  color:var(--ink);
-  overflow-x:hidden;
-  -webkit-font-smoothing:antialiased;
-  text-rendering:optimizeLegibility;
-}
+body{font-family:'DM Sans',sans-serif;background:var(--white);color:var(--ink);overflow-x:hidden;-webkit-font-smoothing:antialiased}
 *{cursor:none}
-#cur{
-  position:fixed;width:8px;height:8px;
-  background:var(--ink);border-radius:50%;
-  pointer-events:none;z-index:99999;
-  transform:translate(-50%,-50%);
-  transition:width .3s,height .3s,background .3s;
-  box-shadow:0 0 20px rgba(0,0,0,.1);
-}
-#cur.hover{
-  width:45px;height:45px;
-  background:rgba(201,168,76,.2);
-  border:2px solid var(--gold);
-  box-shadow:0 0 30px rgba(201,168,76,.3);
-}
-#cur-ring{
-  position:fixed;width:40px;height:40px;
-  border:2px solid rgba(201,168,76,.5);
-  border-radius:50%;pointer-events:none;
-  z-index:99998;transform:translate(-50%,-50%);
-  transition:all .25s var(--ease-smooth);
-}
+#cur{position:fixed;width:10px;height:10px;background:var(--ink);border-radius:50%;pointer-events:none;z-index:99999;transform:translate(-50%,-50%);transition:width .2s,height .2s,background .2s}
+#cur.hover{width:40px;height:40px;background:rgba(0,200,255,.15);border:1.5px solid var(--cyan)}
+#cur-ring{position:fixed;width:36px;height:36px;border:1.5px solid rgba(0,200,255,.4);border-radius:50%;pointer-events:none;z-index:99998;transform:translate(-50%,-50%);transition:all .18s ease}
 
-/* NAV — ULTRA PREMIUM */
-nav{
-  position:fixed;top:0;left:0;right:0;
-  z-index:800;height:70px;
-  padding:0 6%;
-  display:flex;align-items:center;
-  justify-content:space-between;
-  background:rgba(255,255,255,.92);
-  backdrop-filter:blur(40px);
-  border-bottom:1px solid rgba(201,168,76,.15);
-  transition:all .5s var(--ease-smooth);
-  box-shadow:0 0 0 rgba(0,0,0,0);
-}
-nav.scrolled{
-  box-shadow:0 4px 40px rgba(0,0,0,.08);
-  background:rgba(255,255,255,.95);
-  border-bottom:1px solid rgba(0,0,0,.05);
-}
-.nav-brand{display:flex;align-items:center;gap:14px;text-decoration:none}
-.nav-brand img{height:32px;width:32px;object-fit:contain;filter:drop-shadow(0 4px 12px rgba(0,0,0,.08))}
-.nav-name{
-  font-family:'Playfair Display',serif;
-  font-weight:900;font-size:1.1rem;
-  color:var(--ink);letter-spacing:.15em;
-  text-transform:uppercase;
-}
-.nav-links{display:flex;gap:48px;list-style:none}
-.nav-links a{
-  font-size:.7rem;font-weight:600;
-  color:var(--muted);text-decoration:none;
-  letter-spacing:.15em;text-transform:uppercase;
-  transition:all .4s var(--ease-smooth);
-  position:relative;
-}
-.nav-links a::before{
-  content:'';position:absolute;
-  bottom:-6px;left:0;width:0;height:1px;
-  background:var(--gold);
-  transition:width .4s var(--ease-smooth);
-}
-.nav-links a:hover::before,.nav-links a.on::before{width:100%}
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:800;height:64px;padding:0 5%;display:flex;align-items:center;justify-content:space-between;background:rgba(255,255,255,.88);backdrop-filter:blur(24px);border-bottom:1px solid var(--border);transition:box-shadow .3s}
+nav.scrolled{box-shadow:0 2px 30px rgba(0,0,0,.06)}
+.nav-brand{display:flex;align-items:center;gap:9px;text-decoration:none}
+.nav-brand img{height:30px;width:30px;object-fit:contain}
+.nav-name{font-family:'Syne',sans-serif;font-weight:800;font-size:1rem;color:var(--ink);letter-spacing:.1em}
+.nav-links{display:flex;gap:32px;list-style:none}
+.nav-links a{font-size:.72rem;font-weight:500;color:var(--muted);text-decoration:none;letter-spacing:.1em;text-transform:uppercase;transition:color .2s}
 .nav-links a:hover,.nav-links a.on{color:var(--ink)}
-.nav-r{display:flex;align-items:center;gap:16px}
-.nav-btn{
-  padding:11px 28px;border-radius:6px;
-  border:1.5px solid rgba(201,168,76,.5);
-  background:transparent;
-  font-family:'Montserrat',sans-serif;
-  font-weight:700;font-size:.68rem;
-  letter-spacing:.12em;color:var(--ink);
-  transition:all .4s var(--ease-smooth);
-  text-transform:uppercase;
-  cursor:pointer;
-  position:relative;
-  overflow:hidden;
-}
-.nav-btn::before{
-  content:'';position:absolute;
-  inset:0;background:var(--gold);
-  opacity:0;transition:opacity .4s;
-  z-index:-1;
-}
-.nav-btn:hover{
-  border-color:var(--gold);
-  background:var(--gold);
-  color:white;
-  box-shadow:0 12px 40px rgba(201,168,76,.3);
-  transform:translateY(-2px);
-}
-.nav-btn.gold{
-  background:linear-gradient(135deg,var(--gold),#ddbf61);
-  border-color:var(--gold);
-  color:white;
-  box-shadow:0 8px 24px rgba(201,168,76,.25);
-}
+.nav-links a.on{position:relative}
+.nav-links a.on::after{content:'';position:absolute;bottom:-4px;left:0;right:0;height:1.5px;background:linear-gradient(90deg,var(--cyan),var(--purple))}
+.nav-r{display:flex;align-items:center;gap:12px}
+.nav-btn{padding:8px 20px;border-radius:8px;border:1.5px solid var(--ink);background:transparent;font-family:'Syne',sans-serif;font-weight:700;font-size:.68rem;letter-spacing:.08em;color:var(--ink);transition:var(--trans)}
+.nav-btn:hover,.nav-btn.gold{background:var(--ink);color:white}
+.nav-btn.gold{background:linear-gradient(135deg,var(--gold),var(--gold-light));border-color:transparent;color:#1a0}
 
-/* HERO — CINEMATIC */
-.hero{
-  min-height:100vh;
-  display:grid;grid-template-columns:1fr 1.1fr;
-  align-items:center;
-  padding:100px 6% 80px;gap:60px;
-  position:relative;overflow:hidden;
-  background:linear-gradient(135deg,var(--white) 0%,var(--pearl) 100%);
-}
-.hero::before{
-  content:'';position:absolute;
-  right:-20%;top:-30%;
-  width:80%;height:150%;
-  background:radial-gradient(ellipse 800px 600px,rgba(201,168,76,.08) 0%,transparent 70%);
-  pointer-events:none;
-  filter:blur(60px);
-}
-.hero::after{
-  content:'';position:absolute;
-  left:-10%;bottom:-10%;
-  width:60%;height:60%;
-  background:radial-gradient(ellipse,rgba(201,168,76,.05) 0%,transparent 70%);
-  pointer-events:none;
-  filter:blur(80px);
-}
-.h-tag{
-  display:inline-flex;align-items:center;gap:12px;
-  font-size:.72rem;font-weight:700;
-  letter-spacing:.25em;color:var(--gold);
-  text-transform:uppercase;
-  margin-bottom:28px;
-  opacity:0;animation:fadeup 1s .3s var(--ease-smooth) forwards;
-  background:rgba(201,168,76,.08);
-  padding:8px 16px;border-radius:40px;
-  width:fit-content;
-}
-.h-dot{
-  width:6px;height:6px;border-radius:50%;
-  background:var(--gold);
-  animation:pulse 2s ease-in-out infinite;
-}
-@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(1.2)}}
-.h-title{
-  font-family:'Playfair Display',serif;
-  font-weight:900;
-  font-size:clamp(3.5rem,8vw,6.5rem);
-  line-height:.95;letter-spacing:-.02em;
-  margin-bottom:30px;
-  opacity:0;animation:fadeup 1s .4s var(--ease-smooth) forwards;
-  color:var(--ink);
-}
-.h-title .g{
-  background:linear-gradient(120deg,var(--gold) 0%,#e8d5b7 50%,var(--gold) 100%);
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
-  background-clip:text;
-  filter:drop-shadow(0 4px 12px rgba(201,168,76,.2));
-}
-.h-sub{
-  font-size:1.1rem;color:var(--muted);
-  line-height:1.8;max-width:420px;
-  margin-bottom:42px;font-weight:300;
-  opacity:0;animation:fadeup 1s .5s var(--ease-smooth) forwards;
-  letter-spacing:.01em;
-}
-.h-acts{
-  display:flex;gap:18px;flex-wrap:wrap;
-  margin-bottom:50px;
-  opacity:0;animation:fadeup 1s .6s var(--ease-smooth) forwards;
-}
-.btn-dark{
-  display:inline-flex;align-items:center;gap:12px;
-  padding:16px 36px;
-  border-radius:8px;
-  background:var(--ink);color:white;
-  font-family:'Montserrat',sans-serif;
-  font-weight:700;font-size:.78rem;
-  letter-spacing:.12em;text-decoration:none;
-  text-transform:uppercase;
-  transition:all .5s var(--ease-smooth);
-  position:relative;overflow:hidden;
-  border:none;cursor:pointer;
-  box-shadow:0 12px 40px rgba(0,0,0,.15);
-}
-.btn-dark::before{
-  content:'';position:absolute;
-  inset:0;background:linear-gradient(135deg,var(--gold),#e8d5b7);
-  opacity:0;transition:opacity .5s;
-}
-.btn-dark:hover{
-  transform:translateY(-4px);
-  box-shadow:0 24px 60px rgba(0,0,0,.2);
-}
+/* HERO */
+.hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;align-items:center;padding:80px 5% 60px;gap:40px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;right:-15%;top:-20%;width:70%;height:140%;background:radial-gradient(ellipse,rgba(0,200,255,.06) 0%,rgba(139,92,246,.04) 40%,transparent 70%);pointer-events:none}
+.h-tag{display:inline-flex;align-items:center;gap:8px;font-size:.65rem;font-weight:700;letter-spacing:.2em;color:var(--cyan);text-transform:uppercase;margin-bottom:22px;opacity:0;animation:fadeup .8s .2s forwards}
+.h-dot{width:5px;height:5px;border-radius:50%;background:var(--cyan);animation:blink 1.6s ease-in-out infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
+.h-title{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(3rem,6vw,5.8rem);line-height:.9;letter-spacing:-.03em;margin-bottom:22px;opacity:0;animation:fadeup .8s .3s forwards}
+.h-title .g{background:linear-gradient(135deg,var(--cyan),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.h-sub{font-size:1rem;color:var(--muted);line-height:1.7;max-width:380px;margin-bottom:36px;font-weight:300;opacity:0;animation:fadeup .8s .4s forwards}
+.h-acts{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:44px;opacity:0;animation:fadeup .8s .5s forwards}
+.btn-dark{display:inline-flex;align-items:center;gap:10px;padding:15px 28px;border-radius:10px;background:var(--ink);color:white;font-family:'Syne',sans-serif;font-weight:700;font-size:.75rem;letter-spacing:.08em;text-decoration:none;transition:var(--trans);position:relative;overflow:hidden;border:none}
+.btn-dark::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,var(--cyan),var(--purple));opacity:0;transition:.3s}
+.btn-dark:hover{transform:translateY(-2px);box-shadow:0 12px 40px rgba(0,200,255,.2)}
 .btn-dark:hover::before{opacity:1}
 .btn-dark span,.btn-dark svg{position:relative;z-index:1}
-.btn-outline{
-  display:inline-flex;align-items:center;gap:12px;
-  padding:15px 32px;border-radius:8px;
-  border:2px solid var(--gold);
-  color:var(--ink);font-size:.78rem;
-  font-weight:700;text-decoration:none;
-  transition:all .5s var(--ease-smooth);
-  text-transform:uppercase;
-  letter-spacing:.12em;
-  background:transparent;
-  cursor:pointer;
-}
-.btn-outline:hover{
-  background:var(--gold);
-  color:white;
-  box-shadow:0 16px 50px rgba(201,168,76,.3);
-  transform:translateY(-3px);
-}
+.btn-outline{display:inline-flex;align-items:center;gap:10px;padding:14px 22px;border-radius:10px;border:1.5px solid var(--border);color:var(--ink);font-size:.75rem;font-weight:500;text-decoration:none;transition:.2s}
+.btn-outline:hover{border-color:#9ca3af;background:var(--ice)}
 
-/* HERO PRODUCT */
-.hero-stage{
-  position:relative;
-  display:flex;align-items:center;
-  justify-content:center;
-  opacity:0;animation:fadeup 1s .5s var(--ease-smooth) forwards;
-}
-.hero-glow{
-  position:absolute;bottom:10%;left:50%;
-  transform:translateX(-50%);
-  width:90%;height:35%;
-  background:radial-gradient(ellipse,rgba(201,168,76,.25) 0%,rgba(201,168,76,.1) 40%,transparent 75%);
-  filter:blur(80px);
-  animation:glow-pulse 4s ease-in-out infinite;
-}
-@keyframes glow-pulse{0%,100%{opacity:1}50%{opacity:.7}}
-.hero-shoe{
-  width:100%;max-width:680px;
-  filter:drop-shadow(0 50px 100px rgba(0,0,0,.12));
-  animation:float-luxury 8s var(--ease-smooth) infinite;
-  border-radius:24px;
-}
-@keyframes float-luxury{0%,100%{transform:translateY(0)}50%{transform:translateY(-24px)}}
+/* Hero product */
+.hero-stage{position:relative;display:flex;align-items:center;justify-content:center;opacity:0;animation:fadeup .9s .3s forwards}
+.hero-glow{position:absolute;bottom:5%;left:50%;transform:translateX(-50%);width:80%;height:30%;background:radial-gradient(ellipse,rgba(0,200,255,.2),rgba(139,92,246,.1) 50%,transparent 75%);filter:blur(24px)}
+.hero-shoe{width:100%;max-width:620px;filter:drop-shadow(0 30px 60px rgba(0,0,0,.1));animation:float 7s ease-in-out infinite;border-radius:20px}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-16px)}}
 
-/* SOCIAL ECOSYSTEM — LUXURY */
-.social-eco{
-  padding:140px 6% 120px;
-  background:var(--white);
-  border-bottom:2px solid rgba(201,168,76,.1);
-  position:relative;
-  overflow:hidden;
-}
-.social-eco::before{
-  content:'';position:absolute;
-  top:-50%;right:-50%;
-  width:800px;height:800px;
-  background:radial-gradient(ellipse,rgba(201,168,76,.05) 0%,transparent 70%);
-  pointer-events:none;
-}
-.eco-inner{text-align:center;max-width:1200px;margin:0 auto;position:relative;z-index:1}
-.eco-tag{
-  font-size:.75rem;font-weight:800;
-  letter-spacing:.3em;text-transform:uppercase;
-  color:var(--gold);display:block;
-  margin-bottom:24px;
-  background:rgba(201,168,76,.1);
-  padding:10px 20px;border-radius:40px;
-  width:fit-content;margin-left:auto;margin-right:auto;
-}
-.eco-title{
-  font-family:'Playfair Display',serif;
-  font-weight:900;font-size:clamp(3rem,8vw,6.8rem);
-  line-height:.95;letter-spacing:-.02em;
-  color:var(--ink);margin-bottom:24px;
-}
-.eco-grad{
-  background:linear-gradient(120deg,var(--gold) 0%,#e8d5b7 50%,var(--gold) 100%);
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
-  background-clip:text;display:block;
-  filter:drop-shadow(0 4px 12px rgba(201,168,76,.2));
-}
-.eco-sub{
-  font-size:1.15rem;color:var(--muted);
-  margin-bottom:80px;font-weight:300;
-  letter-spacing:.01em;line-height:1.7;
-}
+/* SOCIAL ECOSYSTEM */
+.social-eco{padding:100px 5% 90px;background:linear-gradient(180deg,var(--white) 0%,#f0f2f5 100%);border-bottom:1px solid var(--border)}
+.eco-inner{text-align:center;max-width:1100px;margin:0 auto}
+.eco-tag{font-size:.72rem;font-weight:700;letter-spacing:.25em;text-transform:uppercase;color:var(--cyan);display:block;margin-bottom:18px}
+.eco-title{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(3rem,8vw,6.5rem);line-height:.92;letter-spacing:-.04em;color:var(--ink);margin-bottom:20px}
+.eco-grad{background:linear-gradient(135deg,var(--cyan) 0%,var(--purple) 55%,#ff2d78 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;display:block}
+.eco-sub{font-size:1.05rem;color:var(--muted);margin-bottom:64px;font-weight:300;letter-spacing:.02em;line-height:1.6}
 .eco-sub strong{color:var(--ink);font-weight:700}
 
 /* Social grid */
-.eco-socials{
-  display:grid;grid-template-columns:repeat(4,1fr);
-  gap:24px;margin-bottom:80px;
-}
-.eco-btn{
-  display:flex;flex-direction:column;
-  align-items:center;justify-content:center;gap:20px;
-  padding:50px 28px;
-  border-radius:16px;
-  border:2px solid rgba(201,168,76,.15);
-  background:linear-gradient(135deg,rgba(255,255,255,.8) 0%,rgba(250,250,249,.5) 100%);
-  backdrop-filter:blur(10px);
-  text-decoration:none;color:var(--ink);
-  transition:all .6s var(--ease-smooth);
-  position:relative;overflow:hidden;
-  animation:eco-float 4s var(--ease-smooth) infinite;
-  min-height:240px;
-  cursor:pointer;
-}
+.eco-socials{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:64px}
+.eco-btn{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;padding:40px 20px;border-radius:20px;border:2px solid var(--border);background:var(--white);text-decoration:none;color:var(--ink);transition:all .4s cubic-bezier(.4,0,.2,1);position:relative;overflow:hidden;animation:eco-float 3s ease-in-out infinite;min-height:200px}
 .eco-btn:nth-child(1){animation-delay:0s}
-.eco-btn:nth-child(2){animation-delay:.6s}
-.eco-btn:nth-child(3){animation-delay:1.2s}
-.eco-btn:nth-child(4){animation-delay:1.8s}
-@keyframes eco-float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
-.eco-btn::before{
-  content:'';position:absolute;inset:0;
-  background:linear-gradient(135deg,rgba(201,168,76,.1) 0%,rgba(201,168,76,.05) 100%);
-  opacity:0;transition:opacity .5s;
-}
-.eco-btn:hover{
-  border-color:var(--gold);
-  box-shadow:0 40px 80px rgba(201,168,76,.2);
-  transform:translateY(-16px) scale(1.02);
-  animation-play-state:paused;
-  background:linear-gradient(135deg,rgba(255,255,255,.95) 0%,rgba(250,250,249,.8) 100%);
-}
+.eco-btn:nth-child(2){animation-delay:.5s}
+.eco-btn:nth-child(3){animation-delay:1s}
+.eco-btn:nth-child(4){animation-delay:1.5s}
+@keyframes eco-float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.eco-btn::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,var(--clr1,#00c8ff),var(--clr2,#8b5cf6));opacity:0;transition:opacity .35s}
+.eco-btn:hover{border-color:transparent;box-shadow:0 24px 60px rgba(0,0,0,.14);transform:translateY(-12px) scale(1.03) !important;animation-play-state:paused}
 .eco-btn:hover::before{opacity:1}
-.eco-btn:hover .eco-icon-wrap{
-  background:var(--gold);
-  box-shadow:0 16px 40px rgba(201,168,76,.3);
-}
-.eco-btn:hover .eco-icon-wrap svg,
-.eco-btn:hover .eco-label,
-.eco-btn:hover .eco-handle{color:white}
+.eco-btn:hover .eco-icon-wrap svg,.eco-btn:hover .eco-label,.eco-btn:hover .eco-handle{color:white}
+.eco-icon-wrap{width:68px;height:68px;border-radius:16px;background:var(--ice);border:1.5px solid var(--border);display:flex;align-items:center;justify-content:center;position:relative;z-index:1;transition:.3s;flex-shrink:0}
+.eco-btn:hover .eco-icon-wrap{background:rgba(255,255,255,.2);border-color:rgba(255,255,255,.3)}
+.eco-icon-wrap svg{width:34px;height:34px;color:var(--ink);transition:.3s}
+.eco-label{font-family:'Syne',sans-serif;font-weight:800;font-size:.82rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink);position:relative;z-index:1;transition:.3s}
+.eco-handle{font-size:.75rem;color:var(--muted);position:relative;z-index:1;transition:.3s;letter-spacing:.02em;text-align:center;line-height:1.4}
 
-.eco-icon-wrap{
-  width:80px;height:80px;
-  border-radius:16px;
-  background:linear-gradient(135deg,var(--gold) 0%,#e8d5b7 100%);
-  display:flex;align-items:center;justify-content:center;
-  position:relative;z-index:1;
-  transition:all .5s var(--ease-smooth);
-  flex-shrink:0;
-  box-shadow:0 12px 32px rgba(201,168,76,.25);
-}
-.eco-icon-wrap svg{width:40px;height:40px;color:white;transition:.5s}
+/* Stats */
+.eco-stats{display:flex;justify-content:center;align-items:center;gap:0;background:white;border:1.5px solid var(--border);border-radius:16px;padding:28px 0}
+.eco-stat{text-align:center;padding:0 48px}
+.eco-stat-num{font-family:'Syne',sans-serif;font-weight:800;font-size:2rem;color:var(--ink);display:block;margin-bottom:6px}
+.eco-stat-lbl{font-size:.68rem;color:var(--muted);letter-spacing:.14em;text-transform:uppercase}
+.eco-stat-div{width:1px;height:44px;background:var(--border);flex-shrink:0}
 
-.eco-label{
-  font-family:'Playfair Display',serif;
-  font-weight:800;font-size:.86rem;
-  letter-spacing:.15em;text-transform:uppercase;
-  color:var(--ink);position:relative;z-index:1;
-  transition:.5s;
+/* Mobile — 2 cols */
+@media(max-width:700px){
+  .eco-socials{grid-template-columns:repeat(2,1fr);gap:12px}
+  .eco-btn{padding:32px 16px;min-height:160px;gap:12px}
+  .eco-icon-wrap{width:56px;height:56px}
+  .eco-icon-wrap svg{width:28px;height:28px}
+  .eco-stat{padding:0 24px}
+  .eco-stat-num{font-size:1.4rem}
 }
-.eco-handle{
-  font-size:.78rem;color:var(--muted);
-  position:relative;z-index:1;transition:.5s;
-  letter-spacing:.02em;text-align:center;
-  line-height:1.5;font-weight:500;
+@media(max-width:400px){
+  .eco-socials{grid-template-columns:1fr 1fr}
+  .eco-stats{flex-wrap:wrap;gap:20px;padding:24px}
+  .eco-stat-div{display:none}
 }
 
-/* Stats Section */
-.eco-stats{
-  display:flex;justify-content:center;
-  align-items:center;gap:60px;
-  padding-top:60px;
-  border-top:2px solid rgba(201,168,76,.1);
-}
-.eco-stat{
-  text-align:center;
-}
-.eco-stat-num{
-  font-family:'Playfair Display',serif;
-  font-size:clamp(2rem,5vw,3.5rem);
-  font-weight:900;
-  color:var(--gold);
-  display:block;
-  margin-bottom:12px;
-  text-shadow:0 4px 12px rgba(201,168,76,.15);
-}
-.eco-stat-lbl{
-  font-size:.8rem;font-weight:700;
-  letter-spacing:.2em;text-transform:uppercase;
-  color:var(--muted);
-}
-.eco-stat-div{
-  width:2px;height:60px;
-  background:linear-gradient(180deg,transparent 0%,var(--gold) 50%,transparent 100%);
-}
+/* TICKER */
+.ticker{overflow:hidden;border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:14px 0;background:var(--ink)}
+.ticker-track{display:flex;width:max-content;animation:tick 24s linear infinite}
+.ticker-track span{font-family:'Syne',sans-serif;font-size:.68rem;font-weight:700;letter-spacing:.3em;padding:0 36px;color:rgba(255,255,255,.25);white-space:nowrap}
+.ticker-track .hi{color:var(--cyan)}
+@keyframes tick{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
 
-/* COLLECTIONS */
-.collections{
-  padding:120px 6%;
-  background:linear-gradient(180deg,var(--white) 0%,var(--pearl) 100%);
-  position:relative;
-  overflow:hidden;
-}
-.collections::before{
-  content:'';position:absolute;
-  left:-30%;bottom:-30%;
-  width:60%;height:60%;
-  background:radial-gradient(ellipse,rgba(201,168,76,.06) 0%,transparent 70%);
-  pointer-events:none;
-}
-.col-header{
-  text-align:center;max-width:800px;
-  margin:0 auto 80px;
-  position:relative;z-index:1;
-}
-.col-tag{
-  font-size:.75rem;font-weight:800;
-  letter-spacing:.3em;text-transform:uppercase;
-  color:var(--gold);display:inline-block;
-  margin-bottom:18px;
-}
-.col-title{
-  font-family:'Playfair Display',serif;
-  font-weight:900;font-size:clamp(2.5rem,6vw,5rem);
-  line-height:.95;margin-bottom:18px;
-}
-.col-sub{
-  font-size:1.05rem;color:var(--muted);
-  font-weight:300;line-height:1.7;
-}
-.col-grid{
-  display:grid;grid-template-columns:repeat(3,1fr);
-  gap:32px;position:relative;z-index:1;
-  max-width:1400px;margin:0 auto;
-}
-.col-card{
-  position:relative;
-  border-radius:20px;
-  overflow:hidden;
-  group:1;
-  transition:all .6s var(--ease-smooth);
-  cursor:pointer;
-}
-.col-card img{
-  width:100%;height:400px;
-  object-fit:cover;
-  transition:transform .8s var(--ease-smooth);
-}
-.col-card:hover img{transform:scale(1.08)}
-.col-card-text{
-  position:absolute;bottom:0;left:0;right:0;
-  background:linear-gradient(180deg,transparent 0%,rgba(0,0,0,.4) 60%,rgba(0,0,0,.7) 100%);
-  color:white;padding:40px 30px 30px;
-  transition:all .5s var(--ease-smooth);
-}
-.col-card:hover .col-card-text{
-  background:linear-gradient(180deg,transparent 0%,rgba(0,0,0,.6) 60%,rgba(0,0,0,.9) 100%);
-}
-.col-card-name{
-  font-family:'Playfair Display',serif;
-  font-size:1.4rem;font-weight:900;
-  margin-bottom:8px;
-}
-.col-card-desc{
-  font-size:.9rem;opacity:.9;
-  letter-spacing:.01em;
-}
+/* PERFORMANCE */
+.perf-sec{background:var(--ink);padding:110px 5%}
+.perf-header{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:end;margin-bottom:70px}
+.perf-title{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(2rem,4vw,3.5rem);line-height:1;color:white;letter-spacing:-.02em}
+.perf-title .g{background:linear-gradient(135deg,var(--cyan),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.perf-desc{font-size:.85rem;color:rgba(255,255,255,.4);line-height:1.8;max-width:360px}
+
+/* Product cards */
+.perf-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px}
+.perf-card{position:relative;background:#111;overflow:hidden;min-height:480px;display:flex;flex-direction:column;transition:var(--trans)}
+.perf-card:hover{z-index:2;transform:scale(1.02)}
+.perf-card-img{width:100%;height:280px;object-fit:contain;padding:24px;transition:transform .6s cubic-bezier(.4,0,.2,1)}
+.perf-card:hover .perf-card-img{transform:scale(1.08) translateY(-8px)}
+
+/* LASER SCAN effect */
+.laser-wrap{position:relative;overflow:hidden}
+.laser{position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--cyan),transparent);opacity:.3;z-index:5;animation:laserscan 3s ease-in-out infinite}
+.perf-card:hover .laser{opacity:1;animation:laserscan 1.2s ease-in-out infinite}
+@keyframes laserscan{0%{top:0;opacity:.6}100%{top:100%;opacity:0}}
+.laser-corner{position:absolute;width:18px;height:18px;opacity:.35;transition:.3s;z-index:6}
+.laser-corner.tl{top:12px;left:12px;border-top:2px solid var(--cyan);border-left:2px solid var(--cyan)}
+.laser-corner.tr{top:12px;right:12px;border-top:2px solid var(--cyan);border-right:2px solid var(--cyan)}
+.laser-corner.bl{bottom:12px;left:12px;border-bottom:2px solid var(--cyan);border-left:2px solid var(--cyan)}
+.laser-corner.br{bottom:12px;right:12px;border-bottom:2px solid var(--cyan);border-right:2px solid var(--cyan)}
+.perf-card:hover .laser-corner{opacity:1;filter:drop-shadow(0 0 4px var(--cyan))}
+.prod-tile-scan{position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--cyan),transparent);opacity:.2;animation:laserscan 4s ease-in-out infinite}
+.prod-tile:hover .prod-tile-scan{opacity:1;animation:laserscan 1.4s ease-in-out infinite}
+
+.perf-card-body{padding:20px 24px 28px;flex:1;display:flex;flex-direction:column;border-top:1px solid rgba(255,255,255,.07)}
+.perf-card-tag{font-size:.6rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;margin-bottom:8px}
+.perf-card-name{font-family:'Syne',sans-serif;font-weight:800;font-size:1rem;color:white;margin-bottom:6px;letter-spacing:.04em}
+.perf-card-desc{font-size:.72rem;color:rgba(255,255,255,.3);line-height:1.7;margin-bottom:16px;flex:1}
+.perf-card-footer{display:flex;justify-content:space-between;align-items:center}
+.perf-card-price{font-family:'Syne',sans-serif;font-weight:800;font-size:.9rem;color:white}
+.perf-card-btn{padding:7px 16px;border-radius:6px;font-family:'Syne',sans-serif;font-weight:700;font-size:.62rem;letter-spacing:.08em;border:none;transition:.2s}
+
+/* COLLECTION */
+.collection-sec{padding:110px 5%;background:var(--white)}
+.coll-tabs{display:flex;gap:0;border-bottom:1px solid var(--border);margin-bottom:56px}
+.coll-tab{padding:14px 28px;font-family:'Syne',sans-serif;font-weight:700;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);border:none;background:none;border-bottom:2px solid transparent;margin-bottom:-1px;transition:.2s}
+.coll-tab.active{color:var(--ink);border-bottom-color:var(--ink)}
+.coll-panel{display:none}
+.coll-panel.active{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+
+/* Product tile */
+.prod-tile{border-radius:16px;overflow:hidden;border:1px solid var(--border);transition:var(--trans);position:relative;background:var(--ice)}
+.prod-tile:hover{border-color:rgba(0,200,255,.3);box-shadow:0 20px 50px rgba(0,200,255,.08);transform:translateY(-6px)}
+.prod-tile-img-wrap{height:280px;display:flex;align-items:center;justify-content:center;padding:24px;position:relative;overflow:hidden}
+.prod-tile-img{max-height:220px;object-fit:contain;transition:transform .5s ease}
+.prod-tile:hover .prod-tile-img{transform:scale(1.08)}
+.prod-tile-body{padding:20px 22px 24px;border-top:1px solid var(--border)}
+.prod-tile-line{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px}
+.prod-tile-name{font-family:'Syne',sans-serif;font-weight:800;font-size:.88rem;color:var(--ink)}
+.prod-tile-price{font-family:'Syne',sans-serif;font-weight:700;font-size:.85rem;color:var(--ink)}
+.prod-tile-sub{font-size:.7rem;color:var(--muted);margin-bottom:16px}
+.prod-tile-cta{width:100%;padding:11px;border-radius:8px;font-family:'Syne',sans-serif;font-weight:700;font-size:.7rem;letter-spacing:.08em;border:1.5px solid var(--ink);background:transparent;color:var(--ink);transition:.2s}
+.prod-tile-cta:hover{background:var(--ink);color:white}
+.coming-badge{position:absolute;top:14px;right:14px;background:var(--ink);color:white;font-family:'Syne',sans-serif;font-size:.58rem;font-weight:700;letter-spacing:.12em;padding:5px 10px;border-radius:4px}
+.coming-badge.gold{background:linear-gradient(135deg,var(--gold),var(--gold-light));color:#1a0}
+.notify-btn{width:100%;padding:11px;border-radius:8px;font-family:'Syne',sans-serif;font-weight:700;font-size:.7rem;letter-spacing:.08em;border:none;background:linear-gradient(135deg,var(--gold),var(--gold-light));color:#1a0;transition:.2s}
+.notify-btn:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(201,168,76,.3)}
+
+/* HOME COLLECTION */
+.home-sec{padding:110px 5%;background:linear-gradient(180deg,#0a0a0e 0%,#060608 100%);position:relative;overflow:hidden}
+.home-sec::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 50% at 50% 0%,rgba(201,168,76,.08),transparent);pointer-events:none}
+.home-header{text-align:center;margin-bottom:70px}
+.home-title{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(2rem,4vw,3.2rem);color:white;line-height:1.05;letter-spacing:-.02em;margin-bottom:16px}
+.home-title .g{background:linear-gradient(135deg,var(--gold),var(--gold-light));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.home-sub{font-size:.88rem;color:rgba(255,255,255,.35);line-height:1.8;max-width:480px;margin:0 auto}
+.home-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px}
+.home-card{position:relative;background:#0d0d10;overflow:hidden;min-height:500px;display:flex;flex-direction:column;transition:var(--trans)}
+.home-card:hover{transform:translateY(-4px)}
+.home-card-img-wrap{flex:1;display:flex;align-items:center;justify-content:center;padding:40px 32px 16px;position:relative;min-height:300px}
+.home-card-img{max-height:260px;object-fit:contain;filter:drop-shadow(0 40px 30px rgba(0,0,0,.45)) drop-shadow(0 10px 15px rgba(0,0,0,.3));animation:shoe-hover 4s ease-in-out infinite;position:relative;z-index:2;transition:transform .6s ease,filter .6s ease}
+.home-card:nth-child(1) .home-card-img{animation-delay:0s}
+.home-card:nth-child(2) .home-card-img{animation-delay:.8s}
+.home-card:nth-child(3) .home-card-img{animation-delay:1.6s}
+@keyframes shoe-hover{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+.home-card-glow{position:absolute;bottom:-20%;left:50%;transform:translateX(-50%);width:80%;height:40%;background:radial-gradient(ellipse,rgba(0,200,255,.15),rgba(139,92,246,.08) 50%,transparent 80%);filter:blur(40px)}
+.home-card-shadow{position:absolute;bottom:14%;left:50%;transform:translateX(-50%);width:60%;height:20%;background:radial-gradient(ellipse,rgba(0,0,0,.4),transparent 70%);filter:blur(20px)}
+.home-card-body{padding:32px 28px 40px;border-top:1px solid rgba(255,255,255,.08)}
+.home-card-tag{font-family:'Syne',sans-serif;font-size:.65rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:10px;display:block}
+.home-card-name{font-family:'Syne',sans-serif;font-weight:800;font-size:1.1rem;color:white;margin-bottom:8px}
+.home-card-desc{font-size:.78rem;color:rgba(255,255,255,.35);line-height:1.7;margin-bottom:24px}
+.home-notify-btn{width:100%;padding:14px;border-radius:10px;font-family:'Syne',sans-serif;font-weight:800;font-size:.72rem;letter-spacing:.08em;border:none;transition:.3s;cursor:pointer}
+.home-notify-btn.gold-btn{background:linear-gradient(135deg,var(--gold),var(--gold-light));color:#1a0;box-shadow:0 4px 16px rgba(201,168,76,.25)}
+.home-notify-btn.gold-btn:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(201,168,76,.4)}
 
 /* STUDIO */
-.studio{
-  padding:120px 6%;
-  background:var(--white);
-  position:relative;
-  overflow:hidden;
-}
-.studio::before{
-  content:'';position:absolute;
-  right:-40%;top:-40%;
-  width:800px;height:800px;
-  background:radial-gradient(ellipse,rgba(201,168,76,.07) 0%,transparent 70%);
-  pointer-events:none;
-}
-.studio-title{
-  font-family:'Playfair Display',serif;
-  font-weight:900;font-size:clamp(2.5rem,6vw,5rem);
-  text-align:center;margin-bottom:60px;
-  position:relative;z-index:1;
-}
-.studio-container{
-  display:grid;grid-template-columns:1fr 1fr;
-  gap:80px;position:relative;z-index:1;
-  max-width:1400px;margin:0 auto;
-  align-items:center;
-}
-.studio-canvas{
-  position:relative;
-  min-height:500px;
-  background:linear-gradient(135deg,var(--pearl) 0%,rgba(250,250,249,.6) 100%);
-  border-radius:20px;
-  border:2px solid rgba(201,168,76,.15);
-  display:flex;align-items:center;
-  justify-content:center;
-  overflow:hidden;
-}
-.studio-canvas::before{
-  content:'';position:absolute;
-  inset:0;background:radial-gradient(circle,rgba(201,168,76,.08) 0%,transparent 70%);
-  pointer-events:none;
-}
-.studio-shoe{
-  position:relative;z-index:2;
-  max-width:350px;
-  filter:drop-shadow(0 40px 80px rgba(0,0,0,.15));
-  animation:studio-float 6s var(--ease-smooth) infinite;
-}
-@keyframes studio-float{0%,100%{transform:translateY(0)}50%{transform:translateY(-20px)}}
-#studio-sticker-layer{
-  position:absolute;inset:0;
-  z-index:3;pointer-events:none;
-}
-.studio-panel{
-  display:flex;flex-direction:column;
-  gap:32px;
-  max-width:100%;
-}
-.studio-section{
-  display:flex;flex-direction:column;gap:16px;
-}
-.studio-label{
-  font-family:'Playfair Display',serif;
-  font-size:1rem;font-weight:800;
-  letter-spacing:.15em;text-transform:uppercase;
-  color:var(--ink);
-}
-.studio-tools{
-  display:grid;grid-template-columns:repeat(4,1fr);
-  gap:12px;
-}
-.studio-tool{
-  padding:16px 12px;
-  border-radius:10px;
-  border:2px solid rgba(201,168,76,.2);
-  background:rgba(255,255,255,.6);
-  backdrop-filter:blur(10px);
-  font-size:.75rem;font-weight:700;
-  text-align:center;
-  letter-spacing:.1em;text-transform:uppercase;
-  cursor:pointer;
-  transition:all .4s var(--ease-smooth);
-  color:var(--muted);
-}
-.studio-tool:hover,.studio-tool.active-tool{
-  border-color:var(--gold);
-  background:var(--gold);
-  color:white;
-  box-shadow:0 12px 32px rgba(201,168,76,.2);
-  transform:translateY(-2px);
-}
+.studio-sec{padding:110px 5%;background:var(--white)}
+.studio-inner{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;max-width:1400px;margin:0 auto}
+.studio-badge{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,var(--cyan),var(--purple));color:white;padding:8px 16px;border-radius:50px;font-family:'Syne',sans-serif;font-weight:700;font-size:.62rem;letter-spacing:.12em;margin-bottom:16px}
+.studio-badge-dot{width:6px;height:6px;border-radius:50%;background:white;animation:blink 1.5s ease-in-out infinite}
+.studio-label{display:block;font-family:'Space Mono',monospace;font-size:.65rem;letter-spacing:.2em;color:var(--cyan);margin-bottom:12px}
+.studio-title{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(2rem,5vw,4rem);line-height:1.05;letter-spacing:-.02em;margin-bottom:18px}
+.studio-title .g{background:linear-gradient(135deg,var(--cyan),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.studio-desc{font-size:.92rem;color:var(--muted);line-height:1.8;margin-bottom:28px;max-width:420px}
+.studio-features{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:32px}
+.studio-feat{display:flex;gap:12px;align-items:flex-start;font-size:.8rem;color:var(--ink);line-height:1.6}
+.studio-feat-icon{font-size:1.4rem;flex-shrink:0}
 
-/* NOTIFY */
-.notify-sec{
-  padding:140px 6%;
-  background:linear-gradient(135deg,var(--ink) 0%,#1a1a1a 100%);
-  color:white;
-  position:relative;
-  overflow:hidden;
-  text-align:center;
+/* Studio visual */
+.studio-visual{position:relative}
+.studio-mockup{background:#1a1a1f;border-radius:16px;overflow:hidden;box-shadow:0 40px 80px rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.08)}
+.studio-toolbar{display:flex;align-items:center;gap:10px;padding:12px 14px;background:#0d0d0f;border-bottom:1px solid rgba(255,255,255,.06);min-height:44px}
+.studio-dot{width:10px;height:10px;border-radius:50%}
+.studio-canvas{position:relative;height:380px;padding:20px;background:linear-gradient(135deg,#1a1a1f 0%,#0d0d0f 100%);display:flex;align-items:center;justify-content:center;overflow:hidden}
+.studio-canvas-shoe{max-height:100%;max-width:100%;filter:drop-shadow(0 10px 30px rgba(0,200,255,.2));transition:filter .5s ease}
+.studio-stickers{position:absolute;inset:0}
+.sticker{position:absolute;animation:float 4s ease-in-out infinite;user-select:none;filter:drop-shadow(0 0 8px rgba(0,200,255,.4));transition:transform .2s}
+.sticker:hover{transform:scale(1.2);filter:drop-shadow(0 0 16px rgba(0,200,255,.8))}
+.studio-bottom{display:flex;justify-content:space-around;align-items:center;padding:16px 14px;background:#0d0d0f;border-top:1px solid rgba(255,255,255,.06)}
+.studio-tool{width:40px;height:40px;border-radius:8px;border:1.5px solid rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;font-size:18px;cursor:pointer;transition:.3s;background:transparent}
+.studio-tool:hover,.studio-tool.active-tool{border-color:var(--cyan);background:rgba(0,200,255,.1);box-shadow:0 0 12px rgba(0,200,255,.3)}
+
+/* VIP SECTION */
+.vip-sec{padding:110px 5%;background:linear-gradient(135deg,#0a0a0e 0%,#0f0a1a 50%,#0a0a0e 100%);position:relative;overflow:hidden;text-align:center}
+.vip-sec::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 50% 50%,rgba(139,92,246,.12),transparent);pointer-events:none}
+.vip-inner{max-width:680px;margin:0 auto;position:relative;z-index:1}
+.vip-crown{font-size:3rem;display:block;margin-bottom:16px}
+.vip-title{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(2rem,5vw,3.8rem);color:white;line-height:1.05;letter-spacing:-.02em;margin-bottom:18px}
+.vip-title .g{background:linear-gradient(135deg,var(--cyan),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;display:block}
+.vip-sub{font-size:.92rem;color:rgba(255,255,255,.4);line-height:1.8;margin-bottom:40px;max-width:480px;margin-left:auto;margin-right:auto}
+.vip-perks{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:40px}
+.vip-perk{display:flex;flex-direction:column;align-items:center;gap:10px;padding:20px;border:1px solid rgba(255,255,255,.08);border-radius:12px;background:rgba(139,92,246,.04)}
+.vip-perk-icon{font-size:1.8rem}
+.vip-perk-label{font-family:'Syne',sans-serif;font-weight:700;font-size:.7rem;letter-spacing:.1em;color:rgba(255,255,255,.6);text-transform:uppercase}
+
+/* VIP Choices */
+.vip-choice-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;max-width:680px;margin:0 auto 0;text-align:left}
+.vip-choice-card{background:white;border:1.5px solid var(--border);border-radius:16px;padding:24px;transition:all .3s ease}
+.vip-choice-card:hover{border-color:var(--gold);box-shadow:0 12px 40px rgba(201,168,76,.12)}
+.vip-choice-card--wa:hover{border-color:#25d366;box-shadow:0 12px 40px rgba(37,211,102,.12)}
+.vip-choice-header{display:flex;align-items:flex-start;gap:14px;margin-bottom:18px}
+.vip-choice-icon{font-size:28px;flex-shrink:0;margin-top:2px}
+.vip-choice-title{font-family:'Syne',sans-serif;font-weight:800;font-size:.92rem;color:var(--ink);margin-bottom:4px}
+.vip-choice-desc{font-size:.72rem;color:var(--muted);line-height:1.5}
+.vip-choice-form{display:flex;flex-direction:column;gap:10px}
+.vip-input{width:100%;padding:12px 16px;border:1.5px solid var(--border);border-radius:10px;font-family:'DM Sans',sans-serif;font-size:.88rem;outline:none;color:var(--ink);transition:.2s}
+.vip-input:focus{border-color:var(--purple);box-shadow:0 0 0 3px rgba(139,92,246,.1)}
+.vip-submit{width:100%;padding:13px;border-radius:10px;border:none;background:linear-gradient(135deg,var(--gold),var(--gold-light));color:#1a0;font-family:'Syne',sans-serif;font-weight:800;font-size:.78rem;letter-spacing:.08em;transition:.3s;cursor:pointer}
+.vip-submit:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(201,168,76,.3)}
+
+/* OR divider */
+.vip-choice-or{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 20px;gap:10px}
+.vip-or-line{flex:1;width:1px;background:var(--border)}
+.vip-or-text{font-family:'Syne',sans-serif;font-weight:800;font-size:.65rem;letter-spacing:.15em;color:var(--muted);padding:6px 10px;border:1.5px solid var(--border);border-radius:50px;background:var(--ice)}
+
+/* WhatsApp button */
+.vip-wa-btn{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;padding:13px;border-radius:10px;background:#25d366;color:white;font-family:'Syne',sans-serif;font-weight:800;font-size:.72rem;letter-spacing:.08em;text-decoration:none;transition:.3s;box-shadow:0 4px 20px rgba(37,211,102,.25)}
+.vip-wa-btn:hover{background:#1db954;transform:translateY(-2px);box-shadow:0 8px 28px rgba(37,211,102,.4)}
+
+@media(max-width:680px){
+  .vip-choice-grid{grid-template-columns:1fr}
+  .vip-choice-or{flex-direction:row;padding:16px 0}
+  .vip-or-line{flex:1;height:1px;width:auto}
 }
-.notify-sec::before{
-  content:'';position:absolute;
-  top:-50%;right:-50%;
-  width:800px;height:800px;
-  background:radial-gradient(ellipse,rgba(201,168,76,.1) 0%,transparent 70%);
-  pointer-events:none;
-}
-.notify-sec::after{
-  content:'';position:absolute;
-  bottom:-50%;left:-30%;
-  width:600px;height:600px;
-  background:radial-gradient(ellipse,rgba(201,168,76,.08) 0%,transparent 70%);
-  pointer-events:none;
-}
-.notify-title{
-  font-family:'Playfair Display',serif;
-  font-weight:900;font-size:clamp(2.5rem,6vw,5rem);
-  margin-bottom:24px;
-  line-height:.95;
-  position:relative;z-index:1;
-}
-.notify-subtitle{
-  font-size:1.1rem;
-  color:rgba(255,255,255,.7);
-  margin-bottom:60px;
-  max-width:600px;margin-left:auto;margin-right:auto;
-  font-weight:300;
-  line-height:1.7;
-  position:relative;z-index:1;
-}
-.notify-inner{
-  max-width:500px;margin:0 auto;
-  position:relative;z-index:2;
-}
-.notify-tabs{
-  display:grid;grid-template-columns:1fr 1fr;
-  gap:12px;margin-bottom:32px;
-}
-#tab-email,#tab-wa{
-  padding:14px 20px;
-  border-radius:8px;
-  border:2px solid rgba(201,168,76,.3);
-  background:transparent;
-  color:white;
-  font-weight:700;font-size:.75rem;
-  letter-spacing:.12em;text-transform:uppercase;
-  cursor:pointer;
-  transition:all .4s var(--ease-smooth);
-}
-#tab-email:hover,#tab-wa:hover{
-  border-color:var(--gold);
-}
-.notify-form{
-  display:flex;flex-direction:column;gap:16px;
-}
-#vip-email{
-  padding:16px 20px;
-  border-radius:8px;
-  border:2px solid rgba(201,168,76,.3);
-  background:rgba(255,255,255,.1);
-  backdrop-filter:blur(10px);
-  color:white;
-  font-family:'Montserrat',sans-serif;
-  font-size:.95rem;
-  letter-spacing:.01em;
-  transition:all .4s var(--ease-smooth);
-}
-#vip-email::placeholder{color:rgba(255,255,255,.5)}
-#vip-email:focus{
-  outline:none;
-  border-color:var(--gold);
-  background:rgba(255,255,255,.15);
-  box-shadow:0 0 30px rgba(201,168,76,.2);
-}
-.notify-btn{
-  padding:16px 28px;
-  border-radius:8px;
-  border:none;
-  background:linear-gradient(135deg,var(--gold),#ddbf61);
-  color:white;
-  font-weight:700;font-size:.78rem;
-  letter-spacing:.12em;text-transform:uppercase;
-  cursor:pointer;
-  transition:all .4s var(--ease-smooth);
-  box-shadow:0 12px 40px rgba(201,168,76,.3);
-}
-.notify-btn:hover{
-  transform:translateY(-3px);
-  box-shadow:0 20px 60px rgba(201,168,76,.4);
-}
+.vip-success{display:none;animation:fadeup .6s forwards}
+.vip-success-inner{background:white;border:1px solid rgba(201,168,76,.3);border-radius:16px;padding:36px;box-shadow:0 20px 60px rgba(201,168,76,.1);text-align:center}
+.vip-badge{display:inline-block;background:linear-gradient(135deg,var(--gold),var(--gold-light));border-radius:50px;padding:8px 24px;font-family:'Syne',sans-serif;font-weight:800;font-size:.78rem;letter-spacing:.2em;color:#1a0;margin-bottom:16px}
+.vip-success-title{font-family:'Syne',sans-serif;font-weight:800;font-size:1.4rem;color:var(--ink);margin-bottom:10px}
+.vip-success-sub{font-size:.82rem;color:var(--muted);line-height:1.7}
+.vip-fine{font-size:.65rem;color:rgba(255,255,255,.2);letter-spacing:.08em}
+.confetti-row{display:flex;justify-content:center;gap:8px;font-size:20px;margin-bottom:14px}
 
 /* FOOTER */
-footer{
-  padding:80px 6% 40px;
-  background:var(--black-light);
-  border-top:2px solid rgba(201,168,76,.15);
-  color:rgba(255,255,255,.7);
-}
-.ft-grid{
-  display:grid;grid-template-columns:repeat(4,1fr);
-  gap:60px;margin-bottom:60px;
-  max-width:1400px;margin-left:auto;margin-right:auto;
-}
-.ft-col h4{
-  font-family:'Playfair Display',serif;
-  font-size:1rem;font-weight:800;
-  letter-spacing:.15em;
-  color:white;margin-bottom:20px;
-  text-transform:uppercase;
-}
-.ft-col ul{list-style:none}
-.ft-col li{margin-bottom:12px}
-.ft-col a{
-  color:rgba(255,255,255,.6);
-  text-decoration:none;
-  font-size:.9rem;
-  transition:all .3s;
-}
-.ft-col a:hover{color:var(--gold)}
-.ft-bottom{
-  text-align:center;
-  padding-top:40px;
-  border-top:1px solid rgba(201,168,76,.1);
-  font-size:.85rem;
-}
-.ft-bottom p{margin-bottom:10px}
+footer{background:var(--ink);padding:64px 5% 32px}
+.footer-top{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:40px;margin-bottom:56px}
+.footer-brand-area{}
+.footer-logo{display:flex;align-items:center;gap:8px;margin-bottom:12px}
+.footer-logo img{height:28px;width:28px;object-fit:contain}
+.footer-logo-name{font-family:'Syne',sans-serif;font-weight:800;font-size:.9rem;color:white;letter-spacing:.12em}
+.footer-tagline{font-size:.72rem;color:rgba(255,255,255,.25);line-height:1.7;max-width:200px}
+.footer-col-title{font-family:'Syne',sans-serif;font-weight:700;font-size:.65rem;letter-spacing:.18em;color:rgba(255,255,255,.25);text-transform:uppercase;margin-bottom:16px;display:block}
+.footer-col a{display:block;font-size:.78rem;color:rgba(255,255,255,.45);text-decoration:none;margin-bottom:10px;transition:.2s}
+.footer-col a:hover{color:white}
+.footer-bottom{border-top:1px solid rgba(255,255,255,.08);padding-top:28px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
+.footer-copy{font-size:.65rem;color:rgba(255,255,255,.2);letter-spacing:.06em}
+.footer-socials{display:flex;gap:12px}
+.footer-soc{width:32px;height:32px;border-radius:6px;border:1px solid rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center;text-decoration:none;transition:.2s}
+.footer-soc:hover{border-color:var(--cyan);background:rgba(0,200,255,.08)}
+.footer-soc svg{width:14px;height:14px;fill:rgba(255,255,255,.4)}
+.footer-soc:hover svg{fill:var(--cyan)}
 
-/* ANIMATIONS */
-@keyframes fadeup{
-  from{opacity:0;transform:translateY(30px)}
-  to{opacity:1;transform:translateY(0)}
-}
+/* MEDIA SECTION */
+.media-sec{padding:110px 5% 90px;background:var(--ink);position:relative;overflow:hidden}
+.media-sec::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 50% at 50% 0%,rgba(139,92,246,.1),transparent);pointer-events:none}
+.media-inner{max-width:1100px;margin:0 auto}
+.media-header{text-align:center;margin-bottom:60px}
+.media-label{font-size:.65rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--cyan);display:block;margin-bottom:14px}
+.media-title{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(2rem,5vw,3.8rem);color:white;line-height:1.05;letter-spacing:-.02em}
+.media-grad{background:linear-gradient(135deg,var(--cyan),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;display:block}
+
+/* Video */
+.media-video-wrap{position:relative;border-radius:20px;overflow:hidden;margin-bottom:24px;background:#000;box-shadow:0 30px 80px rgba(0,0,0,.5)}
+.media-video-glow{position:absolute;inset:-1px;border-radius:20px;background:linear-gradient(135deg,var(--cyan),var(--purple),var(--cyan));z-index:0;opacity:.4}
+.media-video{width:100%;max-height:520px;object-fit:cover;display:block;border-radius:19px;position:relative;z-index:1}
+.media-video-badge{position:absolute;top:16px;left:16px;z-index:5;background:rgba(0,0,0,.7);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.15);border-radius:6px;padding:6px 14px;font-family:'Syne',sans-serif;font-size:.65rem;font-weight:700;letter-spacing:.12em;color:white}
+
+/* Photo grid */
+.media-photo-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.media-photo-wrap{position:relative;border-radius:16px;overflow:hidden;background:#111;aspect-ratio:4/3;cursor:pointer}
+.media-photo{width:100%;height:100%;object-fit:cover;transition:transform .6s ease}
+.media-photo-wrap:hover .media-photo{transform:scale(1.07)}
+.media-photo-wrap::before{content:'';position:absolute;inset:0;border-radius:16px;border:2px solid transparent;transition:.4s;z-index:2}
+.media-photo-wrap:hover::before{border-color:var(--purple);box-shadow:0 0 30px rgba(139,92,246,.5),inset 0 0 30px rgba(139,92,246,.1)}
+.media-photo-overlay{position:absolute;bottom:0;left:0;right:0;z-index:3;padding:20px 18px;background:linear-gradient(to top,rgba(0,0,0,.8),transparent);font-family:'Syne',sans-serif;font-weight:800;font-size:.78rem;letter-spacing:.1em;color:white;display:flex;flex-direction:column;gap:2px}
+.media-photo-sub{font-size:.58rem;color:rgba(255,255,255,.4);font-weight:400;letter-spacing:.2em}
+
+/* CREATE MY BRAND SECTION */
+.brand-sec{padding:110px 5%;background:linear-gradient(135deg,#0a0a0e 0%,#0f0a1a 50%,#0a0a0e 100%);position:relative;overflow:hidden;text-align:center}
+.brand-sec::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 50% 50%,rgba(139,92,246,.12),transparent);pointer-events:none}
+.brand-inner{max-width:680px;margin:0 auto;position:relative;z-index:1}
+.brand-tag{font-size:.65rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--purple);display:block;margin-bottom:16px}
+.brand-title{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(2.2rem,5vw,3.8rem);color:white;line-height:1.05;letter-spacing:-.02em;margin-bottom:18px}
+.brand-grad{background:linear-gradient(135deg,var(--cyan),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;display:block}
+.brand-sub{font-size:.92rem;color:rgba(255,255,255,.4);line-height:1.8;margin-bottom:36px;max-width:480px;margin-left:auto;margin-right:auto}
+.brand-perks{display:flex;justify-content:center;gap:24px;flex-wrap:wrap;margin-bottom:40px}
+.brand-perk{display:flex;align-items:center;gap:8px;font-family:'Syne',sans-serif;font-size:.72rem;font-weight:700;letter-spacing:.08em;color:rgba(255,255,255,.5);padding:8px 16px;border:1px solid rgba(255,255,255,.08);border-radius:50px;background:rgba(255,255,255,.04)}
+.brand-cta-btn{display:inline-flex;align-items:center;justify-content:center;gap:12px;padding:18px 44px;border-radius:12px;border:none;background:linear-gradient(135deg,var(--purple),var(--cyan));color:white;font-family:'Syne',sans-serif;font-weight:800;font-size:.88rem;letter-spacing:.1em;cursor:pointer;transition:.4s;box-shadow:0 0 40px rgba(139,92,246,.4);position:relative;overflow:hidden;margin-bottom:16px}
+.brand-cta-btn::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,var(--cyan),var(--purple));opacity:0;transition:.3s}
+.brand-cta-btn:hover{transform:translateY(-3px);box-shadow:0 0 60px rgba(139,92,246,.6)}
+.brand-cta-btn:hover::before{opacity:1}
+.brand-cta-btn span,.brand-cta-btn svg{position:relative;z-index:1}
+
+/* BRAND MODAL */
+.brand-backdrop{display:none;position:fixed;inset:0;background:rgba(0,0,0,.65);backdrop-filter:blur(8px);z-index:1500}
+.brand-modal{display:none;position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);z-index:1501;width:min(560px,94vw);max-height:90vh;overflow-y:auto}
+.brand-modal::-webkit-scrollbar{width:3px}
+.brand-modal::-webkit-scrollbar-thumb{background:rgba(139,92,246,.4);border-radius:2px}
+.brand-modal-box{background:white;border-radius:20px;overflow:hidden;box-shadow:0 40px 100px rgba(0,0,0,.3)}
+.bm-header{display:flex;justify-content:space-between;align-items:flex-start;padding:28px 28px 0}
+.bm-step-indicator{font-family:'Space Mono',monospace;font-size:.6rem;color:var(--purple);letter-spacing:.12em;margin-bottom:4px}
+.bm-title{font-family:'Syne',sans-serif;font-weight:800;font-size:1.2rem;color:var(--ink)}
+.bm-close{width:36px;height:36px;border-radius:50%;border:1px solid var(--border);background:none;font-size:20px;color:var(--muted);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:.2s}
+.bm-close:hover{background:var(--ice)}
+.bm-progress-track{height:3px;background:var(--border);margin:16px 28px 0}
+.bm-progress-fill{height:100%;background:linear-gradient(90deg,var(--purple),var(--cyan));border-radius:2px;transition:width .5s ease}
+.bm-step{padding:24px 28px 28px}
+.bm-label{display:block;font-family:'Syne',sans-serif;font-size:.72rem;font-weight:700;letter-spacing:.1em;color:var(--ink);margin-bottom:8px;text-transform:uppercase}
+.bm-input{width:100%;padding:12px 16px;border:1.5px solid var(--border);border-radius:10px;font-family:'DM Sans',sans-serif;font-size:.9rem;outline:none;color:var(--ink);transition:.2s;resize:none}
+.bm-input:focus{border-color:var(--purple);box-shadow:0 0 0 3px rgba(139,92,246,.1)}
+.bm-btn-next{width:100%;padding:14px;border-radius:10px;border:none;background:linear-gradient(135deg,var(--purple),var(--cyan));color:white;font-family:'Syne',sans-serif;font-weight:800;font-size:.78rem;letter-spacing:.08em;display:flex;align-items:center;justify-content:center;gap:10px;transition:.3s;margin-top:16px}
+.bm-btn-next:hover{transform:translateY(-1px);box-shadow:0 8px 24px rgba(139,92,246,.4)}
+.bm-btn-back{padding:13px 20px;border-radius:10px;border:1.5px solid var(--border);background:transparent;font-family:'Syne',sans-serif;font-weight:700;font-size:.72rem;color:var(--muted);transition:.2s}
+.bm-btn-back:hover{border-color:#9ca3af;color:var(--ink)}
+.bm-choice-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
+.bm-choice-btn{padding:20px 14px;border-radius:12px;border:2px solid var(--border);background:var(--white);display:flex;flex-direction:column;align-items:center;gap:8px;transition:.3s;cursor:pointer}
+.bm-choice-btn:hover,.bm-choice-btn.selected{border-color:var(--purple);background:rgba(139,92,246,.04)}
+.bm-choice-title{font-family:'Syne',sans-serif;font-weight:800;font-size:.75rem;letter-spacing:.1em;color:var(--ink)}
+.bm-choice-sub{font-size:.65rem;color:var(--muted);text-align:center}
+
+/* Packages */
+.bm-packages{display:flex;flex-direction:column;gap:10px;margin-top:12px;max-height:340px;overflow-y:auto;padding-right:4px}
+.bm-packages::-webkit-scrollbar{width:3px}
+.bm-packages::-webkit-scrollbar-thumb{background:rgba(139,92,246,.3);border-radius:2px}
+.bm-pkg{display:flex;align-items:center;gap:14px;padding:14px 16px;border:2px solid var(--border);border-radius:12px;cursor:pointer;transition:.3s;position:relative}
+.bm-pkg:hover{border-color:var(--purple);background:rgba(139,92,246,.03)}
+.bm-pkg.selected-pkg{border-color:var(--purple);background:rgba(139,92,246,.06)}
+.bm-pkg.selected-pkg .bm-pkg-check{color:var(--purple);font-weight:800}
+.bm-pkg-featured{border-color:rgba(201,168,76,.4);background:rgba(201,168,76,.03)}
+.bm-pkg-featured:hover,.bm-pkg-featured.selected-pkg{border-color:var(--gold);background:rgba(201,168,76,.08)}
+.bm-pkg-ultra{border-color:rgba(139,92,246,.3);background:rgba(139,92,246,.04)}
+.bm-pkg-ultra:hover,.bm-pkg-ultra.selected-pkg{border-color:var(--cyan);background:rgba(0,200,255,.06)}
+.bm-pkg-badge{position:absolute;top:-1px;right:12px;background:linear-gradient(135deg,var(--gold),var(--gold-light));color:#1a0;font-family:'Syne',sans-serif;font-size:.55rem;font-weight:700;letter-spacing:.1em;padding:3px 8px;border-radius:0 0 6px 6px}
+.bm-pkg-check{font-size:1.1rem;color:var(--border);flex-shrink:0;width:20px;text-align:center}
+.bm-pkg-info{flex:1}
+.bm-pkg-name{font-family:'Syne',sans-serif;font-weight:800;font-size:.75rem;letter-spacing:.06em;color:var(--ink);margin-bottom:3px}
+.bm-pkg-desc{font-size:.68rem;color:var(--muted);line-height:1.5}
+.bm-pkg-price{font-family:'Syne',sans-serif;font-weight:800;font-size:.88rem;color:var(--ink);white-space:nowrap}
+
+/* Summary */
+.bm-summary{background:var(--ice);border:1.5px solid var(--border);border-radius:12px;padding:20px;margin-bottom:20px}
+.bm-sum-row{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px;font-size:.8rem;gap:12px}
+.bm-sum-row:last-child{margin-bottom:0;padding-top:10px;border-top:1px solid var(--border)}
+.bm-sum-key{color:var(--muted);font-weight:500;flex-shrink:0}
+.bm-sum-val{font-weight:600;color:var(--ink);text-align:right}
+
+/* Send buttons */
+.bm-send-wa{width:100%;padding:16px;border-radius:10px;border:none;background:#25d366;color:white;font-family:'Syne',sans-serif;font-weight:800;font-size:.78rem;letter-spacing:.08em;display:flex;align-items:center;justify-content:center;gap:10px;transition:.3s;cursor:pointer}
+.bm-send-wa:hover{background:#1db954;transform:translateY(-2px);box-shadow:0 8px 28px rgba(37,211,102,.35)}
+.bm-send-gmail{width:100%;padding:15px;border-radius:10px;border:none;background:linear-gradient(135deg,#ea4335,#fbbc05);color:white;font-family:'Syne',sans-serif;font-weight:800;font-size:.78rem;letter-spacing:.08em;display:flex;align-items:center;justify-content:center;gap:10px;transition:.3s;cursor:pointer}
+.bm-send-gmail:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(234,67,53,.35)}
+
+/* REVEAL */
+@keyframes fadeup{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:none}}
+.rv{opacity:0;transform:translateY(28px);transition:opacity .6s ease,transform .6s ease}
+.rv.on{opacity:1;transform:none}
+.rl{opacity:0;transform:translateX(-28px);transition:opacity .6s ease,transform .6s ease}
+.rl.on{opacity:1;transform:none}
+.rr{opacity:0;transform:translateX(28px);transition:opacity .6s ease,transform .6s ease}
+.rr.on{opacity:1;transform:none}
+.rv-safe,.rl-safe,.rr-safe{opacity:1!important;transform:none!important}
+
+/* MODAL SYSTEM */
+.backdrop{display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);backdrop-filter:blur(8px);z-index:900}
+.modal{display:none;position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);z-index:901;width:min(460px,94vw)}
+.modal-box{background:white;border-radius:20px;padding:34px;box-shadow:0 30px 80px rgba(0,0,0,.15)}
+.modal-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px}
+.modal-title{font-family:'Syne',sans-serif;font-weight:800;font-size:1.1rem;color:var(--ink)}
+.modal-close{width:34px;height:34px;border-radius:50%;border:1px solid var(--border);background:none;font-size:18px;color:var(--muted);display:flex;align-items:center;justify-content:center;transition:.2s}
+.modal-close:hover{background:var(--ice)}
+.m-input{width:100%;padding:13px 16px;border:1.5px solid var(--border);border-radius:10px;font-family:'DM Sans',sans-serif;font-size:.88rem;outline:none;margin-bottom:12px;transition:.2s;color:var(--ink)}
+.m-input:focus{border-color:var(--cyan)}
+.m-submit{width:100%;padding:14px;border-radius:10px;border:none;background:var(--ink);color:white;font-family:'Syne',sans-serif;font-weight:700;font-size:.75rem;letter-spacing:.08em;transition:.3s}
+.m-submit.gold{background:linear-gradient(135deg,var(--gold),var(--gold-light));color:#1a0}
+.m-submit:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(0,0,0,.15)}
+.m-success{display:none;text-align:center;padding:16px 0}
 
 /* RESPONSIVE */
+@media(max-width:960px){
+  *{cursor:auto}#cur,#cur-ring{display:none}
+  .hero{grid-template-columns:1fr;padding-top:96px;text-align:center}
+  .h-sub{max-width:100%}.h-acts{justify-content:center}
+  .hero-stage{order:-1}
+  .perf-header{grid-template-columns:1fr}
+  .perf-grid{grid-template-columns:repeat(2,1fr)}
+  .coll-panel.active{grid-template-columns:1fr 1fr}
+  .home-grid{grid-template-columns:1fr}
+  .studio-inner{grid-template-columns:1fr;text-align:center}
+  .studio-desc{max-width:100%;margin:0 auto 28px}
+  .footer-top{grid-template-columns:1fr 1fr}
+  .vip-form{flex-direction:column}
+}
+@media(max-width:600px){
+  .perf-grid,.coll-panel.active,.home-grid,.footer-top{grid-template-columns:1fr}
+  .coll-tabs{overflow-x:auto}
+  .media-photo-grid{grid-template-columns:1fr}
+  .brand-perks{gap:10px}
+  .bm-choice-row{grid-template-columns:1fr}
+  .media-video{max-height:260px}
+}
+
 @media screen and (max-width: 1024px){
-  nav{height:64px;padding:0 4%}
-  .nav-links{gap:32px}
-  .hero{grid-template-columns:1fr;padding:80px 4% 60px;gap:40px}
-  .h-title{font-size:clamp(2.5rem,5vw,4rem)}
-  .hero-shoe{max-width:100%}
-  .social-eco{padding:100px 4% 80px}
-  .eco-socials{gap:20px}
-  .eco-btn{padding:40px 24px;min-height:200px}
-  .eco-stats{gap:40px}
-  .collections{padding:100px 4%}
-  .col-grid{grid-template-columns:repeat(2,1fr);gap:24px}
-  .studio-container{grid-template-columns:1fr;gap:60px}
+  nav{ height:56px; padding:0 3%; }
+  .nav-links{ gap:16px; }
+  .nav-links a{ font-size:.65rem; }
+  .nav-brand img{ height:24px; width:24px; }
+  .nav-name{ font-size:.9rem; }
+  .hero{ grid-template-columns:1fr; padding:70px 3% 40px; gap:30px; }
+  .h-title{ font-size:clamp(2rem,5vw,3.5rem); }
+  .h-sub{ max-width:100%; font-size:.95rem; }
+  .hero-shoe{ max-width:100%; }
+  .social-eco{ padding:60px 3% 50px; }
+  .eco-title{ font-size:clamp(2rem,6vw,4rem); }
+  .eco-socials{ grid-template-columns:repeat(2,1fr); gap:12px; }
+  .studio-inner{ grid-template-columns:1fr; height:auto; }
+  .studio-canvas{ min-height:400px; }
+  .studio-visual{ width:100%; max-width:100%; }
 }
+
 @media screen and (max-width: 768px){
-  *{cursor:auto}
-  nav{height:60px;padding:0 3%}
-  .nav-links{display:none}
-  .nav-name{font-size:1rem}
-  .hero{padding:70px 3% 40px;gap:30px;min-height:auto}
-  .h-title{font-size:clamp(1.8rem,4vw,3rem)}
-  .h-sub{font-size:1rem;max-width:100%}
-  .btn-dark,.btn-outline{padding:14px 24px;font-size:.7rem}
-  .social-eco{padding:80px 3% 60px}
-  .eco-title{font-size:clamp(2rem,5vw,3.5rem)}
-  .eco-socials{grid-template-columns:repeat(2,1fr);gap:16px}
-  .eco-btn{padding:32px 20px;min-height:160px}
-  .eco-icon-wrap{width:70px;height:70px}
-  .eco-stats{flex-direction:column;gap:30px}
-  .eco-stat-div{height:2px;width:40px}
-  .collections{padding:80px 3%}
-  .col-grid{grid-template-columns:1fr}
-  .col-card img{height:300px}
-  .studio{padding:80px 3%}
-  .studio-tools{grid-template-columns:repeat(2,1fr)}
-  .notify-sec{padding:100px 3%}
-  .ft-grid{grid-template-columns:repeat(2,1fr);gap:40px}
-  #cur,#cur-ring{display:none!important}
+  *{ cursor:auto; }
+  nav{ height:52px; padding:0 2%; }
+  .nav-links{ display:none; }
+  .nav-brand img{ height:20px; width:20px; }
+  .nav-name{ font-size:.8rem; }
+  .nav-btn{ padding:6px 12px; font-size:.6rem; }
+  .hero{ min-height:auto; padding:65px 2% 30px; gap:20px; }
+  .h-title{ font-size:clamp(1.8rem,5vw,2.8rem); line-height:1; }
+  .h-tag{ font-size:.6rem; }
+  .h-sub{ font-size:.9rem; margin-bottom:20px; }
+  .h-acts{ gap:10px; }
+  .btn-dark, .btn-outline{ padding:12px 18px; font-size:.68rem; }
+  .hero-shoe{ max-width:90vw; }
+  .hero::before{ width:150%; right:-25%; }
+  .social-eco{ padding:40px 2% 30px; }
+  .eco-tag{ font-size:.65rem; margin-bottom:12px; }
+  .eco-title{ font-size:clamp(1.6rem,4vw,2.5rem); margin-bottom:12px; }
+  .eco-sub{ font-size:.95rem; margin-bottom:30px; }
+  .eco-socials{ grid-template-columns:repeat(2,1fr); gap:10px; }
+  .eco-btn{ padding:24px 12px; min-height:160px; border-radius:12px; }
+  .vip-perks{ grid-template-columns:repeat(2,1fr); gap:12px; }
+  .footer-top{ grid-template-columns:1fr 1fr; }
+  #cur, #cur-ring{ display:none !important; }
 }
+
 @media screen and (max-width: 480px){
-  nav{height:56px}
-  .nav-name{font-size:.95rem}
-  .hero{padding:60px 2% 30px;gap:20px}
-  .h-title{font-size:clamp(1.5rem,3.5vw,2.5rem)}
-  .h-sub{font-size:.95rem}
-  .h-acts{flex-direction:column}
-  .btn-dark,.btn-outline{width:100%;justify-content:center;padding:12px 20px;font-size:.65rem}
-  .h-tag{font-size:.65rem}
-  .eco-socials{grid-template-columns:1fr}
-  .eco-btn{padding:28px 16px;min-height:140px}
-  .eco-icon-wrap{width:60px;height:60px}
-  .eco-stat-num{font-size:clamp(1.5rem,4vw,2.5rem)}
-  .col-card img{height:250px}
-  .studio-container{gap:40px}
-  .studio-tools{grid-template-columns:1fr}
-  .notify-tabs{grid-template-columns:1fr}
-  .notify-title{font-size:clamp(1.8rem,4vw,2.8rem)}
-  .ft-grid{grid-template-columns:1fr;gap:30px}
+  nav{ height:48px; }
+  .nav-brand img{ height:18px; }
+  .nav-name{ font-size:.75rem; }
+  .hero{ padding:55px 2% 20px; gap:15px; }
+  .h-title{ font-size:clamp(1.4rem,4vw,2.2rem); }
+  .h-sub{ font-size:.85rem; }
+  .h-acts{ flex-direction:column; }
+  .btn-dark, .btn-outline{ width:100%; justify-content:center; padding:10px 16px; font-size:.65rem; }
+  .eco-socials{ grid-template-columns:1fr; }
+  .eco-btn{ padding:20px 12px; min-height:140px; border-radius:10px; }
+  .vip-perks{ grid-template-columns:1fr; }
+  .eco-title, .notify-title{ font-size:clamp(1.2rem,3.5vw,2rem); }
 }
 </style>
 </head>
 <body>
 
-<!-- CUSTOM CURSOR -->
 <div id="cur"></div>
 <div id="cur-ring"></div>
 
 <!-- NAV -->
 <nav id="nav">
-  <a href="#" class="nav-brand">
-    <img src="1000027280.png" alt="Logo">
+  <a href="#hero" class="nav-brand">
+    <img src="1000027280.png" alt="Heksel">
     <span class="nav-name">HEKSEL</span>
   </a>
   <ul class="nav-links">
-    <li><a href="#" class="on">Performance</a></li>
-    <li><a href="#">Collection</a></li>
-    <li><a href="#">Studio</a></li>
+    <li><a href="#performance" class="on" onclick="smooth('performance')">Performance</a></li>
+    <li><a href="#collection" onclick="smooth('collection')">Collection</a></li>
+    <li><a href="#home-col" onclick="smooth('home-col')">Home</a></li>
+    <li><a href="#studio" onclick="smooth('studio')">Studio</a></li>
   </ul>
   <div class="nav-r">
-    <button class="nav-btn">Notify Me</button>
-    <button class="nav-btn gold">VIP Access</button>
+    <button class="nav-btn" onclick="openModal('notify-modal')">Notify Me</button>
+    <button class="nav-btn gold" onclick="smooth('vip')">VIP Access</button>
   </div>
 </nav>
 
 <!-- HERO -->
-<section class="hero">
+<section class="hero" id="hero">
   <div>
-    <div class="h-tag"><span class="h-dot"></span>THE NEO COLLECTION 2026</div>
-    <h1 class="h-title">Your Identity <span class="g">Engineered</span></h1>
-    <p class="h-sub">Laser-engineered performance meets haute couture. Discover the most exclusive footwear ecosystem ever created. Three lines. One empire. Infinite possibilities.</p>
+    <div class="h-tag"><span class="h-dot"></span>The NEO Collection 2026</div>
+    <h1 class="h-title">YOUR<br>IDENTITY,<br><span class="g">ENGINEERED.</span></h1>
+    <p class="h-sub">Three lines. One empire. Designed for every version of you — from the track to the living room.</p>
     <div class="h-acts">
-      <a href="#" class="btn-dark"><span>Explore Collection</span></a>
-      <a href="#" class="btn-outline"><span>Join Inner Circle</span></a>
+      <a href="#collection" class="btn-dark" onclick="smooth('collection')">
+        <span>EXPLORE ALL</span>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+      <a href="#vip" class="btn-outline" onclick="smooth('vip')" style="display:inline-flex;align-items:center;gap:8px">
+        Join Inner Circle
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
     </div>
-    <div style="display:flex;gap:48px;flex-wrap:wrap;padding-top:20px;position:relative;z-index:2">
-      <div><div style="font-family:'Playfair Display',serif;font-weight:900;font-size:1.4rem;color:var(--gold)">1K+</div><div style="font-size:.75rem;color:var(--muted);letter-spacing:.15em;text-transform:uppercase;font-weight:600">Builders</div></div>
-      <div><div style="font-family:'Playfair Display',serif;font-weight:900;font-size:1.4rem;color:var(--gold)">3</div><div style="font-size:.75rem;color:var(--muted);letter-spacing:.15em;text-transform:uppercase;font-weight:600">Lines</div></div>
-      <div><div style="font-family:'Playfair Display',serif;font-weight:900;font-size:1.4rem;color:var(--gold)">01</div><div style="font-size:.75rem;color:var(--muted);letter-spacing:.15em;text-transform:uppercase;font-weight:600">Drop</div></div>
+    <div style="display:flex;gap:32px;flex-wrap:wrap">
+      <div><div style="font-family:'Syne',sans-serif;font-weight:800;font-size:1.2rem">1K+</div><div style="font-size:.68rem;color:var(--muted);letter-spacing:.08em;text-transform:uppercase">Builders</div></div>
+      <div><div style="font-family:'Syne',sans-serif;font-weight:800;font-size:1.2rem">3</div><div style="font-size:.68rem;color:var(--muted);letter-spacing:.08em;text-transform:uppercase">Lines</div></div>
+      <div><div style="font-family:'Syne',sans-serif;font-weight:800;font-size:1.2rem">01</div><div style="font-size:.68rem;color:var(--muted);letter-spacing:.08em;text-transform:uppercase">Drop</div></div>
     </div>
   </div>
   <div class="hero-stage">
     <div class="hero-glow"></div>
-    <img src="1000027744.jpg" alt="NEO-KAI 01" class="hero-shoe">
+    <img src="1000027639-removebg-preview.png" alt="NEO-KAI Performance" class="hero-shoe">
   </div>
 </section>
 
 <!-- SOCIAL ECOSYSTEM -->
 <section class="social-eco">
-  <div class="eco-inner">
-    <div class="eco-tag"><span class="h-dot"></span>DIGITAL PRESENCE</div>
-    <h2 class="eco-title">Join The <span class="eco-grad">Ecosystem</span></h2>
-    <p class="eco-sub">50K+ builders across 4 platforms. 24/7 community. One unified vision of performance and style.</p>
+  <div class="eco-inner rv">
+    <span class="eco-tag">DIGITAL PRESENCE</span>
+    <h2 class="eco-title">JOIN THE<br><span class="eco-grad">ECOSYSTEM.</span></h2>
+    <p class="eco-sub">Follow <strong>@hafavilha.hafy.oficial</strong> and join the inner circle.</p>
 
     <div class="eco-socials">
-      <a href="#" class="eco-btn">
+      <a href="https://www.instagram.com/hafavilha" target="_blank" class="eco-btn" style="--clr1:#e1306c;--clr2:#833ab4">
         <div class="eco-icon-wrap">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2s9 5 20 5a9.5 9.5 0 00-9-5.5c4.75 2.25 7-7 7-7"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073z"/></svg>
         </div>
-        <div class="eco-label">@HafaVilha</div>
-        <div class="eco-handle">Follow for exclusive drops</div>
+        <span class="eco-label">INSTAGRAM</span>
+        <span class="eco-handle">@hafavilha</span>
       </a>
-      <a href="#" class="eco-btn">
+
+      <a href="https://vt.tiktok.com/ZSxbdSUg9/" target="_blank" class="eco-btn" style="--clr1:#00f2ea;--clr2:#ff0050">
         <div class="eco-icon-wrap">
-          <svg viewBox="0 0 24 24" fill="currentColor"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8" stroke="white" stroke-width="2" fill="none"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.32 6.32 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.78 1.52V6.75a4.85 4.85 0 01-1.01-.06z"/></svg>
         </div>
-        <div class="eco-label">@HafaVilha</div>
-        <div class="eco-handle">Visual storytelling</div>
+        <span class="eco-label">TIKTOK</span>
+        <span class="eco-handle">@hafavilha</span>
       </a>
-      <a href="#" class="eco-btn">
+
+      <a href="https://wa.me/5553991855262" target="_blank" class="eco-btn" style="--clr1:#25d366;--clr2:#128c7e">
         <div class="eco-icon-wrap">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
         </div>
-        <div class="eco-label">Heksel Studio</div>
-        <div class="eco-handle">Professional network</div>
+        <span class="eco-label">WHATSAPP</span>
+        <span class="eco-handle">Talk to the Founder</span>
       </a>
-      <a href="#" class="eco-btn">
+
+      <a href="https://x.com/hafavilha" target="_blank" class="eco-btn" style="--clr1:#1da1f2;--clr2:#0d8bd9">
         <div class="eco-icon-wrap">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a6 6 0 00-6 6v3H2v4h7v8h4v-8h3l1-4h-4V8a2 2 0 012-2h3z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.73-8.835L1.254 2.25H8.08l4.259 5.63zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
         </div>
-        <div class="eco-label">Facebook</div>
-        <div class="eco-handle">Community hub</div>
+        <span class="eco-label">X (TWITTER)</span>
+        <span class="eco-handle">@hafavilha</span>
       </a>
     </div>
 
     <div class="eco-stats">
       <div class="eco-stat">
         <span class="eco-stat-num">1K+</span>
-        <span class="eco-stat-lbl">Seguidores</span>
+        <span class="eco-stat-lbl">Followers</span>
       </div>
       <div class="eco-stat-div"></div>
       <div class="eco-stat">
         <span class="eco-stat-num">4</span>
-        <span class="eco-stat-lbl">Plataformas</span>
+        <span class="eco-stat-lbl">Platforms</span>
       </div>
       <div class="eco-stat-div"></div>
       <div class="eco-stat">
         <span class="eco-stat-num">24/7</span>
-        <span class="eco-stat-lbl">Comunidade Ativa</span>
+        <span class="eco-stat-lbl">Active Community</span>
       </div>
     </div>
   </div>
 </section>
 
-<!-- COLLECTIONS -->
-<section class="collections">
-  <div class="col-header">
-    <div class="col-tag">THE COLLECTION</div>
-    <h2 class="col-title">Legendary Drops</h2>
-    <p class="col-sub">Each collection tells a story. Each shoe defines an era. Curated for those who demand excellence.</p>
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-track">
+    <span class="hi">NEO-KAI 01</span><span>///</span>
+    <span>PERFORMANCE LINE</span><span>///</span>
+    <span class="hi">NEO-WAI 01</span><span>///</span>
+    <span>SLIDE COLLECTION</span><span>///</span>
+    <span class="hi">NEO-LAI 01</span><span>///</span>
+    <span>HOME COLLECTION</span><span>///</span>
+    <span>HEKSEL IMPERIUM</span><span>///</span>
+    <span class="hi">DROP 01 · 2026</span><span>///</span>
+    <span class="hi">NEO-KAI 01</span><span>///</span>
+    <span>PERFORMANCE LINE</span><span>///</span>
+    <span class="hi">NEO-WAI 01</span><span>///</span>
+    <span>SLIDE COLLECTION</span><span>///</span>
+    <span class="hi">NEO-LAI 01</span><span>///</span>
+    <span>HOME COLLECTION</span><span>///</span>
+    <span>HEKSEL IMPERIUM</span><span>///</span>
+    <span class="hi">DROP 01 · 2026</span><span>///</span>
   </div>
-  <div class="col-grid">
-    <div class="col-card">
-      <img src="1000027744.jpg" alt="NEO-KAI 01">
-      <div class="col-card-text">
-        <div class="col-card-name">NEO-KAI 01</div>
-        <div class="col-card-desc">Walking Mode — Sand Beige Edition</div>
+</div>
+
+<!-- PERFORMANCE -->
+<section class="perf-sec" id="performance">
+  <div class="perf-header rv">
+    <div>
+      <h2 class="perf-title">DESIGNED FOR<br><span class="g">EVERY MODE</span></h2>
+    </div>
+    <p class="perf-desc">The NEO-KAI 01 adapts to your lifestyle. Three exclusive modes, one legendary silhouette. Track. Gym. Pitch. Your choice.</p>
+  </div>
+
+  <div class="perf-grid">
+    <div class="perf-card laser-wrap">
+      <div class="laser"></div>
+      <div class="laser-corner tl"></div><div class="laser-corner tr"></div>
+      <div class="laser-corner bl"></div><div class="laser-corner br"></div>
+      <img src="1000027639-removebg-preview.png" class="perf-card-img" alt="All-Day — NEO-KAI Gold">
+      <div class="perf-card-body">
+        <div class="perf-card-tag" style="color:#c9a84c">◉ ALL-DAY MODE</div>
+        <div class="perf-card-name">NEO-KAI 01<br>GOLD STANDARD</div>
+        <div class="perf-card-desc">Premium leather + responsive cushioning for all-day wear from office to street.</div>
+        <div class="perf-card-footer">
+          <span class="perf-card-price">$189</span>
+          <button class="perf-card-btn" style="background:#c9a84c;color:#1a0" onclick="openNotify('NEO-KAI 01 Gold Standard')">GET NOTIFIED</button>
+        </div>
       </div>
     </div>
-    <div class="col-card">
-      <img src="1000027745.jpg" alt="NEO-KAI 01 Gold">
-      <div class="col-card-text">
-        <div class="col-card-name">NEO-KAI 01</div>
-        <div class="col-card-desc">Built to Dominate — Special Edition</div>
+
+    <div class="perf-card laser-wrap">
+      <div class="laser"></div>
+      <div class="laser-corner tl"></div><div class="laser-corner tr"></div>
+      <div class="laser-corner bl"></div><div class="laser-corner br"></div>
+      <img src="1000027638-removebg-preview.png" class="perf-card-img" alt="Gym — NEO-KAI Red">
+      <div class="perf-card-body">
+        <div class="perf-card-tag" style="color:#ff6b6b">◉ GYM MODE</div>
+        <div class="perf-card-name">NEO-KAI 01<br>RED FORCE</div>
+        <div class="perf-card-desc">Carbon stability plate + Neo-Foam+ for explosive gym sessions and cross-training.</div>
+        <div class="perf-card-footer">
+          <span class="perf-card-price">$189</span>
+          <button class="perf-card-btn" style="background:#ff6b6b;color:#fff" onclick="openNotify('NEO-KAI 01 Red Force')">GET NOTIFIED</button>
+        </div>
       </div>
     </div>
-    <div class="col-card">
-      <img src="1000027744.jpg" alt="Upcoming Release">
-      <div class="col-card-text">
-        <div class="col-card-name">Coming Soon</div>
-        <div class="col-card-desc">Drop 02: 2026 — Stay Tuned</div>
+
+    <div class="perf-card laser-wrap">
+      <div class="laser"></div>
+      <div class="laser-corner tl"></div><div class="laser-corner tr"></div>
+      <div class="laser-corner bl"></div><div class="laser-corner br"></div>
+      <img src="1000027632-removebg-preview.png" class="perf-card-img" alt="Running — NEO-KAI Blue">
+      <div class="perf-card-body">
+        <div class="perf-card-tag" style="color:#60a5fa">◉ RUNNING MODE</div>
+        <div class="perf-card-name">NEO-KAI 01<br>BLUE STRIKE</div>
+        <div class="perf-card-desc">Grip-X outsole and reactive cushioning built for speed on any terrain.</div>
+        <div class="perf-card-footer">
+          <span class="perf-card-price">$189</span>
+          <button class="perf-card-btn" style="background:#60a5fa;color:#fff" onclick="openNotify('NEO-KAI 01 Blue Strike')">GET NOTIFIED</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="perf-card laser-wrap">
+      <div class="laser"></div>
+      <div class="laser-corner tl"></div><div class="laser-corner tr"></div>
+      <div class="laser-corner bl"></div><div class="laser-corner br"></div>
+      <img src="1000027635-removebg-preview.png" class="perf-card-img" alt="Soccer — NEO-KAI Purple">
+      <div class="perf-card-body">
+        <div class="perf-card-tag" style="color:#a78bfa">◉ SOCCER MODE</div>
+        <div class="perf-card-name">NEO-KAI 01<br>ULTRA VIOLET</div>
+        <div class="perf-card-desc">Multi-stud outsole with agility-flex zones. Precision engineered for pitch dominance.</div>
+        <div class="perf-card-footer">
+          <span class="perf-card-price">$189</span>
+          <button class="perf-card-btn" style="background:#a78bfa;color:#fff" onclick="openNotify('NEO-KAI 01 Ultra Violet')">GET NOTIFIED</button>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- STUDIO -->
-<section class="studio">
-  <h2 class="studio-title">Heksel Studio</h2>
-  <div class="studio-container">
-    <div class="studio-canvas">
-      <img id="studio-shoe" src="1000027744.jpg" alt="Studio" class="studio-shoe">
-      <div id="studio-sticker-layer"></div>
-    </div>
-    <div class="studio-panel">
-      <div style="border-bottom:2px solid rgba(201,168,76,.15);padding-bottom:20px">
-        <div id="studio-mode-label" style="font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:800;letter-spacing:.15em;margin-bottom:16px">COLOR MODE</div>
-        <div id="studio-status" style="font-size:1rem;color:var(--muted);line-height:1.6">🎨 Pick a color to apply to the shoe</div>
-      </div>
+<!-- COLLECTION TABS -->
+<section class="collection-sec" id="collection">
+  <div class="rv" style="margin-bottom:48px">
+    <span class="sec-label">THE FULL COLLECTION</span>
+    <h2 class="sec-title">Every Line.<br>One Empire.</h2>
+  </div>
+  <div class="coll-tabs">
+    <button class="coll-tab active" onclick="switchTab('kai')">NEO-KAI</button>
+    <button class="coll-tab" onclick="switchTab('wai')">NEO-WAI</button>
+    <button class="coll-tab" onclick="switchTab('lai')">NEO-LAI</button>
+  </div>
 
-      <div class="studio-section">
-        <div class="studio-label">Customize Your Neo-Kai</div>
-        <div class="studio-tools">
-          <button id="tool-color" class="studio-tool active-tool" onclick="activateTool('color')">🎨 Color</button>
-          <button id="tool-draw" class="studio-tool" onclick="activateTool('draw')">✏️ Draw</button>
-          <button id="tool-sticker" class="studio-tool" onclick="activateTool('sticker')">⚡ Stickers</button>
-          <button id="tool-scale" class="studio-tool" onclick="activateTool('scale')">📐 Scale</button>
+  <!-- KAI PANEL -->
+  <div class="coll-panel active" id="panel-kai">
+    <div class="prod-tile rv">
+      <div class="prod-tile-img-wrap">
+        <div class="prod-tile-scan"></div>
+        <img src="1000027639-removebg-preview.png" class="prod-tile-img" alt="NEO-KAI Gold">
+      </div>
+      <div class="prod-tile-body">
+        <div class="prod-tile-line"><span class="prod-tile-name">NEO-KAI 01 Gold</span><span class="prod-tile-price">$189</span></div>
+        <div class="prod-tile-sub">Sand Beige / Gold · All-Day</div>
+        <button class="prod-tile-cta" onclick="openNotify('NEO-KAI 01 Gold')">NOTIFY ME</button>
+      </div>
+    </div>
+    <div class="prod-tile rv">
+      <div class="prod-tile-img-wrap">
+        <div class="prod-tile-scan"></div>
+        <img src="1000027638-removebg-preview.png" class="prod-tile-img" alt="NEO-KAI Red">
+      </div>
+      <div class="prod-tile-body">
+        <div class="prod-tile-line"><span class="prod-tile-name">NEO-KAI 01 Red</span><span class="prod-tile-price">$189</span></div>
+        <div class="prod-tile-sub">Red / Black · Gym & Training</div>
+        <button class="prod-tile-cta" onclick="openNotify('NEO-KAI 01 Red Force')">NOTIFY ME</button>
+      </div>
+    </div>
+    <div class="prod-tile rv">
+      <div class="prod-tile-img-wrap">
+        <div class="prod-tile-scan"></div>
+        <img src="1000027632-removebg-preview.png" class="prod-tile-img" alt="NEO-KAI Blue">
+      </div>
+      <div class="prod-tile-body">
+        <div class="prod-tile-line"><span class="prod-tile-name">NEO-KAI 01 Blue</span><span class="prod-tile-price">$189</span></div>
+        <div class="prod-tile-sub">Blue / Black · Running</div>
+        <button class="prod-tile-cta" onclick="openNotify('NEO-KAI 01 Blue Strike')">NOTIFY ME</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- WAI PANEL -->
+  <div class="coll-panel" id="panel-wai">
+    <div class="prod-tile rv">
+      <div class="prod-tile-img-wrap" style="background:linear-gradient(135deg,#f9f4e6,#fdf8ec)">
+        <div class="prod-tile-scan"></div>
+        <span class="coming-badge gold">COMING SOON</span>
+        <img src="1000027648-removebg-preview.png" class="prod-tile-img" alt="NEO-WAI Slide">
+      </div>
+      <div class="prod-tile-body">
+        <div class="prod-tile-line"><span class="prod-tile-name">NEO-WAI 01</span><span class="prod-tile-price">TBA</span></div>
+        <div class="prod-tile-sub">Sand Beige / Gold · Slide</div>
+        <button class="notify-btn" onclick="openNotify('NEO-WAI 01 Slide')">🔔 NOTIFY ME</button>
+      </div>
+    </div>
+    <div class="prod-tile rv">
+      <div class="prod-tile-img-wrap" style="background:linear-gradient(135deg,#f9f4e6,#fdf8ec)">
+        <div class="prod-tile-scan"></div>
+        <span class="coming-badge gold">COMING SOON</span>
+        <img src="1000027649-removebg-preview.png" class="prod-tile-img" alt="NEO-WAI Flip">
+      </div>
+      <div class="prod-tile-body">
+        <div class="prod-tile-line"><span class="prod-tile-name">NEO-WAI 01 Flip</span><span class="prod-tile-price">TBA</span></div>
+        <div class="prod-tile-sub">Sand Beige / Cyan · Flip-Flop</div>
+        <button class="notify-btn" onclick="openNotify('NEO-WAI 01 Flip')">🔔 NOTIFY ME</button>
+      </div>
+    </div>
+    <div class="prod-tile rv" style="display:flex;align-items:center;justify-content:center;background:var(--ice);border-style:dashed">
+      <div style="text-align:center;padding:40px">
+        <div style="font-size:32px;margin-bottom:12px">✦</div>
+        <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:.8rem;color:var(--muted);letter-spacing:.1em">MORE COLORWAYS<br>COMING</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LAI PANEL -->
+  <div class="coll-panel" id="panel-lai">
+    <div class="prod-tile rv">
+      <div class="prod-tile-img-wrap" style="background:linear-gradient(135deg,#f9f4e6,#fdf8ec)">
+        <div class="prod-tile-scan"></div>
+        <span class="coming-badge gold">COMING SOON</span>
+        <img src="1000027651-removebg-preview.png" class="prod-tile-img" alt="NEO-LAI Slipper">
+      </div>
+      <div class="prod-tile-body">
+        <div class="prod-tile-line"><span class="prod-tile-name">NEO-LAI 01</span><span class="prod-tile-price">TBA</span></div>
+        <div class="prod-tile-sub">Sand Beige / Gold · Slipper</div>
+        <button class="notify-btn" onclick="openNotify('NEO-LAI 01')">🔔 NOTIFY ME</button>
+      </div>
+    </div>
+    <div class="prod-tile rv">
+      <div class="prod-tile-img-wrap" style="background:linear-gradient(135deg,#f9f4e6,#fdf8ec)">
+        <div class="prod-tile-scan"></div>
+        <span class="coming-badge gold">COMING SOON</span>
+        <img src="1000027652-removebg-preview.png" class="prod-tile-img" alt="NEO-LAI Closed">
+      </div>
+      <div class="prod-tile-body">
+        <div class="prod-tile-line"><span class="prod-tile-name">NEO-LAI 01 Closed</span><span class="prod-tile-price">TBA</span></div>
+        <div class="prod-tile-sub">Sand Beige / Sherpa · Winter</div>
+        <button class="notify-btn" onclick="openNotify('NEO-LAI 01 Closed')">🔔 NOTIFY ME</button>
+      </div>
+    </div>
+    <div class="prod-tile rv" style="display:flex;align-items:center;justify-content:center;background:var(--ice);border-style:dashed">
+      <div style="text-align:center;padding:40px">
+        <div style="font-size:32px;margin-bottom:12px">✦</div>
+        <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:.8rem;color:var(--muted);letter-spacing:.1em">WINTER DROP<br>REVEALED SOON</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOME COLLECTION -->
+<section class="home-sec" id="home-col">
+  <div class="home-header rv">
+    <span style="font-size:.65rem;font-weight:700;letter-spacing:.2em;color:rgba(201,168,76,.7);text-transform:uppercase;display:block;margin-bottom:14px">THE HOME COLLECTION</span>
+    <h2 class="home-title">Luxury<br>Starts at <span class="g">Home.</span></h2>
+    <p class="home-sub">NEO-WAI & NEO-LAI. Engineered for your most comfortable moments. Coming 2026.</p>
+  </div>
+  <div class="home-grid">
+    <div class="home-card rv">
+      <div class="home-card-img-wrap">
+        <div class="home-card-glow"></div>
+        <img src="1000027648-removebg-preview.png" class="home-card-img" alt="NEO-WAI Slide">
+        <div class="home-card-shadow"></div>
+      </div>
+      <div class="home-card-body">
+        <span class="home-card-tag">NEO-WAI 01 · SLIDES</span>
+        <div class="home-card-name">The Luxury Slide</div>
+        <div class="home-card-desc">Cushioned LED sole meets hand-stitched premium suede. Your poolside. Your terrace. Your rules.</div>
+        <button class="home-notify-btn gold-btn" onclick="openNotify('NEO-WAI 01 Slide')">🔔 NOTIFY ME — COMING 2026</button>
+      </div>
+    </div>
+
+    <div class="home-card rv">
+      <div class="home-card-img-wrap">
+        <div class="home-card-glow"></div>
+        <img src="1000027649-removebg-preview.png" class="home-card-img" alt="NEO-WAI Flip">
+        <div class="home-card-shadow"></div>
+      </div>
+      <div class="home-card-body">
+        <span class="home-card-tag">NEO-WAI 01 · FLIP</span>
+        <div class="home-card-name">The Statement Flip</div>
+        <div class="home-card-desc">Thong silhouette reimagined with translucent cyan pods and gold plate personalization.</div>
+        <button class="home-notify-btn gold-btn" onclick="openNotify('NEO-WAI 01 Flip')">🔔 NOTIFY ME — COMING 2026</button>
+      </div>
+    </div>
+
+    <div class="home-card rv">
+      <div class="home-card-img-wrap">
+        <div class="home-card-glow"></div>
+        <img src="1000027651-removebg-preview.png" class="home-card-img" alt="NEO-LAI Slipper">
+        <div class="home-card-shadow"></div>
+      </div>
+      <div class="home-card-body">
+        <span class="home-card-tag">NEO-LAI 01 · SLIPPER</span>
+        <div class="home-card-name">The Cloud Slipper</div>
+        <div class="home-card-desc">Sherpa-lined interior, LED pod cushioning, and your name on the gold plate. The ultimate home luxury.</div>
+        <button class="home-notify-btn gold-btn" onclick="openNotify('NEO-LAI 01 Slipper')">🔔 NOTIFY ME — COMING 2026</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HEKSEL STUDIO -->
+<section class="studio-sec" id="studio">
+  <div class="studio-inner rv">
+    <div>
+      <div class="studio-badge"><div class="studio-badge-dot"></div>COMING SOON</div>
+      <span class="studio-label">HEKSEL STUDIO</span>
+      <h2 class="studio-title">Design Your<br><span class="g">Own Story.</span></h2>
+      <p class="studio-desc">Full customization is coming. Stickers, hand-drawn designs, color builds — your NEO-KAI will be 100% yours. No templates. No limits.</p>
+      <div class="studio-features">
+        <div class="studio-feat"><div class="studio-feat-icon">🎨</div>Custom color palette builder</div>
+        <div class="studio-feat"><div class="studio-feat-icon">✏️</div>Upload your own artwork & stickers</div>
+        <div class="studio-feat"><div class="studio-feat-icon">⚡</div>Real-time 3D shoe preview</div>
+        <div class="studio-feat"><div class="studio-feat-icon">👑</div>1-of-1 certificate of authenticity</div>
+      </div>
+      <button class="btn-dark" onclick="openNotify('Heksel Studio')">
+        <span>GET EARLY ACCESS</span>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </button>
+    </div>
+    <div class="studio-visual">
+      <div class="studio-mockup">
+        <div class="studio-toolbar">
+          <div class="studio-dot" style="background:#ff5f57"></div>
+          <div class="studio-dot" style="background:#febc2e"></div>
+          <div class="studio-dot" style="background:#28c840"></div>
+          <span style="font-family:'Space Mono',monospace;font-size:.6rem;color:rgba(255,255,255,.2);margin-left:8px">HEKSEL STUDIO v1.0</span>
+          <span id="studio-mode-label" style="margin-left:auto;font-family:'Space Mono',monospace;font-size:.55rem;color:var(--cyan);letter-spacing:.08em">COLOR MODE</span>
+        </div>
+
+        <div id="studio-status" style="padding:6px 14px;background:rgba(0,200,255,.06);border-bottom:1px solid rgba(255,255,255,.05);font-family:'Space Mono',monospace;font-size:.55rem;color:rgba(0,200,255,.6);min-height:24px;transition:.3s">Select a tool to start customizing ↓</div>
+
+        <div id="panel-color" style="display:none;padding:10px 14px;border-bottom:1px solid rgba(255,255,255,.06)">
+          <div style="font-size:.58rem;color:rgba(255,255,255,.3);letter-spacing:.1em;margin-bottom:8px;font-family:'Space Mono',monospace">SHOE COLOR</div>
+          <div style="display:flex;gap:7px;flex-wrap:wrap">
+            <div class="s-color" onclick="applyShoeColor('#0d0d0f','#0d0d0f','ONYX BLACK')" style="background:#0d0d0f;width:26px;height:26px;border-radius:50%;border:2px solid rgba(255,255,255,.15);cursor:pointer"></div>
+            <div class="s-color" onclick="applyShoeColor('#f3ead8','sepia(1) saturate(0.5)','SAND BEIGE')" style="background:#f3ead8;width:26px;height:26px;border-radius:50%;border:2px solid rgba(255,255,255,.15);cursor:pointer"></div>
+            <div class="s-color" onclick="applyShoeColor('#cc0000','hue-rotate(0deg) saturate(2)','FIRE RED')" style="background:#cc0000;width:26px;height:26px;border-radius:50%;border:2px solid rgba(255,255,255,.15);cursor:pointer"></div>
+            <div class="s-color" onclick="applyShoeColor('#1a3fbf','hue-rotate(200deg) saturate(2)','ROYAL BLUE')" style="background:#1a3fbf;width:26px;height:26px;border-radius:50%;border:2px solid rgba(255,255,255,.15);cursor:pointer"></div>
+            <div class="s-color" onclick="applyShoeColor('#6d28d9','hue-rotate(260deg) saturate(2)','ULTRA VIOLET')" style="background:#6d28d9;width:26px;height:26px;border-radius:50%;border:2px solid rgba(255,255,255,.15);cursor:pointer"></div>
+            <div class="s-color" onclick="applyShoeColor('#fbbf24','sepia(1) saturate(2.5) hue-rotate(15deg)','GOLD')" style="background:#fbbf24;width:26px;height:26px;border-radius:50%;border:2px solid rgba(255,255,255,.15);cursor:pointer"></div>
+            <div class="s-color" onclick="applyShoeColor('#39ff14','hue-rotate(90deg) saturate(3)','NEON GREEN')" style="background:#39ff14;width:26px;height:26px;border-radius:50%;border:2px solid rgba(255,255,255,.15);cursor:pointer"></div>
+            <div class="s-color" onclick="applyShoeColor('#00c8ff','hue-rotate(175deg) saturate(3)','CYAN ICE')" style="background:#00c8ff;width:26px;height:26px;border-radius:50%;border:2px solid rgba(255,255,255,.15);cursor:pointer"></div>
+          </div>
+        </div>
+
+        <div id="panel-sticker" style="display:none;padding:10px 14px;border-bottom:1px solid rgba(255,255,255,.06)">
+          <div style="font-size:.58rem;color:rgba(255,255,255,.3);letter-spacing:.1em;margin-bottom:8px;font-family:'Space Mono',monospace">ADD STICKERS</div>
+          <div style="display:flex;gap:6px;flex-wrap:wrap">
+            <button onclick="addSticker('⚡')" style="width:32px;height:32px;border:1px solid rgba(255,255,255,.2);background:transparent;border-radius:6px;color:white;font-size:14px;cursor:pointer;transition:.2s">⚡</button>
+            <button onclick="addSticker('🔥')" style="width:32px;height:32px;border:1px solid rgba(255,255,255,.2);background:transparent;border-radius:6px;color:white;font-size:14px;cursor:pointer;transition:.2s">🔥</button>
+            <button onclick="addSticker('✦')" style="width:32px;height:32px;border:1px solid rgba(255,255,255,.2);background:transparent;border-radius:6px;color:white;font-size:14px;cursor:pointer;transition:.2s">✦</button>
+            <button onclick="addSticker('🎨')" style="width:32px;height:32px;border:1px solid rgba(255,255,255,.2);background:transparent;border-radius:6px;color:white;font-size:14px;cursor:pointer;transition:.2s">🎨</button>
+            <button onclick="addSticker('★')" style="width:32px;height:32px;border:1px solid rgba(255,255,255,.2);background:transparent;border-radius:6px;color:white;font-size:14px;cursor:pointer;transition:.2s">★</button>
+          </div>
+        </div>
+
+        <div id="panel-scale" style="display:none;padding:10px 14px;border-bottom:1px solid rgba(255,255,255,.06)">
+          <div style="font-size:.58rem;color:rgba(255,255,255,.3);letter-spacing:.1em;margin-bottom:8px;font-family:'Space Mono',monospace">SCALE</div>
+          <div style="display:flex;gap:10px;align-items:center">
+            <input type="range" min="50" max="150" value="100" id="scale-slider" oninput="scaleShoe(this.value)" style="flex:1;cursor:pointer">
+            <span id="scale-val" style="font-size:.65rem;color:rgba(255,255,255,.5);min-width:35px">100%</span>
+          </div>
+        </div>
+
+        <div class="studio-canvas" id="studio-canvas">
+          <img src="1000027639-removebg-preview.png" class="studio-canvas-shoe" id="studio-shoe" alt="Studio Preview">
+          <div class="studio-stickers" id="studio-sticker-layer">
+            <span class="sticker" style="top:14%;left:10%;animation-delay:0s;font-size:26px">⚡</span>
+            <span class="sticker" style="top:55%;right:8%;animation-delay:.8s;font-size:22px">🔥</span>
+            <span class="sticker" style="bottom:15%;left:18%;animation-delay:1.6s;font-size:20px">✦</span>
+            <span class="sticker" style="top:30%;right:16%;animation-delay:2.4s;font-size:18px">🎨</span>
+            <span class="sticker" style="bottom:30%;right:20%;animation-delay:.4s;font-size:16px">★</span>
+          </div>
+          <div style="position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--cyan),transparent);opacity:.5;animation:laserscan 2s ease-in-out infinite"></div>
+        </div>
+
+        <div class="studio-bottom">
+          <div class="studio-tool active-tool" id="tool-color" title="Color" onclick="activateTool('color')">🎨</div>
+          <div class="studio-tool" id="tool-draw" title="Draw" onclick="activateTool('draw')">✏️</div>
+          <div class="studio-tool" id="tool-sticker" title="Sticker" onclick="activateTool('sticker')">⚡</div>
+          <div class="studio-tool" id="tool-scale" title="Scale" onclick="activateTool('scale')">📐</div>
+          <div class="studio-tool" id="tool-save" title="Save" onclick="studioSave()">💾</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VIP -->
+<section class="vip-sec" id="vip">
+  <div class="vip-inner rv" id="vip-form-area">
+    <span class="vip-crown">👑</span>
+    <h2 class="vip-title">Enter the<br><span class="g">Inner Circle.</span></h2>
+    <p class="vip-sub">VIP members get 48h early access, exclusive colorways, free engraving upgrades, and a direct line to Guilherme. This is not a newsletter — this is a membership.</p>
+    <div class="vip-perks">
+      <div class="vip-perk"><div class="vip-perk-icon">⚡</div><div class="vip-perk-label">Early Access</div></div>
+      <div class="vip-perk"><div class="vip-perk-icon">🎁</div><div class="vip-perk-label">Free Upgrade</div></div>
+      <div class="vip-perk"><div class="vip-perk-icon">🔒</div><div class="vip-perk-label">Exclusive Drops</div></div>
+      <div class="vip-perk"><div class="vip-perk-icon">💬</div><div class="vip-perk-label">Founder Line</div></div>
+    </div>
+
+    <p style="font-family:'Syne',sans-serif;font-size:.65rem;font-weight:700;letter-spacing:.2em;color:var(--muted);text-transform:uppercase;margin-bottom:20px">CHOOSE HOW TO JOIN</p>
+
+    <div class="vip-choice-grid">
+      <div class="vip-choice-card" id="card-email">
+        <div class="vip-choice-header">
+          <div class="vip-choice-icon">📧</div>
+          <div>
+            <div class="vip-choice-title">Via Email</div>
+            <div class="vip-choice-desc">Receive exclusive updates directly to your Gmail</div>
+          </div>
+        </div>
+        <div class="vip-choice-form">
+          <input class="vip-input" id="vip-email" type="email" placeholder="seu@gmail.com">
+          <button class="vip-submit" onclick="submitVIPEmail()">JOIN VIA EMAIL →</button>
         </div>
       </div>
 
-      <div id="panel-color" class="studio-section">
-        <div class="studio-label">Available Colors</div>
-        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px">
-          <button class="s-color" style="background:#0d0d0f" onclick="applyShoeColor('#0d0d0f','#0d0d0f','ONYX BLACK')" title="Onyx Black"></button>
-          <button class="s-color" style="background:#e8d5b7" onclick="applyShoeColor('#e8d5b7','#e8d5b7','SAND BEIGE')" title="Sand Beige"></button>
-          <button class="s-color" style="background:#ff2d2d" onclick="applyShoeColor('#ff2d2d','#ff2d2d','FIRE RED')" title="Fire Red"></button>
-          <button class="s-color" style="background:#2563eb" onclick="applyShoeColor('#2563eb','#2563eb','ROYAL BLUE')" title="Royal Blue"></button>
-          <button class="s-color" style="background:#8b5cf6" onclick="applyShoeColor('#8b5cf6','#8b5cf6','ULTRA VIOLET')" title="Ultra Violet"></button>
-          <button class="s-color" style="background:#c9a84c" onclick="applyShoeColor('#c9a84c','#c9a84c','GOLD')" title="Gold"></button>
-          <button class="s-color" style="background:#39ff14" onclick="applyShoeColor('#39ff14','#39ff14','NEON GREEN')" title="Neon Green"></button>
-          <button class="s-color" style="background:#00c8ff" onclick="applyShoeColor('#00c8ff','#00c8ff','CYAN ICE')" title="Cyan Ice"></button>
+      <div class="vip-choice-or">
+        <div class="vip-or-line"></div>
+        <span class="vip-or-text">OU</span>
+        <div class="vip-or-line"></div>
+      </div>
+
+      <div class="vip-choice-card vip-choice-card--wa" id="card-whatsapp">
+        <div class="vip-choice-header">
+          <div class="vip-choice-icon">💬</div>
+          <div>
+            <div class="vip-choice-title">Waiting List</div>
+            <div class="vip-choice-desc">Join the official WhatsApp group now</div>
+          </div>
         </div>
-      </div>
-
-      <div id="panel-sticker" style="display:none" class="studio-section">
-        <div class="studio-label">Add Stickers</div>
-        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px">
-          <button class="studio-tool" onclick="addSticker('⚡')">⚡</button>
-          <button class="studio-tool" onclick="addSticker('🔥')">🔥</button>
-          <button class="studio-tool" onclick="addSticker('💎')">💎</button>
-          <button class="studio-tool" onclick="addSticker('👑')">👑</button>
-          <button class="studio-tool" onclick="addSticker('🌟')">🌟</button>
-          <button class="studio-tool" onclick="addSticker('✨')">✨</button>
-          <button class="studio-tool" onclick="addSticker('🎯')">🎯</button>
-          <button class="studio-tool" onclick="addSticker('🚀')">🚀</button>
+        <div style="margin:16px 0;padding:12px;background:rgba(37,211,102,.06);border-radius:10px;border:1px solid rgba(37,211,102,.2)">
+          <div style="font-size:.7rem;color:#25d366;font-family:'Syne',sans-serif;font-weight:700;letter-spacing:.1em;margin-bottom:4px">🟢 ACTIVE GROUP</div>
+          <div style="font-size:.75rem;color:var(--muted)">HEKSEL — Waiting List Oficial</div>
         </div>
+        <a href="https://chat.whatsapp.com/G5q3H5MuJSyCmdAOEcf78T" target="_blank" class="vip-wa-btn" id="wa-group-btn">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+          JOIN THE GROUP NOW
+        </a>
+        <p style="font-size:.62rem;color:var(--muted);margin-top:10px;text-align:center">Instant access · Free group · Leave anytime</p>
       </div>
+    </div>
 
-      <div id="panel-scale" style="display:none" class="studio-section">
-        <div class="studio-label">Scale: <span id="scale-val">100%</span></div>
-        <input type="range" min="50" max="150" value="100" onchange="scaleShoe(this.value)" style="width:100%;height:6px;border-radius:3px;background:rgba(201,168,76,.2);outline:none;-webkit-appearance:none;appearance:none">
-      </div>
-
-      <button id="tool-save" class="btn-dark" onclick="studioSave()" style="width:100%;justify-content:center">💾 Save Design</button>
+    <p class="vip-fine" style="margin-top:28px">No spam. Ever. Unsubscribe anytime. 🇧🇷 Designed in Brazil.</p>
+  </div>
+  <div class="vip-success" id="vip-success">
+    <div class="vip-success-inner">
+      <div class="confetti-row">🎉⚡👑🔥✦</div>
+      <div class="vip-badge">INNER CIRCLE — CONFIRMED</div>
+      <div class="vip-success-title">Welcome to the Empire.</div>
+      <div class="vip-success-sub">You're officially part of the HEKSEL Inner Circle. Expect an email from Guilherme personally within 24 hours with your VIP access details.<br><br>🇧🇷 <strong>O futuro é agora.</strong></div>
     </div>
   </div>
 </section>
 
-<!-- NOTIFY -->
-<section class="notify-sec">
-  <h2 class="notify-title">Join Inner Circle</h2>
-  <p class="notify-subtitle">Be the first to access exclusive drops, early collections, and VIP experiences. Limited spots available.</p>
-  
-  <div class="notify-inner">
-    <div class="notify-tabs">
-      <button id="tab-email" class="notify-tab" onclick="switchNotifyTab('email')" style="background:var(--ink);border-color:var(--ink);color:white">📧 Email</button>
-      <button id="tab-wa" class="notify-tab" onclick="switchNotifyTab('wa')" style="background:transparent;border-color:rgba(255,255,255,.3);color:white">💬 WhatsApp</button>
+<!-- MEDIA SECTION -->
+<section class="media-sec" id="media">
+  <div class="media-inner">
+    <div class="media-header rv">
+      <span class="media-label">NEO-KAI 01 — IN ACTION</span>
+      <h2 class="media-title">See the Future<br><span class="media-grad">in Motion.</span></h2>
     </div>
 
-    <div id="notify-email-panel" class="notify-form">
-      <input id="vip-email" type="email" placeholder="your@email.com" required>
-      <button class="notify-btn" onclick="submitVIPEmail()">Get Early Access</button>
+    <div class="media-video-wrap rv">
+      <div class="media-video-glow"></div>
+      <video autoplay muted loop playsinline class="media-video" poster="1000027639-removebg-preview.png">
+        <source src="lv_0_20260529100529.mp4" type="video/mp4">
+      </video>
+      <div class="media-video-badge">🎬 DROP 01 — OFFICIAL</div>
     </div>
 
-    <div id="notify-wa-panel" style="display:none;text-align:center">
-      <p style="margin-bottom:20px;font-size:1.05rem;color:rgba(255,255,255,.8)">Click the button below to message us on WhatsApp</p>
-      <a href="https://wa.me/5553991855262?text=Quero%20acesso%20ao%20VIP%20Inner%20Circle%20do%20Heksel%20Imperium!" class="btn-dark" style="background:linear-gradient(135deg,#25d366,#20ba5a);border:none">Open WhatsApp</a>
-    </div>
-
-    <div id="vip-success" style="display:none;text-align:center;padding:30px;background:rgba(201,168,76,.15);border-radius:12px;border:2px solid rgba(201,168,76,.3)">
-      <div style="font-size:3rem;margin-bottom:16px">✨</div>
-      <h4 style="font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:900;margin-bottom:12px">Welcome to the Inner Circle!</h4>
-      <p style="font-size:1rem;color:rgba(255,255,255,.8)">Check your email for exclusive first access details.</p>
+    <div class="media-photo-grid rv">
+      <div class="media-photo-wrap">
+        <img src="tenis-1.png" alt="NEO-KAI 01 — Side view" class="media-photo">
+        <div class="media-photo-overlay">
+          <span>NEO-KAI 01</span>
+          <span class="media-photo-sub">SIDE VIEW</span>
+        </div>
+      </div>
+      <div class="media-photo-wrap">
+        <img src="tenis-2.png" alt="NEO-KAI 01 — Diagonal view" class="media-photo">
+        <div class="media-photo-overlay">
+          <span>NEO-KAI 01</span>
+          <span class="media-photo-sub">DIAGONAL VIEW</span>
+        </div>
+      </div>
     </div>
   </div>
 </section>
+
+<!-- CREATE MY BRAND SECTION -->
+<section class="brand-sec" id="brand">
+  <div class="brand-inner rv">
+    <span class="brand-tag">✦ HEKSEL SERVICES</span>
+    <h2 class="brand-title">Want a website<br>like this one?<br><span class="brand-grad">Build your brand.</span></h2>
+    <p class="brand-sub">From visual identity to full digital ecosystem. We build your online presence from scratch — just like the HEKSEL portal.</p>
+    <div class="brand-perks">
+      <div class="brand-perk"><span>⚡</span> Ultra-professional website</div>
+      <div class="brand-perk"><span>🎨</span> Full visual identity</div>
+      <div class="brand-perk"><span>📱</span> 100% responsive</div>
+      <div class="brand-perk"><span>🚀</span> Fast delivery</div>
+    </div>
+    <button class="brand-cta-btn" onclick="openBrandModal()">
+      <span>✦ CREATE MY BRAND</span>
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+    </button>
+    <p class="brand-fine">Projects starting at R$ 1,000 · Free quote, no commitment</p>
+  </div>
+</section>
+
+<!-- BRAND MODAL -->
+<div class="brand-backdrop" id="brand-backdrop" onclick="closeBrandModal()"></div>
+<div class="brand-modal" id="brand-modal">
+  <div class="brand-modal-box">
+    <div class="bm-header">
+      <div>
+        <div class="bm-step-indicator" id="bm-step-ind">STEP 1 OF 3</div>
+        <h3 class="bm-title" id="bm-title">Let's get started!</h3>
+      </div>
+      <button class="bm-close" onclick="closeBrandModal()">×</button>
+    </div>
+
+    <div class="bm-progress-track">
+      <div class="bm-progress-fill" id="bm-progress" style="width:33%"></div>
+    </div>
+
+    <div class="bm-step" id="bm-s1">
+      <label class="bm-label">What's your brand name?</label>
+      <input class="bm-input" id="bm-brand-name" placeholder="e.g. APEX STUDIO, ForceFit, LuxDev...">
+      <label class="bm-label" style="margin-top:16px">Industry / Niche</label>
+      <input class="bm-input" id="bm-niche" placeholder="e.g. Fashion, Gym, Tech, Restaurant...">
+      <button class="bm-btn-next" onclick="bmNext(1)">NEXT <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></button>
+    </div>
+
+    <div class="bm-step" id="bm-s2" style="display:none">
+      <label class="bm-label">Do you already have a website or visual identity?</label>
+      <div class="bm-choice-row">
+        <button class="bm-choice-btn" id="bm-yes-btn" onclick="bmChooseExisting(true)">
+          <span style="font-size:22px">✅</span>
+          <span class="bm-choice-title">YES, I DO</span>
+          <span class="bm-choice-sub">I want to renovate / improve it</span>
+        </button>
+        <button class="bm-choice-btn" id="bm-no-btn" onclick="bmChooseExisting(false)">
+          <span style="font-size:22px">🚀</span>
+          <span class="bm-choice-title">NO, I DON'T</span>
+          <span class="bm-choice-sub">I want to build from scratch</span>
+        </button>
+      </div>
+
+      <div id="bm-has-site" style="display:none;margin-top:16px">
+        <label class="bm-label">Current website link</label>
+        <input class="bm-input" id="bm-site-link" placeholder="https://...">
+        <label class="bm-label" style="margin-top:12px">Current logo (paste image link or describe it)</label>
+        <input class="bm-input" id="bm-logo-link" placeholder="Logo link or description...">
+      </div>
+
+      <div id="bm-no-site" style="display:none;margin-top:16px">
+        <label class="bm-label">Tell us about your brand and what you want to communicate</label>
+        <textarea class="bm-input" id="bm-briefing" rows="3" placeholder="e.g. I want a modern minimalist website for my premium gym..."></textarea>
+      </div>
+
+      <div style="display:flex;gap:10px;margin-top:16px">
+        <button class="bm-btn-back" onclick="bmBack(1)">← BACK</button>
+        <button class="bm-btn-next" onclick="bmNext(2)" style="flex:1">NEXT →</button>
+      </div>
+    </div>
+
+    <div class="bm-step" id="bm-s3" style="display:none">
+      <label class="bm-label">Choose the right package for you</label>
+      <div class="bm-packages">
+        <div class="bm-pkg" id="pkg-1" onclick="selectPkg(1,'Normal','R$ 1.000')">
+          <div class="bm-pkg-check">○</div>
+          <div class="bm-pkg-info">
+            <div class="bm-pkg-name">NORMAL</div>
+            <div class="bm-pkg-desc">1-page responsive website, delivered in 7 days</div>
+          </div>
+          <div class="bm-pkg-price">R$ 1.000</div>
+        </div>
+        <div class="bm-pkg" id="pkg-2" onclick="selectPkg(2,'Moderno','R$ 2.000')">
+          <div class="bm-pkg-check">○</div>
+          <div class="bm-pkg-info">
+            <div class="bm-pkg-name">MODERNO</div>
+            <div class="bm-pkg-desc">Multi-page website + animations + basic SEO</div>
+          </div>
+          <div class="bm-pkg-price">R$ 2.000</div>
+        </div>
+        <div class="bm-pkg bm-pkg-featured" id="pkg-3" onclick="selectPkg(3,'Profissional','R$ 5.000')">
+          <div class="bm-pkg-badge">MOST POPULAR</div>
+          <div class="bm-pkg-check">○</div>
+          <div class="bm-pkg-info">
+            <div class="bm-pkg-name">PROFISSIONAL</div>
+            <div class="bm-pkg-desc">Full website + store + visual identity + domain</div>
+          </div>
+          <div class="bm-pkg-price">R$ 5.000</div>
+        </div>
+        <div class="bm-pkg" id="pkg-4" onclick="selectPkg(4,'Elite Profissional','R$ 20.000')">
+          <div class="bm-pkg-check">○</div>
+          <div class="bm-pkg-info">
+            <div class="bm-pkg-name">ELITE PROFISSIONAL</div>
+            <div class="bm-pkg-desc">Complete digital ecosystem + branding + app</div>
+          </div>
+          <div class="bm-pkg-price">R$ 20.000</div>
+        </div>
+        <div class="bm-pkg bm-pkg-ultra" id="pkg-5" onclick="selectPkg(5,'Ultra Elite Ecossistema','R$ 30.000')">
+          <div class="bm-pkg-check">○</div>
+          <div class="bm-pkg-info">
+            <div class="bm-pkg-name">⚡ ULTRA ELITE ECOSSISTEMA</div>
+            <div class="bm-pkg-desc">Everything in Elite + AI, automations, lifetime support</div>
+          </div>
+          <div class="bm-pkg-price">R$ 30.000</div>
+        </div>
+      </div>
+
+      <div style="display:flex;gap:10px;margin-top:20px">
+        <button class="bm-btn-back" onclick="bmBack(2)">← BACK</button>
+        <button class="bm-btn-next" onclick="bmNext(3)" style="flex:1">SEE SUMMARY →</button>
+      </div>
+    </div>
+
+    <div class="bm-step" id="bm-s4" style="display:none">
+      <div class="bm-summary" id="bm-summary"></div>
+      <p style="font-size:.72rem;color:var(--muted);margin-bottom:16px;text-align:center;line-height:1.6">Review your information and choose how to send your quote request.</p>
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <button class="bm-send-wa" onclick="sendBrandWA()">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+          SEND VIA WHATSAPP
+        </button>
+        <button class="bm-send-gmail" onclick="sendBrandGmail()">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          SEND VIA GMAIL
+        </button>
+        <button class="bm-btn-back" onclick="bmBack(3)" style="margin-top:4px">← EDITAR</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- FOOTER -->
 <footer>
-  <div class="ft-grid">
-    <div class="ft-col">
-      <h4>About</h4>
-      <ul>
-        <li><a href="#">Our Story</a></li>
-        <li><a href="#">Craftsmanship</a></li>
-        <li><a href="#">Sustainability</a></li>
-        <li><a href="#">Press Kit</a></li>
-      </ul>
+  <div class="footer-top">
+    <div class="footer-brand-area">
+      <div class="footer-logo">
+        <img src="1000027280.png" alt="Heksel">
+        <span class="footer-logo-name">HEKSEL</span>
+      </div>
+      <p class="footer-tagline">Designed in Brazil. Engineered Globally. Drop 01 — 2026.</p>
     </div>
-    <div class="ft-col">
-      <h4>Collections</h4>
-      <ul>
-        <li><a href="#">NEO-KAI 01</a></li>
-        <li><a href="#">Drop 02</a></li>
-        <li><a href="#">Archive</a></li>
-        <li><a href="#">Collaborations</a></li>
-      </ul>
+    <div class="footer-col">
+      <span class="footer-col-title">Collection</span>
+      <a href="#" onclick="switchTab('kai');smooth('collection')">NEO-KAI 01</a>
+      <a href="#" onclick="switchTab('wai');smooth('collection')">NEO-WAI 01</a>
+      <a href="#" onclick="switchTab('lai');smooth('collection')">NEO-LAI 01</a>
     </div>
-    <div class="ft-col">
-      <h4>Support</h4>
-      <ul>
-        <li><a href="#">Contact</a></li>
-        <li><a href="#">Track Order</a></li>
-        <li><a href="#">Returns</a></li>
-        <li><a href="#">FAQ</a></li>
-      </ul>
+    <div class="footer-col">
+      <span class="footer-col-title">Studio</span>
+      <a href="#studio" onclick="smooth('studio')">Heksel Studio</a>
+      <a href="#" onclick="openNotify('Custom Build')">Custom Build</a>
+      <a href="#vip" onclick="smooth('vip')">Inner Circle VIP</a>
     </div>
-    <div class="ft-col">
-      <h4>Legal</h4>
-      <ul>
-        <li><a href="#">Terms</a></li>
-        <li><a href="#">Privacy</a></li>
-        <li><a href="#">Cookies</a></li>
-        <li><a href="#">Sitemap</a></li>
-      </ul>
+    <div class="footer-col">
+      <span class="footer-col-title">Contact</span>
+      <a href="https://wa.me/5553991855262" target="_blank">WhatsApp</a>
+      <a href="https://www.instagram.com/hafavilha" target="_blank">Instagram</a>
+      <a href="https://vt.tiktok.com/ZSxbdSUg9/" target="_blank">TikTok</a>
     </div>
   </div>
-  <div class="ft-bottom">
-    <p>© 2026 HEKSEL IMPERIUM. All Rights Reserved. Handcrafted with precision in Porto.</p>
-    <p>Siga @hafavilha.hafy.official e faça parte do círculo íntimo.</p>
+  <div class="footer-bottom">
+    <p class="footer-copy">© 2026 HEKSEL IMPERIUM. ALL RIGHTS RESERVED.</p>
+    <div class="footer-socials">
+      <a href="https://www.instagram.com/hafavilha" target="_blank" class="footer-soc">
+        <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073z"/></svg>
+      </a>
+      <a href="https://vt.tiktok.com/ZSxbdSUg9/" target="_blank" class="footer-soc">
+        <svg viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.32 6.32 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.78 1.52V6.75a4.85 4.85 0 01-1.01-.06z"/></svg>
+      </a>
+      <a href="https://wa.me/5553991855262" target="_blank" class="footer-soc">
+        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+      </a>
+    </div>
   </div>
 </footer>
 
+<!-- MODALS -->
+<div class="backdrop" id="backdrop" onclick="closeAll()"></div>
+
+<!-- NOTIFY MODAL -->
+<div class="modal" id="notify-modal">
+  <div class="modal-box">
+    <div class="modal-head">
+      <div class="modal-title" id="notify-modal-title">Get Notified</div>
+      <button class="modal-close" onclick="closeAll()">×</button>
+    </div>
+    <p style="font-size:.78rem;color:var(--muted);margin-bottom:20px;line-height:1.7">Be the first to know when this model drops. Choose how you want to be notified:</p>
+
+    <div id="notify-form">
+      <div style="display:flex;gap:8px;margin-bottom:18px">
+        <button id="tab-email" onclick="switchNotifyTab('email')" style="flex:1;padding:10px;border-radius:8px;border:1.5px solid var(--ink);background:var(--ink);color:white;font-family:'Syne',sans-serif;font-weight:700;font-size:.68rem;letter-spacing:.08em;transition:.2s">📧 EMAIL</button>
+        <button id="tab-wa" onclick="switchNotifyTab('wa')" style="flex:1;padding:10px;border-radius:8px;border:1.5px solid var(--border);background:transparent;color:var(--ink);font-family:'Syne',sans-serif;font-weight:700;font-size:.68rem;letter-spacing:.08em;transition:.2s">💬 WHATSAPP</button>
+      </div>
+
+      <div id="notify-email-panel">
+        <input class="m-input" id="notify-name" placeholder="Seu nome">
+        <input class="m-input" id="notify-email" type="email" placeholder="seu@gmail.com">
+        <button class="m-submit gold" onclick="submitNotify()">🔔 NOTIFY ME BY EMAIL</button>
+      </div>
+
+      <div id="notify-wa-panel" style="display:none">
+        <div style="background:#f0fdf4;border:1px solid rgba(37,211,102,.25);border-radius:12px;padding:16px;margin-bottom:16px;text-align:center">
+          <div style="font-size:.65rem;font-weight:700;letter-spacing:.1em;color:#25d366;font-family:'Syne',sans-serif;margin-bottom:6px">🟢 ACTIVE GROUP — FILA DE ESPERA</div>
+          <div style="font-size:.78rem;color:var(--muted);line-height:1.6">Join the official HEKSEL group and get real-time alerts about the drop, prices and launch.</div>
+        </div>
+        <a href="https://chat.whatsapp.com/G5q3H5MuJSyCmdAOEcf78T" target="_blank" style="display:flex;align-items:center;justify-content:center;gap:10px;width:100%;padding:14px;background:#25d366;border-radius:10px;color:white;font-family:'Syne',sans-serif;font-weight:800;font-size:.75rem;letter-spacing:.08em;text-decoration:none;transition:.3s;box-shadow:0 4px 20px rgba(37,211,102,.25)" onmouseover="this.style.background='#1db954'" onmouseout="this.style.background='#25d366'" onclick="closeAll()">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+          JOIN THE WAITING LIST GROUP
+        </a>
+        <p style="font-size:.62rem;color:var(--muted);text-align:center;margin-top:10px">Free · Leave anytime · Official group</p>
+      </div>
+    </div>
+
+    <div class="m-success" id="notify-success">
+      <div style="font-size:32px;margin-bottom:10px">⚡</div>
+      <div style="font-family:'Syne',sans-serif;font-weight:800;font-size:1rem;margin-bottom:6px">You're on the list!</div>
+      <div style="font-size:.78rem;color:var(--muted)">We'll reach out the moment it drops. 🇧🇷</div>
+    </div>
+  </div>
+</div>
+
 <script>
-// CUSTOM CURSOR
-let mouseX=0,mouseY=0;
-let curX=0,curY=0;
-const cur=document.getElementById('cur');
-const curRing=document.getElementById('cur-ring');
-
-document.addEventListener('mousemove',(e)=>{
-  mouseX=e.clientX;mouseY=e.clientY;
+const cur=document.getElementById('cur'),ring=document.getElementById('cur-ring');
+document.addEventListener('mousemove',e=>{
+  cur.style.left=e.clientX+'px';cur.style.top=e.clientY+'px';
+  ring.style.left=e.clientX+'px';ring.style.top=e.clientY+'px';
+});
+document.querySelectorAll('a,button,.prod-tile,.perf-card,.home-card').forEach(el=>{
+  el.addEventListener('mouseenter',()=>cur.classList.add('hover'));
+  el.addEventListener('mouseleave',()=>cur.classList.remove('hover'));
 });
 
-setInterval(()=>{
-  curX+=(mouseX-curX)*.2;
-  curY+=(mouseY-curY)*.2;
-  cur.style.left=curX+'px';
-  cur.style.top=curY+'px';
-  curRing.style.left=mouseX+'px';
-  curRing.style.top=mouseY+'px';
-},20);
+window.addEventListener('scroll',()=>document.getElementById('nav').classList.toggle('scrolled',scrollY>10));
+function smooth(id){document.getElementById(id)?.scrollIntoView({behavior:'smooth',block:'start'});return false}
 
-document.addEventListener('mouseover',(e)=>{
-  if(e.target.tagName==='A'||e.target.tagName==='BUTTON'){
-    cur.classList.add('hover');
-  }
-});
-document.addEventListener('mouseout',(e)=>{
-  if(e.target.tagName==='A'||e.target.tagName==='BUTTON'){
-    cur.classList.remove('hover');
-  }
-});
+function revealAll(){document.querySelectorAll('.rv,.rl,.rr').forEach(el=>el.classList.add('on'))}
+revealAll();
 
-// NAV SCROLL EFFECT
-const nav=document.getElementById('nav');
-window.addEventListener('scroll',()=>{
-  nav.classList.toggle('scrolled',window.scrollY>10);
-});
-
-// SCROLL ANIMATIONS
-const observerOptions={threshold:.1,rootMargin:'0px 0px -100px 0px'};
-const observer=new IntersectionObserver((entries)=>{
-  entries.forEach(entry=>{
-    if(entry.isIntersecting){
-      entry.target.style.animation='fadeup 1s ease-out forwards';
-      observer.unobserve(entry.target);
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach((e,i)=>{
+    if(e.isIntersecting){
+      setTimeout(()=>e.target.classList.add('on'), i*60);
+      obs.unobserve(e.target);
     }
   });
-},observerOptions);
+},{threshold:0.01, rootMargin:'50px 0px 0px 0px'});
+document.querySelectorAll('.rv,.rl,.rr').forEach(el=>{
+  el.classList.remove('on');
+  obs.observe(el);
+});
+setTimeout(revealAll, 800);
 
-// STUDIO FUNCTIONS
-let currentTool='color';
-let shoeScale=100;
-let stickerCount=0;
+function switchTab(tab){
+  document.querySelectorAll('.coll-tab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.coll-panel').forEach(p=>p.classList.remove('active'));
+  event.target.classList.add('active');
+  document.getElementById('panel-'+tab).classList.add('active');
+}
 
+function openModal(id){
+  document.getElementById('backdrop').style.display='block';
+  document.getElementById(id).style.display='block';
+}
+function closeAll(){
+  document.querySelectorAll('.modal').forEach(m=>m.style.display='none');
+  document.getElementById('backdrop').style.display='none';
+}
+
+let notifyProduct='';
+function openNotify(product){
+  notifyProduct=product;
+  document.getElementById('notify-modal-title').textContent='Notify me: '+product;
+  document.getElementById('notify-form').style.display='block';
+  document.getElementById('notify-success').style.display='none';
+  document.getElementById('notify-name').value='';
+  document.getElementById('notify-email').value='';
+  openModal('notify-modal');
+}
+function submitNotify(){
+  const n=document.getElementById('notify-name').value.trim();
+  const e=document.getElementById('notify-email').value.trim();
+  if(!n||!e||!e.includes('@')){alert('Please fill in your name and email!');return}
+  document.getElementById('notify-form').style.display='none';
+  document.getElementById('notify-success').style.display='block';
+  const msg=`Hi! My name is ${n} (${e}) and I want to be notified about: ${notifyProduct}`;
+  setTimeout(()=>{window.open('https://wa.me/5553991855262?text='+encodeURIComponent(msg),'_blank')},1200);
+}
+
+let currentTool='color',shoeScale=100,stickerCount=0;
 function activateTool(tool){
   currentTool=tool;
   ['color','draw','sticker','scale'].forEach(t=>{
-    const el=document.getElementById('tool-'+t);
-    if(el)el.classList.remove('active-tool');
-  });
-  document.getElementById('tool-'+tool)?.classList.add('active-tool');
-  ['panel-color','panel-sticker','panel-scale'].forEach(p=>{
-    const el=document.getElementById(p);
-    if(el)el.style.display='none';
-  });
-  const status=document.getElementById('studio-status');
-  const modeLabel=document.getElementById('studio-mode-label');
-  if(tool==='color'){
-    document.getElementById('panel-color').style.display='block';
-    status.textContent='🎨 Pick a color to apply to the shoe';
-    modeLabel.textContent='COLOR MODE';
-  }else if(tool==='draw'){
-    status.textContent='✏️ Draw mode — coming in Studio v2.0';
-    modeLabel.textContent='DRAW MODE';
-    const shoe=document.getElementById('studio-shoe');
-    shoe.style.filter='drop-shadow(0 0 30px rgba(201,168,76,.5))';
-    setTimeout(()=>{shoe.style.filter='drop-shadow(0 30px 60px rgba(0,0,0,.15))';},(600));
-  }else if(tool==='sticker'){
-    document.getElementById('panel-sticker').style.display='block';
-    status.textContent='⚡ Choose a sticker to add to the shoe';
-    modeLabel.textContent='STICKER MODE';
-  }else if(tool==='scale'){
-    document.getElementById('panel-scale').style.display='block';
-    status.textContent='📐 Drag slider to resize the shoe';
-    modeLabel.textContent='SCALE MODE';
-  }
-}
-
-function applyShoeColor(hex,filter,name){
-  const shoe=document.getElementById('studio-shoe');
-  const filterMap={
-    'ONYX BLACK':'brightness(0.15) contrast(1.2)',
-    'SAND BEIGE':'sepia(.5) saturate(.8) brightness(1.1)',
-    'FIRE RED':'hue-rotate(330deg) saturate(2.5) brightness(.9)',
-    'ROYAL BLUE':'hue-rotate(195deg) saturate(2.5) brightness(.85)',
-    'ULTRA VIOLET':'hue-rotate(260deg) saturate(2.5) brightness(.8)',
-    'GOLD':'sepia(1) saturate(2.5) hue-rotate(15deg)',
-    'NEON GREEN':'hue-rotate(90deg) saturate(3) brightness(1.1)',
-    'CYAN ICE':'hue-rotate(175deg) saturate(3) brightness(1.05)',
-  };
-  shoe.style.filter=(filterMap[name]||'none')+' drop-shadow(0 30px 60px rgba(0,0,0,.15))';
-  shoe.style.transition='filter .5s ease';
-  document.querySelectorAll('.s-color').forEach(c=>c.classList.remove('active-color'));
-  event.target.classList.add('active-color');
-  const status=document.getElementById('studio-status');
-  status.textContent=`✅ Applied: ${name}`;
-  status.style.color=hex;
-  setTimeout(()=>{status.style.color='rgba(201,168,76,.6)';},(2000));
-}
-
-function addSticker(emoji){
-  const layer=document.getElementById('studio-sticker-layer');
-  const span=document.createElement('span');
-  stickerCount++;
-  const positions=[
-    {top:'15%',left:'8%'},{top:'50%',right:'6%'},{bottom:'12%',left:'14%'},
-    {top:'25%',right:'10%'},{bottom:'25%',left:'50%'},{top:'65%',left:'30%'},
-  ];
-  const pos=positions[stickerCount%positions.length];
-  Object.assign(span.style,{
-    position:'absolute',fontSize:'28px',userSelect:'none',
-    animation:`float ${2+Math.random()*2}s ease-in-out infinite`,
-    animationDelay:`${Math.random()*2}s`,
-    filter:'drop-shadow(0 0 8px rgba(201,168,76,.4))',
-    cursor:'pointer',zIndex:'10',...pos
-  });
-  span.textContent=emoji;
-  span.title='Click to remove';
-  span.onclick=()=>{span.style.transform='scale(0)';setTimeout(()=>span.remove(),300);};
-  span.style.transition='transform .3s';
-  layer.appendChild(span);
-  document.getElementById('studio-status').textContent=`✅ Added ${emoji} — click sticker to remove`;
-}
-
-function scaleShoe(val){
-  shoeScale=val;
-  document.getElementById('studio-shoe').style.transform=`scale(${val/100})`;
-  document.getElementById('scale-val').textContent=`${val}%`;
-  document.getElementById('studio-status').textContent=`📐 Size: ${val}% — drag to adjust`;
-}
-
-function studioSave(){
-  const tool=document.getElementById('tool-save');
-  tool.classList.add('active-tool');
-  tool.textContent='⏳';
-  document.getElementById('studio-status').textContent='💾 Saving your design...';
-  document.getElementById('studio-mode-label').textContent='SAVING...';
-  setTimeout(()=>{
-    tool.textContent='✅';
-    document.getElementById('studio-status').textContent='🎉 Design saved! Join Early Access to order it.';
-    document.getElementById('studio-mode-label').textContent='SAVED!';
-    setTimeout(()=>{
-      tool.textContent='💾';
-      tool.classList.remove('active-tool');
-      openNotify('Heksel Studio — Custom Build');
-    },(1800));
-  },(1200));
-}
-
-// NOTIFY TABS & VIP EMAIL
-function switchNotifyTab(tab){
-  const emailPanel=document.getElementById('notify-email-panel');
-  const waPanel=document.getElementById('notify-wa-panel');
-  const tabEmail=document.getElementById('tab-email');
-  const tabWa=document.getElementById('tab-wa');
-  if(tab==='email'){
-    emailPanel.style.display='block';waPanel.style.display='none';
-    tabEmail.style.background='var(--ink)';tabEmail.style.color='white';tabEmail.style.borderColor='var(--ink)';
-    tabWa.style.background='transparent';tabWa.style.color='white';tabWa.style.borderColor='rgba(255,255,255,.3)';
-  }else{
-    emailPanel.style.display='none';waPanel.style.display='block';
-    tabWa.style.background='#25d366';tabWa.style.color='white';tabWa.style.borderColor='#25d366';
-    tabEmail.style.background='transparent';tabEmail.style.color='white';tabEmail.style.borderColor='rgba(255,255,255,.3)';
-  }
-}
-
-function submitVIPEmail(){
-  const email=document.getElementById('vip-email').value.trim();
-  if(!email||!email.includes('@')){alert('Por favor, insira um email válido!');return}
-  document.getElementById('notify-email-panel').style.display='none';
-  document.getElementById('vip-success').style.display='block';
-  document.getElementById('vip-success').style.animation='fadeup .6s forwards';
-  const msg=`🔥 NOVO MEMBRO VIP INNER CIRCLE\nEmail: ${email}\nQuero acesso antecipado ao NEO-KAI 01!`;
-  setTimeout(()=>{window.open('https://wa.me/5553991855262?text='+encodeURIComponent(msg),'_blank')},(1500));
-}
-
-document.addEventListener('DOMContentLoaded',()=>activateTool('color'));
-</script>
-
-</body>
-</html>
+    const el=document.getEleme
