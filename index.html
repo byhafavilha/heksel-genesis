@@ -1,438 +1,1671 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>HEKSEL IMPERIUM — The NEO Collection</title>
-<link rel="icon" href="1000027280.png" type="image/png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Sans:wght@300;400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-<style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;cursor:none}
-:root{
-  --white:#ffffff;--ice:#f5f6f8;--ink:#0d0d0f;--muted:#6b7280;
-  --border:#e5e7eb;--cyan:#00c8ff;--purple:#8b5cf6;--gold:#c9a84c;
-  --gold-light:#f0cc7a;--neon-green:#39ff14;--glass:rgba(255,255,255,0.75);--trans:.4s cubic-bezier(.4,0,.2,1);
-}
-html{scroll-behavior:smooth}
-body{font-family:'DM Sans',sans-serif;background:var(--white);color:var(--ink);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>HEKSEL IMPERIUM — NEO Collection 2026</title>
+  <link rel="icon" href="1000027280.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:wght@300;400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    /* ═══════════════════════════════════════════════
+       RESET + VARIÁVEIS CYBERPUNK DE LUXO
+    ═══════════════════════════════════════════════ */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
-/* CUSTOM CURSOR */
-#cur{position:fixed;width:10px;height:10px;background:var(--ink);border-radius:50%;pointer-events:none;z-index:99999;transform:translate(-50%,-50%);transition:width .2s,height .2s}
-#cur.hover{width:40px;height:40px;background:rgba(0,200,255,.15);border:1.5px solid var(--cyan)}
-#cur-ring{position:fixed;width:36px;height:36px;border:1.5px solid rgba(0,200,255,.4);border-radius:50%;pointer-events:none;z-index:99998;transform:translate(-50%,-50%);transition:all .18s ease}
+    :root {
+      --white:         #ffffff;
+      --ice:           #f5f6f8;
+      --ink:           #08080d;
+      --muted:         #6b7280;
+      --border:        rgba(255,255,255,0.08);
+      --border-light:  #e5e7eb;
+      --cyan:          #00f0ff;
+      --cyan-dim:      rgba(0,240,255,0.15);
+      --cyan-glow:     rgba(0,240,255,0.5);
+      --purple:        #b45eff;
+      --purple-dim:    rgba(180,94,255,0.15);
+      --purple-glow:   rgba(180,94,255,0.5);
+      --gold:          #c9a84c;
+      --gold-light:    #f5d97f;
+      --neon:          #00ffc3;
+      --card-dark:     rgba(14,14,22,0.92);
+      --glass-dark:    rgba(10,10,18,0.85);
+      --surface:       rgba(255,255,255,0.04);
 
-/* NAV */
-nav{position:fixed;top:0;left:0;right:0;z-index:800;height:64px;padding:0 5%;display:flex;align-items:center;justify-content:space-between;background:rgba(255,255,255,.88);backdrop-filter:blur(24px);border-bottom:1px solid var(--border)}
-.nav-brand{display:flex;align-items:center;gap:9px;text-decoration:none}
-.nav-brand img{height:30px;width:30px;object-fit:contain}
-.nav-name{font-family:'Syne',sans-serif;font-weight:800;font-size:1rem;color:var(--ink);letter-spacing:.1em}
-.nav-links{display:flex;gap:32px;list-style:none}
-.nav-links a{font-size:.72rem;font-weight:500;color:var(--muted);text-decoration:none;letter-spacing:.1em;text-transform:uppercase}
-.nav-links a:hover,.nav-links a.on{color:var(--ink)}
-.nav-btn{padding:8px 20px;border-radius:8px;border:1.5px solid var(--ink);background:transparent;font-family:'Syne',sans-serif;font-weight:700;font-size:.68rem;color:var(--ink);text-decoration:none;transition:var(--trans)}
-.nav-btn:hover{background:var(--ink);color:white}
+      --ease:          cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      --ease-bounce:   cubic-bezier(0.2, 0.9, 0.4, 1.1);
+      --transition:    0.45s var(--ease);
+      --transition-fast: 0.25s var(--ease);
+    }
 
-/* HERO */
-.hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;align-items:center;padding:80px 5% 60px;gap:40px;position:relative}
-.h-tag{display:inline-flex;align-items:center;gap:8px;font-size:.65rem;font-weight:700;letter-spacing:.2em;color:var(--cyan);text-transform:uppercase;margin-bottom:22px}
-.h-dot{width:5px;height:5px;border-radius:50%;background:var(--cyan);animation:blink 1.6s infinite}
-@keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
-.h-title{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(2.5rem,5vw,5rem);line-height:.9;letter-spacing:-.03em;margin-bottom:22px}
-.h-title .g{background:linear-gradient(135deg,var(--cyan),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.h-sub{font-size:1rem;color:var(--muted);line-height:1.7;max-width:380px;margin-bottom:36px}
-.h-acts{display:flex;gap:14px;flex-wrap:wrap}
-.btn-dark{display:inline-flex;align-items:center;gap:10px;padding:15px 28px;border-radius:10px;background:var(--ink);color:white;font-family:'Syne',sans-serif;font-weight:700;font-size:.75rem;letter-spacing:.08em;text-decoration:none;transition:var(--trans)}
-.btn-dark:hover{transform:translateY(-2px);box-shadow:0 12px 40px rgba(0,200,255,.2)}
-.hero-stage{position:relative;display:flex;align-items:center;justify-content:center}
-.hero-glow{position:absolute;bottom:5%;left:50%;transform:translateX(-50%);width:80%;height:30%;background:radial-gradient(ellipse,rgba(0,200,255,.2),rgba(139,92,246,.1) 50%,transparent 75%);filter:blur(24px)}
-.hero-shoe{width:100%;max-width:550px;animation:float 7s ease-in-out infinite}
-@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-16px)}}
+    html { scroll-behavior: smooth; }
 
-/* PREMIUM MEDIA SECTION (VÍDEO REAL + SHADOW NEON) */
-.heksel-media-sec{padding:80px 5%;background:var(--ink);text-align:center;position:relative;border-top:1px solid rgba(255,255,255,0.1)}
-.media-container{max-width:1000px;margin:0 auto;display:flex;flex-direction:column;gap:50px;align-items:center}
-.media-video-wrap, .media-img-wrap{width:100%;border-radius:24px;overflow:hidden;box-shadow:0 0 40px rgba(139,92,246,0.4);border:2px solid var(--purple);transition:var(--trans)}
-.media-video-wrap:hover, .media-img-wrap:hover{box-shadow:0 0 60px rgba(0,c8,ff,0.6);border-color:var(--cyan)}
-.media-container video, .media-container img{width:100%;display:block;object-fit:cover}
-.media-img-wrap img{max-height:600px;object-fit:contain;background:linear-gradient(145deg, #121214, #070708);padding:30px}
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--ink);
+      color: var(--white);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
 
-/* CREATE MY BRAND INTERACTIVE FORM */
-.brand-builder-sec{padding:100px 5%;background:var(--ice);text-align:center}
-.builder-card{max-width:700px;margin:0 auto;background:var(--white);padding:50px 40px;border-radius:24px;border:1px solid var(--border);box-shadow:0 20px 50px rgba(0,0,0,0.05);text-align:left}
-.builder-title{font-family:'Syne',sans-serif;font-weight:800;font-size:2rem;margin-bottom:10px;letter-spacing:-.02em}
-.builder-desc{font-size:.9rem;color:var(--muted);margin-bottom:40px}
-.form-step{display:none}
-.form-step.active{display:block}
-.form-label{display:block;font-family:'Syne',sans-serif;font-weight:700;font-size:.85rem;text-transform:uppercase;margin-bottom:12px;letter-spacing:.05em}
-.form-input{width:100%;padding:16px;border:1.5px solid var(--border);border-radius:12px;font-family:inherit;font-size:1rem;margin-bottom:24px;outline:none;transition:.2s}
-.form-input:focus{border-color:var(--cyan)}
-.radio-group{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px}
-.radio-btn{padding:16px;border:1.5px solid var(--border);border-radius:12px;text-align:center;font-weight:500;transition:.2s}
-.radio-btn:hover{background:var(--ice)}
-.radio-btn.selected{border-color:var(--purple);background:rgba(139,92,246,0.05);color:var(--purple)}
-.radio-group input{display:none}
-.packages-grid{display:grid;grid-template-columns:repeat(auto-fit, minmax(200px, 1fr));gap:16px;margin-bottom:24px}
-.pkg-card{padding:20px;border:1.5px solid var(--border);border-radius:16px;transition:var(--trans)}
-.pkg-card:hover{border-color:var(--gold);transform:translateY(-2px)}
-.pkg-card.selected{border-color:var(--gold);background:rgba(201,168,76,0.05);box-shadow:0 0 20px rgba(201,168,76,0.15)}
-.pkg-title{font-family:'Syne',sans-serif;font-weight:800;font-size:1.1rem;margin-bottom:6px}
-.pkg-price{font-family:'Space Mono',monospace;font-weight:700;color:var(--gold);font-size:1.2rem}
-.form-nav{display:flex;justify-content:space-between;gap:16px;margin-top:30px}
-.btn-nav{padding:14px 28px;border-radius:10px;font-family:'Syne',sans-serif;font-weight:700;font-size:.8rem;border:none;transition:.2s}
-.btn-next{background:var(--ink);color:white}
-.btn-next:hover{opacity:.9}
-.btn-prev{background:transparent;border:1.5px solid var(--border);color:var(--muted)}
-.send-actions{display:grid;grid-template-columns:1fr 1fr;gap:16px;width:100%}
-.btn-send{display:flex;align-items:center;justify-content:center;gap:10px;padding:16px;border-radius:12px;color:white;font-family:'Syne',sans-serif;font-weight:700;text-decoration:none;font-size:.85rem;transition:var(--trans)}
-.btn-send.whatsapp{background:#25D366}.btn-send.whatsapp:hover{box-shadow:0 10px 25px rgba(37,211,102,0.3)}
-.btn-send.gmail{background:#EA4335}.btn-send.gmail:hover{box-shadow:0 10px 25px rgba(234,67,53,0.3)}
+    /* ═══════════════════════════════════════════════
+       CURSOR CUSTOM PREMIUM
+    ═══════════════════════════════════════════════ */
+    * { cursor: none; }
+    #cur {
+      position: fixed; width: 8px; height: 8px;
+      background: var(--cyan); border-radius: 50%;
+      pointer-events: none; z-index: 99999;
+      transform: translate(-50%,-50%);
+      transition: width .3s, height .3s, background .3s, box-shadow .3s;
+      box-shadow: 0 0 12px var(--cyan-glow);
+    }
+    #cur.hover {
+      width: 44px; height: 44px;
+      background: rgba(0,240,255,0.1);
+      border: 1.5px solid var(--cyan);
+      box-shadow: 0 0 30px var(--cyan-glow), 0 0 60px rgba(0,240,255,0.2);
+    }
+    #cur-ring {
+      position: fixed; width: 36px; height: 36px;
+      border: 1.5px solid rgba(0,240,255,0.4);
+      border-radius: 50%; pointer-events: none;
+      z-index: 99998; transform: translate(-50%,-50%);
+      transition: all .18s var(--ease);
+    }
+    @media (pointer: coarse) { #cur, #cur-ring { display: none; } }
 
-/* ECOSYSTEM SOCIALS GRID */
-.social-eco{padding:100px 5%;background:linear-gradient(180deg,var(--white) 0%,#f0f2f5 100%);border-bottom:1px solid var(--border)}
-.eco-inner{text-align:center;max-width:1100px;margin:0 auto}
-.eco-title{font-family:'Syne',sans-serif;font-weight:800;font-size:clamp(2rem,6vw,4rem);line-height:.95;margin-bottom:40px}
-.eco-socials{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:40px}
-.eco-btn{display:flex;flex-direction:column;align-items:center;padding:30px 20px;border-radius:20px;border:2px solid var(--border);background:var(--white);text-decoration:none;color:var(--ink);transition:var(--trans);min-height:160px;justify-content:center}
-.eco-btn:hover{border-color:var(--cyan);box-shadow:0 15px 35px rgba(0,200,255,0.1);transform:translateY(-5px)}
-.eco-label{font-family:'Syne',sans-serif;font-weight:800;font-size:.85rem;text-transform:uppercase;margin-top:10px}
+    /* ═══════════════════════════════════════════════
+       FUNDO ANIMADO — GRID CYBERPUNK
+    ═══════════════════════════════════════════════ */
+    .animated-bg {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      z-index: -2;
+      background:
+        radial-gradient(ellipse 80% 60% at 20% 20%, rgba(0,240,255,0.04), transparent 70%),
+        radial-gradient(ellipse 60% 80% at 80% 80%, rgba(180,94,255,0.05), transparent 70%),
+        var(--ink);
+      overflow: hidden;
+    }
+    /* Grid lines */
+    .animated-bg::before {
+      content: '';
+      position: absolute; width: 200%; height: 200%;
+      top: -50%; left: -50%;
+      background:
+        linear-gradient(rgba(0,240,255,0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,240,255,0.025) 1px, transparent 1px);
+      background-size: 80px 80px;
+      animation: bgMove 60s linear infinite;
+      pointer-events: none;
+    }
+    /* Radial pulse purple */
+    .animated-bg::after {
+      content: '';
+      position: absolute; width: 100%; height: 100%;
+      background: radial-gradient(ellipse at 50% 100%, rgba(180,94,255,0.08), transparent 65%);
+      animation: pulseBg 12s ease-in-out infinite;
+    }
+    @keyframes bgMove {
+      0%   { transform: translate(0, 0); }
+      100% { transform: translate(4%, 4%); }
+    }
+    @keyframes pulseBg {
+      0%, 100% { opacity: 0.4; } 50% { opacity: 1; }
+    }
 
-/* TICKER */
-.ticker{overflow:hidden;background:var(--ink);padding:14px 0}
-.ticker-track{display:flex;width:max-content;animation:tick 20s linear infinite}
-.ticker-track span{font-family:'Syne',sans-serif;font-size:.7rem;font-weight:700;letter-spacing:.3em;padding:0 30px;color:rgba(255,255,255,.3)}
-@keyframes tick{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+    /* Partículas flutuantes */
+    .particle {
+      position: fixed;
+      background: radial-gradient(circle, rgba(0,240,255,0.7), rgba(180,94,255,0.15));
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: -1;
+      animation: floatParticle linear infinite;
+    }
+    @keyframes floatParticle {
+      0%   { transform: translateY(100vh) rotate(0deg);   opacity: 0;   }
+      10%  { opacity: 0.8; }
+      90%  { opacity: 0.4; }
+      100% { transform: translateY(-10vh) rotate(360deg); opacity: 0;   }
+    }
 
-/* COLLECTIONS PRODUCT TILES */
-.collection-sec{padding:100px 5%}
-.coll-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
-.prod-tile{border-radius:16px;overflow:hidden;border:1px solid var(--border);transition:var(--trans);background:var(--ice);position:relative}
-.prod-tile:hover{border-color:var(--cyan);transform:translateY(-5px)}
-.prod-tile-img-wrap{height:250px;display:flex;align-items:center;justify-content:center;padding:20px}
-.prod-tile-img{max-height:200px;object-fit:contain;transition:.5s}
-.prod-tile:hover .prod-tile-img{transform:scale(1.05)}
-.prod-tile-body{padding:20px;border-top:1px solid var(--border);background:white}
-.prod-tile-name{font-family:'Syne',sans-serif;font-weight:800;font-size:.95rem}
-.prod-tile-price{font-family:'Space Mono',monospace;font-size:.9rem;color:var(--purple);font-weight:700;margin-top:5px}
+    /* ═══════════════════════════════════════════════
+       KEYFRAMES DE TEXTO
+    ═══════════════════════════════════════════════ */
+    @keyframes fadeUp {
+      0%   { opacity: 0; transform: translateY(40px); filter: blur(6px); }
+      100% { opacity: 1; transform: translateY(0);    filter: blur(0);   }
+    }
+    @keyframes fadeInLeft {
+      0%   { opacity: 0; transform: translateX(-50px); }
+      100% { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes fadeInRight {
+      0%   { opacity: 0; transform: translateX(50px); }
+      100% { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes glowPulse {
+      0%, 100% { filter: drop-shadow(0 0 4px rgba(0,240,255,0.4)); }
+      50%       { filter: drop-shadow(0 0 18px rgba(0,240,255,0.9)) drop-shadow(0 0 8px rgba(180,94,255,0.7)); }
+    }
+    @keyframes scanline {
+      0%   { top: -5%; }
+      100% { top: 105%; }
+    }
+    @keyframes borderNeon {
+      0%,100% { border-color: rgba(0,240,255,0.3); box-shadow: 0 0 12px rgba(0,240,255,0.1); }
+      50%      { border-color: rgba(180,94,255,0.6); box-shadow: 0 0 24px rgba(180,94,255,0.2); }
+    }
 
-/* STUDIO LABORATORY */
-.studio-sec{padding:100px 5%;background:var(--white)}
-.studio-inner{border-radius:24px;background:var(--ink);padding:60px;display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
-.studio-title{font-family:'Syne',sans-serif;font-weight:800;font-size:2.5rem;color:white;margin-bottom:15px}
-.studio-desc{color:rgba(255,255,255,0.4);font-size:.9rem;margin-bottom:30px}
-.studio-mockup{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:20px;padding:30px;text-align:center}
-.studio-canvas{height:220px;display:flex;align-items:center;justify-content:center}
-.studio-canvas img{max-height:180px;object-fit:contain;filter:drop-shadow(0 10px 25px rgba(0,200,255,0.3))}
-.studio-controls{display:flex;justify-content:center;gap:12px;margin-top:20px}
-.color-dot{width:24px;height:24px;border-radius:50%;border:2px solid transparent;transition:.2s}
-.color-dot:hover{transform:scale(1.2)}
+    .animate-text  { animation: fadeUp 0.9s var(--ease) forwards; opacity: 0; }
+    .animate-left  { animation: fadeInLeft 0.9s var(--ease) forwards; opacity: 0; }
+    .animate-right { animation: fadeInRight 0.9s var(--ease) forwards; opacity: 0; }
 
-/* FOOTER */
-footer{padding:60px 5%;background:var(--white);border-top:1px solid var(--border);text-align:center}
-.ft-logo{height:40px;margin-bottom:20px}
-.ft-socials{display:flex;justify-content:center;gap:20px;margin-bottom:30px}
-.ft-socials img{height:24px;width:24px;object-fit:contain;transition:.2s}
-.ft-socials img:hover{transform:scale(1.15)}
-.ft-copy{font-size:.75rem;color:var(--muted)}
+    .glow-text {
+      background: linear-gradient(120deg, var(--cyan) 0%, var(--purple) 60%, #ff2d78 100%);
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+      animation: glowPulse 3s ease-in-out infinite;
+    }
+    .glow-gold {
+      background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 50%, var(--gold) 100%);
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+    }
 
-/* RESPONSIVE DESIGN */
-@media screen and (max-width: 768px){
-  .hero, .studio-inner{grid-template-columns:1fr;text-align:center}
-  .h-acts{justify-content:center}
-  .eco-socials, .coll-grid{grid-template-columns:1fr 1fr}
-  .nav-links{display:none}
-  .builder-card{padding:30px 20px}
-}
-@media screen and (max-width: 480px){
-  .eco-socials, .coll-grid{grid-template-columns:1fr}
-  .radio-group, .packages-grid, .send-actions{grid-template-columns:1fr}
-}
-</style>
+    /* ═══════════════════════════════════════════════
+       SISTEMA DE BOTÕES PREMIUM
+    ═══════════════════════════════════════════════ */
+    button, .btn-primary, .btn-outline-nav, .btn-gold-nav,
+    .cta-brand, .notify-btn-card, .btn-next,
+    .btn-send-wa, .btn-send-email, .package-item {
+      transition: all var(--transition);
+      cursor: none;
+      position: relative;
+      overflow: hidden;
+      isolation: isolate;
+    }
+
+    /* Ripple universal */
+    button::after, .btn-primary::after, .cta-brand::after,
+    .notify-btn-card::after, .btn-next::after,
+    .btn-send-wa::after, .btn-send-email::after {
+      content: '';
+      position: absolute; top: 50%; left: 50%;
+      width: 0; height: 0; border-radius: 50%;
+      background: rgba(255,255,255,0.25);
+      transform: translate(-50%,-50%);
+      transition: width .6s, height .6s, opacity .6s;
+      z-index: 0; pointer-events: none;
+    }
+    button:active::after, .btn-primary:active::after, .cta-brand:active::after,
+    .notify-btn-card:active::after, .btn-next:active::after,
+    .btn-send-wa:active::after, .btn-send-email:active::after {
+      width: 240px; height: 240px; opacity: 0;
+    }
+    button > *, .btn-primary > *, .cta-brand > *,
+    .notify-btn-card > *, .btn-next > *,
+    .btn-send-wa > *, .btn-send-email > * { position: relative; z-index: 1; }
+
+    /* Botão primário — dark com hover neon */
+    .btn-primary {
+      background: rgba(255,255,255,0.05);
+      color: white;
+      border: 1.5px solid rgba(0,240,255,0.4);
+      padding: 14px 30px;
+      border-radius: 10px;
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      backdrop-filter: blur(8px);
+    }
+    .btn-primary:hover {
+      background: rgba(0,240,255,0.12);
+      border-color: var(--cyan);
+      box-shadow: 0 0 30px rgba(0,240,255,0.25), 0 16px 40px rgba(0,0,0,0.3);
+      transform: translateY(-4px);
+      color: var(--cyan);
+    }
+
+    /* Botão outline nav */
+    .btn-outline-nav {
+      padding: 9px 20px;
+      border-radius: 50px;
+      border: 1.5px solid rgba(255,255,255,0.2);
+      background: transparent;
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      color: rgba(255,255,255,0.8);
+      text-transform: uppercase;
+    }
+    .btn-outline-nav:hover {
+      background: rgba(255,255,255,0.08);
+      border-color: var(--cyan);
+      color: var(--cyan);
+      box-shadow: 0 0 16px rgba(0,240,255,0.2);
+      transform: translateY(-2px);
+    }
+
+    /* Botão GOLD VIP — pulse animado */
+    .btn-gold-nav {
+      padding: 9px 20px;
+      border-radius: 50px;
+      border: none;
+      background: linear-gradient(135deg, var(--gold), var(--gold-light), var(--gold));
+      background-size: 200% 200%;
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      color: #1a0f00;
+      text-transform: uppercase;
+      animation: goldPulse 2.5s ease-in-out infinite, goldShift 4s ease infinite;
+    }
+    @keyframes goldPulse {
+      0%,100% { box-shadow: 0 0 0 0 rgba(201,168,76,0.6), 0 8px 20px rgba(201,168,76,0.2); }
+      60%      { box-shadow: 0 0 0 10px rgba(201,168,76,0), 0 8px 20px rgba(201,168,76,0.3); }
+    }
+    @keyframes goldShift {
+      0%   { background-position: 0% 50%; }
+      50%  { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    .btn-gold-nav:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 0 40px rgba(201,168,76,0.5), 0 16px 32px rgba(201,168,76,0.2) !important;
+      filter: brightness(1.1);
+    }
+
+    /* Botão CTA brand — gradiente animado */
+    .cta-brand {
+      background: linear-gradient(135deg, var(--purple), var(--cyan), var(--purple));
+      background-size: 300% 300%;
+      border: none;
+      color: white;
+      padding: 18px 48px;
+      border-radius: 12px;
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 0.88rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 16px;
+      animation: gradientShift 4s ease infinite;
+    }
+    @keyframes gradientShift {
+      0%   { background-position: 0% 50%; }
+      50%  { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    .cta-brand:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 0 60px rgba(180,94,255,0.5), 0 0 30px rgba(0,240,255,0.3), 0 24px 48px rgba(0,0,0,0.4);
+    }
+
+    /* Botão notify cards */
+    .notify-btn-card {
+      width: 100%;
+      margin-top: 14px;
+      background: rgba(0,240,255,0.08);
+      color: var(--cyan);
+      border: 1.5px solid rgba(0,240,255,0.3);
+      padding: 11px;
+      border-radius: 50px;
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+    .notify-btn-card:hover {
+      background: var(--cyan);
+      color: var(--ink);
+      border-color: var(--cyan);
+      box-shadow: 0 0 30px rgba(0,240,255,0.5), 0 12px 28px rgba(0,0,0,0.3);
+      transform: translateY(-3px);
+    }
+
+    /* Package items */
+    .package-item {
+      background: rgba(255,255,255,0.03);
+      border: 1.5px solid rgba(255,255,255,0.08);
+      border-radius: 16px;
+      transition: all 0.3s var(--ease);
+    }
+    .package-item:hover {
+      transform: translateX(6px) scale(1.01);
+      background: var(--purple-dim);
+      border-color: var(--purple);
+      box-shadow: 0 0 20px rgba(180,94,255,0.15);
+    }
+    .package-item.selected-package {
+      border-color: var(--purple);
+      background: rgba(180,94,255,0.08);
+      box-shadow: 0 0 24px rgba(180,94,255,0.2);
+    }
+
+    /* ═══════════════════════════════════════════════
+       NAVBAR — GLASSMORPHISM PREMIUM
+    ═══════════════════════════════════════════════ */
+    nav {
+      position: fixed; top: 0; left: 0; width: 100%;
+      padding: 0 5%; height: 68px;
+      display: flex; align-items: center; justify-content: space-between;
+      background: rgba(8,8,13,0.75);
+      backdrop-filter: blur(28px) saturate(1.4);
+      border-bottom: 1px solid rgba(0,240,255,0.08);
+      z-index: 800;
+      transition: background .4s, border-color .4s, box-shadow .4s;
+    }
+    nav.scrolled {
+      background: rgba(8,8,13,0.92);
+      border-bottom-color: rgba(0,240,255,0.2);
+      box-shadow: 0 4px 40px rgba(0,0,0,0.5), 0 0 0 1px rgba(0,240,255,0.05);
+    }
+
+    .logo {
+      display: flex; align-items: center; gap: 10px; text-decoration: none;
+    }
+    .logo img { height: 30px; width: auto; }
+    .logo span {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800; font-size: 1rem;
+      letter-spacing: 0.18em; color: var(--white);
+      text-transform: uppercase;
+    }
+
+    .nav-links { display: flex; gap: 36px; list-style: none; }
+    .nav-links a {
+      text-decoration: none; font-size: 0.68rem; font-weight: 600;
+      text-transform: uppercase; color: rgba(255,255,255,0.45);
+      letter-spacing: 0.14em;
+      transition: color .3s;
+      position: relative; padding-bottom: 4px;
+    }
+    .nav-links a::after {
+      content: ''; position: absolute; bottom: 0; left: 0;
+      width: 0; height: 1.5px;
+      background: linear-gradient(90deg, var(--cyan), var(--purple));
+      transition: width .35s var(--ease);
+    }
+    .nav-links a:hover, .nav-links a.active {
+      color: var(--white);
+    }
+    .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
+
+    .nav-buttons { display: flex; gap: 10px; align-items: center; }
+
+    /* ═══════════════════════════════════════════════
+       HERO SECTION — IMPACTO MÁXIMO
+    ═══════════════════════════════════════════════ */
+    .hero {
+      min-height: 100vh;
+      display: grid; grid-template-columns: 1fr 1fr;
+      align-items: center;
+      padding: 110px 5% 70px; gap: 48px;
+      position: relative; overflow: hidden;
+    }
+
+    /* Scanline effect sutil */
+    .hero::after {
+      content: '';
+      position: absolute; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, transparent, rgba(0,240,255,0.15), transparent);
+      animation: scanline 8s linear infinite;
+      pointer-events: none; z-index: 0;
+    }
+
+    .hero-left { position: relative; z-index: 1; }
+
+    .hero-left .badge {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem; font-weight: 700;
+      letter-spacing: 0.22em; color: var(--cyan);
+      text-transform: uppercase;
+      margin-bottom: 24px;
+      display: inline-flex; align-items: center; gap: 10px;
+      animation: fadeUp 0.9s var(--ease) forwards;
+      background: rgba(0,240,255,0.08);
+      padding: 8px 16px; border-radius: 50px;
+      border: 1px solid rgba(0,240,255,0.2);
+    }
+
+    .badge-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--cyan);
+      box-shadow: 0 0 8px var(--cyan);
+      animation: blink 1.8s ease-in-out infinite;
+    }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:.2} }
+
+    .hero-left h1 {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: clamp(3.2rem, 6.5vw, 6rem);
+      line-height: 0.9; letter-spacing: -0.03em;
+      margin-bottom: 28px;
+      color: var(--white);
+      animation: fadeUp 0.9s 0.2s var(--ease) forwards; opacity: 0;
+    }
+
+    .hero-left p {
+      font-size: 1.05rem; color: rgba(255,255,255,0.55);
+      max-width: 400px; margin-bottom: 40px;
+      line-height: 1.75; font-weight: 300;
+      animation: fadeUp 0.9s 0.4s var(--ease) forwards; opacity: 0;
+      letter-spacing: 0.01em;
+    }
+
+    .hero-actions {
+      display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 52px;
+      animation: fadeUp 0.9s 0.6s var(--ease) forwards; opacity: 0;
+    }
+
+    /* Stats bar hero */
+    .hero-stats {
+      display: flex; gap: 40px;
+      animation: fadeUp 0.9s 0.8s var(--ease) forwards; opacity: 0;
+    }
+    .stat-item { text-align: center; }
+    .stat-num {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800; font-size: 1.6rem;
+      color: var(--white); display: block; line-height: 1;
+      background: linear-gradient(135deg, var(--cyan), var(--purple));
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+    }
+    .stat-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.58rem; color: rgba(255,255,255,0.3);
+      letter-spacing: 0.2em; text-transform: uppercase; margin-top: 4px;
+      display: block;
+    }
+    .stat-divider {
+      width: 1px; background: rgba(0,240,255,0.15);
+      align-self: stretch;
+    }
+
+    /* Hero right — produto flutuante */
+    .hero-right {
+      position: relative; z-index: 1;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .hero-right::before {
+      content: '';
+      position: absolute; bottom: 5%; left: 50%; transform: translateX(-50%);
+      width: 80%; height: 30%;
+      background: radial-gradient(ellipse, rgba(0,240,255,0.22) 0%, rgba(180,94,255,0.12) 50%, transparent 75%);
+      filter: blur(28px);
+      z-index: -1;
+    }
+    .hero-right img {
+      width: 100%; max-width: 580px;
+      filter: drop-shadow(0 40px 60px rgba(0,0,0,0.4))
+              drop-shadow(0 0 40px rgba(0,240,255,0.12));
+      animation: floatHero 6s ease-in-out infinite;
+      position: relative; z-index: 2;
+      transition: filter .5s;
+    }
+    .hero-right img:hover {
+      filter: drop-shadow(0 40px 80px rgba(0,0,0,0.5))
+              drop-shadow(0 0 60px rgba(0,240,255,0.25))
+              drop-shadow(0 0 30px rgba(180,94,255,0.2));
+    }
+    @keyframes floatHero {
+      0%,100% { transform: translateY(0) rotate(0.5deg); }
+      50%      { transform: translateY(-20px) rotate(-0.5deg); }
+    }
+
+    /* ═══════════════════════════════════════════════
+       MEDIA SECTION — CYBERPUNK CINEMA
+    ═══════════════════════════════════════════════ */
+    .media-section {
+      padding: 100px 5% 80px;
+      background: rgba(6,6,12,0.98);
+      position: relative; overflow: hidden;
+      text-align: center;
+    }
+    .media-section::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse 70% 50% at 50% 0%, rgba(0,240,255,0.06), transparent);
+      pointer-events: none;
+    }
+
+    .video-container {
+      max-width: 1100px; margin: 0 auto 48px;
+      border-radius: 24px; overflow: hidden;
+      position: relative;
+      /* BUG FIX #1: borda neon dupla + sombra correta */
+      border: 1.5px solid rgba(0,240,255,0.35);
+      box-shadow:
+        0 0 40px rgba(0,240,255,0.12),
+        0 0 80px rgba(180,94,255,0.08),
+        0 40px 80px rgba(0,0,0,0.6),
+        inset 0 0 40px rgba(0,0,0,0.3);
+      animation: borderNeon 4s ease-in-out infinite;
+    }
+    .video-container video {
+      width: 100%; display: block;
+      border-radius: 22px;
+    }
+    /* Badge sobre o vídeo */
+    .video-container::after {
+      content: '🎬 DROP 01 — OFFICIAL';
+      position: absolute; top: 16px; left: 16px;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.6rem; letter-spacing: 0.14em;
+      color: rgba(255,255,255,0.9);
+      background: rgba(0,0,0,0.6);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.12);
+      padding: 6px 14px; border-radius: 50px;
+      pointer-events: none;
+    }
+
+    .hero-shoe-neon {
+      max-width: 420px; margin: 0 auto;
+      position: relative;
+    }
+    .hero-shoe-neon::before {
+      content: '';
+      position: absolute; bottom: 0; left: 50%; transform: translateX(-50%);
+      width: 85%; height: 40%;
+      background: radial-gradient(ellipse, rgba(180,94,255,0.4), rgba(0,240,255,0.2) 50%, transparent 75%);
+      filter: blur(24px); z-index: 0;
+    }
+    .hero-shoe-neon img {
+      max-width: 100%; width: 90%;
+      border-radius: 24px;
+      box-shadow:
+        0 0 40px rgba(180,94,255,0.5),
+        0 0 80px rgba(180,94,255,0.2),
+        0 30px 60px rgba(0,0,0,0.6);
+      transition: all .5s var(--ease);
+      position: relative; z-index: 1;
+      display: block; margin: 0 auto;
+    }
+    .hero-shoe-neon img:hover {
+      transform: scale(1.04) translateY(-8px);
+      box-shadow:
+        0 0 60px rgba(0,240,255,0.6),
+        0 0 100px rgba(180,94,255,0.3),
+        0 40px 80px rgba(0,0,0,0.7);
+    }
+
+    /* ═══════════════════════════════════════════════
+       CREATE MY BRAND SECTION
+    ═══════════════════════════════════════════════ */
+    .brand-section {
+      padding: 120px 5%; text-align: center;
+      background: linear-gradient(180deg, rgba(8,8,18,0.98) 0%, rgba(14,6,28,0.98) 100%);
+      color: white; position: relative; z-index: 1;
+      overflow: hidden;
+    }
+    .brand-section::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse 80% 70% at 50% 50%, rgba(180,94,255,0.1), transparent 70%);
+      pointer-events: none;
+    }
+    .brand-section h2 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(2.2rem, 5.5vw, 4rem);
+      font-weight: 800; line-height: 1.05;
+      letter-spacing: -0.02em;
+      margin-bottom: 22px;
+      position: relative; z-index: 1;
+    }
+    .brand-section > p {
+      color: rgba(255,255,255,0.45);
+      max-width: 580px; margin: 0 auto 40px;
+      font-size: 1.05rem; font-weight: 300; line-height: 1.75;
+      position: relative; z-index: 1;
+    }
+    /* BUG FIX #2: position relativo para que o botão fique acima do radial */
+    #openBrandModalBtn { position: relative; z-index: 1; }
+
+    .brand-perks {
+      margin-top: 32px;
+      display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;
+      position: relative; z-index: 1;
+    }
+    .brand-perk-item {
+      display: flex; align-items: center; gap: 8px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      padding: 9px 18px; border-radius: 50px;
+      font-family: 'Syne', sans-serif;
+      font-size: 0.7rem; font-weight: 600;
+      letter-spacing: 0.08em; color: rgba(255,255,255,0.6);
+      transition: all .3s var(--ease);
+    }
+    .brand-perk-item:hover {
+      border-color: rgba(0,240,255,0.3);
+      color: var(--cyan);
+      background: rgba(0,240,255,0.06);
+    }
+
+    /* ═══════════════════════════════════════════════
+       COLLECTION SECTION — CARDS DE LUXO
+    ═══════════════════════════════════════════════ */
+    .collection {
+      padding: 120px 5%;
+      background: rgba(10,10,18,0.98);
+      text-align: center;
+      position: relative; overflow: hidden;
+    }
+    .collection::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--cyan-glow), transparent);
+    }
+
+    .section-tag {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem; font-weight: 700;
+      letter-spacing: 0.25em; text-transform: uppercase;
+      color: var(--cyan); display: inline-block;
+      margin-bottom: 18px;
+      background: rgba(0,240,255,0.08);
+      padding: 7px 16px; border-radius: 50px;
+      border: 1px solid rgba(0,240,255,0.2);
+    }
+
+    .section-title {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(2.2rem, 5vw, 4rem);
+      font-weight: 800; line-height: 0.95;
+      letter-spacing: -0.03em; margin-bottom: 12px;
+      color: var(--white);
+    }
+
+    .section-sub {
+      font-size: 1rem; color: rgba(255,255,255,0.4);
+      margin-bottom: 60px; font-weight: 300; line-height: 1.7;
+    }
+
+    .card-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+      gap: 28px; margin-top: 0; justify-items: center;
+    }
+
+    .prod-card {
+      background: rgba(14,14,22,0.9);
+      border-radius: 24px; overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.07);
+      transition: all .5s var(--ease);
+      width: 100%; max-width: 320px;
+      backdrop-filter: blur(10px);
+      position: relative;
+    }
+    /* Linha de brilho topo */
+    .prod-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(0,240,255,0.4), transparent);
+      opacity: 0; transition: opacity .4s;
+    }
+    .prod-card:hover::before { opacity: 1; }
+    .prod-card:hover {
+      transform: translateY(-12px) scale(1.01);
+      border-color: rgba(0,240,255,0.4);
+      box-shadow:
+        0 0 30px rgba(0,240,255,0.12),
+        0 0 60px rgba(180,94,255,0.08),
+        0 30px 60px rgba(0,0,0,0.5);
+    }
+    .prod-card img {
+      width: 100%; aspect-ratio: 1/1; object-fit: contain;
+      background: linear-gradient(135deg, rgba(14,14,24,0.9), rgba(20,14,32,0.9));
+      padding: 28px; transition: transform .6s var(--ease);
+    }
+    .prod-card:hover img { transform: scale(1.08) translateY(-4px); }
+
+    .prod-info {
+      padding: 22px 20px 20px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+    .prod-name {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800; font-size: 0.9rem;
+      letter-spacing: 0.05em; color: var(--white);
+      margin-bottom: 6px;
+    }
+    .prod-price {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.8rem; color: var(--gold);
+      font-weight: 700; letter-spacing: 0.05em;
+    }
+
+    /* ═══════════════════════════════════════════════
+       STUDIO LAB — TECH PREMIUM
+    ═══════════════════════════════════════════════ */
+    .studio-lab {
+      padding: 120px 5%;
+      background: linear-gradient(180deg, rgba(8,8,18,0.99) 0%, rgba(6,12,20,0.99) 100%);
+      color: white; text-align: center;
+      position: relative; overflow: hidden;
+    }
+    .studio-lab::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse 70% 60% at 30% 50%, rgba(0,240,255,0.05), transparent 60%);
+      pointer-events: none;
+    }
+
+    .studio-container {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 60px;
+      align-items: center; max-width: 1200px;
+      margin: 0 auto; text-align: left;
+      position: relative; z-index: 1;
+    }
+    .studio-container > div:first-child { text-align: left; }
+
+    .studio-mock {
+      background: rgba(255,255,255,0.03);
+      border-radius: 28px; padding: 32px;
+      border: 1px solid rgba(0,240,255,0.18);
+      backdrop-filter: blur(8px);
+      text-align: center;
+      box-shadow:
+        0 0 40px rgba(0,240,255,0.06),
+        0 0 80px rgba(180,94,255,0.04),
+        0 30px 60px rgba(0,0,0,0.4);
+      transition: all .5s var(--ease);
+      position: relative; overflow: hidden;
+    }
+    .studio-mock::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 1px;
+      background: linear-gradient(90deg, transparent, var(--cyan-glow), transparent);
+    }
+    .studio-mock:hover {
+      border-color: rgba(0,240,255,0.35);
+      box-shadow:
+        0 0 60px rgba(0,240,255,0.1),
+        0 0 100px rgba(180,94,255,0.06),
+        0 40px 80px rgba(0,0,0,0.5);
+      transform: translateY(-6px);
+    }
+    .studio-mock img {
+      max-width: 100%;
+      filter: drop-shadow(0 20px 40px rgba(0,240,255,0.2))
+              drop-shadow(0 0 20px rgba(180,94,255,0.2));
+      transition: filter .5s;
+    }
+    .studio-mock:hover img {
+      filter: drop-shadow(0 20px 50px rgba(0,240,255,0.35))
+              drop-shadow(0 0 30px rgba(180,94,255,0.3));
+    }
+
+    .studio-badge {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.62rem; letter-spacing: 0.16em;
+      text-transform: uppercase;
+      background: rgba(0,240,255,0.1);
+      color: var(--cyan);
+      padding: 7px 14px; border-radius: 50px;
+      display: inline-block; margin-bottom: 18px;
+      border: 1px solid rgba(0,240,255,0.2);
+    }
+
+    .studio-actions {
+      display: flex; justify-content: center; gap: 10px; margin-top: 22px; flex-wrap: wrap;
+    }
+    .studio-actions .studio-badge {
+      margin-bottom: 0;
+      transition: all .3s;
+      cursor: none;
+    }
+    .studio-actions .studio-badge:hover {
+      background: rgba(0,240,255,0.2);
+      border-color: var(--cyan);
+      box-shadow: 0 0 16px rgba(0,240,255,0.2);
+    }
+
+    /* Feature list studio */
+    .studio-features {
+      display: flex; flex-direction: column; gap: 12px; margin: 24px 0;
+    }
+    .studio-feat {
+      display: flex; align-items: center; gap: 12px;
+      color: rgba(255,255,255,0.65);
+      font-size: 0.9rem; font-weight: 300;
+    }
+    .studio-feat::before {
+      content: '';
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--cyan);
+      box-shadow: 0 0 8px var(--cyan); flex-shrink: 0;
+    }
+
+    /* ═══════════════════════════════════════════════
+       FOOTER — ELEGÂNCIA TOTAL
+    ═══════════════════════════════════════════════ */
+    footer {
+      background: rgba(4,4,8,0.99);
+      padding: 80px 5% 36px;
+      color: rgba(255,255,255,0.6);
+      border-top: 1px solid rgba(0,240,255,0.08);
+      position: relative; overflow: hidden;
+    }
+    footer::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 1px;
+      background: linear-gradient(90deg, transparent, var(--cyan-glow), transparent);
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.4fr repeat(3, 1fr);
+      gap: 48px; margin-bottom: 48px; text-align: left;
+    }
+
+    .footer-logo img { height: 26px; margin-bottom: 14px; display: block; }
+    .footer-logo p {
+      font-size: 0.8rem; color: rgba(255,255,255,0.3);
+      line-height: 1.7; max-width: 200px;
+    }
+
+    .footer-col h4 {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700; font-size: 0.65rem;
+      letter-spacing: 0.2em; color: rgba(255,255,255,0.25);
+      text-transform: uppercase; margin-bottom: 20px;
+      display: block;
+    }
+    .footer-col a {
+      display: block; color: rgba(255,255,255,0.45);
+      text-decoration: none; font-size: 0.82rem;
+      margin-bottom: 12px; transition: all .25s;
+    }
+    .footer-col a:hover {
+      color: var(--cyan);
+      transform: translateX(4px);
+    }
+
+    .social-icons {
+      display: flex; gap: 12px; margin-top: 22px;
+    }
+    .social-icons a {
+      width: 36px; height: 36px; border-radius: 8px;
+      border: 1px solid rgba(255,255,255,0.08);
+      display: flex; align-items: center; justify-content: center;
+      transition: all .3s var(--ease);
+    }
+    .social-icons a:hover {
+      border-color: var(--cyan);
+      background: rgba(0,240,255,0.08);
+      box-shadow: 0 0 16px rgba(0,240,255,0.15);
+      transform: translateY(-3px);
+    }
+    .social-icons img {
+      width: 18px; height: 18px;
+      filter: brightness(0) invert(1); opacity: 0.5;
+      transition: opacity .3s;
+    }
+    .social-icons a:hover img { opacity: 1; }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding-top: 28px;
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 12px;
+    }
+    .footer-copy {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.6rem; color: rgba(255,255,255,0.2);
+      letter-spacing: 0.08em;
+    }
+
+    /* ═══════════════════════════════════════════════
+       MODAL CREATE MY BRAND — REDESENHO TOTAL
+    ═══════════════════════════════════════════════ */
+    .modal-overlay {
+      display: none; position: fixed; inset: 0;
+      background: rgba(0,0,0,0.88);
+      backdrop-filter: blur(16px);
+      z-index: 1000;
+      align-items: center; justify-content: center;
+    }
+
+    .modal-container {
+      background: rgba(14,14,22,0.98);
+      border: 1px solid rgba(0,240,255,0.2);
+      max-width: 540px; width: 92%;
+      border-radius: 28px; padding: 36px;
+      max-height: 88vh; overflow-y: auto;
+      margin: auto; text-align: left;
+      box-shadow:
+        0 0 60px rgba(0,240,255,0.08),
+        0 0 100px rgba(180,94,255,0.06),
+        0 40px 80px rgba(0,0,0,0.6);
+      animation: modalIn .4s var(--ease-bounce) forwards;
+      position: relative;
+    }
+    .modal-container::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 1px;
+      background: linear-gradient(90deg, transparent, var(--cyan), transparent);
+      border-radius: 28px 28px 0 0;
+    }
+    @keyframes modalIn {
+      0%   { opacity: 0; transform: translateY(30px) scale(0.97); }
+      100% { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    .modal-container::-webkit-scrollbar { width: 3px; }
+    .modal-container::-webkit-scrollbar-thumb {
+      background: rgba(0,240,255,0.3); border-radius: 2px;
+    }
+
+    /* Título do modal */
+    .modal-container h3 {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800; font-size: 1.3rem;
+      color: var(--white); margin-bottom: 24px;
+      letter-spacing: -0.01em;
+    }
+
+    /* BUG FIX #3: close modal posicionado sem afetar o fluxo */
+    .close-modal {
+      position: absolute; top: 20px; right: 24px;
+      font-size: 24px; cursor: none; line-height: 1;
+      color: rgba(255,255,255,0.4);
+      transition: color .2s, transform .2s;
+      background: none; border: none;
+      width: 32px; height: 32px;
+      display: flex; align-items: center; justify-content: center;
+      border-radius: 50%;
+    }
+    .close-modal:hover {
+      color: var(--cyan);
+      transform: rotate(90deg);
+      background: rgba(0,240,255,0.08);
+    }
+
+    .step { display: none; }
+    .step.active-step { display: block; }
+
+    .form-group { margin-bottom: 22px; }
+
+    label {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700; display: block; margin-bottom: 8px;
+      font-size: 0.68rem; text-transform: uppercase;
+      letter-spacing: 0.1em; color: rgba(255,255,255,0.5);
+    }
+
+    input, textarea {
+      width: 100%; padding: 13px 18px;
+      border: 1.5px solid rgba(255,255,255,0.1);
+      border-radius: 12px; outline: none;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.92rem;
+      background: rgba(255,255,255,0.04);
+      color: var(--white);
+      transition: all .3s var(--ease);
+    }
+    input::placeholder, textarea::placeholder {
+      color: rgba(255,255,255,0.2);
+    }
+    input:focus, textarea:focus {
+      border-color: var(--purple);
+      background: rgba(180,94,255,0.05);
+      box-shadow: 0 0 0 3px rgba(180,94,255,0.1);
+    }
+
+    .radio-group {
+      display: flex; gap: 16px; margin-top: 10px; flex-wrap: wrap;
+    }
+    .radio-group label {
+      display: flex; align-items: center; gap: 8px;
+      color: rgba(255,255,255,0.65);
+      text-transform: none; letter-spacing: 0;
+      font-size: 0.85rem; font-weight: 500; cursor: none;
+      background: rgba(255,255,255,0.04);
+      border: 1.5px solid rgba(255,255,255,0.08);
+      padding: 10px 18px; border-radius: 50px;
+      transition: all .3s;
+    }
+    .radio-group label:hover {
+      border-color: rgba(180,94,255,0.4);
+      background: rgba(180,94,255,0.06);
+    }
+    .radio-group input[type="radio"] { width: auto; accent-color: var(--purple); }
+
+    .packages { display: flex; flex-direction: column; gap: 10px; margin: 20px 0; }
+
+    /* BUG FIX #4: package-item precisa de color white no modal dark */
+    .package-item {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 16px 18px;
+      border: 1.5px solid rgba(255,255,255,0.08);
+      border-radius: 14px; cursor: none;
+    }
+    .package-item strong { color: var(--white); font-family: 'Syne', sans-serif; font-size: 0.8rem; letter-spacing: 0.05em; }
+    .package-item small { color: rgba(255,255,255,0.35); font-size: 0.72rem; }
+    .package-item div:last-child strong { color: var(--gold); }
+
+    .modal-buttons {
+      display: flex; gap: 12px; margin-top: 28px;
+      justify-content: flex-end; flex-wrap: wrap;
+    }
+
+    .btn-next {
+      background: linear-gradient(135deg, var(--purple), var(--cyan));
+      color: white; padding: 12px 24px;
+      border: none; border-radius: 50px;
+      font-family: 'Syne', sans-serif;
+      font-weight: 800; font-size: 0.72rem;
+      letter-spacing: 0.1em;
+    }
+    .btn-next:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(180,94,255,0.4);
+    }
+
+    .btn-send-wa {
+      background: linear-gradient(135deg, #25D366, #1db954);
+      color: white; padding: 14px 24px;
+      border: none; border-radius: 50px;
+      font-family: 'Syne', sans-serif;
+      font-weight: 800; font-size: 0.72rem;
+      letter-spacing: 0.1em;
+    }
+    .btn-send-wa:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 30px rgba(37,211,102,0.35);
+    }
+
+    .btn-send-email {
+      background: linear-gradient(135deg, #EA4335, #fbbc05);
+      color: white; padding: 14px 24px;
+      border: none; border-radius: 50px;
+      font-family: 'Syne', sans-serif;
+      font-weight: 800; font-size: 0.72rem;
+      letter-spacing: 0.1em;
+    }
+    .btn-send-email:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 30px rgba(234,67,53,0.35);
+    }
+
+    /* Summary box */
+    #summaryInfo {
+      background: rgba(255,255,255,0.04) !important;
+      border: 1.5px solid rgba(0,240,255,0.15) !important;
+      border-radius: 16px; padding: 20px;
+      margin-bottom: 20px;
+      font-size: 0.85rem; color: rgba(255,255,255,0.7);
+      line-height: 1.8;
+    }
+    #summaryInfo strong { color: var(--white); }
+
+    /* ═══════════════════════════════════════════════
+       RESPONSIVIDADE TOTAL
+    ═══════════════════════════════════════════════ */
+    @media (max-width: 1024px) {
+      nav { padding: 0 4%; height: 62px; }
+      .hero { padding: 90px 4% 60px; gap: 32px; }
+      .hero-left h1 { font-size: clamp(2.8rem, 5vw, 4.5rem); }
+      .collection, .studio-lab, .brand-section, .media-section { padding: 90px 4%; }
+    }
+
+    @media (max-width: 800px) {
+      * { cursor: auto !important; }
+      #cur, #cur-ring { display: none !important; }
+
+      nav { padding: 0 4%; height: 60px; }
+      .nav-links { display: none; }
+      .nav-buttons { gap: 8px; }
+      .btn-outline-nav { padding: 7px 14px; font-size: 0.6rem; }
+      .btn-gold-nav { padding: 7px 14px; font-size: 0.6rem; }
+
+      .hero {
+        grid-template-columns: 1fr;
+        text-align: center; padding-top: 90px; gap: 24px;
+        min-height: auto; padding-bottom: 60px;
+      }
+      .hero-left p { margin-left: auto; margin-right: auto; }
+      .hero-actions { justify-content: center; }
+      .hero-stats { justify-content: center; }
+      .hero-right { justify-content: center; }
+      .hero-right img { max-width: 80%; }
+      .hero-left .badge { margin-left: auto; margin-right: auto; }
+
+      .media-section { padding: 70px 4%; }
+      .video-container { border-radius: 16px; margin-bottom: 32px; }
+
+      .brand-section { padding: 80px 4%; }
+      .brand-section h2 { font-size: clamp(1.8rem, 5vw, 2.8rem); }
+
+      .collection { padding: 80px 4%; }
+      .card-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+      .prod-card { max-width: 100%; }
+
+      .studio-lab { padding: 80px 4%; }
+      .studio-container { grid-template-columns: 1fr; text-align: center; gap: 36px; }
+      .studio-container > div:first-child { text-align: center; }
+      .studio-features { align-items: center; }
+
+      footer { padding: 60px 4% 28px; }
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; text-align: left; }
+      .footer-bottom { justify-content: center; }
+    }
+
+    @media (max-width: 480px) {
+      .hero-left h1 { font-size: clamp(2.2rem, 8vw, 3rem); }
+      .hero-actions { flex-direction: column; align-items: center; }
+      .btn-primary, .cta-brand { width: 100%; justify-content: center; }
+      .btn-outline-nav { width: 100%; justify-content: center; text-align: center; }
+      .hero-stats { gap: 20px; }
+
+      .card-grid { grid-template-columns: 1fr; }
+      .prod-card { max-width: 320px; margin: 0 auto; }
+
+      .brand-section h2 { font-size: 1.8rem; }
+      .brand-perks { gap: 10px; }
+
+      .footer-grid { grid-template-columns: 1fr; text-align: center; }
+      .social-icons { justify-content: center; }
+
+      .modal-container { padding: 24px 20px; border-radius: 20px; }
+      .modal-buttons { justify-content: center; flex-direction: column; }
+      .btn-next, .btn-send-wa, .btn-send-email, .btn-outline-nav { width: 100%; justify-content: center; }
+    }
+  </style>
 </head>
 <body>
 
+<!-- CURSOR CUSTOM -->
 <div id="cur"></div>
 <div id="cur-ring"></div>
 
-<nav>
-  <a href="#" class="nav-brand">
-    <img src="1000027280.png" alt="Heksel Logo">
-    <span class="nav-name">HEKSEL</span>
+<!-- FUNDO ANIMADO COM PARTÍCULAS -->
+<div class="animated-bg"></div>
+<script>
+  (function createParticles() {
+    const count = 40;
+    for (let i = 0; i < count; i++) {
+      const p = document.createElement('div');
+      p.classList.add('particle');
+      const size = Math.random() * 6 + 2;
+      p.style.width  = size + 'px';
+      p.style.height = size + 'px';
+      p.style.left   = Math.random() * 100 + '%';
+      p.style.animationDuration = (Math.random() * 18 + 10) + 's';
+      p.style.animationDelay    = (Math.random() * 8) + 's';
+      p.style.opacity = (Math.random() * 0.5).toString();
+      document.body.appendChild(p);
+    }
+  })();
+</script>
+
+<!-- NAVBAR -->
+<nav id="nav">
+  <a href="#" class="logo">
+    <img src="1000027280.png" alt="Heksel">
+    <span>HEKSEL</span>
   </a>
   <ul class="nav-links">
-    <li><a href="#" class="on">Home</a></li>
-    <li><a href="#media">Media</a></li>
-    <li><a href="#create">Create My Brand</a></li>
-    <li><a href="#collections">Collections</a></li>
-    <li><a href="#studio">Studio</a></li>
+    <li><a href="#hero" class="active">HOME</a></li>
+    <li><a href="#collection">COLLECTION</a></li>
+    <li><a href="#studioLab">STUDIO</a></li>
+    <li><a href="#brandSection">CREATE</a></li>
   </ul>
-  <div class="nav-r">
-    <a href="#create" class="nav-btn">BUILD BRAND</a>
+  <div class="nav-buttons">
+    <button class="btn-outline-nav" onclick="openNotifyModal()">NOTIFY ME</button>
+    <button class="btn-gold-nav" onclick="document.getElementById('brandSection').scrollIntoView({behavior:'smooth'})">VIP ACCESS</button>
   </div>
 </nav>
 
-<section class="hero">
-  <div>
-    <div class="h-tag"><span class="h-dot"></span>Studio Hafa Production</div>
-    <h1 class="h-title">HEKSEL<br><span class="g">IMPERIUM</span></h1>
-    <p class="h-sub">O ápice do ecossistema cyberpunk de luxo. Concebido sob medida para redefinir a soberania urbana e a exclusividade estética digital.</p>
-    <div class="h-acts">
-      <a href="#create" class="btn-dark"><span>ORDEM DE COMPRA</span></a>
+<!-- ═══ HERO ═══ -->
+<section class="hero" id="hero">
+  <div class="hero-left">
+    <div class="badge">
+      <span class="badge-dot"></span>
+      THE NEO COLLECTION 2026
+    </div>
+    <h1>YOUR IDENTITY,<br><span class="glow-text">ENGINEERED.</span></h1>
+    <p>Três linhas. Um império. Performance, home wear e luxo digital — cada passo é uma declaração de poder.</p>
+    <div class="hero-actions">
+      <button class="btn-primary" onclick="document.getElementById('collection').scrollIntoView({behavior:'smooth'})">
+        EXPLORE ALL <span>→</span>
+      </button>
+      <button class="btn-outline-nav" onclick="openBrandModal()">CREATE MY BRAND ✦</button>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-item">
+        <span class="stat-num">1K+</span>
+        <span class="stat-label">Builders</span>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat-item">
+        <span class="stat-num">3</span>
+        <span class="stat-label">Lines</span>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat-item">
+        <span class="stat-num">01</span>
+        <span class="stat-label">Drop</span>
+      </div>
     </div>
   </div>
-  <div class="hero-stage">
-    <div class="hero-glow"></div>
-    <img src="tenis.png" alt="Heksel Shoe Destaque" class="hero-shoe">
+  <div class="hero-right">
+    <img src="tenis.png" alt="Heksel Imperium Shoe" onerror="this.src='1000027639-removebg-preview.png'">
   </div>
 </section>
 
-<div class="ticker">
-  <div class="ticker-track">
-    <span>HEKSEL IMPERIUM</span> — <span>STUDIO HAFA ECOSYSTEM</span> — <span>LIMITED EDITION</span> — <span>NEO ARCHITECTURE</span> — <span>HEKSEL IMPERIUM</span> — <span>STUDIO HAFA ECOSYSTEM</span> — <span>LIMITED EDITION</span> — <span>NEO ARCHITECTURE</span>
+<!-- ═══ MEDIA SECTION ═══ -->
+<section class="media-section">
+  <div class="video-container">
+    <video autoplay muted loop playsinline poster="tenis.png">
+      <source src="lv_0_20260529100529.mp4" type="video/mp4">
+    </video>
+  </div>
+  <div class="hero-shoe-neon">
+    <img src="tenis.png" alt="NEO-KAI 01 — Neon Edition" onerror="this.src='1000027639-removebg-preview.png'">
+  </div>
+</section>
+
+<!-- ═══ CREATE MY BRAND ═══ -->
+<section class="brand-section" id="brandSection">
+  <span class="studio-badge">✦ HEKSEL SERVICES</span>
+  <h2>Want a website like this?<br><span class="glow-gold">Build your brand.</span></h2>
+  <p>Identidade visual completa + website profissional + ecossistema digital. Do início ao infinito.</p>
+  <button class="cta-brand" id="openBrandModalBtn">✦ CREATE MY BRAND ✦</button>
+  <div class="brand-perks">
+    <div class="brand-perk-item">⚡ Ultra-profissional</div>
+    <div class="brand-perk-item">🎨 Visual identity</div>
+    <div class="brand-perk-item">📱 100% responsivo</div>
+    <div class="brand-perk-item">🚀 Entrega rápida</div>
+  </div>
+</section>
+
+<!-- ═══ COLLECTION ═══ -->
+<section class="collection" id="collection">
+  <span class="section-tag">⚡ NEO COLLECTION — DROP 01</span>
+  <h2 class="section-title">Every Line.<br><span class="glow-text">One Empire.</span></h2>
+  <p class="section-sub">Laser-engineered performance meets street culture. Six silhouettes. One declaration.</p>
+  <div class="card-grid">
+    <div class="prod-card">
+      <img src="1000027639-removebg-preview.png" alt="NEO-KAI Gold">
+      <div class="prod-info">
+        <div class="prod-name">NEO-KAI 01 Gold</div>
+        <div class="prod-price">$189</div>
+        <button class="notify-btn-card" onclick="openNotifyModal()">NOTIFY ME</button>
+      </div>
+    </div>
+    <div class="prod-card">
+      <img src="1000027638-removebg-preview.png" alt="NEO-KAI Red">
+      <div class="prod-info">
+        <div class="prod-name">NEO-KAI 01 Red Force</div>
+        <div class="prod-price">$189</div>
+        <button class="notify-btn-card" onclick="openNotifyModal()">NOTIFY ME</button>
+      </div>
+    </div>
+    <div class="prod-card">
+      <img src="1000027632-removebg-preview.png" alt="NEO-KAI Blue">
+      <div class="prod-info">
+        <div class="prod-name">NEO-KAI 01 Blue Strike</div>
+        <div class="prod-price">$189</div>
+        <button class="notify-btn-card" onclick="openNotifyModal()">NOTIFY ME</button>
+      </div>
+    </div>
+    <div class="prod-card">
+      <img src="1000027648-removebg-preview.png" alt="NEO-WAI Slide">
+      <div class="prod-info">
+        <div class="prod-name">NEO-WAI 01 Slide</div>
+        <div class="prod-price">TBA</div>
+        <button class="notify-btn-card" onclick="openNotifyModal()">COMING SOON</button>
+      </div>
+    </div>
+    <div class="prod-card">
+      <img src="1000027649-removebg-preview.png" alt="NEO-WAI Flip">
+      <div class="prod-info">
+        <div class="prod-name">NEO-WAI 01 Flip</div>
+        <div class="prod-price">TBA</div>
+        <button class="notify-btn-card" onclick="openNotifyModal()">NOTIFY ME</button>
+      </div>
+    </div>
+    <div class="prod-card">
+      <img src="1000027651-removebg-preview.png" alt="NEO-LAI">
+      <div class="prod-info">
+        <div class="prod-name">NEO-LAI 01 Slipper</div>
+        <div class="prod-price">TBA</div>
+        <button class="notify-btn-card" onclick="openNotifyModal()">EARLY ACCESS</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ STUDIO HAFA LAB ═══ -->
+<section class="studio-lab" id="studioLab">
+  <div class="studio-container">
+    <div>
+      <span class="studio-badge">HEKSEL STUDIO — EM BREVE</span>
+      <h2 style="font-family:'Syne',sans-serif; font-size:clamp(2rem,4vw,3.2rem); margin-bottom:20px; font-weight:800; letter-spacing:-0.02em; line-height:1.05;">
+        Design Your<br><span class="glow-text">Own Story.</span>
+      </h2>
+      <p style="opacity:0.55; margin-bottom:28px; font-weight:300; line-height:1.75; font-size:1rem; max-width:380px;">
+        Customização total: cores, stickers, arte final. O calçado 100% seu — nenhum outro igual no mundo.
+      </p>
+      <div class="studio-features">
+        <div class="studio-feat">Paleta de cores customizada</div>
+        <div class="studio-feat">Upload de artwork pessoal</div>
+        <div class="studio-feat">Pré-visualização em tempo real</div>
+      </div>
+      <button class="btn-primary" style="margin-top:8px;" onclick="openNotifyModal()">
+        GET EARLY ACCESS →
+      </button>
+    </div>
+    <div class="studio-mock">
+      <img src="1000027639-removebg-preview.png" alt="Studio preview">
+      <div class="studio-actions">
+        <span class="studio-badge">🎨 COLOR</span>
+        <span class="studio-badge">⚡ STICKER</span>
+        <span class="studio-badge">📐 SIZE</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-logo">
+      <img src="1000027280.png" alt="Heksel">
+      <p>Designed in Brazil.<br>Engineered Globally.</p>
+      <div class="social-icons">
+        <a href="https://www.instagram.com/hafavilha" target="_blank">
+          <img src="instagram-heksel.png" alt="Instagram" onerror="this.src='data:image/svg+xml,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 24 24\' fill=\'white\'><rect x=\'2\' y=\'2\' width=\'20\' height=\'20\' rx=\'5\'/></svg>'">
+        </a>
+        <a href="https://vt.tiktok.com/ZSxbdSUg9/" target="_blank">
+          <img src="tiktok-heksel.png" alt="TikTok" onerror="this.src='data:image/svg+xml,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 24 24\' fill=\'white\'><circle cx=\'12\' cy=\'12\' r=\'10\'/></svg>'">
+        </a>
+        <a href="https://wa.me/5553991855262" target="_blank">
+          <img src="x-heksel.png" alt="WhatsApp" onerror="this.src='data:image/svg+xml,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 24 24\' fill=\'white\'><circle cx=\'12\' cy=\'12\' r=\'10\'/></svg>'">
+        </a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Collection</h4>
+      <a href="#">NEO-KAI 01</a>
+      <a href="#">NEO-WAI 01</a>
+      <a href="#">NEO-LAI 01</a>
+    </div>
+    <div class="footer-col">
+      <h4>Studio</h4>
+      <a href="#studioLab" onclick="document.getElementById('studioLab').scrollIntoView({behavior:'smooth'})">Heksel Studio</a>
+      <a href="#" onclick="openNotifyModal()">Custom Build</a>
+      <a href="#brandSection" onclick="document.getElementById('brandSection').scrollIntoView({behavior:'smooth'})">Inner Circle</a>
+    </div>
+    <div class="footer-col">
+      <h4>Suporte</h4>
+      <a href="https://wa.me/5553991855262" target="_blank">WhatsApp</a>
+      <a href="mailto:hafavilhahafy@gmail.com">hafavilhahafy@gmail.com</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">© 2026 HEKSEL IMPERIUM — TODOS OS DIREITOS RESERVADOS.</span>
+    <span class="footer-copy" style="color:rgba(0,240,255,0.3)">DESIGNED IN BRAZIL. ENGINEERED GLOBALLY.</span>
+  </div>
+</footer>
+
+<!-- ═══ MODAL CREATE MY BRAND ═══ -->
+<div class="modal-overlay" id="brandModal">
+  <div class="modal-container">
+    <button class="close-modal" onclick="closeBrandModal()">×</button>
+
+    <div id="step1" class="step active-step">
+      <h3>Let's get started! ✦</h3>
+      <div class="form-group">
+        <label>Nome da marca *</label>
+        <input type="text" id="brandName" placeholder="Ex: APEX STUDIO, ForceFit...">
+      </div>
+      <div class="form-group">
+        <label>Segmento / Nicho</label>
+        <input type="text" id="niche" placeholder="Moda, Tech, Fitness, Restaurante...">
+      </div>
+      <div class="modal-buttons">
+        <button class="btn-next" onclick="nextStep(2)">PRÓXIMO →</button>
+      </div>
+    </div>
+
+    <div id="step2" class="step">
+      <h3>Identidade existente?</h3>
+      <div class="radio-group">
+        <label><input type="radio" name="hasSite" value="yes" onclick="toggleSiteFields(true)"> ✅ Sim, tenho</label>
+        <label><input type="radio" name="hasSite" value="no" onclick="toggleSiteFields(false)"> 🚀 Começar do zero</label>
+      </div>
+      <div id="siteFields" style="display:none; margin-top:18px;">
+        <div class="form-group">
+          <label>Link do site atual</label>
+          <input type="text" id="siteLink" placeholder="https://">
+        </div>
+        <div class="form-group">
+          <label>Logo (link ou descrição)</label>
+          <input type="text" id="logoDesc" placeholder="Link ou descrição do logo">
+        </div>
+      </div>
+      <div id="briefField" style="display:none; margin-top:18px;">
+        <div class="form-group">
+          <label>Briefing — conte sobre sua marca</label>
+          <textarea id="briefing" rows="3" placeholder="Ex: quero um site dark futurístico, vitrine de produtos premium..."></textarea>
+        </div>
+      </div>
+      <div class="modal-buttons">
+        <button class="btn-outline-nav" onclick="prevStep(1)">← VOLTAR</button>
+        <button class="btn-next" onclick="nextStep(3)">PRÓXIMO →</button>
+      </div>
+    </div>
+
+    <div id="step3" class="step">
+      <h3>Escolha seu pacote</h3>
+      <div class="packages" id="packagesList"></div>
+      <div class="modal-buttons">
+        <button class="btn-outline-nav" onclick="prevStep(2)">← VOLTAR</button>
+        <button class="btn-next" onclick="nextStep(4)">RESUMO →</button>
+      </div>
+    </div>
+
+    <div id="step4" class="step">
+      <h3>Resumo do orçamento ✦</h3>
+      <div id="summaryInfo"></div>
+      <div class="modal-buttons" style="flex-direction:column; align-items:stretch;">
+        <button class="btn-send-wa" id="sendWABtn">💬 ENVIAR VIA WHATSAPP</button>
+        <button class="btn-send-email" id="sendEmailBtn">📧 ENVIAR VIA GMAIL</button>
+        <button class="btn-outline-nav" onclick="prevStep(3)" style="text-align:center;">← EDITAR</button>
+      </div>
+    </div>
   </div>
 </div>
 
-<section class="heksel-media-sec" id="media">
-  <div class="media-container">
-    <div class="media-video-wrap">
-      <video src="lv_0_20260529100529.mp4" autoplay loop muted playsinline></video>
-    </div>
-    <div class="media-img-wrap">
-      <img src="tenis.png" alt="Heksel Cyber Shadow">
-    </div>
-  </div>
-</section>
-
-<section class="brand-builder-sec" id="create">
-  <div class="builder-card">
-    <h2 class="builder-title">Create My Brand</h2>
-    <p class="builder-desc">Simule o orçamento do seu ecossistema premium com o Studio Hafa.</p>
-    
-    <form id="brandForm" onsubmit="event.preventDefault();">
-      <div class="form-step active" id="step1">
-        <label class="form-label">Qual o nome da sua Marca?</label>
-        <input type="text" id="brandName" class="form-input" placeholder="Digite o nome da sua marca..." required>
-        <div class="form-nav">
-          <div></div>
-          <button type="button" class="btn-nav btn-next" onclick="nextStep(2)">Avançar</button>
-        </div>
-      </div>
-
-      <div class="form-step" id="step2">
-        <label class="form-label">Você já possui um Site ativo?</label>
-        <div class="radio-group">
-          <div class="radio-btn" id="hasSiteYes" onclick="selectSiteOption(true)">Sim, eu tenho</div>
-          <div class="radio-btn" id="hasSiteNo" onclick="selectSiteOption(false)">Não tenho</div>
-        </div>
-        
-        <div id="siteDetails" style="display: none;">
-          <label class="form-label">Link do Site Atual</label>
-          <input type="url" id="siteLink" class="form-input" placeholder="https://exemplo.com">
-          <label class="form-label">Link ou Nome do Logotipo</label>
-          <input type="text" id="siteLogo" class="form-input" placeholder="Ex: Arquivo logo.png ou Briefing">
-        </div>
-        
-        <div id="noSiteDetails" style="display: none;">
-          <label class="form-label">Resumo/Briefing do que precisa</label>
-          <input type="text" id="siteBriefing" class="form-input" placeholder="Ex: Preciso de uma Landing Page corporativa de luxo...">
-        </div>
-
-        <div class="form-nav">
-          <button type="button" class="btn-nav btn-prev" onclick="prevStep(1)">Voltar</button>
-          <button type="button" class="btn-nav btn-next" onclick="nextStep(3)">Avançar</button>
-        </div>
-      </div>
-
-      <div class="form-step" id="step3">
-        <label class="form-label">Selecione o seu Pacote de Elite</label>
-        <div class="packages-grid">
-          <div class="pkg-card" id="pkg1" onclick="selectPackage('Normal — R$ 1.000', 'pkg1')">
-            <div class="pkg-title">Normal</div>
-            <div class="pkg-price">R$ 1.000</div>
-          </div>
-          <div class="pkg-card" id="pkg2" onclick="selectPackage('Moderno — R$ 2.000', 'pkg2')">
-            <div class="pkg-title">Moderno</div>
-            <div class="pkg-price">R$ 2.000</div>
-          </div>
-          <div class="pkg-card" id="pkg3" onclick="selectPackage('Profissional — R$ 5.000', 'pkg3')">
-            <div class="pkg-title">Profissional</div>
-            <div class="pkg-price">R$ 5.000</div>
-          </div>
-          <div class="pkg-card" id="pkg4" onclick="selectPackage('Elite Profissional — R$ 20.000', 'pkg4')">
-            <div class="pkg-title">Elite Profissional</div>
-            <div class="pkg-price">R$ 20.000</div>
-          </div>
-          <div class="pkg-card" id="pkg5" onclick="selectPackage('Ultra Elite Ecossistema — R$ 30.000', 'pkg5')">
-            <div class="pkg-title">Ultra Elite</div>
-            <div class="pkg-price">R$ 30.000</div>
-          </div>
-        </div>
-
-        <div class="form-nav">
-          <button type="button" class="btn-nav btn-prev" onclick="prevStep(2)">Voltar</button>
-          <button type="button" class="btn-nav btn-next" onclick="nextStep(4)">Avançar</button>
-        </div>
-      </div>
-
-      <div class="form-step" id="step4">
-        <label class="form-label" style="text-align: center; margin-bottom: 25px;">Seu Ecossistema está pronto! Escolha a plataforma de disparo:</label>
-        <div class="send-actions">
-          <a href="#" id="whatsappBtn" target="_blank" class="btn-send whatsapp">Disparar via WhatsApp</a>
-          <a href="#" id="gmailBtn" target="_blank" class="btn-send gmail">Disparar via Gmail</a>
-        </div>
-        <div class="form-nav">
-          <button type="button" class="btn-nav btn-prev" onclick="prevStep(3)" style="margin-top: 20px;">Corrigir Dados</button>
-          <div></div>
-        </div>
-      </div>
-    </form>
-  </div>
-</section>
-
-<section class="collection-sec" id="collections">
-  <div class="eco-inner">
-    <h2 class="eco-title">THE IMPERIUM COLLECTIONS</h2>
-    <div class="coll-grid">
-      <div class="prod-tile">
-        <div class="prod-tile-img-wrap"><img src="tenis.png" class="prod-tile-img" alt="Heksel Sneaker"></div>
-        <div class="prod-tile-body">
-          <div class="prod-tile-name">Heksel Phantom Neo</div>
-          <div class="prod-tile-price">R$ 4.900</div>
-        </div>
-      </div>
-      <div class="prod-tile">
-        <div class="prod-tile-img-wrap"><img src="relogio.png" class="prod-tile-img" alt="Heksel Watch"></div>
-        <div class="prod-tile-body">
-          <div class="prod-tile-name">Chronograph Cyber Elite</div>
-          <div class="prod-tile-price">R$ 12.500</div>
-        </div>
-      </div>
-      <div class="prod-tile">
-        <div class="prod-tile-img-wrap"><img src="1000027443.png" class="prod-tile-img" alt="Heksel Core"></div>
-        <div class="prod-tile-body">
-          <div class="prod-tile-name">Heksel Obsidian Drop</div>
-          <div class="prod-tile-price">R$ 5.200</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="studio-sec" id="studio">
-  <div class="studio-inner">
-    <div>
-      <h2 class="studio-title">STUDIO HAFA<br>LABORATORY</h2>
-      <p class="studio-desc">Simule e alterne as diretrizes estéticas dos modelos diretamente do painel de controle holográfico.</p>
-    </div>
-    <div class="studio-mockup">
-      <div class="studio-canvas">
-        <img id="studioShoe" src="tenis.png" alt="Custom Shoe">
-      </div>
-      <div class="studio-controls">
-        <div class="color-dot" style="background:#00c8ff;" onclick="changeStudioTone('rgba(0,200,255,0.3)')"></div>
-        <div class="color-dot" style="background:#8b5cf6;" onclick="changeStudioTone('rgba(139,92,246,0.3)')"></div>
-        <div class="color-dot" style="background:#c9a84c;" onclick="changeStudioTone('rgba(201,168,76,0.3)')"></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="social-eco">
-  <div class="eco-inner">
-    <h2 class="eco-title">CONNECTED ECOSYSTEM</h2>
-    <div class="eco-socials">
-      <a href="https://instagram.com" target="_blank" class="eco-btn">
-        <span class="eco-label">Instagram</span>
-      </a>
-      <a href="https://tiktok.com" target="_blank" class="eco-btn">
-        <span class="eco-label">TikTok</span>
-      </a>
-      <a href="https://x.com" target="_blank" class="eco-btn">
-        <span class="eco-label">X Platform</span>
-      </a>
-      <a href="#" class="eco-btn">
-        <span class="eco-label">Waitlist</span>
-      </a>
-    </div>
-  </div>
-</section>
-
-<footer>
-  <img src="1000027280.png" class="ft-logo" alt="Heksel Bottom Brand">
-  <div class="ft-socials">
-    <a href="https://instagram.com" target="_blank"><img src="instagram-heksel.png" alt="Instagram"></a>
-    <a href="https://tiktok.com" target="_blank"><img src="tiktok-heksel.png" alt="TikTok"></a>
-    <a href="https://x.com" target="_blank"><img src="x-heksel.png" alt="X"></a>
-  </div>
-  <p class="ft-copy">&copy; 2026 HEKSEL IMPERIUM. Developed via Studio Hafa. All Rights Reserved.</p>
-</footer>
-
 <script>
-/* MOUSE INTERACTION SCRIPT */
-const cur = document.getElementById('cur');
-const ring = document.getElementById('cur-ring');
-document.addEventListener('mousemove', (e) => {
-  cur.style.left = e.clientX + 'px';
-  cur.style.top = e.clientY + 'px';
-  ring.style.left = e.clientX + 'px';
-  ring.style.top = e.clientY + 'px';
-});
+  /* ── CURSOR CUSTOM ── */
+  (function(){
+    const cur = document.getElementById('cur');
+    const ring = document.getElementById('cur-ring');
+    if (!cur || !ring) return;
+    let mx = 0, my = 0, cx = 0, cy = 0;
+    document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+    setInterval(() => {
+      cx += (mx - cx) * 0.2; cy += (my - cy) * 0.2;
+      cur.style.left  = cx + 'px'; cur.style.top  = cy + 'px';
+      ring.style.left = mx + 'px'; ring.style.top = my + 'px';
+    }, 16);
+    document.addEventListener('mouseover', e => {
+      if (e.target.tagName === 'A' || e.target.tagName === 'BUTTON' || e.target.closest('button') || e.target.closest('a'))
+        cur.classList.add('hover');
+    });
+    document.addEventListener('mouseout', e => {
+      if (e.target.tagName === 'A' || e.target.tagName === 'BUTTON' || e.target.closest('button') || e.target.closest('a'))
+        cur.classList.remove('hover');
+    });
+  })();
 
-/* BRAND CONFIGURATOR LOGIC */
-let currentStep = 1;
-let selectedSite = null;
-let chosenPackage = '';
+  /* ── NAV SCROLL ── */
+  const navEl = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    navEl.classList.toggle('scrolled', window.scrollY > 10);
+  });
 
-function nextStep(step) {
-  if(step === 2 && !document.getElementById('brandName').value) {
-    alert('Por favor, informe o nome da sua marca.');
-    return;
+  /* ── ACTIVE LINK NO SCROLL ── */
+  const sections = document.querySelectorAll('section');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => {
+      if (window.scrollY >= s.offsetTop - 160) current = s.id;
+    });
+    document.querySelectorAll('.nav-links a').forEach(a => {
+      a.classList.remove('active');
+      if (a.getAttribute('href') === `#${current}`) a.classList.add('active');
+    });
+  });
+
+  /* ── PACOTES ── */
+  const packages = [
+    { name: "NORMAL",                 price: "R$ 1.000",  desc: "Site 1 página, responsivo, entrega 7 dias" },
+    { name: "MODERNO",                price: "R$ 2.000",  desc: "Multi páginas + animações + SEO básico" },
+    { name: "PROFISSIONAL",           price: "R$ 5.000",  desc: "Website completo + loja + identidade visual" },
+    { name: "ELITE PROFISSIONAL",     price: "R$ 20.000", desc: "Ecossistema digital completo + branding + app" },
+    { name: "ULTRA ELITE ECOSSISTEMA",price: "R$ 30.000", desc: "IA, automações, suporte vitalício + dominância de mercado" }
+  ];
+
+  let selectedPkgIndex = null;
+  let formData = { brand: '', niche: '', hasSite: null, siteLink: '', logoDesc: '', briefing: '', package: '' };
+
+  function renderPackages() {
+    const container = document.getElementById('packagesList');
+    if (!container) return;
+    container.innerHTML = packages.map((pkg, idx) => `
+      <div class="package-item" data-idx="${idx}">
+        <div>
+          <strong>${pkg.name}</strong><br>
+          <small>${pkg.desc}</small>
+        </div>
+        <div><strong>${pkg.price}</strong></div>
+      </div>
+    `).join('');
+    document.querySelectorAll('.package-item').forEach(el => {
+      el.addEventListener('click', () => {
+        document.querySelectorAll('.package-item').forEach(p => p.classList.remove('selected-package'));
+        el.classList.add('selected-package');
+        selectedPkgIndex = parseInt(el.dataset.idx);
+        formData.package = packages[selectedPkgIndex].name + ' — ' + packages[selectedPkgIndex].price;
+      });
+    });
   }
-  document.querySelectorAll('.form-step').forEach(s => s.classList.remove('active'));
-  document.getElementById('step' + step).classList.add('active');
-  currentStep = step;
-  if(step === 4) generateLinks();
-}
 
-function prevStep(step) {
-  document.querySelectorAll('.form-step').forEach(s => s.classList.remove('active'));
-  document.getElementById('step' + step).classList.add('active');
-  currentStep = step;
-}
+  function showStep(step) {
+    document.querySelectorAll('.step').forEach(s => s.classList.remove('active-step'));
+    const el = document.getElementById(`step${step}`);
+    if (el) el.classList.add('active-step');
+    if (step === 3) renderPackages();
+    if (step === 4) buildSummary();
+  }
 
-function selectSiteOption(hasSite) {
-  selectedSite = hasSite;
-  document.getElementById('hasSiteYes').classList.toggle('selected', hasSite);
-  document.getElementById('hasSiteNo').classList.toggle('selected', !hasSite);
-  document.getElementById('siteDetails').style.display = hasSite ? 'block' : 'none';
-  document.getElementById('noSiteDetails').style.display = hasSite ? 'none' : 'block';
-}
+  function nextStep(target) {
+    if (target === 2) {
+      const brand = document.getElementById('brandName')?.value.trim();
+      if (!brand) { alert('Por favor, digite o nome da marca'); return; }
+      formData.brand = brand;
+      formData.niche = document.getElementById('niche')?.value.trim() || '';
+      showStep(2);
+    } else if (target === 3) {
+      const choice = document.querySelector('input[name="hasSite"]:checked');
+      if (!choice) { alert('Selecione se já possui site ou identidade visual'); return; }
+      formData.hasSite = choice.value === 'yes';
+      if (formData.hasSite) {
+        formData.siteLink  = document.getElementById('siteLink')?.value.trim()  || '';
+        formData.logoDesc  = document.getElementById('logoDesc')?.value.trim()  || '';
+      } else {
+        formData.briefing  = document.getElementById('briefing')?.value.trim()  || '';
+      }
+      showStep(3);
+    } else if (target === 4) {
+      if (selectedPkgIndex === null) { alert('Selecione um pacote para continuar'); return; }
+      showStep(4);
+    }
+  }
 
-function selectPackage(pkgName, cardId) {
-  chosenPackage = pkgName;
-  document.querySelectorAll('.pkg-card').forEach(c => c.classList.remove('selected'));
-  document.getElementById(cardId).classList.add('selected');
-}
+  function prevStep(back) { showStep(back); }
 
-function generateLinks() {
-  const brand = document.getElementById('brandName').value;
-  const siteInfo = selectedSite ? `Sim (Link: ${document.getElementById('siteLink').value}, Logo: ${document.getElementById('siteLogo').value})` : `Não (Briefing: ${document.getElementById('siteBriefing').value})`;
-  const pacote = chosenPackage || 'Nenhum selecionado';
-  
-  const textMessage = `Olá Studio Hafa, montei o Briefing da minha Marca no painel Heksel:\n\n• Marca: ${brand}\n• Possui site: ${siteInfo}\n• Pacote escolhido: ${pacote}`;
-  
-  // WhatsApp Link Config
-  document.getElementById('whatsappBtn').href = `https://wa.me/5553991855262?text=${encodeURIComponent(textMessage)}`;
-  
-  // Gmail Link Config
-  document.getElementById('gmailBtn').href = `https://mail.google.com/mail/?view=cm&fs=1&to=hafavilhahafy@gmail.com&sb=Orçamento%20Heksel%20Imperium&body=${encodeURIComponent(textMessage)}`;
-}
+  function toggleSiteFields(has) {
+    document.getElementById('siteFields').style.display  = has ? 'block' : 'none';
+    document.getElementById('briefField').style.display  = has ? 'none'  : 'block';
+  }
 
-/* STUDIO CONTROLLER */
-function changeStudioTone(rgbaShadow) {
-  document.getElementById('studioShoe').style.filter = `drop-shadow(0 15px 30px ${rgbaShadow})`;
-}
+  function buildSummary() {
+    const hasSiteText = formData.hasSite
+      ? `Sim — ${formData.siteLink || 'não informado'} | Logo: ${formData.logoDesc || '-'}`
+      : `Não — Briefing: ${formData.briefing || '-'}`;
+    const el = document.getElementById('summaryInfo');
+    if (el) el.innerHTML = `
+      <div><strong>Marca:</strong> ${formData.brand}</div>
+      <div><strong>Segmento:</strong> ${formData.niche || '-'}</div>
+      <div><strong>Site existente:</strong> ${hasSiteText}</div>
+      <div><strong>Pacote:</strong> ${formData.package}</div>
+    `;
+  }
+
+  function getMessage() {
+    return `🚀 *ORÇAMENTO — CREATE MY BRAND*%0A*Marca:* ${formData.brand}%0A*Segmento:* ${formData.niche || '-'}%0A*Site atual:* ${formData.hasSite ? formData.siteLink : 'Não possui'}%0A*Logo/Briefing:* ${formData.hasSite ? formData.logoDesc : formData.briefing}%0A*Pacote:* ${formData.package}%0A%0A✦ Gostaria de iniciar o projeto!`;
+  }
+
+  document.getElementById('sendWABtn')?.addEventListener('click', () => {
+    window.open(`https://wa.me/5553991855262?text=${getMessage()}`, '_blank');
+  });
+
+  document.getElementById('sendEmailBtn')?.addEventListener('click', () => {
+    window.location.href = `mailto:hafavilhahafy@gmail.com?subject=Orçamento%20Create%20My%20Brand%20-%20${formData.brand}&body=${getMessage().replace(/%0A/g, '\n')}`;
+  });
+
+  function openBrandModal() {
+    const modal = document.getElementById('brandModal');
+    if (!modal) return;
+    modal.style.display = 'flex';
+    selectedPkgIndex = null;
+    formData = { brand: '', niche: '', hasSite: null, siteLink: '', logoDesc: '', briefing: '', package: '' };
+    ['brandName','niche','siteLink','logoDesc','briefing'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.value = '';
+    });
+    document.querySelectorAll('input[name="hasSite"]').forEach(r => r.checked = false);
+    document.getElementById('siteFields').style.display = 'none';
+    document.getElementById('briefField').style.display = 'none';
+    showStep(1);
+  }
+
+  function closeBrandModal() {
+    const modal = document.getElementById('brandModal');
+    if (modal) modal.style.display = 'none';
+  }
+
+  document.getElementById('openBrandModalBtn')?.addEventListener('click', openBrandModal);
+  window.addEventListener('click', e => {
+    if (e.target === document.getElementById('brandModal')) closeBrandModal();
+  });
+
+  /* BUG FIX #5: openNotifyModal com modal real em vez de alert() */
+  function openNotifyModal() {
+    const msg = encodeURIComponent('🔔 Olá! Quero ser notificado sobre os lançamentos do HEKSEL IMPERIUM e entrar na lista VIP. 👟⚡');
+    window.open(`https://wa.me/5553991855262?text=${msg}`, '_blank');
+  }
 </script>
-
 </body>
 </html>
