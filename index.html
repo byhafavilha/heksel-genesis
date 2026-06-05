@@ -182,7 +182,7 @@
     .cta-brand, .notify-btn-card, .btn-next,
     .btn-send-wa, .btn-send-email, .package-item {
       transition: all var(--transition);
-      cursor: none;
+      cursor: pointer;
       position: relative;
       overflow: hidden;
       isolation: isolate;
@@ -527,6 +527,10 @@
       0%,100% { transform: translateY(0) rotate(0.5deg); }
       50%      { transform: translateY(-20px) rotate(-0.5deg); }
     }
+    @keyframes float {
+      0%,100% { transform: translateY(0) rotate(0deg); }
+      50%      { transform: translateY(-18px) rotate(0deg); }
+    }
 
     /* ═══════════════════════════════════════════════
        MEDIA SECTION — CYBERPUNK CINEMA
@@ -830,7 +834,7 @@
     .studio-actions .studio-badge {
       margin-bottom: 0;
       transition: all .3s;
-      cursor: none;
+      cursor: pointer;
     }
     .studio-actions .studio-badge:hover {
       background: rgba(0,240,255,0.2);
@@ -900,24 +904,30 @@
     }
 
     .social-icons {
-      display: flex; gap: 12px; margin-top: 22px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-top: 22px;
+      flex-wrap: wrap;
     }
     .social-icons a {
-      width: 36px; height: 36px; border-radius: 8px;
-      border: 1px solid rgba(255,255,255,0.08);
+      width: 40px; height: 40px; border-radius: 10px;
+      border: 1px solid rgba(255,255,255,0.1);
       display: flex; align-items: center; justify-content: center;
-      transition: all .3s var(--ease);
+      transition: all .35s var(--ease);
+      flex-shrink: 0;
     }
     .social-icons a:hover {
       border-color: var(--cyan);
       background: rgba(0,240,255,0.08);
-      box-shadow: 0 0 16px rgba(0,240,255,0.15);
-      transform: translateY(-3px);
+      box-shadow: 0 0 20px rgba(0,240,255,0.2);
+      transform: translateY(-4px);
     }
     .social-icons img {
-      width: 18px; height: 18px;
-      filter: brightness(0) invert(1); opacity: 0.5;
+      width: 20px; height: 20px;
+      filter: brightness(0) invert(1); opacity: 0.55;
       transition: opacity .3s;
+      display: block;
     }
     .social-icons a:hover img { opacity: 1; }
 
@@ -984,7 +994,7 @@
     /* BUG FIX #3: close modal posicionado sem afetar o fluxo */
     .close-modal {
       position: absolute; top: 20px; right: 24px;
-      font-size: 24px; cursor: none; line-height: 1;
+      font-size: 24px; cursor: pointer; line-height: 1;
       color: rgba(255,255,255,0.4);
       transition: color .2s, transform .2s;
       background: none; border: none;
@@ -1036,7 +1046,7 @@
       display: flex; align-items: center; gap: 8px;
       color: rgba(255,255,255,0.65);
       text-transform: none; letter-spacing: 0;
-      font-size: 0.85rem; font-weight: 500; cursor: none;
+      font-size: 0.85rem; font-weight: 500; cursor: pointer;
       background: rgba(255,255,255,0.04);
       border: 1.5px solid rgba(255,255,255,0.08);
       padding: 10px 18px; border-radius: 50px;
@@ -1055,7 +1065,7 @@
       display: flex; justify-content: space-between; align-items: center;
       padding: 16px 18px;
       border: 1.5px solid rgba(255,255,255,0.08);
-      border-radius: 14px; cursor: none;
+      border-radius: 14px; cursor: pointer;
     }
     .package-item strong { color: var(--white); font-family: 'Syne', sans-serif; font-size: 0.8rem; letter-spacing: 0.05em; }
     .package-item small { color: rgba(255,255,255,0.35); font-size: 0.72rem; }
@@ -1166,6 +1176,9 @@
       footer { padding: 60px 4% 28px; }
       .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; text-align: left; }
       .footer-bottom { justify-content: center; }
+      .footer-logo { text-align: center; }
+      .footer-logo p { max-width: 100%; }
+      .social-icons { justify-content: center; gap: 16px; }
     }
 
     @media (max-width: 480px) {
@@ -1182,7 +1195,8 @@
       .brand-perks { gap: 10px; }
 
       .footer-grid { grid-template-columns: 1fr; text-align: center; }
-      .social-icons { justify-content: center; }
+      .footer-logo { text-align: center; }
+      .social-icons { justify-content: center; gap: 18px; margin-top: 18px; }
 
       .modal-container { padding: 24px 20px; border-radius: 20px; }
       .modal-buttons { justify-content: center; flex-direction: column; }
@@ -1193,14 +1207,14 @@
     ═══════════════════════════════════════════════ */
     .hero-carousel {
       position: relative;
-      width: 100%; max-width: 580px;
+      width: 100%; max-width: 640px;
       display: flex; flex-direction: column;
-      align-items: center; gap: 20px;
+      align-items: center; gap: 16px;
     }
 
     .carousel-track {
       position: relative; width: 100%;
-      min-height: 420px;
+      min-height: 500px;
       display: flex; align-items: center; justify-content: center;
     }
 
@@ -1227,12 +1241,12 @@
     .carousel-glow {
       position: absolute; bottom: 0; left: 50%;
       transform: translateX(-50%);
-      width: 85%; height: 38%;
+      width: 90%; height: 40%;
       background: radial-gradient(ellipse,
         rgba(0,240,255,0.22) 0%,
         rgba(180,94,255,0.12) 50%,
         transparent 75%);
-      filter: blur(26px); z-index: 0;
+      filter: blur(30px); z-index: 0;
       animation: glowBreathe 4s ease-in-out infinite;
     }
     @keyframes glowBreathe {
@@ -1241,25 +1255,26 @@
     }
 
     .carousel-slide img {
-      width: 100%; max-width: 520px;
-      filter: drop-shadow(0 40px 60px rgba(0,0,0,.45))
-              drop-shadow(0 0 40px rgba(0,240,255,.1));
+      width: 100%; max-width: 640px;
+      filter: drop-shadow(0 50px 70px rgba(0,0,0,.5))
+              drop-shadow(0 0 50px rgba(0,240,255,.12));
       animation: float 6s ease-in-out infinite;
       position: relative; z-index: 2;
       transition: filter .5s;
+      transform-origin: center bottom;
     }
     .carousel-slide.active img:hover {
-      filter: drop-shadow(0 40px 80px rgba(0,0,0,.55))
-              drop-shadow(0 0 60px rgba(0,240,255,.25))
-              drop-shadow(0 0 30px rgba(180,94,255,.2));
+      filter: drop-shadow(0 50px 90px rgba(0,0,0,.6))
+              drop-shadow(0 0 70px rgba(0,240,255,.28))
+              drop-shadow(0 0 35px rgba(180,94,255,.22));
     }
 
     /* Label do produto */
     .carousel-label {
-      position: absolute; bottom: -8px; left: 50%;
+      position: absolute; bottom: 2px; left: 50%;
       transform: translateX(-50%);
       display: flex; flex-direction: column; align-items: center; gap: 3px;
-      z-index: 3;
+      z-index: 3; white-space: nowrap;
     }
     .carousel-label-tag {
       font-family: 'Space Mono', monospace;
@@ -1272,12 +1287,15 @@
       letter-spacing: .14em; color: rgba(255,255,255,.75);
     }
 
-    /* Setas */
+    /* ── NAVEGAÇÃO INFERIOR: setas flanqueando os dots ── */
+    .carousel-nav {
+      display: flex; align-items: center;
+      justify-content: center; gap: 20px;
+      width: 100%; position: relative; z-index: 5;
+    }
+
     .carousel-arrow {
-      position: absolute; top: 50%;
-      transform: translateY(-50%);
-      z-index: 10;
-      width: 46px; height: 46px;
+      width: 44px; height: 44px;
       background: rgba(180,94,255,.08);
       border: 1.5px solid rgba(180,94,255,.35);
       border-radius: 12px;
@@ -1285,31 +1303,27 @@
       display: flex; align-items: center; justify-content: center;
       transition: all .35s var(--ease);
       backdrop-filter: blur(8px);
+      flex-shrink: 0;
     }
-    .carousel-arrow svg { width: 20px; height: 20px; }
-    .carousel-prev { left: -22px; }
-    .carousel-next { right: -22px; }
+    .carousel-arrow svg { width: 18px; height: 18px; }
     .carousel-arrow:hover {
       background: rgba(180,94,255,.2);
       border-color: var(--purple);
       box-shadow: 0 0 24px var(--purple-glow), 0 8px 20px rgba(0,0,0,.3);
-      transform: translateY(-50%) scale(1.1);
+      transform: scale(1.12);
       color: #fff;
     }
-    .carousel-arrow:active {
-      transform: translateY(-50%) scale(0.95);
-    }
+    .carousel-arrow:active { transform: scale(0.93); }
 
     /* Dots */
     .carousel-dots {
       display: flex; gap: 10px; align-items: center;
-      position: relative; z-index: 5;
     }
     .carousel-dot {
       width: 6px; height: 6px; border-radius: 50%;
       background: rgba(255,255,255,.18);
       transition: all .35s var(--ease);
-      cursor: none;
+      cursor: pointer;
     }
     .carousel-dot.active {
       width: 24px; border-radius: 4px;
@@ -1542,14 +1556,17 @@
 
     /* Carousel responsivo */
     @media (max-width: 800px) {
-      .carousel-arrow { display: none; }
       .hero-carousel { max-width: 100%; }
-      .carousel-track { min-height: 320px; }
+      .carousel-track { min-height: 380px; }
+      .carousel-slide img { max-width: 90vw; }
       .btn-accessory { font-size: .6rem; padding: 10px 18px; }
+      .carousel-arrow { width: 38px; height: 38px; }
     }
     @media (max-width: 480px) {
-      .carousel-track { min-height: 260px; }
+      .carousel-track { min-height: 300px; }
+      .carousel-nav { gap: 14px; }
       .carousel-dots { gap: 8px; }
+      .carousel-arrow { width: 34px; height: 34px; }
     }
 
   </style>
@@ -1634,10 +1651,6 @@
   <div class="hero-right">
     <div class="hero-carousel" id="heroCarousel">
 
-      <button class="carousel-arrow carousel-prev" id="carouselPrev" aria-label="Anterior">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="15 18 9 12 15 6"/></svg>
-      </button>
-
       <div class="carousel-track" id="carouselTrack">
         <div class="carousel-slide active" data-idx="0">
           <div class="carousel-glow"></div>
@@ -1656,15 +1669,21 @@
         </div>
       </div>
 
-      <button class="carousel-arrow carousel-next" id="carouselNext" aria-label="Próximo">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg>
-      </button>
-
-      <div class="carousel-dots" id="carouselDots">
-        <span class="carousel-dot active" data-dot="0"></span>
-        <span class="carousel-dot" data-dot="1"></span>
-        <span class="carousel-dot" data-dot="2"></span>
+      <!-- Navegação: setas flanqueando os dots na base -->
+      <div class="carousel-nav">
+        <button class="carousel-arrow carousel-prev" id="carouselPrev" aria-label="Anterior">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+        <div class="carousel-dots" id="carouselDots">
+          <span class="carousel-dot active" data-dot="0"></span>
+          <span class="carousel-dot" data-dot="1"></span>
+          <span class="carousel-dot" data-dot="2"></span>
+        </div>
+        <button class="carousel-arrow carousel-next" id="carouselNext" aria-label="Próximo">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
       </div>
+
     </div>
 
     <button class="btn-accessory" id="btnAccessory" onclick="showAccessory()">
@@ -1934,24 +1953,19 @@
     });
   })();
 
-  /* ── NAV SCROLL ── */
+  /* ── NAV SCROLL + ACTIVE LINKS ── */
   const navEl = document.getElementById('nav');
+  const sections = document.querySelectorAll('section[id]');
   window.addEventListener('scroll', () => {
     navEl.classList.toggle('scrolled', window.scrollY > 10);
-  });
-
-  /* ── ACTIVE LINK NO SCROLL ── */
-  const sections = document.querySelectorAll('section');
-  window.addEventListener('scroll', () => {
     let current = '';
     sections.forEach(s => {
       if (window.scrollY >= s.offsetTop - 160) current = s.id;
     });
     document.querySelectorAll('.nav-links a').forEach(a => {
-      a.classList.remove('active');
-      if (a.getAttribute('href') === `#${current}`) a.classList.add('active');
+      a.classList.toggle('active', a.getAttribute('href') === `#${current}`);
     });
-  });
+  }, { passive: true });
 
   /* ── PACOTES ── */
   const packages = [
@@ -2098,7 +2112,9 @@
         ? 'translateX(60px) scale(0.96)'
         : 'translateX(-60px) scale(0.96)';
       requestAnimationFrame(() => {
-        slides[current].style.transform = '';
+        requestAnimationFrame(() => {
+          slides[current].style.transform = '';
+        });
       });
 
       dots.forEach(d => d.classList.remove('active'));
@@ -2167,25 +2183,28 @@
       ['#ffe600','#ff0055'],   // gold-red
     ];
 
-    let mode = 'dark'; // 'dark' | 'light' | 'secret'
+    function hexToRgba(hex, alpha) {
+      const r = parseInt(hex.slice(1,3), 16);
+      const g = parseInt(hex.slice(3,5), 16);
+      const b = parseInt(hex.slice(5,7), 16);
+      return `rgba(${r},${g},${b},${alpha})`;
+    }
+
+    let mode = 'dark';
     let clickTimes = [];
     let toastTimer;
 
     FAB?.addEventListener('click', () => {
-      // Registrar tempo do clique para Easter Egg
       const now = Date.now();
       clickTimes.push(now);
-      // Manter apenas os últimos 3 cliques
       clickTimes = clickTimes.filter(t => now - t < 1200);
 
-      // ══ EASTER EGG: 3 cliques em menos de 1.2s ══
       if (clickTimes.length >= 3) {
         clickTimes = [];
         activateSecret();
         return;
       }
 
-      // Toggle normal dark ↔ light
       if (mode === 'dark') {
         body.classList.add('theme-light');
         body.classList.remove('theme-secret');
@@ -2198,10 +2217,16 @@
         ICON.textContent = '☀';
         mode = 'dark';
       } else {
-        // Sai do secret de volta para dark
+        // Sai do secret — restaura TODAS as variáveis
         body.classList.remove('theme-light', 'theme-secret');
         body.style.background = '';
-        document.documentElement.style.setProperty('--ink', '#08080d');
+        const root = document.documentElement.style;
+        root.removeProperty('--cyan');
+        root.removeProperty('--purple');
+        root.removeProperty('--cyan-glow');
+        root.removeProperty('--purple-glow');
+        root.removeProperty('--cyan-dim');
+        root.removeProperty('--purple-dim');
         ICON.textContent = '☀';
         mode = 'dark';
       }
@@ -2214,18 +2239,19 @@
       body.classList.remove('theme-light');
       body.classList.add('theme-secret');
       body.style.background =
-        `linear-gradient(135deg, ${from}22 0%, ${to}18 50%, ${from}14 100%), #050508`;
+        `linear-gradient(135deg, ${hexToRgba(from, 0.13)} 0%, ${hexToRgba(to, 0.1)} 50%, ${hexToRgba(from, 0.08)} 100%), #050508`;
 
-      // Atualiza variáveis CSS dinamicamente
-      document.documentElement.style.setProperty('--cyan', from);
-      document.documentElement.style.setProperty('--purple', to);
-      document.documentElement.style.setProperty('--cyan-glow', from + '80');
-      document.documentElement.style.setProperty('--purple-glow', to + '80');
+      const root = document.documentElement.style;
+      root.setProperty('--cyan',        from);
+      root.setProperty('--purple',      to);
+      root.setProperty('--cyan-glow',   hexToRgba(from, 0.5));
+      root.setProperty('--purple-glow', hexToRgba(to, 0.5));
+      root.setProperty('--cyan-dim',    hexToRgba(from, 0.15));
+      root.setProperty('--purple-dim',  hexToRgba(to, 0.15));
 
       ICON.textContent = '🌈';
       mode = 'secret';
 
-      // Toast
       if (TOAST) {
         TOAST.querySelector('span').textContent =
           `🌈 MODO SECRETO — ${from.toUpperCase()} × ${to.toUpperCase()}`;
