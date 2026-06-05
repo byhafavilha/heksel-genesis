@@ -545,10 +545,9 @@
     }
 
     .video-container {
-      max-width: 1100px; margin: 0 auto 48px;
-      border-radius: 24px; overflow: hidden;
+      max-width: 680px; margin: 0 auto 48px;
+      border-radius: 20px; overflow: hidden;
       position: relative;
-      /* BUG FIX #1: borda neon dupla + sombra correta */
       border: 1.5px solid rgba(0,240,255,0.35);
       box-shadow:
         0 0 40px rgba(0,240,255,0.12),
@@ -559,7 +558,9 @@
     }
     .video-container video {
       width: 100%; display: block;
-      border-radius: 22px;
+      max-height: 420px;
+      object-fit: cover;
+      border-radius: 18px;
     }
     /* Badge sobre o vídeo */
     .video-container::after {
@@ -1187,6 +1188,370 @@
       .modal-buttons { justify-content: center; flex-direction: column; }
       .btn-next, .btn-send-wa, .btn-send-email, .btn-outline-nav { width: 100%; justify-content: center; }
     }
+    /* ═══════════════════════════════════════════════
+       HERO CAROUSEL — CYBERPUNK LUXURY SLIDER
+    ═══════════════════════════════════════════════ */
+    .hero-carousel {
+      position: relative;
+      width: 100%; max-width: 580px;
+      display: flex; flex-direction: column;
+      align-items: center; gap: 20px;
+    }
+
+    .carousel-track {
+      position: relative; width: 100%;
+      min-height: 420px;
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    .carousel-slide {
+      position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; pointer-events: none;
+      transition: opacity .55s var(--ease), transform .55s var(--ease);
+      transform: translateX(60px) scale(0.96);
+    }
+    .carousel-slide.active {
+      opacity: 1; pointer-events: auto;
+      transform: translateX(0) scale(1);
+    }
+    .carousel-slide.exit-left {
+      opacity: 0;
+      transform: translateX(-60px) scale(0.96);
+    }
+    .carousel-slide.exit-right {
+      opacity: 0;
+      transform: translateX(60px) scale(0.96);
+    }
+
+    .carousel-glow {
+      position: absolute; bottom: 0; left: 50%;
+      transform: translateX(-50%);
+      width: 85%; height: 38%;
+      background: radial-gradient(ellipse,
+        rgba(0,240,255,0.22) 0%,
+        rgba(180,94,255,0.12) 50%,
+        transparent 75%);
+      filter: blur(26px); z-index: 0;
+      animation: glowBreathe 4s ease-in-out infinite;
+    }
+    @keyframes glowBreathe {
+      0%,100% { opacity:.7; transform: translateX(-50%) scaleY(1); }
+      50%      { opacity:1;  transform: translateX(-50%) scaleY(1.15); }
+    }
+
+    .carousel-slide img {
+      width: 100%; max-width: 520px;
+      filter: drop-shadow(0 40px 60px rgba(0,0,0,.45))
+              drop-shadow(0 0 40px rgba(0,240,255,.1));
+      animation: float 6s ease-in-out infinite;
+      position: relative; z-index: 2;
+      transition: filter .5s;
+    }
+    .carousel-slide.active img:hover {
+      filter: drop-shadow(0 40px 80px rgba(0,0,0,.55))
+              drop-shadow(0 0 60px rgba(0,240,255,.25))
+              drop-shadow(0 0 30px rgba(180,94,255,.2));
+    }
+
+    /* Label do produto */
+    .carousel-label {
+      position: absolute; bottom: -8px; left: 50%;
+      transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: 3px;
+      z-index: 3;
+    }
+    .carousel-label-tag {
+      font-family: 'Space Mono', monospace;
+      font-size: .55rem; letter-spacing: .2em;
+      color: rgba(0,240,255,.5); text-transform: uppercase;
+    }
+    .carousel-label-name {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800; font-size: .8rem;
+      letter-spacing: .14em; color: rgba(255,255,255,.75);
+    }
+
+    /* Setas */
+    .carousel-arrow {
+      position: absolute; top: 50%;
+      transform: translateY(-50%);
+      z-index: 10;
+      width: 46px; height: 46px;
+      background: rgba(180,94,255,.08);
+      border: 1.5px solid rgba(180,94,255,.35);
+      border-radius: 12px;
+      color: var(--purple);
+      display: flex; align-items: center; justify-content: center;
+      transition: all .35s var(--ease);
+      backdrop-filter: blur(8px);
+    }
+    .carousel-arrow svg { width: 20px; height: 20px; }
+    .carousel-prev { left: -22px; }
+    .carousel-next { right: -22px; }
+    .carousel-arrow:hover {
+      background: rgba(180,94,255,.2);
+      border-color: var(--purple);
+      box-shadow: 0 0 24px var(--purple-glow), 0 8px 20px rgba(0,0,0,.3);
+      transform: translateY(-50%) scale(1.1);
+      color: #fff;
+    }
+    .carousel-arrow:active {
+      transform: translateY(-50%) scale(0.95);
+    }
+
+    /* Dots */
+    .carousel-dots {
+      display: flex; gap: 10px; align-items: center;
+      position: relative; z-index: 5;
+    }
+    .carousel-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: rgba(255,255,255,.18);
+      transition: all .35s var(--ease);
+      cursor: none;
+    }
+    .carousel-dot.active {
+      width: 24px; border-radius: 4px;
+      background: linear-gradient(90deg, var(--cyan), var(--purple));
+      box-shadow: 0 0 10px var(--cyan-glow);
+    }
+    .carousel-dot:hover { background: rgba(180,94,255,.5); }
+
+    /* ═══════════════════════════════════════════════
+       BOTÃO VIEW ACCESSORY — HOLOGRÁFICO
+    ═══════════════════════════════════════════════ */
+    .btn-accessory {
+      position: relative;
+      display: inline-flex; align-items: center; gap: 10px;
+      padding: 11px 24px;
+      border-radius: 50px;
+      border: 1.5px solid rgba(201,168,76,.35);
+      background: linear-gradient(135deg,
+        rgba(201,168,76,.06) 0%,
+        rgba(245,217,127,.04) 100%);
+      backdrop-filter: blur(10px);
+      color: var(--gold-light);
+      font-family: 'Space Mono', monospace;
+      font-size: .65rem; font-weight: 700;
+      letter-spacing: .18em; text-transform: uppercase;
+      transition: all .4s var(--ease);
+      overflow: hidden;
+    }
+    .btn-accessory::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg,
+        rgba(201,168,76,.12) 0%,
+        rgba(245,217,127,.08) 100%);
+      opacity: 0; transition: opacity .4s;
+    }
+    .btn-accessory:hover {
+      border-color: var(--gold);
+      box-shadow: 0 0 28px rgba(201,168,76,.35),
+                  0 0 60px rgba(201,168,76,.12),
+                  0 12px 28px rgba(0,0,0,.3);
+      transform: translateY(-3px);
+      color: var(--gold-light);
+    }
+    .btn-accessory:hover::before { opacity: 1; }
+
+    .accessory-icon {
+      font-size: 1rem; position: relative; z-index: 1;
+      animation: spinSlow 6s linear infinite;
+    }
+    @keyframes spinSlow {
+      0%   { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    .accessory-text { position: relative; z-index: 1; }
+
+    /* Pulse ring no botão */
+    .accessory-pulse {
+      position: absolute; right: 14px; top: 50%;
+      transform: translateY(-50%);
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--gold);
+      box-shadow: 0 0 8px var(--gold);
+      animation: accessoryPulse 2s ease-in-out infinite;
+    }
+    @keyframes accessoryPulse {
+      0%,100% { box-shadow: 0 0 0 0 rgba(201,168,76,.6); }
+      60%      { box-shadow: 0 0 0 8px rgba(201,168,76,0); }
+    }
+
+    /* Estado ativo do botão acessório */
+    .btn-accessory.accessory-active {
+      border-color: var(--gold);
+      background: linear-gradient(135deg, rgba(201,168,76,.18), rgba(245,217,127,.1));
+      box-shadow: 0 0 32px rgba(201,168,76,.4);
+      color: #fff;
+    }
+
+    /* ═══════════════════════════════════════════════
+       BOTÃO FLUTUANTE TEMA LIGHT/DARK + EASTER EGG
+    ═══════════════════════════════════════════════ */
+    .theme-fab {
+      position: fixed;
+      bottom: 32px; right: 28px;
+      z-index: 9000;
+      width: 52px; height: 52px;
+      border-radius: 50%;
+      background: rgba(14,14,24,.85);
+      border: 1.5px solid rgba(0,240,255,.25);
+      backdrop-filter: blur(20px);
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer !important;
+      pointer-events: auto !important;
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
+      transition: all .4s var(--ease);
+      box-shadow: 0 0 20px rgba(0,240,255,.1), 0 8px 24px rgba(0,0,0,.4);
+    }
+    .theme-fab:hover {
+      border-color: var(--cyan);
+      box-shadow: 0 0 30px var(--cyan-glow), 0 12px 32px rgba(0,0,0,.5);
+      transform: scale(1.1) rotate(15deg);
+    }
+    .theme-fab:active { transform: scale(0.95) rotate(-10deg); }
+
+    .theme-icon {
+      font-size: 1.3rem; line-height: 1;
+      transition: all .4s var(--ease);
+      user-select: none;
+    }
+    .theme-fab-ring {
+      position: absolute; inset: -6px;
+      border-radius: 50%;
+      border: 1px solid transparent;
+      transition: all .4s;
+    }
+    .theme-fab:hover .theme-fab-ring {
+      border-color: rgba(0,240,255,.2);
+      animation: fabRingSpin 2s linear infinite;
+    }
+    @keyframes fabRingSpin {
+      0%   { transform: rotate(0deg);   }
+      100% { transform: rotate(360deg); }
+    }
+
+    /* ─── TEMA LIGHT ─── */
+    body.theme-light {
+      background: #f5f6f8;
+      color: #08080d;
+    }
+    body.theme-light .animated-bg {
+      background: radial-gradient(ellipse 80% 60% at 20% 20%,rgba(0,200,255,.05),transparent 70%),
+                  radial-gradient(ellipse 60% 80% at 80% 80%,rgba(140,60,220,.05),transparent 70%),
+                  #f0f2f7;
+    }
+    body.theme-light .animated-bg::before {
+      background:
+        linear-gradient(rgba(0,180,220,.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,180,220,.04) 1px, transparent 1px);
+    }
+    body.theme-light nav {
+      background: rgba(245,246,250,.88);
+      border-bottom-color: rgba(0,0,0,.07);
+    }
+    body.theme-light .logo span,
+    body.theme-light .hero-left h1,
+    body.theme-light .hero-left p,
+    body.theme-light .section-title { color: #08080d; }
+    body.theme-light .hero-left p { color: rgba(0,0,0,.55); }
+    body.theme-light .nav-links a { color: rgba(0,0,0,.45); }
+    body.theme-light .nav-links a:hover,
+    body.theme-light .nav-links a.active { color: #08080d; }
+    body.theme-light .stat-label { color: rgba(0,0,0,.35); }
+    body.theme-light .collection {
+      background: rgba(235,237,245,.98);
+    }
+    body.theme-light .prod-card {
+      background: rgba(255,255,255,.95);
+      border-color: rgba(0,0,0,.07);
+      box-shadow: 0 4px 20px rgba(0,0,0,.06);
+    }
+    body.theme-light .prod-name { color: #08080d; }
+    body.theme-light .brand-section {
+      background: linear-gradient(180deg,#ececf5 0%,#e8e0f5 100%);
+      color: #08080d;
+    }
+    body.theme-light .brand-section h2,
+    body.theme-light .brand-section > p { color: #08080d; }
+    body.theme-light .brand-section > p { color: rgba(0,0,0,.55); }
+    body.theme-light .studio-lab {
+      background: linear-gradient(180deg,#e8eaf5 0%,#e4ecf8 100%);
+    }
+    body.theme-light .studio-lab h2 { color: #08080d; }
+    body.theme-light .studio-lab p { color: rgba(0,0,0,.55); }
+    body.theme-light .studio-mock {
+      background: rgba(255,255,255,.8);
+      border-color: rgba(0,180,220,.2);
+    }
+    body.theme-light footer {
+      background: #1a1a2e;
+    }
+    body.theme-light .theme-fab {
+      background: rgba(230,232,245,.9);
+      border-color: rgba(0,0,0,.12);
+      box-shadow: 0 4px 20px rgba(0,0,0,.1);
+    }
+    body.theme-light .modal-container {
+      background: rgba(255,255,255,.98);
+      border-color: rgba(0,180,220,.2);
+      color: #08080d;
+    }
+    body.theme-light .modal-container h3,
+    body.theme-light label { color: #08080d; }
+    body.theme-light input,
+    body.theme-light textarea {
+      background: rgba(0,0,0,.03);
+      border-color: rgba(0,0,0,.12);
+      color: #08080d;
+    }
+    body.theme-light .package-item { border-color: rgba(0,0,0,.1); }
+    body.theme-light .package-item strong { color: #08080d; }
+
+    /* ─── EASTER EGG — MODO SECRETO ─── */
+    body.theme-secret {
+      color: #ffffff;
+    }
+    body.theme-secret nav {
+      background: rgba(0,0,0,.5);
+    }
+    body.theme-secret .prod-card { background: rgba(0,0,0,.35); border-color: rgba(255,255,255,.12); }
+    body.theme-secret .prod-name { color: white; }
+
+    /* Toast Easter Egg */
+    .easter-toast {
+      position: fixed; bottom: 100px; right: 28px;
+      z-index: 9001;
+      background: linear-gradient(135deg, var(--purple), var(--cyan));
+      color: white;
+      font-family: 'Syne', sans-serif; font-weight: 800;
+      font-size: .75rem; letter-spacing: .1em;
+      padding: 12px 20px; border-radius: 12px;
+      box-shadow: 0 0 30px var(--purple-glow), 0 12px 30px rgba(0,0,0,.4);
+      opacity: 0; transform: translateY(12px);
+      transition: all .4s var(--ease);
+      pointer-events: none;
+    }
+    .easter-toast.show {
+      opacity: 1; transform: translateY(0);
+    }
+
+    /* Carousel responsivo */
+    @media (max-width: 800px) {
+      .carousel-arrow { display: none; }
+      .hero-carousel { max-width: 100%; }
+      .carousel-track { min-height: 320px; }
+      .btn-accessory { font-size: .6rem; padding: 10px 18px; }
+    }
+    @media (max-width: 480px) {
+      .carousel-track { min-height: 260px; }
+      .carousel-dots { gap: 8px; }
+    }
+
   </style>
 </head>
 <body>
@@ -1265,8 +1630,48 @@
       </div>
     </div>
   </div>
+  <!-- ══ HERO CAROUSEL + VIEW ACCESSORY ══ -->
   <div class="hero-right">
-    <img src="tenis.png" alt="Heksel Imperium Shoe" onerror="this.src='1000027639-removebg-preview.png'">
+    <div class="hero-carousel" id="heroCarousel">
+
+      <button class="carousel-arrow carousel-prev" id="carouselPrev" aria-label="Anterior">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+
+      <div class="carousel-track" id="carouselTrack">
+        <div class="carousel-slide active" data-idx="0">
+          <div class="carousel-glow"></div>
+          <img src="tenis.png" alt="NEO-KAI 01" onerror="this.src='1000027639-removebg-preview.png'">
+          <div class="carousel-label"><span class="carousel-label-tag">01 / 03</span><span class="carousel-label-name">NEO-KAI 01</span></div>
+        </div>
+        <div class="carousel-slide" data-idx="1">
+          <div class="carousel-glow" style="background:radial-gradient(ellipse,rgba(180,94,255,0.25),rgba(0,240,255,0.12) 50%,transparent 75%)"></div>
+          <img src="1000027632-removebg-preview.png" alt="NEO-WAI 01">
+          <div class="carousel-label"><span class="carousel-label-tag">02 / 03</span><span class="carousel-label-name">NEO-WAI 01</span></div>
+        </div>
+        <div class="carousel-slide" data-idx="2">
+          <div class="carousel-glow" style="background:radial-gradient(ellipse,rgba(201,168,76,0.3),rgba(245,217,127,0.1) 50%,transparent 75%)"></div>
+          <img src="relogio.png" alt="Heksel Watch">
+          <div class="carousel-label"><span class="carousel-label-tag">◈ ACCESSORY</span><span class="carousel-label-name">HEKSEL WATCH</span></div>
+        </div>
+      </div>
+
+      <button class="carousel-arrow carousel-next" id="carouselNext" aria-label="Próximo">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
+
+      <div class="carousel-dots" id="carouselDots">
+        <span class="carousel-dot active" data-dot="0"></span>
+        <span class="carousel-dot" data-dot="1"></span>
+        <span class="carousel-dot" data-dot="2"></span>
+      </div>
+    </div>
+
+    <button class="btn-accessory" id="btnAccessory" onclick="showAccessory()">
+      <span class="accessory-icon">◈</span>
+      <span class="accessory-text">VIEW ACCESSORY</span>
+      <span class="accessory-pulse"></span>
+    </button>
   </div>
 </section>
 
@@ -1495,6 +1900,17 @@
   </div>
 </div>
 
+<!-- ══ BOTÃO FLUTUANTE TEMA LIGHT/DARK + EASTER EGG ══ -->
+<button class="theme-fab" id="themeFab" title="Mudar tema" type="button">
+  <span class="theme-icon" id="themeIcon">☀</span>
+  <div class="theme-fab-ring"></div>
+</button>
+
+<!-- Toast Easter Egg -->
+<div class="easter-toast" id="easterToast">
+  <span>🌈 MODO SECRETO ATIVADO!</span>
+</div>
+
 <script>
   /* ── CURSOR CUSTOM ── */
   (function(){
@@ -1661,11 +2077,165 @@
     if (e.target === document.getElementById('brandModal')) closeBrandModal();
   });
 
-  /* BUG FIX #5: openNotifyModal com modal real em vez de alert() */
-  function openNotifyModal() {
-    const msg = encodeURIComponent('🔔 Olá! Quero ser notificado sobre os lançamentos do HEKSEL IMPERIUM e entrar na lista VIP. 👟⚡');
-    window.open(`https://wa.me/5553991855262?text=${msg}`, '_blank');
+  /* ── CAROUSEL ── */
+  (function initCarousel() {
+    let current = 0;
+    const slides = document.querySelectorAll('.carousel-slide');
+    const dots   = document.querySelectorAll('.carousel-dot');
+    const total  = slides.length;
+
+    function goTo(idx, dir) {
+      const prev = current;
+      current = (idx + total) % total;
+      if (prev === current) return;
+
+      slides[prev].classList.add(dir === 'next' ? 'exit-left' : 'exit-right');
+      slides[prev].classList.remove('active');
+      setTimeout(() => slides[prev].classList.remove('exit-left', 'exit-right'), 600);
+
+      slides[current].classList.add('active');
+      slides[current].style.transform = dir === 'next'
+        ? 'translateX(60px) scale(0.96)'
+        : 'translateX(-60px) scale(0.96)';
+      requestAnimationFrame(() => {
+        slides[current].style.transform = '';
+      });
+
+      dots.forEach(d => d.classList.remove('active'));
+      dots[current]?.classList.add('active');
+
+      // Sincroniza botão acessório
+      const btn = document.getElementById('btnAccessory');
+      if (btn) btn.classList.toggle('accessory-active', current === 2);
+    }
+
+    document.getElementById('carouselNext')?.addEventListener('click', () => goTo(current + 1, 'next'));
+    document.getElementById('carouselPrev')?.addEventListener('click', () => goTo(current - 1, 'prev'));
+
+    dots.forEach(d => d.addEventListener('click', () => {
+      const idx = parseInt(d.dataset.dot);
+      goTo(idx, idx > current ? 'next' : 'prev');
+    }));
+
+    // Touch / swipe mobile
+    let touchX = 0;
+    const track = document.getElementById('carouselTrack');
+    track?.addEventListener('touchstart', e => { touchX = e.touches[0].clientX; }, { passive: true });
+    track?.addEventListener('touchend', e => {
+      const dx = e.changedTouches[0].clientX - touchX;
+      if (Math.abs(dx) > 40) goTo(current + (dx < 0 ? 1 : -1), dx < 0 ? 'next' : 'prev');
+    }, { passive: true });
+
+    // Auto-play
+    let autoTimer = setInterval(() => goTo(current + 1, 'next'), 4500);
+    const carousel = document.getElementById('heroCarousel');
+    carousel?.addEventListener('mouseenter', () => clearInterval(autoTimer));
+    carousel?.addEventListener('mouseleave', () => {
+      clearInterval(autoTimer);
+      autoTimer = setInterval(() => goTo(current + 1, 'next'), 4500);
+    });
+
+    window._carouselGoTo = goTo;
+    window._carouselGetCurrent = () => current;
+  })();
+
+  /* VIEW ACCESSORY */
+  function showAccessory() {
+    const cur = window._carouselGetCurrent?.() ?? 0;
+    if (cur === 2) {
+      window._carouselGoTo(0, 'prev');
+      document.getElementById('btnAccessory')?.classList.remove('accessory-active');
+    } else {
+      window._carouselGoTo(2, 'next');
+      document.getElementById('btnAccessory')?.classList.add('accessory-active');
+    }
   }
+
+  /* ── TEMA LIGHT / DARK + EASTER EGG ── */
+  (function initTheme() {
+    const FAB   = document.getElementById('themeFab');
+    const ICON  = document.getElementById('themeIcon');
+    const TOAST = document.getElementById('easterToast');
+    const body  = document.body;
+
+    const SECRET_PALETTES = [
+      ['#00f0ff','#b45eff'],   // cyan-purple
+      ['#ff2d78','#ffd600'],   // pink-yellow
+      ['#00ffc3','#7b2fff'],   // neon-deep purple
+      ['#ff6600','#00f0ff'],   // orange-cyan
+      ['#ff00cc','#00ff99'],   // magenta-neon
+      ['#ffe600','#ff0055'],   // gold-red
+    ];
+
+    let mode = 'dark'; // 'dark' | 'light' | 'secret'
+    let clickTimes = [];
+    let toastTimer;
+
+    FAB?.addEventListener('click', () => {
+      // Registrar tempo do clique para Easter Egg
+      const now = Date.now();
+      clickTimes.push(now);
+      // Manter apenas os últimos 3 cliques
+      clickTimes = clickTimes.filter(t => now - t < 1200);
+
+      // ══ EASTER EGG: 3 cliques em menos de 1.2s ══
+      if (clickTimes.length >= 3) {
+        clickTimes = [];
+        activateSecret();
+        return;
+      }
+
+      // Toggle normal dark ↔ light
+      if (mode === 'dark') {
+        body.classList.add('theme-light');
+        body.classList.remove('theme-secret');
+        body.style.background = '';
+        ICON.textContent = '🌙';
+        mode = 'light';
+      } else if (mode === 'light') {
+        body.classList.remove('theme-light', 'theme-secret');
+        body.style.background = '';
+        ICON.textContent = '☀';
+        mode = 'dark';
+      } else {
+        // Sai do secret de volta para dark
+        body.classList.remove('theme-light', 'theme-secret');
+        body.style.background = '';
+        document.documentElement.style.setProperty('--ink', '#08080d');
+        ICON.textContent = '☀';
+        mode = 'dark';
+      }
+    });
+
+    function activateSecret() {
+      const palette = SECRET_PALETTES[Math.floor(Math.random() * SECRET_PALETTES.length)];
+      const from = palette[0], to = palette[1];
+
+      body.classList.remove('theme-light');
+      body.classList.add('theme-secret');
+      body.style.background =
+        `linear-gradient(135deg, ${from}22 0%, ${to}18 50%, ${from}14 100%), #050508`;
+
+      // Atualiza variáveis CSS dinamicamente
+      document.documentElement.style.setProperty('--cyan', from);
+      document.documentElement.style.setProperty('--purple', to);
+      document.documentElement.style.setProperty('--cyan-glow', from + '80');
+      document.documentElement.style.setProperty('--purple-glow', to + '80');
+
+      ICON.textContent = '🌈';
+      mode = 'secret';
+
+      // Toast
+      if (TOAST) {
+        TOAST.querySelector('span').textContent =
+          `🌈 MODO SECRETO — ${from.toUpperCase()} × ${to.toUpperCase()}`;
+        TOAST.classList.add('show');
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(() => TOAST.classList.remove('show'), 3000);
+      }
+    }
+  })();
+
 </script>
 </body>
 </html>
