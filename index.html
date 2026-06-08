@@ -1146,61 +1146,118 @@
       .btn-outline-nav { padding: 7px 14px; font-size: 0.6rem; }
       .btn-gold-nav { padding: 7px 14px; font-size: 0.6rem; }
 
+      /* ── HERO CENTRALIZADO ── */
       .hero {
         grid-template-columns: 1fr;
-        text-align: center; padding-top: 90px; gap: 24px;
-        min-height: auto; padding-bottom: 60px;
+        text-align: center;
+        align-items: center;
+        justify-items: center;
+        padding: 88px 5% 60px;
+        gap: 24px;
+        min-height: auto;
       }
-      .hero-left p { margin-left: auto; margin-right: auto; }
-      .hero-actions { justify-content: center; }
-      .hero-stats { justify-content: center; }
-      .hero-right { justify-content: center; }
-      .hero-right img { max-width: 80%; }
-      .hero-left .badge { margin-left: auto; margin-right: auto; }
+      .hero-left {
+        display: flex; flex-direction: column;
+        align-items: center; width: 100%;
+      }
+      .hero-left .badge { margin: 0 auto 20px; }
+      .hero-left h1 {
+        text-align: center;
+        width: 100%;
+        word-break: break-word;
+        overflow-wrap: break-word;
+      }
+      .hero-left p {
+        text-align: center;
+        margin-left: auto; margin-right: auto;
+        max-width: 90%;
+      }
+      .hero-actions {
+        justify-content: center;
+        width: 100%;
+        flex-direction: column;
+        align-items: center;
+      }
+      .btn-primary { width: 100%; justify-content: center; }
+      .hero-stats { justify-content: center; width: 100%; }
+      .hero-right {
+        justify-content: center;
+        width: 100%;
+      }
 
-      .media-section { padding: 70px 4%; }
+      /* ── SEÇÕES CENTRALIZADAS ── */
+      .media-section { padding: 70px 5%; text-align: center; }
       .video-container { border-radius: 16px; margin-bottom: 32px; }
 
-      .brand-section { padding: 80px 4%; }
+      .brand-section { padding: 80px 5%; }
       .brand-section h2 { font-size: clamp(1.8rem, 5vw, 2.8rem); }
 
-      .collection { padding: 80px 4%; }
+      .collection { padding: 80px 5%; text-align: center; }
       .card-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
       .prod-card { max-width: 100%; }
+      .section-title, .section-sub, .section-tag { text-align: center; }
 
-      .studio-lab { padding: 80px 4%; }
-      .studio-container { grid-template-columns: 1fr; text-align: center; gap: 36px; }
-      .studio-container > div:first-child { text-align: center; }
+      /* ── STUDIO CENTRALIZADO ── */
+      .studio-lab { padding: 80px 5%; text-align: center; }
+      .studio-container {
+        grid-template-columns: 1fr;
+        text-align: center;
+        justify-items: center;
+        gap: 36px;
+      }
+      .studio-container > div:first-child {
+        text-align: center;
+        display: flex; flex-direction: column; align-items: center;
+      }
       .studio-features { align-items: center; }
+      .studio-lab h2 { text-align: center; }
+      .studio-lab p { text-align: center; margin-left: auto; margin-right: auto; }
+      .studio-mock { width: 100%; }
 
-      footer { padding: 60px 4% 28px; }
-      .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; text-align: left; }
-      .footer-bottom { justify-content: center; }
+      /* ── FOOTER CENTRALIZADO ── */
+      footer { padding: 60px 5% 28px; }
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 28px; }
+      .footer-bottom { justify-content: center; flex-direction: column; align-items: center; gap: 8px; }
       .footer-logo { text-align: center; }
       .footer-logo p { max-width: 100%; }
       .social-icons { justify-content: center; gap: 16px; }
+      .footer-copy { text-align: center; }
     }
 
     @media (max-width: 480px) {
-      .hero-left h1 { font-size: clamp(2.2rem, 8vw, 3rem); }
-      .hero-actions { flex-direction: column; align-items: center; }
+      .hero { padding: 76px 4% 50px; gap: 20px; }
+      .hero-left h1 { font-size: clamp(2rem, 7vw, 2.8rem); }
+      .hero-actions { flex-direction: column; align-items: center; width: 100%; }
       .btn-primary, .cta-brand { width: 100%; justify-content: center; }
-      .btn-outline-nav { width: 100%; justify-content: center; text-align: center; }
-      .hero-stats { gap: 20px; }
+      .btn-outline-nav { width: auto; justify-content: center; text-align: center; }
+      .hero-stats { gap: 16px; }
+      .stat-divider { height: 28px; }
 
+      .collection { padding: 60px 4%; }
       .card-grid { grid-template-columns: 1fr; }
       .prod-card { max-width: 320px; margin: 0 auto; }
 
-      .brand-section h2 { font-size: 1.8rem; }
-      .brand-perks { gap: 10px; }
+      .studio-lab { padding: 60px 4%; }
+      .studio-container { gap: 28px; }
 
-      .footer-grid { grid-template-columns: 1fr; text-align: center; }
+      .brand-section { padding: 60px 4%; }
+      .brand-section h2 { font-size: 1.7rem; }
+      .brand-perks { gap: 10px; justify-content: center; }
+
+      .media-section { padding: 60px 4%; }
+
+      footer { padding: 50px 4% 24px; }
+      .footer-grid { grid-template-columns: 1fr; text-align: center; gap: 28px; }
       .footer-logo { text-align: center; }
+      .footer-col { text-align: center; }
+      .footer-col a { display: inline-block; }
       .social-icons { justify-content: center; gap: 18px; margin-top: 18px; }
+      .footer-bottom { flex-direction: column; align-items: center; gap: 6px; }
+      .footer-copy { font-size: 0.55rem; text-align: center; }
 
-      .modal-container { padding: 24px 20px; border-radius: 20px; }
+      .modal-container { padding: 24px 16px; border-radius: 20px; }
       .modal-buttons { justify-content: center; flex-direction: column; }
-      .btn-next, .btn-send-wa, .btn-send-email, .btn-outline-nav { width: 100%; justify-content: center; }
+      .btn-next, .btn-send-wa, .btn-send-email { width: 100%; justify-content: center; }
     }
     /* ═══════════════════════════════════════════════
        HERO CAROUSEL — CYBERPUNK LUXURY SLIDER
@@ -1315,20 +1372,21 @@
     }
     .carousel-arrow:active { transform: scale(0.93); }
 
-    /* Dots */
+    /* Dots — compactos para suportar 10 sem overflow */
     .carousel-dots {
-      display: flex; gap: 10px; align-items: center;
+      display: flex; gap: 6px; align-items: center;
+      flex-wrap: nowrap; overflow: hidden;
     }
     .carousel-dot {
-      width: 6px; height: 6px; border-radius: 50%;
+      width: 5px; height: 5px; border-radius: 50%;
       background: rgba(255,255,255,.18);
       transition: all .35s var(--ease);
-      cursor: pointer;
+      cursor: pointer; flex-shrink: 0;
     }
     .carousel-dot.active {
-      width: 24px; border-radius: 4px;
+      width: 20px; border-radius: 3px;
       background: linear-gradient(90deg, var(--cyan), var(--purple));
-      box-shadow: 0 0 10px var(--cyan-glow);
+      box-shadow: 0 0 8px var(--cyan-glow);
     }
     .carousel-dot:hover { background: rgba(180,94,255,.5); }
 
@@ -1651,34 +1709,15 @@
   <div class="hero-right">
     <div class="hero-carousel" id="heroCarousel">
 
-      <div class="carousel-track" id="carouselTrack">
-        <div class="carousel-slide active" data-idx="0">
-          <div class="carousel-glow"></div>
-          <img src="tenis.png" alt="NEO-KAI 01" onerror="this.src='1000027639-removebg-preview.png'">
-          <div class="carousel-label"><span class="carousel-label-tag">01 / 03</span><span class="carousel-label-name">NEO-KAI 01</span></div>
-        </div>
-        <div class="carousel-slide" data-idx="1">
-          <div class="carousel-glow" style="background:radial-gradient(ellipse,rgba(180,94,255,0.25),rgba(0,240,255,0.12) 50%,transparent 75%)"></div>
-          <img src="1000027632-removebg-preview.png" alt="NEO-WAI 01">
-          <div class="carousel-label"><span class="carousel-label-tag">02 / 03</span><span class="carousel-label-name">NEO-WAI 01</span></div>
-        </div>
-        <div class="carousel-slide" data-idx="2">
-          <div class="carousel-glow" style="background:radial-gradient(ellipse,rgba(201,168,76,0.3),rgba(245,217,127,0.1) 50%,transparent 75%)"></div>
-          <img src="relogio.png" alt="Heksel Watch">
-          <div class="carousel-label"><span class="carousel-label-tag">◈ ACCESSORY</span><span class="carousel-label-name">HEKSEL WATCH</span></div>
-        </div>
-      </div>
+      <!-- Track: slides injetados pelo JS -->
+      <div class="carousel-track" id="carouselTrack"></div>
 
-      <!-- Navegação: setas flanqueando os dots na base -->
+      <!-- Navegação: setas + dots (dots injetados pelo JS) -->
       <div class="carousel-nav">
         <button class="carousel-arrow carousel-prev" id="carouselPrev" aria-label="Anterior">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="15 18 9 12 15 6"/></svg>
         </button>
-        <div class="carousel-dots" id="carouselDots">
-          <span class="carousel-dot active" data-dot="0"></span>
-          <span class="carousel-dot" data-dot="1"></span>
-          <span class="carousel-dot" data-dot="2"></span>
-        </div>
+        <div class="carousel-dots" id="carouselDots"></div>
         <button class="carousel-arrow carousel-next" id="carouselNext" aria-label="Próximo">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg>
         </button>
@@ -2091,79 +2130,132 @@
     if (e.target === document.getElementById('brandModal')) closeBrandModal();
   });
 
-  /* ── CAROUSEL ── */
+  /* ── CAROUSEL — 10 IMAGENS REAIS + RELÓGIO VIA VIEW ACCESSORY ── */
   (function initCarousel() {
-    let current = 0;
-    const slides = document.querySelectorAll('.carousel-slide');
-    const dots   = document.querySelectorAll('.carousel-dot');
-    const total  = slides.length;
+
+    /* ══ LISTA OFICIAL DAS 10 IMAGENS ══ */
+    const IMAGES = [
+      { src: '1000027632-removebg-preview.png', name: 'NEO-KAI 01',  tag: '01 / 10',
+        glow: 'rgba(0,240,255,0.22),rgba(180,94,255,0.12)' },
+      { src: '1000027633.png',                  name: 'NEO-KAI 01',  tag: '02 / 10',
+        glow: 'rgba(180,94,255,0.25),rgba(0,240,255,0.12)' },
+      { src: '1000027635-removebg-preview.png', name: 'NEO-KAI 01',  tag: '03 / 10',
+        glow: 'rgba(0,240,255,0.2),rgba(180,94,255,0.15)' },
+      { src: '1000027638-removebg-preview.png', name: 'NEO-KAI 01',  tag: '04 / 10',
+        glow: 'rgba(255,45,120,0.2),rgba(180,94,255,0.12)' },
+      { src: '1000027639-removebg-preview.png', name: 'NEO-KAI 01',  tag: '05 / 10',
+        glow: 'rgba(180,94,255,0.22),rgba(0,240,255,0.1)' },
+      { src: '1000027648-removebg-preview.png', name: 'NEO-KAI 01',  tag: '06 / 10',
+        glow: 'rgba(0,240,255,0.18),rgba(180,94,255,0.18)' },
+      { src: '1000027649-removebg-preview.png', name: 'NEO-KAI 01',  tag: '07 / 10',
+        glow: 'rgba(180,94,255,0.28),rgba(0,240,255,0.1)' },
+      { src: '1000027651-removebg-preview.png', name: 'NEO-KAI 01',  tag: '08 / 10',
+        glow: 'rgba(0,240,255,0.25),rgba(180,94,255,0.1)' },
+      { src: '1000027652.png',                  name: 'NEO-WAI 01',  tag: '09 / 10',
+        glow: 'rgba(180,94,255,0.3),rgba(0,240,255,0.12)' },
+      { src: '1000027654.png',                  name: 'NEO-LAI 01',  tag: '10 / 10',
+        glow: 'rgba(201,168,76,0.28),rgba(245,217,127,0.1)' },
+    ];
+    const SHOE_COUNT = 10; /* apenas índices 0-9 no autoplay */
+
+    const track  = document.getElementById('carouselTrack');
+    const dotsEl = document.getElementById('carouselDots');
+    if (!track || !dotsEl) return;
+
+    /* ── Renderizar todos os slides dinamicamente ── */
+    IMAGES.forEach((img, idx) => {
+      const slide = document.createElement('div');
+      slide.className = 'carousel-slide' + (idx === 0 ? ' active' : '');
+      slide.dataset.idx = idx;
+      slide.innerHTML = `
+        <div class="carousel-glow" style="background:radial-gradient(ellipse,${img.glow} 50%,transparent 75%)"></div>
+        <img src="${img.src}" alt="${img.name}" loading="lazy">
+        <div class="carousel-label">
+          <span class="carousel-label-tag">${img.tag}</span>
+          <span class="carousel-label-name">${img.name}</span>
+        </div>`;
+      track.appendChild(slide);
+    });
+
+    /* ── Renderizar dots (apenas os 10 de tênis) ── */
+    for (let i = 0; i < SHOE_COUNT; i++) {
+      const dot = document.createElement('span');
+      dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+      dot.dataset.dot = i;
+      dot.addEventListener('click', () => goTo(i, i > current ? 'next' : 'prev'));
+      dotsEl.appendChild(dot);
+    }
+
+    const slides = track.querySelectorAll('.carousel-slide');
+    const dots   = dotsEl.querySelectorAll('.carousel-dot');
+    let current  = 0;
+
+    function syncDots(idx) {
+      dots.forEach(d => d.classList.remove('active'));
+      if (idx < SHOE_COUNT) dots[idx]?.classList.add('active');
+    }
 
     function goTo(idx, dir) {
       const prev = current;
-      current = (idx + total) % total;
+      current = ((idx % IMAGES.length) + IMAGES.length) % IMAGES.length;
       if (prev === current) return;
 
       slides[prev].classList.add(dir === 'next' ? 'exit-left' : 'exit-right');
       slides[prev].classList.remove('active');
       setTimeout(() => slides[prev].classList.remove('exit-left', 'exit-right'), 600);
 
-      slides[current].classList.add('active');
       slides[current].style.transform = dir === 'next'
         ? 'translateX(60px) scale(0.96)'
         : 'translateX(-60px) scale(0.96)';
-      requestAnimationFrame(() => {
-        requestAnimationFrame(() => {
-          slides[current].style.transform = '';
-        });
-      });
+      slides[current].classList.add('active');
 
-      dots.forEach(d => d.classList.remove('active'));
-      dots[current]?.classList.add('active');
+      requestAnimationFrame(() => requestAnimationFrame(() => {
+        slides[current].style.transform = '';
+      }));
 
-      // Sincroniza botão acessório
-      const btn = document.getElementById('btnAccessory');
-      if (btn) btn.classList.toggle('accessory-active', current === 2);
+      syncDots(current);
+
+      /* Feedback visual no botão VIEW ACCESSORY */
+      document.getElementById('btnAccessory')
+        ?.classList.toggle('accessory-active', current === SHOE_COUNT);
     }
 
-    document.getElementById('carouselNext')?.addEventListener('click', () => goTo(current + 1, 'next'));
-    document.getElementById('carouselPrev')?.addEventListener('click', () => goTo(current - 1, 'prev'));
+    document.getElementById('carouselNext')
+      ?.addEventListener('click', () => goTo(current + 1, 'next'));
+    document.getElementById('carouselPrev')
+      ?.addEventListener('click', () => goTo(current - 1, 'prev'));
 
-    dots.forEach(d => d.addEventListener('click', () => {
-      const idx = parseInt(d.dataset.dot);
-      goTo(idx, idx > current ? 'next' : 'prev');
-    }));
-
-    // Touch / swipe mobile
+    /* Touch / swipe mobile */
     let touchX = 0;
-    const track = document.getElementById('carouselTrack');
-    track?.addEventListener('touchstart', e => { touchX = e.touches[0].clientX; }, { passive: true });
-    track?.addEventListener('touchend', e => {
+    track.addEventListener('touchstart', e => { touchX = e.touches[0].clientX; }, { passive: true });
+    track.addEventListener('touchend',   e => {
       const dx = e.changedTouches[0].clientX - touchX;
       if (Math.abs(dx) > 40) goTo(current + (dx < 0 ? 1 : -1), dx < 0 ? 'next' : 'prev');
     }, { passive: true });
 
-    // Auto-play
-    let autoTimer = setInterval(() => goTo(current + 1, 'next'), 4500);
+    /* Auto-play apenas pelos 10 tênis */
+    let autoTimer = setInterval(() => goTo((current + 1) % SHOE_COUNT, 'next'), 4500);
     const carousel = document.getElementById('heroCarousel');
     carousel?.addEventListener('mouseenter', () => clearInterval(autoTimer));
     carousel?.addEventListener('mouseleave', () => {
       clearInterval(autoTimer);
-      autoTimer = setInterval(() => goTo(current + 1, 'next'), 4500);
+      autoTimer = setInterval(() => goTo((current + 1) % SHOE_COUNT, 'next'), 4500);
     });
 
-    window._carouselGoTo = goTo;
+    /* Expor API global para VIEW ACCESSORY e tema */
+    window._carouselGoTo       = goTo;
     window._carouselGetCurrent = () => current;
+    window._carouselShoeCount  = SHOE_COUNT;
   })();
 
-  /* VIEW ACCESSORY */
+  /* VIEW ACCESSORY — alterna para o relógio (slide 10) ou volta ao tênis */
   function showAccessory() {
-    const cur = window._carouselGetCurrent?.() ?? 0;
-    if (cur === 2) {
+    const cur       = window._carouselGetCurrent?.() ?? 0;
+    const shoeCount = window._carouselShoeCount  ?? 10;
+    if (cur === shoeCount) {
       window._carouselGoTo(0, 'prev');
-      document.getElementById('btnAccessory')?.classList.remove('accessory-active');
     } else {
-      window._carouselGoTo(2, 'next');
-      document.getElementById('btnAccessory')?.classList.add('accessory-active');
+      window._carouselGoTo(shoeCount, 'next');
     }
   }
 
