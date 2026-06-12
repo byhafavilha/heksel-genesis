@@ -2354,6 +2354,418 @@
     }
   })();
 
+  /* ══════════════════════════════════════════════════════════════
+   HEKSEL GENESIS — SISTEMA DE COMUNICAÇÃO EM TEMPO REAL v1.0
+   Arquitetura: Genesis (Emissor) ←→ Studio (Receptor/Validador)
+══════════════════════════════════════════════════════════════ */
+
+/* ── CONFIGURAÇÃO DO ECOSSISTEMA ── */
+const HEKSEL_CONFIG = {
+  STUDIO_WEBHOOK_URL: 'https://hook.us2.make.com/lawfjw0n1ugn7ur6zh211tn63jgs035m',
+  TIMEOUT_MS: 5000,
+  WHATSAPP_NUMBER: '5553991855262',
+  EMAIL_ADDRESS: 'hafavilhahafy@gmail.com',
+};
+
+/* ── UTILITÁRIOS DE UI ── */
+const GenesisUI = {
+
+  setButtonLoading(btn, loading) {
+    if (!btn) return;
+    if (loading) {
+      btn.dataset.originalText = btn.innerHTML;
+      btn.innerHTML = `<span class="genesis-spinner"></span> ENVIANDO...`;
+      btn.disabled = true;
+      btn.style.opacity = '0.7';
+    } else {
+      btn.innerHTML = btn.dataset.originalText || btn.innerHTML;
+      btn.disabled = false;
+      btn.style.opacity = '';
+    }
+  },
+
+  showSuccessModal() {
+    document.getElementById('genesisSuccessModal')?.remove();
+
+    const modal = document.createElement('div');
+    modal.id = 'genesisSuccessModal';
+    modal.innerHTML = `
+      <div class="genesis-success-backdrop" id="genesisBackdrop">
+        <div class="genesis-success-card" id="genesisCard">
+          <div class="genesis-success-orb"></div>
+          <div class="genesis-success-orb genesis-orb-2"></div>
+          <div class="genesis-check-ring">
+            <svg class="genesis-check-svg" viewBox="0 0 52 52">
+              <circle class="genesis-check-circle" cx="26" cy="26" r="24" fill="none" stroke-width="2"/>
+              <path class="genesis-check-tick" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" d="M14 26 l8 8 l16-16"/>
+            </svg>
+          </div>
+          <div class="genesis-success-tag">✦ TRANSMITTED</div>
+          <h2 class="genesis-success-title">Application Received!</h2>
+          <p class="genesis-success-sub">Our team is reviewing your project.<br>Expect contact within <strong>24h</strong>.</p>
+          <div class="genesis-status-bar">
+            <div class="genesis-status-fill"></div>
+          </div>
+          <div class="genesis-status-label">HEKSEL STUDIO — PROCESSING</div>
+          <button class="genesis-close-btn" id="genesisCloseBtn">CLOSE ×</button>
+        </div>
+      </div>
+    `;
+    document.body.appendChild(modal);
+
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        modal.querySelector('#genesisCard').classList.add('genesis-card-visible');
+      });
+    });
+
+    const autoTimer = setTimeout(() => GenesisUI.closeSuccessModal(), 7000);
+
+    modal.querySelector('#genesisCloseBtn').addEventListener('click', () => {
+      clearTimeout(autoTimer);
+      GenesisUI.closeSuccessModal();
+    });
+    modal.querySelector('#genesisBackdrop').addEventListener('click', e => {
+      if (e.target === modal.querySelector('#genesisBackdrop')) {
+        clearTimeout(autoTimer);
+        GenesisUI.closeSuccessModal();
+      }
+    });
+  },
+
+  closeSuccessModal() {
+    const modal = document.getElementById('genesisSuccessModal');
+    if (!modal) return;
+    modal.querySelector('#genesisCard').style.transform = 'scale(0.9) translateY(20px)';
+    modal.querySelector('#genesisCard').style.opacity = '0';
+    setTimeout(() => {
+      modal.remove();
+      closeBrandModal();
+    }, 350);
+  },
+
+  showErrorToast(message) {
+    document.getElementById('genesisErrorToast')?.remove();
+    const toast = document.createElement('div');
+    toast.id = 'genesisErrorToast';
+    toast.className = 'genesis-error-toast';
+    toast.innerHTML = `<span class="genesis-error-icon">⚠</span> ${message}`;
+    document.body.appendChild(toast);
+    requestAnimationFrame(() => requestAnimationFrame(() => toast.classList.add('genesis-toast-visible')));
+    setTimeout(() => {
+      toast.classList.remove('genesis-toast-visible');
+      setTimeout(() => toast.remove(), 400);
+    }, 5000);
+  },
+};
+
+/* ── MOTOR DE COMUNICAÇÃO — FETCH + TIMEOUT + FALLBACK ── */
+const GenesisTransmitter = {
+
+  buildPayload() {
+    return {
+      timestamp: new Date().toISOString(),
+      source:    'heksel-genesis',
+      brand:     formData.brand,
+      niche:     formData.niche     || null,
+      has_site:  formData.hasSite,
+      site_link: formData.siteLink  || null,
+      logo_desc: formData.logoDesc  || null,
+      briefing:  formData.briefing  || null,
+      package:   formData.package,
+      version:   '1.0.0',
+    };
+  },
+
+  withTimeout(promise, ms) {
+    const timer = new Promise((_, reject) =>
+      setTimeout(() => reject(new Error('TIMEOUT')), ms)
+    );
+    return Promise.race([promise, timer]);
+  },
+
+  async transmit(payload) {
+    const response = await this.withTimeout(
+      fetch(HEKSEL_CONFIG.STUDIO_WEBHOOK_URL, {
+        method:  'POST',
+        headers: {
+          'Content-Type':     'application/json',
+          'X-Genesis-Source': 'heksel-genesis',
+        },
+        body: JSON.stringify(payload),
+      }),
+      HEKSEL_CONFIG.TIMEOUT_MS
+    );
+
+    if (!response.ok) {
+      throw new Error(`HTTP_${response.status}`);
+    }
+
+    return response;
+  },
+
+  /* ── LIMPEZA COMPLETA DO FORMULÁRIO ── */
+  resetForm() {
+    /* Reset do objeto de estado */
+    formData = { brand: '', niche: '', hasSite: null, siteLink: '', logoDesc: '', briefing: '', package: '' };
+    selectedPkgIndex = null;
+
+    /* Reset dos campos DOM — equivalente ao form.reset() */
+    ['brandName', 'niche', 'siteLink', 'logoDesc', 'briefing'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.value = '';
+    });
+    document.querySelectorAll('input[name="hasSite"]').forEach(r => r.checked = false);
+
+    /* Oculta painéis condicionais */
+    const siteFields = document.getElementById('siteFields');
+    const briefField = document.getElementById('briefField');
+    if (siteFields) siteFields.style.display = 'none';
+    if (briefField) briefField.style.display = 'none';
+
+    /* Remove seleção visual de pacote */
+    document.querySelectorAll('.package-item').forEach(p => p.classList.remove('selected-package'));
+
+    /* Retorna ao passo 1 para o próximo uso */
+    showStep(1);
+  },
+
+  async send(triggerBtn) {
+    const payload = this.buildPayload();
+
+    GenesisUI.setButtonLoading(triggerBtn, true);
+
+    try {
+      await this.transmit(payload);
+
+      /* ✅ STATUS 200 OK — limpa tudo e exibe modal de sucesso */
+      this.resetForm();
+      GenesisUI.showSuccessModal();
+
+    } catch (err) {
+
+      GenesisUI.setButtonLoading(triggerBtn, false);
+
+      if (err.message === 'TIMEOUT') {
+        GenesisUI.showErrorToast('Studio não respondeu a tempo. Tente novamente ou envie via WhatsApp.');
+      } else if (err.message.startsWith('HTTP_')) {
+        GenesisUI.showErrorToast(`Servidor retornou erro (${err.message.replace('HTTP_', '')}). Use WhatsApp como alternativa.`);
+      } else {
+        GenesisUI.showErrorToast('Sem conexão com o Studio. Redirecionando para WhatsApp...');
+        setTimeout(() => {
+          window.open(`https://wa.me/${HEKSEL_CONFIG.WHATSAPP_NUMBER}?text=${getMessage()}`, '_blank');
+        }, 2000);
+      }
+      return;
+    }
+
+    GenesisUI.setButtonLoading(triggerBtn, false);
+  },
+};
+
+/* ── ESTILOS DO SISTEMA GENESIS INJETADOS EM RUNTIME ── */
+(function injectGenesisStyles() {
+  const style = document.createElement('style');
+  style.textContent = `
+
+    .genesis-spinner {
+      display: inline-block;
+      width: 14px; height: 14px;
+      border: 2px solid rgba(255,255,255,0.3);
+      border-top-color: #00f0ff;
+      border-radius: 50%;
+      animation: genesisSpin 0.7s linear infinite;
+      vertical-align: middle;
+      margin-right: 6px;
+    }
+    @keyframes genesisSpin { to { transform: rotate(360deg); } }
+
+    .genesis-success-backdrop {
+      position: fixed; inset: 0; z-index: 99999;
+      background: rgba(4,4,10,0.85);
+      backdrop-filter: blur(18px);
+      display: flex; align-items: center; justify-content: center;
+      padding: 20px;
+    }
+
+    #genesisCard {
+      position: relative; overflow: hidden;
+      background: linear-gradient(145deg, rgba(12,12,22,0.98), rgba(8,6,20,0.98));
+      border: 1px solid rgba(0,240,255,0.25);
+      border-radius: 28px;
+      padding: 52px 44px 44px;
+      max-width: 440px; width: 100%;
+      text-align: center;
+      box-shadow:
+        0 0 60px rgba(0,240,255,0.12),
+        0 0 120px rgba(180,94,255,0.08),
+        0 40px 80px rgba(0,0,0,0.6);
+      transform: scale(0.85) translateY(30px);
+      opacity: 0;
+      transition: transform 0.55s cubic-bezier(0.2,0.9,0.4,1.1),
+                  opacity 0.45s ease;
+    }
+    #genesisCard.genesis-card-visible {
+      transform: scale(1) translateY(0);
+      opacity: 1;
+    }
+
+    .genesis-success-orb {
+      position: absolute; border-radius: 50%;
+      pointer-events: none;
+      background: radial-gradient(circle, rgba(0,240,255,0.18), transparent 70%);
+      width: 280px; height: 280px;
+      top: -80px; left: -80px;
+      animation: orbFloat 6s ease-in-out infinite;
+    }
+    .genesis-orb-2 {
+      background: radial-gradient(circle, rgba(180,94,255,0.14), transparent 70%);
+      width: 200px; height: 200px;
+      top: auto; left: auto;
+      bottom: -60px; right: -60px;
+      animation-delay: -3s;
+    }
+    @keyframes orbFloat {
+      0%,100% { transform: translate(0,0) scale(1); }
+      50%      { transform: translate(12px,-12px) scale(1.08); }
+    }
+
+    .genesis-check-ring {
+      width: 72px; height: 72px;
+      margin: 0 auto 24px;
+      position: relative; z-index: 1;
+    }
+    .genesis-check-svg { width: 100%; height: 100%; }
+
+    .genesis-check-circle {
+      stroke: rgba(0,240,255,0.35);
+      stroke-dasharray: 160;
+      stroke-dashoffset: 160;
+      animation: drawCircle 0.6s ease 0.2s forwards;
+    }
+    .genesis-check-tick {
+      stroke: #00f0ff;
+      stroke-dasharray: 50;
+      stroke-dashoffset: 50;
+      animation: drawTick 0.5s ease 0.7s forwards;
+      filter: drop-shadow(0 0 6px rgba(0,240,255,0.8));
+    }
+    @keyframes drawCircle { to { stroke-dashoffset: 0; } }
+    @keyframes drawTick   { to { stroke-dashoffset: 0; } }
+
+    .genesis-success-tag {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.6rem; letter-spacing: 0.28em;
+      color: rgba(0,240,255,0.6);
+      text-transform: uppercase;
+      margin-bottom: 14px;
+      position: relative; z-index: 1;
+    }
+
+    .genesis-success-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.9rem; font-weight: 800;
+      line-height: 1.1; letter-spacing: -0.02em;
+      background: linear-gradient(120deg, #00f0ff, #b45eff);
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+      margin-bottom: 14px;
+      position: relative; z-index: 1;
+    }
+
+    .genesis-success-sub {
+      color: rgba(255,255,255,0.45);
+      font-size: 0.92rem; line-height: 1.65;
+      margin-bottom: 32px;
+      position: relative; z-index: 1;
+    }
+    .genesis-success-sub strong { color: rgba(255,255,255,0.75); }
+
+    .genesis-status-bar {
+      width: 100%; height: 3px;
+      background: rgba(255,255,255,0.06);
+      border-radius: 99px; overflow: hidden;
+      margin-bottom: 10px;
+      position: relative; z-index: 1;
+    }
+    .genesis-status-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #00f0ff, #b45eff, #00ffc3);
+      background-size: 200% 100%;
+      border-radius: 99px;
+      animation: statusScan 2s linear infinite;
+      width: 40%;
+    }
+    @keyframes statusScan {
+      0%   { background-position: 0% 0%;   margin-left: -40%; }
+      100% { background-position: 200% 0%; margin-left: 100%; }
+    }
+
+    .genesis-status-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.55rem; letter-spacing: 0.2em;
+      color: rgba(0,240,255,0.35);
+      margin-bottom: 32px;
+      position: relative; z-index: 1;
+    }
+
+    .genesis-close-btn {
+      background: rgba(0,240,255,0.08);
+      color: rgba(255,255,255,0.5);
+      border: 1px solid rgba(0,240,255,0.2);
+      padding: 12px 36px; border-radius: 50px;
+      font-family: 'Syne', sans-serif;
+      font-size: 0.7rem; font-weight: 700;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      cursor: pointer; transition: all 0.3s ease;
+      position: relative; z-index: 1;
+    }
+    .genesis-close-btn:hover {
+      background: rgba(0,240,255,0.15);
+      color: #00f0ff;
+      border-color: #00f0ff;
+      box-shadow: 0 0 20px rgba(0,240,255,0.2);
+    }
+
+    .genesis-error-toast {
+      position: fixed; bottom: 100px; left: 50%;
+      transform: translateX(-50%) translateY(20px);
+      z-index: 99998;
+      background: linear-gradient(135deg, rgba(20,8,18,0.97), rgba(12,6,22,0.97));
+      border: 1px solid rgba(255,60,100,0.4);
+      color: rgba(255,255,255,0.85);
+      font-family: 'Syne', sans-serif;
+      font-size: 0.78rem; font-weight: 600;
+      letter-spacing: 0.04em;
+      padding: 14px 24px; border-radius: 14px;
+      box-shadow: 0 0 30px rgba(255,60,100,0.2), 0 16px 32px rgba(0,0,0,0.5);
+      opacity: 0;
+      transition: opacity 0.35s ease, transform 0.35s ease;
+      white-space: nowrap; max-width: 90vw;
+      text-align: center;
+    }
+    .genesis-error-toast.genesis-toast-visible {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+    .genesis-error-icon {
+      color: #ff4060; margin-right: 8px;
+      animation: warnPulse 1s ease-in-out infinite;
+    }
+    @keyframes warnPulse {
+      0%,100% { opacity:1; } 50% { opacity:0.4; }
+    }
+  `;
+  document.head.appendChild(style);
+})();
+
+/* ── BINDING DOS BOTÕES DO STEP 4 ── */
+document.getElementById('sendWABtn')?.addEventListener('click', function() {
+  GenesisTransmitter.send(this);
+});
+
+document.getElementById('sendEmailBtn')?.addEventListener('click', () => {
+  window.location.href = `mailto:${HEKSEL_CONFIG.EMAIL_ADDRESS}?subject=Orçamento%20Create%20My%20Brand%20-%20${formData.brand}&body=${getMessage().replace(/%0A/g, '\n')}`;
+});
 </script>
 </body>
 </html>
