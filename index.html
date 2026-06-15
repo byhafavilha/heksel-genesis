@@ -2096,8 +2096,8 @@
     return `🚀 *ORÇAMENTO — CREATE MY BRAND*%0A*Marca:* ${formData.brand}%0A*Segmento:* ${formData.niche || '-'}%0A*Site atual:* ${formData.hasSite ? formData.siteLink : 'Não possui'}%0A*Logo/Briefing:* ${formData.hasSite ? formData.logoDesc : formData.briefing}%0A*Pacote:* ${formData.package}%0A%0A✦ Gostaria de iniciar o projeto!`;
   }
 
-  document.getElementById('sendWABtn')?.addEventListener('click', () => {
-    window.open(`https://wa.me/5553991855262?text=${getMessage()}`, '_blank');
+  document.getElementById('sendWABtn')?.addEventListener('click', function() {
+    GenesisTransmitter.send(this);
   });
 
   document.getElementById('sendEmailBtn')?.addEventListener('click', () => {
