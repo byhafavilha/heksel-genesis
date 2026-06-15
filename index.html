@@ -230,7 +230,7 @@
     .package-item:hover { transform: translateX(6px); background: var(--purple-dim); border-color: var(--purple); }
     .package-item.selected-package { border-color: var(--purple); background: rgba(180,94,255,0.08); }
 
-    /* NAVBAR + HAMBURGER */
+    /* NAVBAR */
     nav {
       position: fixed; top: 0; left: 0; width: 100%;
       padding: 0 5%; height: 68px;
@@ -276,14 +276,36 @@
     .mobile-menu a:last-child { border-bottom: none; }
     .mobile-menu a:hover { color: var(--cyan); }
 
-    @media (max-width: 800px) {
-      .nav-links { display: none; }
-      .hamburger { display: flex; }
+    /* ═══ HERO CENTRALIZADO NO MEIO DA TELA ═══ */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding-top: 68px; /* compensa a navbar fixa */
+      position: relative;
+      overflow: hidden;
     }
-
-    /* HERO + SECTIONS */
-    .hero { min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr; align-items: center; padding: 110px 5% 70px; gap: 48px; position: relative; overflow: hidden; }
-    .hero::after { content: ''; position: absolute; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, transparent, rgba(0,240,255,0.15), transparent); animation: scanline 8s linear infinite; pointer-events: none; z-index: 0; }
+    .hero::after {
+      content: '';
+      position: absolute; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, transparent, rgba(0,240,255,0.15), transparent);
+      animation: scanline 8s linear infinite;
+      pointer-events: none; z-index: 0;
+    }
+    .section-inner {
+      width: 100%;
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 5%;
+    }
+    .hero .section-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      gap: 48px;
+      width: 100%;
+    }
     .hero-left { position: relative; z-index: 1; }
     .badge { font-family: 'Space Mono', monospace; font-size: 0.65rem; font-weight: 700; letter-spacing: 0.22em; color: var(--cyan); text-transform: uppercase; margin-bottom: 24px; display: inline-flex; align-items: center; gap: 10px; animation: fadeUp 0.9s var(--ease) forwards; background: rgba(0,240,255,0.08); padding: 8px 16px; border-radius: 50px; border: 1px solid rgba(0,240,255,0.2); }
     .badge-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--cyan); box-shadow: 0 0 8px var(--cyan); animation: blink 1.8s ease-in-out infinite; }
@@ -297,13 +319,13 @@
     .stat-label { font-family: 'Space Mono', monospace; font-size: 0.58rem; color: rgba(255,255,255,0.3); letter-spacing: 0.2em; text-transform: uppercase; margin-top: 4px; }
     .hero-right { position: relative; z-index: 1; display: flex; align-items: center; justify-content: center; }
 
-    .media-section { padding: 100px 5% 80px; background: rgba(6,6,12,0.98); text-align: center; }
+    /* OUTRAS SEÇÕES */
+    .media-section { padding: 100px 0 80px; background: rgba(6,6,12,0.98); text-align: center; }
     .video-container { max-width: 680px; margin: 0 auto 48px; border-radius: 20px; overflow: hidden; border: 1.5px solid rgba(0,240,255,0.35); animation: borderNeon 4s ease-in-out infinite; }
     .video-container video { width: 100%; display: block; max-height: 420px; object-fit: cover; border-radius: 18px; }
 
-    /* ═══ BRAND SECTION COM GRADIENTE SUAVE (FUSÃO ROXO/PRETO) ═══ */
     .brand-section {
-      padding: 120px 5%; text-align: center;
+      padding: 120px 0; text-align: center;
       background: linear-gradient(180deg,
         rgba(8,8,18,0.98) 0%,
         rgba(18,10,34,0.98) 30%,
@@ -311,7 +333,6 @@
         rgba(14,6,28,0.98) 100%);
       color: white; position: relative; z-index: 1; overflow: hidden;
     }
-    /* Efeito de glow roxo suave sobreposto para fusão */
     .brand-section::after {
       content: '';
       position: absolute; inset: 0;
@@ -319,9 +340,7 @@
       pointer-events: none; z-index: 0;
     }
     .brand-section h2, .brand-section > p, .brand-section .cta-brand,
-    .brand-section .plan-duo, .brand-section .brand-perks {
-      position: relative; z-index: 1;
-    }
+    .brand-section .plan-duo, .brand-section .brand-perks { position: relative; z-index: 1; }
     .brand-section h2 { font-family: 'Syne', sans-serif; font-size: clamp(2.2rem, 5.5vw, 4rem); font-weight: 800; line-height: 1.05; letter-spacing: -0.02em; margin-bottom: 22px; }
     .brand-section > p { color: rgba(255,255,255,0.45); max-width: 580px; margin: 0 auto 40px; font-size: 1.05rem; font-weight: 300; line-height: 1.75; }
     .brand-perks { margin-top: 32px; display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
@@ -346,28 +365,16 @@
     .plan-card.premium ul li::before { color: var(--gold); }
     .btn-plan-premium { background: linear-gradient(135deg, var(--gold), var(--gold-light)); color: #1a0f00; border: none; padding: 14px 28px; border-radius: 50px; font-family: 'Syne', sans-serif; font-weight: 800; font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; width: 100%; margin-top: auto; }
     .btn-plan-freemium {
-      background: rgba(0,240,255,0.22);
-      color: var(--cyan);
-      border: 2px solid rgba(0,240,255,0.65);
-      padding: 14px 28px;
-      border-radius: 50px;
-      font-family: 'Syne', sans-serif;
-      font-weight: 800;
-      font-size: 0.75rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      width: 100%;
-      box-shadow: 0 0 14px rgba(0,240,255,0.25);
-      margin-top: auto;
+      background: rgba(0,240,255,0.22); color: var(--cyan);
+      border: 2px solid rgba(0,240,255,0.65); padding: 14px 28px;
+      border-radius: 50px; font-family: 'Syne', sans-serif;
+      font-weight: 800; font-size: 0.75rem; letter-spacing: 0.1em;
+      text-transform: uppercase; width: 100%;
+      box-shadow: 0 0 14px rgba(0,240,255,0.25); margin-top: auto;
     }
-    .btn-plan-freemium:hover {
-      background: rgba(0,240,255,0.35);
-      border-color: var(--cyan);
-      box-shadow: 0 0 28px rgba(0,240,255,0.5);
-      transform: translateY(-2px);
-    }
+    .btn-plan-freemium:hover { background: rgba(0,240,255,0.35); border-color: var(--cyan); box-shadow: 0 0 28px rgba(0,240,255,0.5); transform: translateY(-2px); }
 
-    .collection { padding: 120px 5%; background: rgba(10,10,18,0.98); text-align: center; }
+    .collection { padding: 120px 0; background: rgba(10,10,18,0.98); text-align: center; }
     .section-tag { font-family: 'Space Mono', monospace; font-size: 0.65rem; font-weight: 700; letter-spacing: 0.25em; text-transform: uppercase; color: var(--cyan); display: inline-block; margin-bottom: 18px; background: rgba(0,240,255,0.08); padding: 7px 16px; border-radius: 50px; border: 1px solid rgba(0,240,255,0.2); }
     .section-title { font-family: 'Syne', sans-serif; font-size: clamp(2.2rem, 5vw, 4rem); font-weight: 800; line-height: 0.95; letter-spacing: -0.03em; margin-bottom: 12px; color: var(--white); }
     .section-sub { font-size: 1rem; color: rgba(255,255,255,0.4); margin-bottom: 60px; font-weight: 300; line-height: 1.7; }
@@ -380,7 +387,7 @@
     .prod-name { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 0.9rem; color: var(--white); margin-bottom: 6px; }
     .prod-price { font-family: 'Space Mono', monospace; font-size: 0.8rem; color: var(--gold); font-weight: 700; }
 
-    .studio-lab { padding: 120px 5%; background: linear-gradient(180deg, rgba(8,8,18,0.99) 0%, rgba(6,12,20,0.99) 100%); color: white; text-align: center; }
+    .studio-lab { padding: 120px 0; background: linear-gradient(180deg, rgba(8,8,18,0.99) 0%, rgba(6,12,20,0.99) 100%); color: white; text-align: center; }
     .studio-container { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; max-width: 1200px; margin: 0 auto; text-align: left; }
     .studio-mock { background: rgba(255,255,255,0.03); border-radius: 28px; padding: 32px; border: 1px solid rgba(0,240,255,0.18); backdrop-filter: blur(8px); text-align: center; }
     .studio-badge { font-family: 'Space Mono', monospace; font-size: 0.62rem; letter-spacing: 0.16em; text-transform: uppercase; background: rgba(0,240,255,0.1); color: var(--cyan); padding: 7px 14px; border-radius: 50px; display: inline-block; margin-bottom: 18px; border: 1px solid rgba(0,240,255,0.2); }
@@ -388,7 +395,7 @@
     .studio-feat { display: flex; align-items: center; gap: 12px; color: rgba(255,255,255,0.65); font-size: 0.9rem; font-weight: 300; }
     .studio-feat::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--cyan); box-shadow: 0 0 8px var(--cyan); flex-shrink: 0; }
 
-    footer { background: rgba(4,4,8,0.99); padding: 80px 5% 36px; color: rgba(255,255,255,0.6); border-top: 1px solid rgba(0,240,255,0.08); }
+    footer { background: rgba(4,4,8,0.99); padding: 80px 0 36px; color: rgba(255,255,255,0.6); border-top: 1px solid rgba(0,240,255,0.08); }
     .footer-grid { display: grid; grid-template-columns: 1.4fr repeat(3, 1fr); gap: 48px; margin-bottom: 48px; }
     .footer-logo img { height: 26px; margin-bottom: 14px; }
     .footer-logo p { font-size: 0.8rem; color: rgba(255,255,255,0.3); line-height: 1.7; max-width: 200px; }
@@ -465,15 +472,101 @@
     .theme-fab { position: fixed; bottom: 32px; right: 28px; z-index: 9000; width: 52px; height: 52px; border-radius: 50%; background: rgba(14,14,24,.85); border: 1.5px solid rgba(0,240,255,.25); backdrop-filter: blur(20px); display: flex; align-items: center; justify-content: center; cursor: pointer !important; }
     .theme-icon { font-size: 1.3rem; }
 
-    @media (max-width: 800px) {
-      .hero { grid-template-columns: 1fr; padding: 88px 5% 60px; }
-      .plan-duo { flex-direction: column; align-items: center; }
-      .freemium-sim { grid-template-columns: 1fr; }
-      .carousel-track { min-height: 380px; }
-      .footer-grid { grid-template-columns: 1fr 1fr; }
+    /* RESPONSIVO */
+    @media (max-width: 1024px) {
+      .hero .section-inner { gap: 32px; }
     }
+    @media (max-width: 800px) {
+      * { cursor: auto !important; }
+      #cur, #cur-ring { display: none !important; }
+      nav { padding: 0 4%; height: 60px; }
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .nav-buttons { gap: 8px; }
+      .btn-outline-nav { padding: 7px 14px; font-size: 0.6rem; }
+      .btn-gold-nav { padding: 7px 14px; font-size: 0.6rem; }
+
+      .hero { padding-top: 60px; }
+      .hero .section-inner {
+        grid-template-columns: 1fr;
+        text-align: center;
+        justify-items: center;
+        gap: 24px;
+      }
+      .hero-left { display: flex; flex-direction: column; align-items: center; width: 100%; }
+      .hero-left .badge { margin: 0 auto 20px; }
+      .hero-left h1 { text-align: center; width: 100%; word-break: break-word; overflow-wrap: break-word; }
+      .hero-left p { text-align: center; margin-left: auto; margin-right: auto; max-width: 90%; }
+      .hero-actions { justify-content: center; width: 100%; flex-direction: column; align-items: center; }
+      .btn-primary { width: 100%; justify-content: center; }
+      .hero-stats { justify-content: center; width: 100%; }
+      .hero-right { justify-content: center; width: 100%; }
+
+      .media-section { padding: 70px 0; text-align: center; }
+      .video-container { border-radius: 16px; margin-bottom: 32px; }
+
+      .brand-section { padding: 80px 0; }
+      .brand-section h2 { font-size: clamp(1.8rem, 5vw, 2.8rem); }
+
+      .collection { padding: 80px 0; text-align: center; }
+      .card-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+      .prod-card { max-width: 100%; }
+
+      .studio-lab { padding: 80px 0; text-align: center; }
+      .studio-container { grid-template-columns: 1fr; text-align: center; justify-items: center; gap: 36px; }
+      .studio-container > div:first-child { text-align: center; display: flex; flex-direction: column; align-items: center; }
+      .studio-features { align-items: center; }
+      .studio-lab h2 { text-align: center; }
+      .studio-lab p { text-align: center; margin-left: auto; margin-right: auto; }
+      .studio-mock { width: 100%; }
+
+      footer { padding: 60px 0 28px; }
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 28px; }
+      .footer-bottom { justify-content: center; flex-direction: column; align-items: center; gap: 8px; }
+      .footer-logo { text-align: center; }
+      .footer-logo p { max-width: 100%; }
+      .social-icons { justify-content: center; gap: 16px; }
+      .footer-copy { text-align: center; }
+
+      .carousel-track { min-height: 380px; }
+      .carousel-slide img { max-width: 90vw; }
+      .carousel-arrow { width: 38px; height: 38px; }
+    }
+
     @media (max-width: 480px) {
-      .footer-grid { grid-template-columns: 1fr; }
+      .hero { padding-top: 60px; }
+      .hero-left h1 { font-size: clamp(2rem, 7vw, 2.8rem); }
+      .hero-actions { flex-direction: column; align-items: center; width: 100%; }
+      .btn-primary, .cta-brand { width: 100%; justify-content: center; }
+      .hero-stats { gap: 16px; }
+      .stat-divider { height: 28px; }
+
+      .collection { padding: 60px 0; }
+      .card-grid { grid-template-columns: 1fr; }
+      .prod-card { max-width: 320px; margin: 0 auto; }
+
+      .studio-lab { padding: 60px 0; }
+      .studio-container { gap: 28px; }
+
+      .brand-section { padding: 60px 0; }
+      .brand-section h2 { font-size: 1.7rem; }
+      .brand-perks { gap: 10px; justify-content: center; }
+
+      .media-section { padding: 60px 0; }
+
+      footer { padding: 50px 0 24px; }
+      .footer-grid { grid-template-columns: 1fr; text-align: center; gap: 28px; }
+      .footer-logo { text-align: center; }
+      .footer-col { text-align: center; }
+      .footer-col a { display: inline-block; }
+      .social-icons { justify-content: center; gap: 18px; margin-top: 18px; }
+      .footer-bottom { flex-direction: column; align-items: center; gap: 6px; }
+      .footer-copy { font-size: 0.55rem; text-align: center; }
+
+      .carousel-track { min-height: 300px; }
+      .carousel-nav { gap: 14px; }
+      .carousel-dots { gap: 8px; }
+      .carousel-arrow { width: 34px; height: 34px; }
     }
   </style>
 </head>
@@ -516,114 +609,126 @@
 </nav>
 
 <section class="hero" id="hero">
-  <div class="hero-left">
-    <div class="badge"><span class="badge-dot"></span>The NEO Collection 2026</div>
-    <h1>Your Identity,<br><span class="glow-text">Engineered.</span></h1>
-    <p>Three lines. One empire. Performance, home wear and digital luxury — every step is a statement of power.</p>
-    <div class="hero-actions">
-      <button class="btn-primary" onclick="document.getElementById('collection').scrollIntoView({behavior:'smooth'})">Explore All <span>→</span></button>
-      <button class="btn-outline-nav" onclick="openBrandModal()">Create My Brand ✦</button>
+  <div class="section-inner">
+    <div class="hero-left">
+      <div class="badge"><span class="badge-dot"></span>The NEO Collection 2026</div>
+      <h1>Your Identity,<br><span class="glow-text">Engineered.</span></h1>
+      <p>Three lines. One empire. Performance, home wear and digital luxury — every step is a statement of power.</p>
+      <div class="hero-actions">
+        <button class="btn-primary" onclick="document.getElementById('collection').scrollIntoView({behavior:'smooth'})">Explore All <span>→</span></button>
+        <button class="btn-outline-nav" onclick="openBrandModal()">Create My Brand ✦</button>
+      </div>
+      <div class="hero-stats">
+        <div class="stat-item"><span class="stat-num">1K+</span><span class="stat-label">Builders</span></div>
+        <div class="stat-divider"></div>
+        <div class="stat-item"><span class="stat-num">3</span><span class="stat-label">Lines</span></div>
+        <div class="stat-divider"></div>
+        <div class="stat-item"><span class="stat-num">01</span><span class="stat-label">Drop</span></div>
+      </div>
     </div>
-    <div class="hero-stats">
-      <div class="stat-item"><span class="stat-num">1K+</span><span class="stat-label">Builders</span></div>
-      <div class="stat-divider"></div>
-      <div class="stat-item"><span class="stat-num">3</span><span class="stat-label">Lines</span></div>
-      <div class="stat-divider"></div>
-      <div class="stat-item"><span class="stat-num">01</span><span class="stat-label">Drop</span></div>
-    </div>
-  </div>
-  <div class="hero-right">
-    <div class="hero-carousel" id="heroCarousel">
-      <div class="carousel-track" id="carouselTrack"></div>
-      <div class="carousel-nav">
-        <button class="carousel-arrow carousel-prev" id="carouselPrev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg></button>
-        <div class="carousel-dots" id="carouselDots"></div>
-        <button class="carousel-arrow carousel-next" id="carouselNext"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></button>
+    <div class="hero-right">
+      <div class="hero-carousel" id="heroCarousel">
+        <div class="carousel-track" id="carouselTrack"></div>
+        <div class="carousel-nav">
+          <button class="carousel-arrow carousel-prev" id="carouselPrev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg></button>
+          <div class="carousel-dots" id="carouselDots"></div>
+          <button class="carousel-arrow carousel-next" id="carouselNext"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></button>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
 <section class="media-section">
-  <div class="video-container">
-    <video autoplay muted loop playsinline poster="tenis.png"><source src="lv_0_20260529100529.mp4" type="video/mp4"></video>
+  <div class="section-inner">
+    <div class="video-container">
+      <video autoplay muted loop playsinline poster="tenis.png"><source src="lv_0_20260529100529.mp4" type="video/mp4"></video>
+    </div>
+    <div class="hero-shoe-neon"><img src="tenis.png" alt="NEO-KAI 01" onerror="this.src='1000027639-removebg-preview.png'"></div>
   </div>
-  <div class="hero-shoe-neon"><img src="tenis.png" alt="NEO-KAI 01" onerror="this.src='1000027639-removebg-preview.png'"></div>
 </section>
 
 <section class="brand-section" id="brandSection">
-  <span class="studio-badge">✦ Heksel Services</span>
-  <h2>Want a website like this?<br><span class="glow-gold">Build your brand.</span></h2>
-  <p>Complete visual identity + professional website + digital ecosystem. From start to infinity.</p>
-  <button class="cta-brand" id="openBrandModalBtn">✦ Create My Brand ✦</button>
+  <div class="section-inner">
+    <span class="studio-badge">✦ Heksel Services</span>
+    <h2>Want a website like this?<br><span class="glow-gold">Build your brand.</span></h2>
+    <p>Complete visual identity + professional website + digital ecosystem. From start to infinity.</p>
+    <button class="cta-brand" id="openBrandModalBtn">✦ Create My Brand ✦</button>
 
-  <div class="plan-duo">
-    <div class="plan-card freemium">
-      <span class="plan-badge freemium-badge">Live Preview</span>
-      <h4>Freemium</h4>
-      <div class="plan-price">Free</div>
-      <ul><li>Interactive app simulation</li><li>Final design preview</li><li>Feature testing</li><li>No commitment</li></ul>
-      <button class="btn-plan-freemium" onclick="openFreemiumModal()">Try It Now</button>
+    <div class="plan-duo">
+      <div class="plan-card freemium">
+        <span class="plan-badge freemium-badge">Live Preview</span>
+        <h4>Freemium</h4>
+        <div class="plan-price">Free</div>
+        <ul><li>Interactive app simulation</li><li>Final design preview</li><li>Feature testing</li><li>No commitment</li></ul>
+        <button class="btn-plan-freemium" onclick="openFreemiumModal()">Try It Now</button>
+      </div>
+      <div class="plan-card premium">
+        <span class="plan-badge premium-badge">Full Access</span>
+        <h4>Premium</h4>
+        <div class="plan-price">$4,996.32</div>
+        <ul><li>Complete website + store</li><li>Exclusive visual identity</li><li>Digital ecosystem</li><li>Lifetime support</li></ul>
+        <button class="btn-plan-premium" onclick="openBrandModal()">Hire Premium</button>
+      </div>
     </div>
-    <div class="plan-card premium">
-      <span class="plan-badge premium-badge">Full Access</span>
-      <h4>Premium</h4>
-      <div class="plan-price">$4,996.32</div>
-      <ul><li>Complete website + store</li><li>Exclusive visual identity</li><li>Digital ecosystem</li><li>Lifetime support</li></ul>
-      <button class="btn-plan-premium" onclick="openBrandModal()">Hire Premium</button>
-    </div>
-  </div>
 
-  <div class="brand-perks">
-    <div class="brand-perk-item">⚡ Ultra-professional</div>
-    <div class="brand-perk-item">🎨 Visual identity</div>
-    <div class="brand-perk-item">📱 100% responsive</div>
-    <div class="brand-perk-item">🚀 Fast delivery</div>
+    <div class="brand-perks">
+      <div class="brand-perk-item">⚡ Ultra-professional</div>
+      <div class="brand-perk-item">🎨 Visual identity</div>
+      <div class="brand-perk-item">📱 100% responsive</div>
+      <div class="brand-perk-item">🚀 Fast delivery</div>
+    </div>
   </div>
 </section>
 
 <section class="collection" id="collection">
-  <span class="section-tag">⚡ NEO Collection — Drop 01</span>
-  <h2 class="section-title">Every Line.<br><span class="glow-text">One Empire.</span></h2>
-  <p class="section-sub">Laser-engineered performance meets street culture. Six silhouettes. One declaration.</p>
-  <div class="card-grid">
-    <div class="prod-card"><img src="1000027639-removebg-preview.png" alt="NEO-KAI Gold"><div class="prod-info"><div class="prod-name">NEO-KAI 01 Gold</div><div class="prod-price">$189</div><button class="notify-btn-card" onclick="openNotifyModal()">Notify Me</button></div></div>
-    <div class="prod-card"><img src="1000027638-removebg-preview.png" alt="NEO-KAI Red"><div class="prod-info"><div class="prod-name">NEO-KAI 01 Red Force</div><div class="prod-price">$189</div><button class="notify-btn-card" onclick="openNotifyModal()">Notify Me</button></div></div>
-    <div class="prod-card"><img src="1000027632-removebg-preview.png" alt="NEO-KAI Blue"><div class="prod-info"><div class="prod-name">NEO-KAI 01 Blue Strike</div><div class="prod-price">$189</div><button class="notify-btn-card" onclick="openNotifyModal()">Notify Me</button></div></div>
-    <div class="prod-card"><img src="1000027648-removebg-preview.png" alt="NEO-WAI Slide"><div class="prod-info"><div class="prod-name">NEO-WAI 01 Slide</div><div class="prod-price">TBA</div><button class="notify-btn-card" onclick="openNotifyModal()">Coming Soon</button></div></div>
-    <div class="prod-card"><img src="1000027649-removebg-preview.png" alt="NEO-WAI Flip"><div class="prod-info"><div class="prod-name">NEO-WAI 01 Flip</div><div class="prod-price">TBA</div><button class="notify-btn-card" onclick="openNotifyModal()">Notify Me</button></div></div>
-    <div class="prod-card"><img src="1000027651-removebg-preview.png" alt="NEO-LAI"><div class="prod-info"><div class="prod-name">NEO-LAI 01 Slipper</div><div class="prod-price">TBA</div><button class="notify-btn-card" onclick="openNotifyModal()">Early Access</button></div></div>
+  <div class="section-inner">
+    <span class="section-tag">⚡ NEO Collection — Drop 01</span>
+    <h2 class="section-title">Every Line.<br><span class="glow-text">One Empire.</span></h2>
+    <p class="section-sub">Laser-engineered performance meets street culture. Six silhouettes. One declaration.</p>
+    <div class="card-grid">
+      <div class="prod-card"><img src="1000027639-removebg-preview.png" alt="NEO-KAI Gold"><div class="prod-info"><div class="prod-name">NEO-KAI 01 Gold</div><div class="prod-price">$189</div><button class="notify-btn-card" onclick="openNotifyModal()">Notify Me</button></div></div>
+      <div class="prod-card"><img src="1000027638-removebg-preview.png" alt="NEO-KAI Red"><div class="prod-info"><div class="prod-name">NEO-KAI 01 Red Force</div><div class="prod-price">$189</div><button class="notify-btn-card" onclick="openNotifyModal()">Notify Me</button></div></div>
+      <div class="prod-card"><img src="1000027632-removebg-preview.png" alt="NEO-KAI Blue"><div class="prod-info"><div class="prod-name">NEO-KAI 01 Blue Strike</div><div class="prod-price">$189</div><button class="notify-btn-card" onclick="openNotifyModal()">Notify Me</button></div></div>
+      <div class="prod-card"><img src="1000027648-removebg-preview.png" alt="NEO-WAI Slide"><div class="prod-info"><div class="prod-name">NEO-WAI 01 Slide</div><div class="prod-price">TBA</div><button class="notify-btn-card" onclick="openNotifyModal()">Coming Soon</button></div></div>
+      <div class="prod-card"><img src="1000027649-removebg-preview.png" alt="NEO-WAI Flip"><div class="prod-info"><div class="prod-name">NEO-WAI 01 Flip</div><div class="prod-price">TBA</div><button class="notify-btn-card" onclick="openNotifyModal()">Notify Me</button></div></div>
+      <div class="prod-card"><img src="1000027651-removebg-preview.png" alt="NEO-LAI"><div class="prod-info"><div class="prod-name">NEO-LAI 01 Slipper</div><div class="prod-price">TBA</div><button class="notify-btn-card" onclick="openNotifyModal()">Early Access</button></div></div>
+    </div>
   </div>
 </section>
 
 <section class="studio-lab" id="studioLab">
-  <div class="studio-container">
-    <div>
-      <span class="studio-badge">Heksel Studio — Coming Soon</span>
-      <h2 style="font-family:'Syne',sans-serif; font-size:clamp(2rem,4vw,3.2rem); margin-bottom:20px; font-weight:800; letter-spacing:-0.02em; line-height:1.05;">Design Your<br><span class="glow-text">Own Story.</span></h2>
-      <p style="opacity:0.55; margin-bottom:28px; font-weight:300; line-height:1.75; font-size:1rem; max-width:380px;">Full customization: colors, stickers, final artwork. The shoe 100% yours — no other like it in the world.</p>
-      <div class="studio-features"><div class="studio-feat">Custom color palette</div><div class="studio-feat">Upload personal artwork</div><div class="studio-feat">Real-time preview</div></div>
-      <button class="btn-primary" style="margin-top:8px;" onclick="openNotifyModal()">Get Early Access →</button>
+  <div class="section-inner">
+    <div class="studio-container">
+      <div>
+        <span class="studio-badge">Heksel Studio — Coming Soon</span>
+        <h2 style="font-family:'Syne',sans-serif; font-size:clamp(2rem,4vw,3.2rem); margin-bottom:20px; font-weight:800; letter-spacing:-0.02em; line-height:1.05;">Design Your<br><span class="glow-text">Own Story.</span></h2>
+        <p style="opacity:0.55; margin-bottom:28px; font-weight:300; line-height:1.75; font-size:1rem; max-width:380px;">Full customization: colors, stickers, final artwork. The shoe 100% yours — no other like it in the world.</p>
+        <div class="studio-features"><div class="studio-feat">Custom color palette</div><div class="studio-feat">Upload personal artwork</div><div class="studio-feat">Real-time preview</div></div>
+        <button class="btn-primary" style="margin-top:8px;" onclick="openNotifyModal()">Get Early Access →</button>
+      </div>
+      <div class="studio-mock"><img src="1000027639-removebg-preview.png" alt="Studio preview"></div>
     </div>
-    <div class="studio-mock"><img src="1000027639-removebg-preview.png" alt="Studio preview"></div>
   </div>
 </section>
 
 <footer>
-  <div class="footer-grid">
-    <div class="footer-logo"><img src="1000027280.png" alt="Heksel"><p>Designed in Brazil.<br>Engineered Globally.</p>
-      <div class="social-icons">
-        <a href="https://www.instagram.com/hafavilha" target="_blank"><img src="instagram-heksel.png" alt="Instagram"></a>
-        <a href="https://vt.tiktok.com/ZSxbdSUg9/" target="_blank"><img src="tiktok-heksel.png" alt="TikTok"></a>
-        <a href="#" target="_blank"><img src="x-heksel.png" alt="X"></a>
+  <div class="section-inner">
+    <div class="footer-grid">
+      <div class="footer-logo"><img src="1000027280.png" alt="Heksel"><p>Designed in Brazil.<br>Engineered Globally.</p>
+        <div class="social-icons">
+          <a href="https://www.instagram.com/hafavilha" target="_blank"><img src="instagram-heksel.png" alt="Instagram"></a>
+          <a href="https://vt.tiktok.com/ZSxbdSUg9/" target="_blank"><img src="tiktok-heksel.png" alt="TikTok"></a>
+          <a href="#" target="_blank"><img src="x-heksel.png" alt="X"></a>
+        </div>
       </div>
+      <div class="footer-col"><h4>Collection</h4><a href="#">NEO-KAI 01</a><a href="#">NEO-WAI 01</a><a href="#">NEO-LAI 01</a></div>
+      <div class="footer-col"><h4>Studio</h4><a href="#studioLab">Heksel Studio</a><a href="#" onclick="openNotifyModal()">Custom Build</a><a href="#brandSection">Inner Circle</a></div>
+      <div class="footer-col"><h4>Support</h4><a href="https://wa.me/5553991855262" target="_blank">WhatsApp</a><a href="mailto:hafavilhahafy@gmail.com">hafavilhahafy@gmail.com</a></div>
     </div>
-    <div class="footer-col"><h4>Collection</h4><a href="#">NEO-KAI 01</a><a href="#">NEO-WAI 01</a><a href="#">NEO-LAI 01</a></div>
-    <div class="footer-col"><h4>Studio</h4><a href="#studioLab">Heksel Studio</a><a href="#" onclick="openNotifyModal()">Custom Build</a><a href="#brandSection">Inner Circle</a></div>
-    <div class="footer-col"><h4>Support</h4><a href="https://wa.me/5553991855262" target="_blank">WhatsApp</a><a href="mailto:hafavilhahafy@gmail.com">hafavilhahafy@gmail.com</a></div>
-  </div>
-  <div class="footer-bottom">
-    <span class="footer-copy">© 2026 HEKSEL IMPERIUM — ALL RIGHTS RESERVED.</span>
+    <div class="footer-bottom">
+      <span class="footer-copy">© 2026 HEKSEL IMPERIUM — ALL RIGHTS RESERVED.</span>
+    </div>
   </div>
 </footer>
 
@@ -673,7 +778,6 @@
   const navEl = document.getElementById('nav');
   window.addEventListener('scroll', () => { navEl.classList.toggle('scrolled', window.scrollY > 10); }, { passive: true });
 
-  // Mobile menu
   const hamburgerBtn = document.getElementById('hamburgerBtn');
   const mobileMenu = document.getElementById('mobileMenu');
   hamburgerBtn?.addEventListener('click', (e) => { e.stopPropagation(); mobileMenu.style.display = mobileMenu.style.display === 'flex' ? 'none' : 'flex'; });
@@ -681,10 +785,8 @@
   document.addEventListener('click', (e) => { if (!hamburgerBtn?.contains(e.target) && !mobileMenu?.contains(e.target)) closeMobileMenu(); });
   mobileMenu?.querySelectorAll('a').forEach(link => link.addEventListener('click', closeMobileMenu));
 
-  // Notify modal (simple alert)
   function openNotifyModal() { alert('Notification feature coming soon! Stay tuned.'); }
 
-  // Package data
   const packages = [
     { name: "Normal", price: "$1,000", desc: "Single page, responsive, 7-day delivery" },
     { name: "Modern", price: "$2,000", desc: "Multi-page + animations + basic SEO" },
