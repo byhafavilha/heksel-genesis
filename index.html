@@ -90,7 +90,6 @@
         var(--ink);
       overflow: hidden;
     }
-    /* Grid lines */
     .animated-bg::before {
       content: '';
       position: absolute; width: 200%; height: 200%;
@@ -102,7 +101,6 @@
       animation: bgMove 60s linear infinite;
       pointer-events: none;
     }
-    /* Radial pulse purple */
     .animated-bg::after {
       content: '';
       position: absolute; width: 100%; height: 100%;
@@ -117,7 +115,6 @@
       0%, 100% { opacity: 0.4; } 50% { opacity: 1; }
     }
 
-    /* Partículas flutuantes */
     .particle {
       position: fixed;
       background: radial-gradient(circle, rgba(0,240,255,0.7), rgba(180,94,255,0.15));
@@ -133,9 +130,6 @@
       100% { transform: translateY(-10vh) rotate(360deg); opacity: 0;   }
     }
 
-    /* ═══════════════════════════════════════════════
-       KEYFRAMES DE TEXTO
-    ═══════════════════════════════════════════════ */
     @keyframes fadeUp {
       0%   { opacity: 0; transform: translateY(40px); filter: blur(6px); }
       100% { opacity: 1; transform: translateY(0);    filter: blur(0);   }
@@ -175,9 +169,6 @@
       -webkit-background-clip: text; background-clip: text; color: transparent;
     }
 
-    /* ═══════════════════════════════════════════════
-       SISTEMA DE BOTÕES PREMIUM
-    ═══════════════════════════════════════════════ */
     button, .btn-primary, .btn-outline-nav, .btn-gold-nav,
     .cta-brand, .notify-btn-card, .btn-next,
     .btn-send-wa, .btn-send-email, .package-item {
@@ -188,7 +179,6 @@
       isolation: isolate;
     }
 
-    /* Ripple universal */
     button::after, .btn-primary::after, .cta-brand::after,
     .notify-btn-card::after, .btn-next::after,
     .btn-send-wa::after, .btn-send-email::after {
@@ -209,7 +199,6 @@
     .notify-btn-card > *, .btn-next > *,
     .btn-send-wa > *, .btn-send-email > * { position: relative; z-index: 1; }
 
-    /* Botão primário — dark com hover neon */
     .btn-primary {
       background: rgba(255,255,255,0.05);
       color: white;
@@ -234,7 +223,6 @@
       color: var(--cyan);
     }
 
-    /* Botão outline nav */
     .btn-outline-nav {
       padding: 9px 20px;
       border-radius: 50px;
@@ -255,7 +243,6 @@
       transform: translateY(-2px);
     }
 
-    /* Botão GOLD VIP — pulse animado */
     .btn-gold-nav {
       padding: 9px 20px;
       border-radius: 50px;
@@ -285,7 +272,6 @@
       filter: brightness(1.1);
     }
 
-    /* Botão CTA brand — gradiente animado */
     .cta-brand {
       background: linear-gradient(135deg, var(--purple), var(--cyan), var(--purple));
       background-size: 300% 300%;
@@ -314,7 +300,6 @@
       box-shadow: 0 0 60px rgba(180,94,255,0.5), 0 0 30px rgba(0,240,255,0.3), 0 24px 48px rgba(0,0,0,0.4);
     }
 
-    /* Botão notify cards */
     .notify-btn-card {
       width: 100%;
       margin-top: 14px;
@@ -337,7 +322,6 @@
       transform: translateY(-3px);
     }
 
-    /* Package items */
     .package-item {
       background: rgba(255,255,255,0.03);
       border: 1.5px solid rgba(255,255,255,0.08);
@@ -356,9 +340,6 @@
       box-shadow: 0 0 24px rgba(180,94,255,0.2);
     }
 
-    /* ═══════════════════════════════════════════════
-       NAVBAR — GLASSMORPHISM PREMIUM
-    ═══════════════════════════════════════════════ */
     nav {
       position: fixed; top: 0; left: 0; width: 100%;
       padding: 0 5%; height: 68px;
@@ -407,9 +388,6 @@
 
     .nav-buttons { display: flex; gap: 10px; align-items: center; }
 
-    /* ═══════════════════════════════════════════════
-       HERO SECTION — IMPACTO MÁXIMO
-    ═══════════════════════════════════════════════ */
     .hero {
       min-height: 100vh;
       display: grid; grid-template-columns: 1fr 1fr;
@@ -418,7 +396,6 @@
       position: relative; overflow: hidden;
     }
 
-    /* Scanline effect sutil */
     .hero::after {
       content: '';
       position: absolute; left: 0; right: 0; height: 2px;
@@ -473,7 +450,6 @@
       animation: fadeUp 0.9s 0.6s var(--ease) forwards; opacity: 0;
     }
 
-    /* Stats bar hero */
     .hero-stats {
       display: flex; gap: 40px;
       animation: fadeUp 0.9s 0.8s var(--ease) forwards; opacity: 0;
@@ -497,7 +473,6 @@
       align-self: stretch;
     }
 
-    /* Hero right — produto flutuante */
     .hero-right {
       position: relative; z-index: 1;
       display: flex; align-items: center; justify-content: center;
@@ -510,31 +485,7 @@
       filter: blur(28px);
       z-index: -1;
     }
-    .hero-right img {
-      width: 100%; max-width: 580px;
-      filter: drop-shadow(0 40px 60px rgba(0,0,0,0.4))
-              drop-shadow(0 0 40px rgba(0,240,255,0.12));
-      animation: floatHero 6s ease-in-out infinite;
-      position: relative; z-index: 2;
-      transition: filter .5s;
-    }
-    .hero-right img:hover {
-      filter: drop-shadow(0 40px 80px rgba(0,0,0,0.5))
-              drop-shadow(0 0 60px rgba(0,240,255,0.25))
-              drop-shadow(0 0 30px rgba(180,94,255,0.2));
-    }
-    @keyframes floatHero {
-      0%,100% { transform: translateY(0) rotate(0.5deg); }
-      50%      { transform: translateY(-20px) rotate(-0.5deg); }
-    }
-    @keyframes float {
-      0%,100% { transform: translateY(0) rotate(0deg); }
-      50%      { transform: translateY(-18px) rotate(0deg); }
-    }
 
-    /* ═══════════════════════════════════════════════
-       MEDIA SECTION — CYBERPUNK CINEMA
-    ═══════════════════════════════════════════════ */
     .media-section {
       padding: 100px 5% 80px;
       background: rgba(6,6,12,0.98);
@@ -566,7 +517,6 @@
       object-fit: cover;
       border-radius: 18px;
     }
-    /* Badge sobre o vídeo */
     .video-container::after {
       content: '🎬 DROP 01 — OFFICIAL';
       position: absolute; top: 16px; left: 16px;
@@ -610,9 +560,6 @@
         0 40px 80px rgba(0,0,0,0.7);
     }
 
-    /* ═══════════════════════════════════════════════
-       CREATE MY BRAND SECTION
-    ═══════════════════════════════════════════════ */
     .brand-section {
       padding: 120px 5%; text-align: center;
       background: linear-gradient(180deg, rgba(8,8,18,0.98) 0%, rgba(14,6,28,0.98) 100%);
@@ -639,7 +586,6 @@
       font-size: 1.05rem; font-weight: 300; line-height: 1.75;
       position: relative; z-index: 1;
     }
-    /* BUG FIX #2: position relativo para que o botão fique acima do radial */
     #openBrandModalBtn { position: relative; z-index: 1; }
 
     .brand-perks {
@@ -663,9 +609,6 @@
       background: rgba(0,240,255,0.06);
     }
 
-    /* ═══════════════════════════════════════════════
-       COLLECTION SECTION — CARDS DE LUXO
-    ═══════════════════════════════════════════════ */
     .collection {
       padding: 120px 5%;
       background: rgba(10,10,18,0.98);
@@ -717,7 +660,6 @@
       backdrop-filter: blur(10px);
       position: relative;
     }
-    /* Linha de brilho topo */
     .prod-card::before {
       content: '';
       position: absolute; top: 0; left: 0; right: 0; height: 1px;
@@ -756,9 +698,6 @@
       font-weight: 700; letter-spacing: 0.05em;
     }
 
-    /* ═══════════════════════════════════════════════
-       STUDIO LAB — TECH PREMIUM
-    ═══════════════════════════════════════════════ */
     .studio-lab {
       padding: 120px 5%;
       background: linear-gradient(180deg, rgba(8,8,18,0.99) 0%, rgba(6,12,20,0.99) 100%);
@@ -842,7 +781,6 @@
       box-shadow: 0 0 16px rgba(0,240,255,0.2);
     }
 
-    /* Feature list studio */
     .studio-features {
       display: flex; flex-direction: column; gap: 12px; margin: 24px 0;
     }
@@ -858,9 +796,6 @@
       box-shadow: 0 0 8px var(--cyan); flex-shrink: 0;
     }
 
-    /* ═══════════════════════════════════════════════
-       FOOTER — ELEGÂNCIA TOTAL
-    ═══════════════════════════════════════════════ */
     footer {
       background: rgba(4,4,8,0.99);
       padding: 80px 5% 36px;
@@ -906,6 +841,7 @@
     .social-icons {
       display: flex;
       align-items: center;
+      justify-content: flex-start;
       gap: 14px;
       margin-top: 22px;
       flex-wrap: wrap;
@@ -943,9 +879,6 @@
       letter-spacing: 0.08em;
     }
 
-    /* ═══════════════════════════════════════════════
-       MODAL CREATE MY BRAND — REDESENHO TOTAL
-    ═══════════════════════════════════════════════ */
     .modal-overlay {
       display: none; position: fixed; inset: 0;
       background: rgba(0,0,0,0.88);
@@ -983,7 +916,6 @@
       background: rgba(0,240,255,0.3); border-radius: 2px;
     }
 
-    /* Título do modal */
     .modal-container h3 {
       font-family: 'Syne', sans-serif;
       font-weight: 800; font-size: 1.3rem;
@@ -991,7 +923,6 @@
       letter-spacing: -0.01em;
     }
 
-    /* BUG FIX #3: close modal posicionado sem afetar o fluxo */
     .close-modal {
       position: absolute; top: 20px; right: 24px;
       font-size: 24px; cursor: pointer; line-height: 1;
@@ -1060,7 +991,6 @@
 
     .packages { display: flex; flex-direction: column; gap: 10px; margin: 20px 0; }
 
-    /* BUG FIX #4: package-item precisa de color white no modal dark */
     .package-item {
       display: flex; justify-content: space-between; align-items: center;
       padding: 16px 18px;
@@ -1115,7 +1045,6 @@
       box-shadow: 0 12px 30px rgba(234,67,53,0.35);
     }
 
-    /* Summary box */
     #summaryInfo {
       background: rgba(255,255,255,0.04) !important;
       border: 1.5px solid rgba(0,240,255,0.15) !important;
@@ -1127,140 +1056,7 @@
     #summaryInfo strong { color: var(--white); }
 
     /* ═══════════════════════════════════════════════
-       RESPONSIVIDADE TOTAL
-    ═══════════════════════════════════════════════ */
-    @media (max-width: 1024px) {
-      nav { padding: 0 4%; height: 62px; }
-      .hero { padding: 90px 4% 60px; gap: 32px; }
-      .hero-left h1 { font-size: clamp(2.8rem, 5vw, 4.5rem); }
-      .collection, .studio-lab, .brand-section, .media-section { padding: 90px 4%; }
-    }
-
-    @media (max-width: 800px) {
-      * { cursor: auto !important; }
-      #cur, #cur-ring { display: none !important; }
-
-      nav { padding: 0 4%; height: 60px; }
-      .nav-links { display: none; }
-      .nav-buttons { gap: 8px; }
-      .btn-outline-nav { padding: 7px 14px; font-size: 0.6rem; }
-      .btn-gold-nav { padding: 7px 14px; font-size: 0.6rem; }
-
-      /* ── HERO CENTRALIZADO ── */
-      .hero {
-        grid-template-columns: 1fr;
-        text-align: center;
-        align-items: center;
-        justify-items: center;
-        padding: 88px 5% 60px;
-        gap: 24px;
-        min-height: auto;
-      }
-      .hero-left {
-        display: flex; flex-direction: column;
-        align-items: center; width: 100%;
-      }
-      .hero-left .badge { margin: 0 auto 20px; }
-      .hero-left h1 {
-        text-align: center;
-        width: 100%;
-        word-break: break-word;
-        overflow-wrap: break-word;
-      }
-      .hero-left p {
-        text-align: center;
-        margin-left: auto; margin-right: auto;
-        max-width: 90%;
-      }
-      .hero-actions {
-        justify-content: center;
-        width: 100%;
-        flex-direction: column;
-        align-items: center;
-      }
-      .btn-primary { width: 100%; justify-content: center; }
-      .hero-stats { justify-content: center; width: 100%; }
-      .hero-right {
-        justify-content: center;
-        width: 100%;
-      }
-
-      /* ── SEÇÕES CENTRALIZADAS ── */
-      .media-section { padding: 70px 5%; text-align: center; }
-      .video-container { border-radius: 16px; margin-bottom: 32px; }
-
-      .brand-section { padding: 80px 5%; }
-      .brand-section h2 { font-size: clamp(1.8rem, 5vw, 2.8rem); }
-
-      .collection { padding: 80px 5%; text-align: center; }
-      .card-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
-      .prod-card { max-width: 100%; }
-      .section-title, .section-sub, .section-tag { text-align: center; }
-
-      /* ── STUDIO CENTRALIZADO ── */
-      .studio-lab { padding: 80px 5%; text-align: center; }
-      .studio-container {
-        grid-template-columns: 1fr;
-        text-align: center;
-        justify-items: center;
-        gap: 36px;
-      }
-      .studio-container > div:first-child {
-        text-align: center;
-        display: flex; flex-direction: column; align-items: center;
-      }
-      .studio-features { align-items: center; }
-      .studio-lab h2 { text-align: center; }
-      .studio-lab p { text-align: center; margin-left: auto; margin-right: auto; }
-      .studio-mock { width: 100%; }
-
-      /* ── FOOTER CENTRALIZADO ── */
-      footer { padding: 60px 5% 28px; }
-      .footer-grid { grid-template-columns: 1fr 1fr; gap: 28px; }
-      .footer-bottom { justify-content: center; flex-direction: column; align-items: center; gap: 8px; }
-      .footer-logo { text-align: center; }
-      .footer-logo p { max-width: 100%; }
-      .social-icons { justify-content: center; gap: 16px; }
-      .footer-copy { text-align: center; }
-    }
-
-    @media (max-width: 480px) {
-      .hero { padding: 76px 4% 50px; gap: 20px; }
-      .hero-left h1 { font-size: clamp(2rem, 7vw, 2.8rem); }
-      .hero-actions { flex-direction: column; align-items: center; width: 100%; }
-      .btn-primary, .cta-brand { width: 100%; justify-content: center; }
-      .btn-outline-nav { width: auto; justify-content: center; text-align: center; }
-      .hero-stats { gap: 16px; }
-      .stat-divider { height: 28px; }
-
-      .collection { padding: 60px 4%; }
-      .card-grid { grid-template-columns: 1fr; }
-      .prod-card { max-width: 320px; margin: 0 auto; }
-
-      .studio-lab { padding: 60px 4%; }
-      .studio-container { gap: 28px; }
-
-      .brand-section { padding: 60px 4%; }
-      .brand-section h2 { font-size: 1.7rem; }
-      .brand-perks { gap: 10px; justify-content: center; }
-
-      .media-section { padding: 60px 4%; }
-
-      footer { padding: 50px 4% 24px; }
-      .footer-grid { grid-template-columns: 1fr; text-align: center; gap: 28px; }
-      .footer-logo { text-align: center; }
-      .footer-col { text-align: center; }
-      .footer-col a { display: inline-block; }
-      .social-icons { justify-content: center; gap: 18px; margin-top: 18px; }
-      .footer-bottom { flex-direction: column; align-items: center; gap: 6px; }
-      .footer-copy { font-size: 0.55rem; text-align: center; }
-
-      .modal-container { padding: 24px 16px; border-radius: 20px; }
-      .modal-buttons { justify-content: center; flex-direction: column; }
-      .btn-next, .btn-send-wa, .btn-send-email { width: 100%; justify-content: center; }
-    }
-    /* ═══════════════════════════════════════════════
-       HERO CAROUSEL — CYBERPUNK LUXURY SLIDER
+       HERO CAROUSEL — CYBERPUNK LUXURY SLIDER (5 IMAGENS OFICIAIS)
     ═══════════════════════════════════════════════ */
     .hero-carousel {
       position: relative;
@@ -1325,8 +1121,11 @@
               drop-shadow(0 0 70px rgba(0,240,255,.28))
               drop-shadow(0 0 35px rgba(180,94,255,.22));
     }
+    @keyframes float {
+      0%,100% { transform: translateY(0) rotate(0deg); }
+      50%      { transform: translateY(-18px) rotate(0deg); }
+    }
 
-    /* Label do produto */
     .carousel-label {
       position: absolute; bottom: 2px; left: 50%;
       transform: translateX(-50%);
@@ -1344,7 +1143,6 @@
       letter-spacing: .14em; color: rgba(255,255,255,.75);
     }
 
-    /* ── NAVEGAÇÃO INFERIOR: setas flanqueando os dots ── */
     .carousel-nav {
       display: flex; align-items: center;
       justify-content: center; gap: 20px;
@@ -1372,7 +1170,6 @@
     }
     .carousel-arrow:active { transform: scale(0.93); }
 
-    /* Dots — compactos para suportar 10 sem overflow */
     .carousel-dots {
       display: flex; gap: 6px; align-items: center;
       flex-wrap: nowrap; overflow: hidden;
@@ -1390,79 +1187,6 @@
     }
     .carousel-dot:hover { background: rgba(180,94,255,.5); }
 
-    /* ═══════════════════════════════════════════════
-       BOTÃO VIEW ACCESSORY — HOLOGRÁFICO
-    ═══════════════════════════════════════════════ */
-    .btn-accessory {
-      position: relative;
-      display: inline-flex; align-items: center; gap: 10px;
-      padding: 11px 24px;
-      border-radius: 50px;
-      border: 1.5px solid rgba(201,168,76,.35);
-      background: linear-gradient(135deg,
-        rgba(201,168,76,.06) 0%,
-        rgba(245,217,127,.04) 100%);
-      backdrop-filter: blur(10px);
-      color: var(--gold-light);
-      font-family: 'Space Mono', monospace;
-      font-size: .65rem; font-weight: 700;
-      letter-spacing: .18em; text-transform: uppercase;
-      transition: all .4s var(--ease);
-      overflow: hidden;
-    }
-    .btn-accessory::before {
-      content: '';
-      position: absolute; inset: 0;
-      background: linear-gradient(135deg,
-        rgba(201,168,76,.12) 0%,
-        rgba(245,217,127,.08) 100%);
-      opacity: 0; transition: opacity .4s;
-    }
-    .btn-accessory:hover {
-      border-color: var(--gold);
-      box-shadow: 0 0 28px rgba(201,168,76,.35),
-                  0 0 60px rgba(201,168,76,.12),
-                  0 12px 28px rgba(0,0,0,.3);
-      transform: translateY(-3px);
-      color: var(--gold-light);
-    }
-    .btn-accessory:hover::before { opacity: 1; }
-
-    .accessory-icon {
-      font-size: 1rem; position: relative; z-index: 1;
-      animation: spinSlow 6s linear infinite;
-    }
-    @keyframes spinSlow {
-      0%   { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
-    }
-    .accessory-text { position: relative; z-index: 1; }
-
-    /* Pulse ring no botão */
-    .accessory-pulse {
-      position: absolute; right: 14px; top: 50%;
-      transform: translateY(-50%);
-      width: 8px; height: 8px; border-radius: 50%;
-      background: var(--gold);
-      box-shadow: 0 0 8px var(--gold);
-      animation: accessoryPulse 2s ease-in-out infinite;
-    }
-    @keyframes accessoryPulse {
-      0%,100% { box-shadow: 0 0 0 0 rgba(201,168,76,.6); }
-      60%      { box-shadow: 0 0 0 8px rgba(201,168,76,0); }
-    }
-
-    /* Estado ativo do botão acessório */
-    .btn-accessory.accessory-active {
-      border-color: var(--gold);
-      background: linear-gradient(135deg, rgba(201,168,76,.18), rgba(245,217,127,.1));
-      box-shadow: 0 0 32px rgba(201,168,76,.4);
-      color: #fff;
-    }
-
-    /* ═══════════════════════════════════════════════
-       BOTÃO FLUTUANTE TEMA LIGHT/DARK + EASTER EGG
-    ═══════════════════════════════════════════════ */
     .theme-fab {
       position: fixed;
       bottom: 32px; right: 28px;
@@ -1535,9 +1259,7 @@
     body.theme-light .nav-links a:hover,
     body.theme-light .nav-links a.active { color: #08080d; }
     body.theme-light .stat-label { color: rgba(0,0,0,.35); }
-    body.theme-light .collection {
-      background: rgba(235,237,245,.98);
-    }
+    body.theme-light .collection { background: rgba(235,237,245,.98); }
     body.theme-light .prod-card {
       background: rgba(255,255,255,.95);
       border-color: rgba(0,0,0,.07);
@@ -1560,9 +1282,7 @@
       background: rgba(255,255,255,.8);
       border-color: rgba(0,180,220,.2);
     }
-    body.theme-light footer {
-      background: #1a1a2e;
-    }
+    body.theme-light footer { background: #1a1a2e; }
     body.theme-light .theme-fab {
       background: rgba(230,232,245,.9);
       border-color: rgba(0,0,0,.12);
@@ -1584,17 +1304,11 @@
     body.theme-light .package-item { border-color: rgba(0,0,0,.1); }
     body.theme-light .package-item strong { color: #08080d; }
 
-    /* ─── EASTER EGG — MODO SECRETO ─── */
-    body.theme-secret {
-      color: #ffffff;
-    }
-    body.theme-secret nav {
-      background: rgba(0,0,0,.5);
-    }
+    body.theme-secret { color: #ffffff; }
+    body.theme-secret nav { background: rgba(0,0,0,.5); }
     body.theme-secret .prod-card { background: rgba(0,0,0,.35); border-color: rgba(255,255,255,.12); }
     body.theme-secret .prod-name { color: white; }
 
-    /* Toast Easter Egg */
     .easter-toast {
       position: fixed; bottom: 100px; right: 28px;
       z-index: 9001;
@@ -1612,30 +1326,110 @@
       opacity: 1; transform: translateY(0);
     }
 
-    /* Carousel responsivo */
+    /* Responsivo */
+    @media (max-width: 1024px) {
+      nav { padding: 0 4%; height: 62px; }
+      .hero { padding: 90px 4% 60px; gap: 32px; }
+      .hero-left h1 { font-size: clamp(2.8rem, 5vw, 4.5rem); }
+      .collection, .studio-lab, .brand-section, .media-section { padding: 90px 4%; }
+    }
+
     @media (max-width: 800px) {
-      .hero-carousel { max-width: 100%; }
+      * { cursor: auto !important; }
+      #cur, #cur-ring { display: none !important; }
+
+      nav { padding: 0 4%; height: 60px; }
+      .nav-links { display: none; }
+      .nav-buttons { gap: 8px; }
+      .btn-outline-nav { padding: 7px 14px; font-size: 0.6rem; }
+      .btn-gold-nav { padding: 7px 14px; font-size: 0.6rem; }
+
+      .hero {
+        grid-template-columns: 1fr;
+        text-align: center;
+        align-items: center;
+        justify-items: center;
+        padding: 88px 5% 60px;
+        gap: 24px;
+        min-height: auto;
+      }
+      .hero-left {
+        display: flex; flex-direction: column;
+        align-items: center; width: 100%;
+      }
+      .hero-left .badge { margin: 0 auto 20px; }
+      .hero-left h1 { text-align: center; width: 100%; word-break: break-word; overflow-wrap: break-word; }
+      .hero-left p { text-align: center; margin-left: auto; margin-right: auto; max-width: 90%; }
+      .hero-actions { justify-content: center; width: 100%; flex-direction: column; align-items: center; }
+      .btn-primary { width: 100%; justify-content: center; }
+      .hero-stats { justify-content: center; width: 100%; }
+      .hero-right { justify-content: center; width: 100%; }
+      .media-section { padding: 70px 5%; text-align: center; }
+      .video-container { border-radius: 16px; margin-bottom: 32px; }
+      .brand-section { padding: 80px 5%; }
+      .brand-section h2 { font-size: clamp(1.8rem, 5vw, 2.8rem); }
+      .collection { padding: 80px 5%; text-align: center; }
+      .card-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+      .prod-card { max-width: 100%; }
+      .section-title, .section-sub, .section-tag { text-align: center; }
+      .studio-lab { padding: 80px 5%; text-align: center; }
+      .studio-container { grid-template-columns: 1fr; text-align: center; justify-items: center; gap: 36px; }
+      .studio-container > div:first-child { text-align: center; display: flex; flex-direction: column; align-items: center; }
+      .studio-features { align-items: center; }
+      .studio-lab h2 { text-align: center; }
+      .studio-lab p { text-align: center; margin-left: auto; margin-right: auto; }
+      .studio-mock { width: 100%; }
+      footer { padding: 60px 5% 28px; }
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 28px; }
+      .footer-bottom { justify-content: center; flex-direction: column; align-items: center; gap: 8px; }
+      .footer-logo { text-align: center; }
+      .footer-logo p { max-width: 100%; }
+      .social-icons { justify-content: center; gap: 16px; }
+      .footer-copy { text-align: center; }
       .carousel-track { min-height: 380px; }
       .carousel-slide img { max-width: 90vw; }
-      .btn-accessory { font-size: .6rem; padding: 10px 18px; }
       .carousel-arrow { width: 38px; height: 38px; }
     }
+
     @media (max-width: 480px) {
+      .hero { padding: 76px 4% 50px; gap: 20px; }
+      .hero-left h1 { font-size: clamp(2rem, 7vw, 2.8rem); }
+      .hero-actions { flex-direction: column; align-items: center; width: 100%; }
+      .btn-primary, .cta-brand { width: 100%; justify-content: center; }
+      .hero-stats { gap: 16px; }
+      .stat-divider { height: 28px; }
+      .collection { padding: 60px 4%; }
+      .card-grid { grid-template-columns: 1fr; }
+      .prod-card { max-width: 320px; margin: 0 auto; }
+      .studio-lab { padding: 60px 4%; }
+      .studio-container { gap: 28px; }
+      .brand-section { padding: 60px 4%; }
+      .brand-section h2 { font-size: 1.7rem; }
+      .brand-perks { gap: 10px; justify-content: center; }
+      .media-section { padding: 60px 4%; }
+      footer { padding: 50px 4% 24px; }
+      .footer-grid { grid-template-columns: 1fr; text-align: center; gap: 28px; }
+      .footer-logo { text-align: center; }
+      .footer-col { text-align: center; }
+      .footer-col a { display: inline-block; }
+      .social-icons { justify-content: center; gap: 18px; margin-top: 18px; }
+      .footer-bottom { flex-direction: column; align-items: center; gap: 6px; }
+      .footer-copy { font-size: 0.55rem; text-align: center; }
+      .modal-container { padding: 24px 16px; border-radius: 20px; }
+      .modal-buttons { justify-content: center; flex-direction: column; }
+      .btn-next, .btn-send-wa, .btn-send-email { width: 100%; justify-content: center; }
       .carousel-track { min-height: 300px; }
       .carousel-nav { gap: 14px; }
       .carousel-dots { gap: 8px; }
       .carousel-arrow { width: 34px; height: 34px; }
     }
-
   </style>
 </head>
 <body>
 
-<!-- CURSOR CUSTOM -->
 <div id="cur"></div>
 <div id="cur-ring"></div>
 
-<!-- FUNDO ANIMADO COM PARTÍCULAS -->
 <div class="animated-bg"></div>
 <script>
   (function createParticles() {
@@ -1655,7 +1449,6 @@
   })();
 </script>
 
-<!-- NAVBAR -->
 <nav id="nav">
   <a href="#" class="logo">
     <img src="1000027280.png" alt="Heksel">
@@ -1673,7 +1466,6 @@
   </div>
 </nav>
 
-<!-- ═══ HERO ═══ -->
 <section class="hero" id="hero">
   <div class="hero-left">
     <div class="badge">
@@ -1705,14 +1497,9 @@
       </div>
     </div>
   </div>
-  <!-- ══ HERO CAROUSEL + VIEW ACCESSORY ══ -->
   <div class="hero-right">
     <div class="hero-carousel" id="heroCarousel">
-
-      <!-- Track: slides injetados pelo JS -->
       <div class="carousel-track" id="carouselTrack"></div>
-
-      <!-- Navegação: setas + dots (dots injetados pelo JS) -->
       <div class="carousel-nav">
         <button class="carousel-arrow carousel-prev" id="carouselPrev" aria-label="Anterior">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="15 18 9 12 15 6"/></svg>
@@ -1722,18 +1509,10 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg>
         </button>
       </div>
-
     </div>
-
-    <button class="btn-accessory" id="btnAccessory" onclick="showAccessory()">
-      <span class="accessory-icon">◈</span>
-      <span class="accessory-text">VIEW ACCESSORY</span>
-      <span class="accessory-pulse"></span>
-    </button>
   </div>
 </section>
 
-<!-- ═══ MEDIA SECTION ═══ -->
 <section class="media-section">
   <div class="video-container">
     <video autoplay muted loop playsinline poster="tenis.png">
@@ -1745,7 +1524,6 @@
   </div>
 </section>
 
-<!-- ═══ CREATE MY BRAND ═══ -->
 <section class="brand-section" id="brandSection">
   <span class="studio-badge">✦ HEKSEL SERVICES</span>
   <h2>Want a website like this?<br><span class="glow-gold">Build your brand.</span></h2>
@@ -1759,7 +1537,6 @@
   </div>
 </section>
 
-<!-- ═══ COLLECTION ═══ -->
 <section class="collection" id="collection">
   <span class="section-tag">⚡ NEO COLLECTION — DROP 01</span>
   <h2 class="section-title">Every Line.<br><span class="glow-text">One Empire.</span></h2>
@@ -1816,7 +1593,6 @@
   </div>
 </section>
 
-<!-- ═══ STUDIO HAFA LAB ═══ -->
 <section class="studio-lab" id="studioLab">
   <div class="studio-container">
     <div>
@@ -1847,7 +1623,6 @@
   </div>
 </section>
 
-<!-- ═══ FOOTER ═══ -->
 <footer>
   <div class="footer-grid">
     <div class="footer-logo">
@@ -1855,13 +1630,13 @@
       <p>Designed in Brazil.<br>Engineered Globally.</p>
       <div class="social-icons">
         <a href="https://www.instagram.com/hafavilha" target="_blank">
-          <img src="instagram-heksel.png" alt="Instagram" onerror="this.src='data:image/svg+xml,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 24 24\' fill=\'white\'><rect x=\'2\' y=\'2\' width=\'20\' height=\'20\' rx=\'5\'/></svg>'">
+          <img src="instagram-heksel.png" alt="Instagram" onerror="this.src='data:image/svg+xml,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27white%27><rect x=%272%27 y=%272%27 width=%2720%27 height=%2720%27 rx=%275%27/></svg>'">
         </a>
         <a href="https://vt.tiktok.com/ZSxbdSUg9/" target="_blank">
-          <img src="tiktok-heksel.png" alt="TikTok" onerror="this.src='data:image/svg+xml,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 24 24\' fill=\'white\'><circle cx=\'12\' cy=\'12\' r=\'10\'/></svg>'">
+          <img src="tiktok-heksel.png" alt="TikTok" onerror="this.src='data:image/svg+xml,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27white%27><circle cx=%2712%27 cy=%2712%27 r=%2710%27/></svg>'">
         </a>
-        <a href="https://wa.me/5553991855262" target="_blank">
-          <img src="x-heksel.png" alt="WhatsApp" onerror="this.src='data:image/svg+xml,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 24 24\' fill=\'white\'><circle cx=\'12\' cy=\'12\' r=\'10\'/></svg>'">
+        <a href="#" target="_blank">
+          <img src="x-heksel.png" alt="X" onerror="this.src='data:image/svg+xml,<svg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 24 24%27 fill=%27white%27><circle cx=%2712%27 cy=%2712%27 r=%2710%27/></svg>'">
         </a>
       </div>
     </div>
@@ -1889,26 +1664,15 @@
   </div>
 </footer>
 
-<!-- ═══ MODAL CREATE MY BRAND ═══ -->
 <div class="modal-overlay" id="brandModal">
   <div class="modal-container">
     <button class="close-modal" onclick="closeBrandModal()">×</button>
-
     <div id="step1" class="step active-step">
       <h3>Let's get started! ✦</h3>
-      <div class="form-group">
-        <label>Nome da marca *</label>
-        <input type="text" id="brandName" placeholder="Ex: APEX STUDIO, ForceFit...">
-      </div>
-      <div class="form-group">
-        <label>Segmento / Nicho</label>
-        <input type="text" id="niche" placeholder="Moda, Tech, Fitness, Restaurante...">
-      </div>
-      <div class="modal-buttons">
-        <button class="btn-next" onclick="nextStep(2)">PRÓXIMO →</button>
-      </div>
+      <div class="form-group"><label>Nome da marca *</label><input type="text" id="brandName" placeholder="Ex: APEX STUDIO, ForceFit..."></div>
+      <div class="form-group"><label>Segmento / Nicho</label><input type="text" id="niche" placeholder="Moda, Tech, Fitness, Restaurante..."></div>
+      <div class="modal-buttons"><button class="btn-next" onclick="nextStep(2)">PRÓXIMO →</button></div>
     </div>
-
     <div id="step2" class="step">
       <h3>Identidade existente?</h3>
       <div class="radio-group">
@@ -1916,27 +1680,17 @@
         <label><input type="radio" name="hasSite" value="no" onclick="toggleSiteFields(false)"> 🚀 Começar do zero</label>
       </div>
       <div id="siteFields" style="display:none; margin-top:18px;">
-        <div class="form-group">
-          <label>Link do site atual</label>
-          <input type="text" id="siteLink" placeholder="https://">
-        </div>
-        <div class="form-group">
-          <label>Logo (link ou descrição)</label>
-          <input type="text" id="logoDesc" placeholder="Link ou descrição do logo">
-        </div>
+        <div class="form-group"><label>Link do site atual</label><input type="text" id="siteLink" placeholder="https://"></div>
+        <div class="form-group"><label>Logo (link ou descrição)</label><input type="text" id="logoDesc" placeholder="Link ou descrição do logo"></div>
       </div>
       <div id="briefField" style="display:none; margin-top:18px;">
-        <div class="form-group">
-          <label>Briefing — conte sobre sua marca</label>
-          <textarea id="briefing" rows="3" placeholder="Ex: quero um site dark futurístico, vitrine de produtos premium..."></textarea>
-        </div>
+        <div class="form-group"><label>Briefing — conte sobre sua marca</label><textarea id="briefing" rows="3" placeholder="Ex: quero um site dark futurístico, vitrine de produtos premium..."></textarea></div>
       </div>
       <div class="modal-buttons">
         <button class="btn-outline-nav" onclick="prevStep(1)">← VOLTAR</button>
         <button class="btn-next" onclick="nextStep(3)">PRÓXIMO →</button>
       </div>
     </div>
-
     <div id="step3" class="step">
       <h3>Escolha seu pacote</h3>
       <div class="packages" id="packagesList"></div>
@@ -1945,7 +1699,6 @@
         <button class="btn-next" onclick="nextStep(4)">RESUMO →</button>
       </div>
     </div>
-
     <div id="step4" class="step">
       <h3>Resumo do orçamento ✦</h3>
       <div id="summaryInfo"></div>
@@ -1958,19 +1711,16 @@
   </div>
 </div>
 
-<!-- ══ BOTÃO FLUTUANTE TEMA LIGHT/DARK + EASTER EGG ══ -->
 <button class="theme-fab" id="themeFab" title="Mudar tema" type="button">
   <span class="theme-icon" id="themeIcon">☀</span>
   <div class="theme-fab-ring"></div>
 </button>
 
-<!-- Toast Easter Egg -->
 <div class="easter-toast" id="easterToast">
   <span>🌈 MODO SECRETO ATIVADO!</span>
 </div>
 
 <script>
-  /* ── CURSOR CUSTOM ── */
   (function(){
     const cur = document.getElementById('cur');
     const ring = document.getElementById('cur-ring');
@@ -1992,7 +1742,6 @@
     });
   })();
 
-  /* ── NAV SCROLL + ACTIVE LINKS ── */
   const navEl = document.getElementById('nav');
   const sections = document.querySelectorAll('section[id]');
   window.addEventListener('scroll', () => {
@@ -2006,7 +1755,6 @@
     });
   }, { passive: true });
 
-  /* ── PACOTES ── */
   const packages = [
     { name: "NORMAL",                 price: "R$ 1.000",  desc: "Site 1 página, responsivo, entrega 7 dias" },
     { name: "MODERNO",                price: "R$ 2.000",  desc: "Multi páginas + animações + SEO básico" },
@@ -2023,10 +1771,7 @@
     if (!container) return;
     container.innerHTML = packages.map((pkg, idx) => `
       <div class="package-item" data-idx="${idx}">
-        <div>
-          <strong>${pkg.name}</strong><br>
-          <small>${pkg.desc}</small>
-        </div>
+        <div><strong>${pkg.name}</strong><br><small>${pkg.desc}</small></div>
         <div><strong>${pkg.price}</strong></div>
       </div>
     `).join('');
@@ -2130,45 +1875,26 @@
     if (e.target === document.getElementById('brandModal')) closeBrandModal();
   });
 
-  /* ── CAROUSEL — 10 IMAGENS REAIS + RELÓGIO VIA VIEW ACCESSORY ── */
+  /* ── CARROSSEL OFICIAL — 5 IMAGENS ── */
   (function initCarousel() {
-
-    /* ══ LISTA OFICIAL DAS 10 IMAGENS ══ */
     const IMAGES = [
-      { src: '1000027632-removebg-preview.png', name: 'NEO-KAI 01',  tag: '01 / 10',
-        glow: 'rgba(0,240,255,0.22),rgba(180,94,255,0.12)' },
-      { src: '1000027633.png',                  name: 'NEO-KAI 01',  tag: '02 / 10',
-        glow: 'rgba(180,94,255,0.25),rgba(0,240,255,0.12)' },
-      { src: '1000027635-removebg-preview.png', name: 'NEO-KAI 01',  tag: '03 / 10',
-        glow: 'rgba(0,240,255,0.2),rgba(180,94,255,0.15)' },
-      { src: '1000027638-removebg-preview.png', name: 'NEO-KAI 01',  tag: '04 / 10',
-        glow: 'rgba(255,45,120,0.2),rgba(180,94,255,0.12)' },
-      { src: '1000027639-removebg-preview.png', name: 'NEO-KAI 01',  tag: '05 / 10',
-        glow: 'rgba(180,94,255,0.22),rgba(0,240,255,0.1)' },
-      { src: '1000027648-removebg-preview.png', name: 'NEO-KAI 01',  tag: '06 / 10',
-        glow: 'rgba(0,240,255,0.18),rgba(180,94,255,0.18)' },
-      { src: '1000027649-removebg-preview.png', name: 'NEO-KAI 01',  tag: '07 / 10',
-        glow: 'rgba(180,94,255,0.28),rgba(0,240,255,0.1)' },
-      { src: '1000027651-removebg-preview.png', name: 'NEO-KAI 01',  tag: '08 / 10',
-        glow: 'rgba(0,240,255,0.25),rgba(180,94,255,0.1)' },
-      { src: '1000027652.png',                  name: 'NEO-WAI 01',  tag: '09 / 10',
-        glow: 'rgba(180,94,255,0.3),rgba(0,240,255,0.12)' },
-      { src: '1000027654.png',                  name: 'NEO-LAI 01',  tag: '10 / 10',
-        glow: 'rgba(201,168,76,0.28),rgba(245,217,127,0.1)' },
+      { src: '1000027639-removebg-preview.png', name: 'NEO-KAI 01 Gold',  tag: '01 / 05' },
+      { src: '1000027648-removebg-preview.png', name: 'NEO-WAI 01 Slide', tag: '02 / 05' },
+      { src: '1000027649-removebg-preview.png', name: 'NEO-WAI 01 Flip',  tag: '03 / 05' },
+      { src: '1000027651-removebg-preview.png', name: 'NEO-LAI 01 Slipper', tag: '04 / 05' },
+      { src: '1000027652-removebg-preview.png', name: 'NEO-KAI 01 Black',  tag: '05 / 05' }
     ];
-    const SHOE_COUNT = 10; /* apenas índices 0-9 no autoplay */
 
     const track  = document.getElementById('carouselTrack');
     const dotsEl = document.getElementById('carouselDots');
     if (!track || !dotsEl) return;
 
-    /* ── Renderizar todos os slides dinamicamente ── */
     IMAGES.forEach((img, idx) => {
       const slide = document.createElement('div');
       slide.className = 'carousel-slide' + (idx === 0 ? ' active' : '');
       slide.dataset.idx = idx;
       slide.innerHTML = `
-        <div class="carousel-glow" style="background:radial-gradient(ellipse,${img.glow} 50%,transparent 75%)"></div>
+        <div class="carousel-glow"></div>
         <img src="${img.src}" alt="${img.name}" loading="lazy">
         <div class="carousel-label">
           <span class="carousel-label-tag">${img.tag}</span>
@@ -2177,8 +1903,7 @@
       track.appendChild(slide);
     });
 
-    /* ── Renderizar dots (apenas os 10 de tênis) ── */
-    for (let i = 0; i < SHOE_COUNT; i++) {
+    for (let i = 0; i < IMAGES.length; i++) {
       const dot = document.createElement('span');
       dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
       dot.dataset.dot = i;
@@ -2192,7 +1917,7 @@
 
     function syncDots(idx) {
       dots.forEach(d => d.classList.remove('active'));
-      if (idx < SHOE_COUNT) dots[idx]?.classList.add('active');
+      dots[idx]?.classList.add('active');
     }
 
     function goTo(idx, dir) {
@@ -2214,18 +1939,11 @@
       }));
 
       syncDots(current);
-
-      /* Feedback visual no botão VIEW ACCESSORY */
-      document.getElementById('btnAccessory')
-        ?.classList.toggle('accessory-active', current === SHOE_COUNT);
     }
 
-    document.getElementById('carouselNext')
-      ?.addEventListener('click', () => goTo(current + 1, 'next'));
-    document.getElementById('carouselPrev')
-      ?.addEventListener('click', () => goTo(current - 1, 'prev'));
+    document.getElementById('carouselNext')?.addEventListener('click', () => goTo(current + 1, 'next'));
+    document.getElementById('carouselPrev')?.addEventListener('click', () => goTo(current - 1, 'prev'));
 
-    /* Touch / swipe mobile */
     let touchX = 0;
     track.addEventListener('touchstart', e => { touchX = e.touches[0].clientX; }, { passive: true });
     track.addEventListener('touchend',   e => {
@@ -2233,31 +1951,14 @@
       if (Math.abs(dx) > 40) goTo(current + (dx < 0 ? 1 : -1), dx < 0 ? 'next' : 'prev');
     }, { passive: true });
 
-    /* Auto-play apenas pelos 10 tênis */
-    let autoTimer = setInterval(() => goTo((current + 1) % SHOE_COUNT, 'next'), 4500);
+    let autoTimer = setInterval(() => goTo((current + 1) % IMAGES.length, 'next'), 4500);
     const carousel = document.getElementById('heroCarousel');
     carousel?.addEventListener('mouseenter', () => clearInterval(autoTimer));
     carousel?.addEventListener('mouseleave', () => {
       clearInterval(autoTimer);
-      autoTimer = setInterval(() => goTo((current + 1) % SHOE_COUNT, 'next'), 4500);
+      autoTimer = setInterval(() => goTo((current + 1) % IMAGES.length, 'next'), 4500);
     });
-
-    /* Expor API global para VIEW ACCESSORY e tema */
-    window._carouselGoTo       = goTo;
-    window._carouselGetCurrent = () => current;
-    window._carouselShoeCount  = SHOE_COUNT;
   })();
-
-  /* VIEW ACCESSORY — alterna para o relógio (slide 10) ou volta ao tênis */
-  function showAccessory() {
-    const cur       = window._carouselGetCurrent?.() ?? 0;
-    const shoeCount = window._carouselShoeCount  ?? 10;
-    if (cur === shoeCount) {
-      window._carouselGoTo(0, 'prev');
-    } else {
-      window._carouselGoTo(shoeCount, 'next');
-    }
-  }
 
   /* ── TEMA LIGHT / DARK + EASTER EGG ── */
   (function initTheme() {
@@ -2267,12 +1968,8 @@
     const body  = document.body;
 
     const SECRET_PALETTES = [
-      ['#00f0ff','#b45eff'],   // cyan-purple
-      ['#ff2d78','#ffd600'],   // pink-yellow
-      ['#00ffc3','#7b2fff'],   // neon-deep purple
-      ['#ff6600','#00f0ff'],   // orange-cyan
-      ['#ff00cc','#00ff99'],   // magenta-neon
-      ['#ffe600','#ff0055'],   // gold-red
+      ['#00f0ff','#b45eff'], ['#ff2d78','#ffd600'], ['#00ffc3','#7b2fff'],
+      ['#ff6600','#00f0ff'], ['#ff00cc','#00ff99'], ['#ffe600','#ff0055']
     ];
 
     function hexToRgba(hex, alpha) {
@@ -2298,55 +1995,34 @@
       }
 
       if (mode === 'dark') {
-        body.classList.add('theme-light');
-        body.classList.remove('theme-secret');
-        body.style.background = '';
-        ICON.textContent = '🌙';
-        mode = 'light';
+        body.classList.add('theme-light'); body.classList.remove('theme-secret');
+        body.style.background = ''; ICON.textContent = '🌙'; mode = 'light';
       } else if (mode === 'light') {
         body.classList.remove('theme-light', 'theme-secret');
-        body.style.background = '';
-        ICON.textContent = '☀';
-        mode = 'dark';
+        body.style.background = ''; ICON.textContent = '☀'; mode = 'dark';
       } else {
-        // Sai do secret — restaura TODAS as variáveis
         body.classList.remove('theme-light', 'theme-secret');
         body.style.background = '';
         const root = document.documentElement.style;
-        root.removeProperty('--cyan');
-        root.removeProperty('--purple');
-        root.removeProperty('--cyan-glow');
-        root.removeProperty('--purple-glow');
-        root.removeProperty('--cyan-dim');
-        root.removeProperty('--purple-dim');
-        ICON.textContent = '☀';
-        mode = 'dark';
+        root.removeProperty('--cyan'); root.removeProperty('--purple');
+        root.removeProperty('--cyan-glow'); root.removeProperty('--purple-glow');
+        root.removeProperty('--cyan-dim'); root.removeProperty('--purple-dim');
+        ICON.textContent = '☀'; mode = 'dark';
       }
     });
 
     function activateSecret() {
       const palette = SECRET_PALETTES[Math.floor(Math.random() * SECRET_PALETTES.length)];
       const from = palette[0], to = palette[1];
-
-      body.classList.remove('theme-light');
-      body.classList.add('theme-secret');
-      body.style.background =
-        `linear-gradient(135deg, ${hexToRgba(from, 0.13)} 0%, ${hexToRgba(to, 0.1)} 50%, ${hexToRgba(from, 0.08)} 100%), #050508`;
-
+      body.classList.remove('theme-light'); body.classList.add('theme-secret');
+      body.style.background = `linear-gradient(135deg, ${hexToRgba(from, 0.13)} 0%, ${hexToRgba(to, 0.1)} 50%, ${hexToRgba(from, 0.08)} 100%), #050508`;
       const root = document.documentElement.style;
-      root.setProperty('--cyan',        from);
-      root.setProperty('--purple',      to);
-      root.setProperty('--cyan-glow',   hexToRgba(from, 0.5));
-      root.setProperty('--purple-glow', hexToRgba(to, 0.5));
-      root.setProperty('--cyan-dim',    hexToRgba(from, 0.15));
-      root.setProperty('--purple-dim',  hexToRgba(to, 0.15));
-
-      ICON.textContent = '🌈';
-      mode = 'secret';
-
+      root.setProperty('--cyan', from); root.setProperty('--purple', to);
+      root.setProperty('--cyan-glow', hexToRgba(from, 0.5)); root.setProperty('--purple-glow', hexToRgba(to, 0.5));
+      root.setProperty('--cyan-dim', hexToRgba(from, 0.15)); root.setProperty('--purple-dim', hexToRgba(to, 0.15));
+      ICON.textContent = '🌈'; mode = 'secret';
       if (TOAST) {
-        TOAST.querySelector('span').textContent =
-          `🌈 MODO SECRETO — ${from.toUpperCase()} × ${to.toUpperCase()}`;
+        TOAST.querySelector('span').textContent = `🌈 MODO SECRETO — ${from.toUpperCase()} × ${to.toUpperCase()}`;
         TOAST.classList.add('show');
         clearTimeout(toastTimer);
         toastTimer = setTimeout(() => TOAST.classList.remove('show'), 3000);
@@ -2354,418 +2030,70 @@
     }
   })();
 
-  /* ══════════════════════════════════════════════════════════════
-   HEKSEL GENESIS — SISTEMA DE COMUNICAÇÃO EM TEMPO REAL v1.0
-   Arquitetura: Genesis (Emissor) ←→ Studio (Receptor/Validador)
-══════════════════════════════════════════════════════════════ */
+  const HEKSEL_CONFIG = {
+    STUDIO_WEBHOOK_URL: 'https://hook.us2.make.com/lawfjw0n1ugn7ur6zh211tn63jgs035m',
+    TIMEOUT_MS: 5000,
+    WHATSAPP_NUMBER: '5553991855262',
+    EMAIL_ADDRESS: 'hafavilhahafy@gmail.com',
+  };
 
-/* ── CONFIGURAÇÃO DO ECOSSISTEMA ── */
-const HEKSEL_CONFIG = {
-  STUDIO_WEBHOOK_URL: 'https://hook.us2.make.com/lawfjw0n1ugn7ur6zh211tn63jgs035m',
-  TIMEOUT_MS: 5000,
-  WHATSAPP_NUMBER: '5553991855262',
-  EMAIL_ADDRESS: 'hafavilhahafy@gmail.com',
-};
-
-/* ── UTILITÁRIOS DE UI ── */
-const GenesisUI = {
-
-  setButtonLoading(btn, loading) {
-    if (!btn) return;
-    if (loading) {
-      btn.dataset.originalText = btn.innerHTML;
-      btn.innerHTML = `<span class="genesis-spinner"></span> ENVIANDO...`;
-      btn.disabled = true;
-      btn.style.opacity = '0.7';
-    } else {
-      btn.innerHTML = btn.dataset.originalText || btn.innerHTML;
-      btn.disabled = false;
-      btn.style.opacity = '';
-    }
-  },
-
-  showSuccessModal() {
-    document.getElementById('genesisSuccessModal')?.remove();
-
-    const modal = document.createElement('div');
-    modal.id = 'genesisSuccessModal';
-    modal.innerHTML = `
-      <div class="genesis-success-backdrop" id="genesisBackdrop">
-        <div class="genesis-success-card" id="genesisCard">
-          <div class="genesis-success-orb"></div>
-          <div class="genesis-success-orb genesis-orb-2"></div>
-          <div class="genesis-check-ring">
-            <svg class="genesis-check-svg" viewBox="0 0 52 52">
-              <circle class="genesis-check-circle" cx="26" cy="26" r="24" fill="none" stroke-width="2"/>
-              <path class="genesis-check-tick" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" d="M14 26 l8 8 l16-16"/>
-            </svg>
-          </div>
-          <div class="genesis-success-tag">✦ TRANSMITTED</div>
-          <h2 class="genesis-success-title">Application Received!</h2>
-          <p class="genesis-success-sub">Our team is reviewing your project.<br>Expect contact within <strong>24h</strong>.</p>
-          <div class="genesis-status-bar">
-            <div class="genesis-status-fill"></div>
-          </div>
-          <div class="genesis-status-label">HEKSEL STUDIO — PROCESSING</div>
-          <button class="genesis-close-btn" id="genesisCloseBtn">CLOSE ×</button>
-        </div>
-      </div>
-    `;
-    document.body.appendChild(modal);
-
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        modal.querySelector('#genesisCard').classList.add('genesis-card-visible');
-      });
-    });
-
-    const autoTimer = setTimeout(() => GenesisUI.closeSuccessModal(), 7000);
-
-    modal.querySelector('#genesisCloseBtn').addEventListener('click', () => {
-      clearTimeout(autoTimer);
-      GenesisUI.closeSuccessModal();
-    });
-    modal.querySelector('#genesisBackdrop').addEventListener('click', e => {
-      if (e.target === modal.querySelector('#genesisBackdrop')) {
-        clearTimeout(autoTimer);
-        GenesisUI.closeSuccessModal();
-      }
-    });
-  },
-
-  closeSuccessModal() {
-    const modal = document.getElementById('genesisSuccessModal');
-    if (!modal) return;
-    modal.querySelector('#genesisCard').style.transform = 'scale(0.9) translateY(20px)';
-    modal.querySelector('#genesisCard').style.opacity = '0';
-    setTimeout(() => {
-      modal.remove();
-      closeBrandModal();
-    }, 350);
-  },
-
-  showErrorToast(message) {
-    document.getElementById('genesisErrorToast')?.remove();
-    const toast = document.createElement('div');
-    toast.id = 'genesisErrorToast';
-    toast.className = 'genesis-error-toast';
-    toast.innerHTML = `<span class="genesis-error-icon">⚠</span> ${message}`;
-    document.body.appendChild(toast);
-    requestAnimationFrame(() => requestAnimationFrame(() => toast.classList.add('genesis-toast-visible')));
-    setTimeout(() => {
-      toast.classList.remove('genesis-toast-visible');
-      setTimeout(() => toast.remove(), 400);
-    }, 5000);
-  },
-};
-
-/* ── MOTOR DE COMUNICAÇÃO — FETCH + TIMEOUT + FALLBACK ── */
-const GenesisTransmitter = {
-
-  buildPayload() {
-    return {
-      timestamp: new Date().toISOString(),
-      source:    'heksel-genesis',
-      brand:     formData.brand,
-      niche:     formData.niche     || null,
-      has_site:  formData.hasSite,
-      site_link: formData.siteLink  || null,
-      logo_desc: formData.logoDesc  || null,
-      briefing:  formData.briefing  || null,
-      package:   formData.package,
-      version:   '1.0.0',
-    };
-  },
-
-  withTimeout(promise, ms) {
-    const timer = new Promise((_, reject) =>
-      setTimeout(() => reject(new Error('TIMEOUT')), ms)
-    );
-    return Promise.race([promise, timer]);
-  },
-
-  async transmit(payload) {
-    const response = await this.withTimeout(
-      fetch(HEKSEL_CONFIG.STUDIO_WEBHOOK_URL, {
-        method:  'POST',
-        headers: {
-          'Content-Type':     'application/json',
-          'X-Genesis-Source': 'heksel-genesis',
-        },
-        body: JSON.stringify(payload),
-      }),
-      HEKSEL_CONFIG.TIMEOUT_MS
-    );
-
-    if (!response.ok) {
-      throw new Error(`HTTP_${response.status}`);
-    }
-
-    return response;
-  },
-
-  /* ── LIMPEZA COMPLETA DO FORMULÁRIO ── */
-  resetForm() {
-    /* Reset do objeto de estado */
-    formData = { brand: '', niche: '', hasSite: null, siteLink: '', logoDesc: '', briefing: '', package: '' };
-    selectedPkgIndex = null;
-
-    /* Reset dos campos DOM — equivalente ao form.reset() */
-    ['brandName', 'niche', 'siteLink', 'logoDesc', 'briefing'].forEach(id => {
-      const el = document.getElementById(id);
-      if (el) el.value = '';
-    });
-    document.querySelectorAll('input[name="hasSite"]').forEach(r => r.checked = false);
-
-    /* Oculta painéis condicionais */
-    const siteFields = document.getElementById('siteFields');
-    const briefField = document.getElementById('briefField');
-    if (siteFields) siteFields.style.display = 'none';
-    if (briefField) briefField.style.display = 'none';
-
-    /* Remove seleção visual de pacote */
-    document.querySelectorAll('.package-item').forEach(p => p.classList.remove('selected-package'));
-
-    /* Retorna ao passo 1 para o próximo uso */
-    showStep(1);
-  },
-
-  async send(triggerBtn) {
-    const payload = this.buildPayload();
-
-    GenesisUI.setButtonLoading(triggerBtn, true);
-
-    try {
-      await this.transmit(payload);
-
-      /* ✅ STATUS 200 OK — limpa tudo e exibe modal de sucesso */
-      this.resetForm();
-      GenesisUI.showSuccessModal();
-
-    } catch (err) {
-
-      GenesisUI.setButtonLoading(triggerBtn, false);
-
-      if (err.message === 'TIMEOUT') {
-        GenesisUI.showErrorToast('Studio não respondeu a tempo. Tente novamente ou envie via WhatsApp.');
-      } else if (err.message.startsWith('HTTP_')) {
-        GenesisUI.showErrorToast(`Servidor retornou erro (${err.message.replace('HTTP_', '')}). Use WhatsApp como alternativa.`);
+  const GenesisUI = {
+    setButtonLoading(btn, loading) {
+      if (!btn) return;
+      if (loading) {
+        btn.dataset.originalText = btn.innerHTML;
+        btn.innerHTML = `<span class="genesis-spinner"></span> ENVIANDO...`;
+        btn.disabled = true; btn.style.opacity = '0.7';
       } else {
-        GenesisUI.showErrorToast('Sem conexão com o Studio. Redirecionando para WhatsApp...');
-        setTimeout(() => {
-          window.open(`https://wa.me/${HEKSEL_CONFIG.WHATSAPP_NUMBER}?text=${getMessage()}`, '_blank');
-        }, 2000);
+        btn.innerHTML = btn.dataset.originalText || btn.innerHTML;
+        btn.disabled = false; btn.style.opacity = '';
       }
-      return;
+    },
+    showSuccessModal() {
+      document.getElementById('genesisSuccessModal')?.remove();
+      const modal = document.createElement('div');
+      modal.id = 'genesisSuccessModal';
+      modal.innerHTML = `<div class="genesis-success-backdrop" id="genesisBackdrop"><div class="genesis-success-card" id="genesisCard">...transmitted...</div></div>`;
+      document.body.appendChild(modal);
+      setTimeout(() => GenesisUI.closeSuccessModal(), 7000);
+    },
+    closeSuccessModal() {
+      const modal = document.getElementById('genesisSuccessModal');
+      if (modal) modal.remove();
+      closeBrandModal();
+    },
+    showErrorToast(msg) {
+      alert(msg);
     }
+  };
 
-    GenesisUI.setButtonLoading(triggerBtn, false);
-  },
-};
-
-/* ── ESTILOS DO SISTEMA GENESIS INJETADOS EM RUNTIME ── */
-(function injectGenesisStyles() {
-  const style = document.createElement('style');
-  style.textContent = `
-
-    .genesis-spinner {
-      display: inline-block;
-      width: 14px; height: 14px;
-      border: 2px solid rgba(255,255,255,0.3);
-      border-top-color: #00f0ff;
-      border-radius: 50%;
-      animation: genesisSpin 0.7s linear infinite;
-      vertical-align: middle;
-      margin-right: 6px;
+  const GenesisTransmitter = {
+    buildPayload() {
+      return {
+        timestamp: new Date().toISOString(), source: 'heksel-genesis',
+        brand: formData.brand, niche: formData.niche || null,
+        has_site: formData.hasSite, site_link: formData.siteLink || null,
+        logo_desc: formData.logoDesc || null, briefing: formData.briefing || null,
+        package: formData.package, version: '1.0.0'
+      };
+    },
+    async send(triggerBtn) {
+      GenesisUI.setButtonLoading(triggerBtn, true);
+      try {
+        await fetch(HEKSEL_CONFIG.STUDIO_WEBHOOK_URL, {
+          method: 'POST', headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(this.buildPayload())
+        });
+        formData = { brand: '', niche: '', hasSite: null, siteLink: '', logoDesc: '', briefing: '', package: '' };
+        selectedPkgIndex = null;
+        showStep(1);
+        GenesisUI.showSuccessModal();
+      } catch (err) {
+        GenesisUI.setButtonLoading(triggerBtn, false);
+        GenesisUI.showErrorToast('Erro ao enviar. Tente novamente.');
+      }
     }
-    @keyframes genesisSpin { to { transform: rotate(360deg); } }
-
-    .genesis-success-backdrop {
-      position: fixed; inset: 0; z-index: 99999;
-      background: rgba(4,4,10,0.85);
-      backdrop-filter: blur(18px);
-      display: flex; align-items: center; justify-content: center;
-      padding: 20px;
-    }
-
-    #genesisCard {
-      position: relative; overflow: hidden;
-      background: linear-gradient(145deg, rgba(12,12,22,0.98), rgba(8,6,20,0.98));
-      border: 1px solid rgba(0,240,255,0.25);
-      border-radius: 28px;
-      padding: 52px 44px 44px;
-      max-width: 440px; width: 100%;
-      text-align: center;
-      box-shadow:
-        0 0 60px rgba(0,240,255,0.12),
-        0 0 120px rgba(180,94,255,0.08),
-        0 40px 80px rgba(0,0,0,0.6);
-      transform: scale(0.85) translateY(30px);
-      opacity: 0;
-      transition: transform 0.55s cubic-bezier(0.2,0.9,0.4,1.1),
-                  opacity 0.45s ease;
-    }
-    #genesisCard.genesis-card-visible {
-      transform: scale(1) translateY(0);
-      opacity: 1;
-    }
-
-    .genesis-success-orb {
-      position: absolute; border-radius: 50%;
-      pointer-events: none;
-      background: radial-gradient(circle, rgba(0,240,255,0.18), transparent 70%);
-      width: 280px; height: 280px;
-      top: -80px; left: -80px;
-      animation: orbFloat 6s ease-in-out infinite;
-    }
-    .genesis-orb-2 {
-      background: radial-gradient(circle, rgba(180,94,255,0.14), transparent 70%);
-      width: 200px; height: 200px;
-      top: auto; left: auto;
-      bottom: -60px; right: -60px;
-      animation-delay: -3s;
-    }
-    @keyframes orbFloat {
-      0%,100% { transform: translate(0,0) scale(1); }
-      50%      { transform: translate(12px,-12px) scale(1.08); }
-    }
-
-    .genesis-check-ring {
-      width: 72px; height: 72px;
-      margin: 0 auto 24px;
-      position: relative; z-index: 1;
-    }
-    .genesis-check-svg { width: 100%; height: 100%; }
-
-    .genesis-check-circle {
-      stroke: rgba(0,240,255,0.35);
-      stroke-dasharray: 160;
-      stroke-dashoffset: 160;
-      animation: drawCircle 0.6s ease 0.2s forwards;
-    }
-    .genesis-check-tick {
-      stroke: #00f0ff;
-      stroke-dasharray: 50;
-      stroke-dashoffset: 50;
-      animation: drawTick 0.5s ease 0.7s forwards;
-      filter: drop-shadow(0 0 6px rgba(0,240,255,0.8));
-    }
-    @keyframes drawCircle { to { stroke-dashoffset: 0; } }
-    @keyframes drawTick   { to { stroke-dashoffset: 0; } }
-
-    .genesis-success-tag {
-      font-family: 'Space Mono', monospace;
-      font-size: 0.6rem; letter-spacing: 0.28em;
-      color: rgba(0,240,255,0.6);
-      text-transform: uppercase;
-      margin-bottom: 14px;
-      position: relative; z-index: 1;
-    }
-
-    .genesis-success-title {
-      font-family: 'Syne', sans-serif;
-      font-size: 1.9rem; font-weight: 800;
-      line-height: 1.1; letter-spacing: -0.02em;
-      background: linear-gradient(120deg, #00f0ff, #b45eff);
-      -webkit-background-clip: text; background-clip: text; color: transparent;
-      margin-bottom: 14px;
-      position: relative; z-index: 1;
-    }
-
-    .genesis-success-sub {
-      color: rgba(255,255,255,0.45);
-      font-size: 0.92rem; line-height: 1.65;
-      margin-bottom: 32px;
-      position: relative; z-index: 1;
-    }
-    .genesis-success-sub strong { color: rgba(255,255,255,0.75); }
-
-    .genesis-status-bar {
-      width: 100%; height: 3px;
-      background: rgba(255,255,255,0.06);
-      border-radius: 99px; overflow: hidden;
-      margin-bottom: 10px;
-      position: relative; z-index: 1;
-    }
-    .genesis-status-fill {
-      height: 100%;
-      background: linear-gradient(90deg, #00f0ff, #b45eff, #00ffc3);
-      background-size: 200% 100%;
-      border-radius: 99px;
-      animation: statusScan 2s linear infinite;
-      width: 40%;
-    }
-    @keyframes statusScan {
-      0%   { background-position: 0% 0%;   margin-left: -40%; }
-      100% { background-position: 200% 0%; margin-left: 100%; }
-    }
-
-    .genesis-status-label {
-      font-family: 'Space Mono', monospace;
-      font-size: 0.55rem; letter-spacing: 0.2em;
-      color: rgba(0,240,255,0.35);
-      margin-bottom: 32px;
-      position: relative; z-index: 1;
-    }
-
-    .genesis-close-btn {
-      background: rgba(0,240,255,0.08);
-      color: rgba(255,255,255,0.5);
-      border: 1px solid rgba(0,240,255,0.2);
-      padding: 12px 36px; border-radius: 50px;
-      font-family: 'Syne', sans-serif;
-      font-size: 0.7rem; font-weight: 700;
-      letter-spacing: 0.14em; text-transform: uppercase;
-      cursor: pointer; transition: all 0.3s ease;
-      position: relative; z-index: 1;
-    }
-    .genesis-close-btn:hover {
-      background: rgba(0,240,255,0.15);
-      color: #00f0ff;
-      border-color: #00f0ff;
-      box-shadow: 0 0 20px rgba(0,240,255,0.2);
-    }
-
-    .genesis-error-toast {
-      position: fixed; bottom: 100px; left: 50%;
-      transform: translateX(-50%) translateY(20px);
-      z-index: 99998;
-      background: linear-gradient(135deg, rgba(20,8,18,0.97), rgba(12,6,22,0.97));
-      border: 1px solid rgba(255,60,100,0.4);
-      color: rgba(255,255,255,0.85);
-      font-family: 'Syne', sans-serif;
-      font-size: 0.78rem; font-weight: 600;
-      letter-spacing: 0.04em;
-      padding: 14px 24px; border-radius: 14px;
-      box-shadow: 0 0 30px rgba(255,60,100,0.2), 0 16px 32px rgba(0,0,0,0.5);
-      opacity: 0;
-      transition: opacity 0.35s ease, transform 0.35s ease;
-      white-space: nowrap; max-width: 90vw;
-      text-align: center;
-    }
-    .genesis-error-toast.genesis-toast-visible {
-      opacity: 1;
-      transform: translateX(-50%) translateY(0);
-    }
-    .genesis-error-icon {
-      color: #ff4060; margin-right: 8px;
-      animation: warnPulse 1s ease-in-out infinite;
-    }
-    @keyframes warnPulse {
-      0%,100% { opacity:1; } 50% { opacity:0.4; }
-    }
-  `;
-  document.head.appendChild(style);
-})();
-
-/* ── BINDING DOS BOTÕES DO STEP 4 ── */
-document.getElementById('sendWABtn')?.addEventListener('click', function() {
-  GenesisTransmitter.send(this);
-});
-
-document.getElementById('sendEmailBtn')?.addEventListener('click', () => {
-  window.location.href = `mailto:${HEKSEL_CONFIG.EMAIL_ADDRESS}?subject=Orçamento%20Create%20My%20Brand%20-%20${formData.brand}&body=${getMessage().replace(/%0A/g, '\n')}`;
-});
+  };
 </script>
 </body>
 </html>
