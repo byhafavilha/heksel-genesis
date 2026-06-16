@@ -233,8 +233,9 @@
     /* NAVBAR */
     nav {
       position: fixed; top: 0; left: 0; width: 100%;
-      padding: 0 5%; height: 68px;
+      height: 68px; /* altura fixa */
       display: flex; align-items: center; justify-content: space-between;
+      padding: 0 5%;
       background: rgba(8,8,13,0.75); backdrop-filter: blur(28px) saturate(1.4);
       border-bottom: 1px solid rgba(0,240,255,0.08);
       z-index: 800; transition: background .4s, border-color .4s, box-shadow .4s;
@@ -276,15 +277,15 @@
     .mobile-menu a:last-child { border-bottom: none; }
     .mobile-menu a:hover { color: var(--cyan); }
 
-    /* ═══ HERO CENTRALIZADO NO MEIO DA TELA ═══ */
+    /* ═══ HERO PERFEITAMENTE CENTRALIZADA ═══ */
     .hero {
-      min-height: 100vh;
+      min-height: calc(100vh - 68px); /* altura exata descontando a navbar */
       display: flex;
       align-items: center;
       justify-content: center;
-      padding-top: 68px; /* compensa a navbar fixa */
       position: relative;
       overflow: hidden;
+      margin-top: 68px; /* empurra para baixo da navbar fixa */
     }
     .hero::after {
       content: '';
@@ -317,6 +318,7 @@
     .stat-item { text-align: center; }
     .stat-num { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.6rem; background: linear-gradient(135deg, var(--cyan), var(--purple)); -webkit-background-clip: text; background-clip: text; color: transparent; }
     .stat-label { font-family: 'Space Mono', monospace; font-size: 0.58rem; color: rgba(255,255,255,0.3); letter-spacing: 0.2em; text-transform: uppercase; margin-top: 4px; }
+    .stat-divider { width: 1px; background: rgba(0,240,255,0.15); height: 28px; align-self: center; }
     .hero-right { position: relative; z-index: 1; display: flex; align-items: center; justify-content: center; }
 
     /* OUTRAS SEÇÕES */
@@ -482,11 +484,11 @@
       nav { padding: 0 4%; height: 60px; }
       .nav-links { display: none; }
       .hamburger { display: flex; }
-      .nav-buttons { gap: 8px; }
-      .btn-outline-nav { padding: 7px 14px; font-size: 0.6rem; }
-      .btn-gold-nav { padding: 7px 14px; font-size: 0.6rem; }
 
-      .hero { padding-top: 60px; }
+      .hero {
+        min-height: calc(100vh - 60px);
+        margin-top: 60px;
+      }
       .hero .section-inner {
         grid-template-columns: 1fr;
         text-align: center;
@@ -534,12 +536,15 @@
     }
 
     @media (max-width: 480px) {
-      .hero { padding-top: 60px; }
+      .hero {
+        min-height: calc(100vh - 60px);
+        margin-top: 60px;
+      }
       .hero-left h1 { font-size: clamp(2rem, 7vw, 2.8rem); }
       .hero-actions { flex-direction: column; align-items: center; width: 100%; }
       .btn-primary, .cta-brand { width: 100%; justify-content: center; }
       .hero-stats { gap: 16px; }
-      .stat-divider { height: 28px; }
+      .stat-divider { height: 20px; }
 
       .collection { padding: 60px 0; }
       .card-grid { grid-template-columns: 1fr; }
