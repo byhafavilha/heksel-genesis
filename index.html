@@ -9,14 +9,15 @@
   <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
   <script>
-    // ⚠️ SUBSTITUA PELAS SUAS CONFIGURAÇÕES DO FIREBASE
+    // ⚠️ CONFIGURAÇÃO OFICIAL DO HEKSEL IMPERIUM (Firestore)
     const firebaseConfig = {
-      apiKey: "AIzaSy...",
-      authDomain: "heksel-xxxx.firebaseapp.com",
-      projectId: "heksel-xxxx",
-      storageBucket: "heksel-xxxx.appspot.com",
-      messagingSenderId: "xxxxxxxxxxxx",
-      appId: "1:xxxxxxxxxxxx:web:xxxxxxxxxxxx"
+      apiKey: "AIzaSyBLpnWUoNiKSiZWuWEVOwdAjeiNjvIv1T4",
+      authDomain: "heksel-imperio.firebaseapp.com",
+      projectId: "heksel-imperio",
+      storageBucket: "heksel-imperio.firebasestorage.app",
+      messagingSenderId: "598467080448",
+      appId: "1:598467080448:web:6afe26361bf75c1c21c3e5",
+      measurementId: "G-Z8K5WVT2WH"
     };
     firebase.initializeApp(firebaseConfig);
     const db = firebase.firestore();
@@ -477,6 +478,7 @@
     <span class="studio-badge" style="font-family: 'Space Mono', monospace; font-size: 0.62rem; letter-spacing: 0.16em; text-transform: uppercase; background: rgba(0,240,255,0.1); color: var(--cyan); padding: 7px 14px; border-radius: 50px; display: inline-block; margin-bottom: 18px; border: 1px solid rgba(0,240,255,0.2);">✦ Heksel Services</span>
     <h2>Want a website like this?<br><span class="glow-gold">Build your brand.</span></h2>
     <p>Complete visual identity + professional website + digital ecosystem. From start to infinity.</p>
+    <!-- ✦ Create My Brand abre o modal de pedido -->
     <button class="cta-brand" onclick="openOrderModal()">✦ Create My Brand ✦</button>
 
     <div class="plan-duo">
@@ -624,6 +626,7 @@
   function closeOrderModal() { document.getElementById('orderModalOverlay').style.display = 'none'; }
   document.getElementById('orderModalOverlay').addEventListener('click', function(e) { if (e.target === this) closeOrderModal(); });
 
+  // Submissão do formulário → Firestore
   document.getElementById('orderForm').addEventListener('submit', async function(e) {
     e.preventDefault();
     const name = document.getElementById('clientName').value.trim();
@@ -660,7 +663,7 @@
   function closeFreemiumModal() { document.getElementById('freemiumModal').style.display = 'none'; }
   window.addEventListener('click', e => { if (e.target === document.getElementById('freemiumModal')) closeFreemiumModal(); });
 
-  /* CAROUSEL */
+  /* CAROUSEL 8 IMAGES */
   (function initCarousel() {
     const IMAGES = [
       { src: '1000027632-removebg-preview.png', name: 'NEO-KAI 01 Blue',  tag: '01 / 08' },
@@ -710,7 +713,7 @@
     document.getElementById('heroCarousel')?.addEventListener('mouseleave', () => { clearInterval(autoTimer); autoTimer = setInterval(() => goTo((current + 1) % IMAGES.length, 'next'), 4500); });
   })();
 
-  /* THEME TOGGLE */
+  /* THEME TOGGLE (com easter egg arco-íris) */
   (function initTheme() {
     const FAB   = document.getElementById('themeFab');
     const ICON  = document.getElementById('themeIcon');
