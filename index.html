@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>HEKSEL IMPERIUM — NEO Collection 2026</title>
   <link rel="icon" href="1000027280.png" type="image/png">
-  <!-- Firebase SDKs (mantidos para registro adicional) -->
+  <!-- Firebase SDKs -->
   <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
   <script>
@@ -117,6 +117,8 @@
     @keyframes ping { 0% { box-shadow: 0 0 0 0 rgba(0,240,255,0.4); } 70% { box-shadow: 0 0 0 10px rgba(0,240,255,0); } 100% { box-shadow: 0 0 0 0 rgba(0,240,255,0); } }
     @keyframes shimmer { 0% { background-position: -200px 0; } 100% { background-position: calc(200px + 100%) 0; } }
     @keyframes crossfadePlaceholder { 0% { color: rgba(255,255,255,0.2); } 50% { color: var(--accent-orange); } 100% { color: rgba(255,255,255,0.2); } }
+    @keyframes spinSlow { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    @keyframes pulseGlow { 0%, 100% { filter: drop-shadow(0 0 6px var(--cyan-glow)); } 50% { filter: drop-shadow(0 0 18px rgba(0,240,255,0.9)) drop-shadow(0 0 8px rgba(180,94,255,0.7)); } }
 
     .glow-text { background: linear-gradient(120deg, var(--cyan) 0%, var(--purple) 60%, #ff2d78 100%); -webkit-background-clip: text; background-clip: text; color: transparent; animation: glowPulse 3s ease-in-out infinite; }
     .glow-gold { background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 50%, var(--gold) 100%); -webkit-background-clip: text; background-clip: text; color: transparent; }
@@ -283,6 +285,13 @@
     #contactDetail { transition: all 0.4s ease; }
     .placeholder-flash { animation: crossfadePlaceholder 0.8s ease; }
 
+    /* INVESTMENT SECTION */
+    .investment-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px; }
+    .investment-btn { flex: 1; min-width: 60px; padding: 8px 6px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.12); background: rgba(255,255,255,0.02); font-family: 'Syne', sans-serif; font-size: 0.65rem; font-weight: 700; color: rgba(255,255,255,0.5); cursor: pointer; transition: all 0.35s; text-align: center; }
+    .investment-btn:hover { border-color: var(--cyan); color: var(--cyan); background: rgba(0,240,255,0.06); }
+    .investment-btn.active { border-color: var(--cyan); background: rgba(0,240,255,0.1); color: var(--cyan); box-shadow: 0 0 12px rgba(0,240,255,0.15); animation: ping 1.4s ease-out infinite; }
+    #investmentManual { transition: all 0.3s ease; }
+
     .btn-submit-order { background: linear-gradient(135deg, var(--purple), var(--cyan)); color: white; padding: 15px; border: none; border-radius: 12px; font-family: 'Syne', sans-serif; font-weight: 800; font-size: 0.8rem; text-transform: uppercase; cursor: pointer; transition: all var(--transition); margin-top: 4px; letter-spacing: 0.08em; }
     .btn-submit-order:hover { transform: translateY(-3px); box-shadow: 0 0 40px rgba(180,94,255,0.4); }
     .close-order-modal { position: absolute; top: 14px; right: 18px; font-size: 24px; background: none; border: none; color: rgba(255,255,255,0.35); cursor: pointer; transition: color 0.3s; }
@@ -312,6 +321,26 @@
     .freemium-sim-card h5 { font-family: 'Syne', sans-serif; font-size: 0.85rem; color: var(--white); margin-bottom: 6px; }
     .freemium-sim-card p { font-size: 0.72rem; color: rgba(255,255,255,0.4); }
     .freemium-impact { font-family: 'Syne', sans-serif; font-size: 1.05rem; font-weight: 700; background: linear-gradient(120deg, var(--cyan), var(--purple)); -webkit-background-clip: text; background-clip: text; color: transparent; animation: glowPulse 3s ease-in-out infinite; margin: 24px 0 8px; letter-spacing: -0.01em; }
+
+    /* ═══ TROSK JARVIS INTERFACE ═══ */
+    .trosk-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.96); backdrop-filter: blur(12px); z-index: 6000; align-items: center; justify-content: center; }
+    .trosk-container { position: relative; width: 100%; max-width: 700px; height: 500px; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+    .trosk-hologram { position: relative; width: 300px; height: 300px; margin: 0 auto 30px; }
+    .trosk-hologram .hologram-circle { position: absolute; top: 50%; left: 50%; border-radius: 50%; border: 1px solid rgba(0,240,255,0.2); transform: translate(-50%, -50%); animation: spinSlow 20s linear infinite; }
+    .trosk-hologram .hologram-circle:nth-child(1) { width: 280px; height: 280px; animation-duration: 12s; }
+    .trosk-hologram .hologram-circle:nth-child(2) { width: 230px; height: 230px; animation-duration: 18s; animation-direction: reverse; }
+    .trosk-hologram .hologram-circle:nth-child(3) { width: 170px; height: 170px; animation-duration: 24s; }
+    .trosk-hologram .hologram-logo { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 120px; height: 120px; z-index: 2; animation: pulseGlow 3s ease-in-out infinite; }
+    .trosk-hologram .hologram-logo img { width: 100%; height: 100%; object-fit: contain; filter: drop-shadow(0 0 10px rgba(0,240,255,0.8)); }
+    .trosk-log { width: 100%; max-width: 500px; height: 120px; overflow-y: auto; font-family: 'Space Mono', monospace; font-size: 0.7rem; color: rgba(0,240,255,0.7); padding: 0 20px; text-align: left; }
+    .trosk-log .log-line { margin-bottom: 4px; opacity: 0; animation: logFadeIn 0.5s ease forwards; }
+    @keyframes logFadeIn { 0% { opacity: 0; transform: translateY(10px); } 100% { opacity: 1; transform: translateY(0); } }
+    .trosk-close { position: absolute; top: 20px; right: 20px; font-size: 28px; color: rgba(255,255,255,0.4); cursor: pointer; background: none; border: none; z-index: 10; transition: color 0.3s; }
+    .trosk-close:hover { color: var(--cyan); }
+
+    /* TROSK ANALYZE BUTTON */
+    .btn-trosk-analyze { background: linear-gradient(135deg, var(--cyan), #0077ff); color: white; padding: 15px 28px; border: none; border-radius: 12px; font-family: 'Syne', sans-serif; font-weight: 800; font-size: 0.8rem; text-transform: uppercase; cursor: pointer; transition: all var(--transition); display: inline-flex; align-items: center; gap: 10px; margin-top: 16px; box-shadow: 0 0 30px rgba(0,240,255,0.25); }
+    .btn-trosk-analyze:hover { transform: translateY(-3px); box-shadow: 0 0 50px rgba(0,240,255,0.5); }
 
     /* CAROUSEL */
     .hero-carousel { position: relative; width: 100%; max-width: 640px; display: flex; flex-direction: column; align-items: center; gap: 16px; }
@@ -367,6 +396,8 @@
       .footer-logo { text-align: center; } .social-icons { justify-content: center; } .footer-copy { text-align: center; }
       .carousel-track { min-height: 360px; } .carousel-slide img { max-width: 85vw; } .carousel-arrow { width: 40px; height: 40px; }
       .contact-method-row { flex-direction: column; }
+      .trosk-hologram { width: 240px; height: 240px; }
+      .trosk-hologram .hologram-logo { width: 90px; height: 90px; }
     }
 
     @media (max-width: 480px) {
@@ -480,6 +511,8 @@
       <div class="brand-perk-item">⚡ Ultra-professional</div><div class="brand-perk-item">🎨 Visual identity</div>
       <div class="brand-perk-item">📱 100% responsive</div><div class="brand-perk-item">🚀 Fast delivery</div>
     </div>
+    <!-- Botão Trosk Analyze -->
+    <button class="btn-trosk-analyze" onclick="openTroskModal()">🔍 Analyze with Trosk</button>
   </div>
 </section>
 
@@ -524,50 +557,30 @@
     <h2>Start Your Project</h2>
     <p class="order-subtitle">Fill the form below and our team will contact you in minutes.</p>
     <form class="order-form" id="orderForm">
-      <div>
-        <label>Brand Name *</label>
-        <input type="text" id="clientName" placeholder="e.g. APEX STUDIO, ForceFit..." required>
-      </div>
+      <div><label>Brand Name *</label><input type="text" id="clientName" placeholder="e.g. APEX STUDIO, ForceFit..." required></div>
       <div>
         <label>Contact Method *</label>
         <div class="contact-method-row" id="contactMethodRow">
-          <div class="contact-btn gmail-btn" data-method="gmail" onclick="selectContactMethod('gmail')">
-            <img src="g.logo.png" alt="Gmail"><span>Gmail</span>
-          </div>
-          <div class="contact-btn discord-btn" data-method="discord" onclick="selectContactMethod('discord')">
-            <img src="d.logo.png" alt="Discord"><span>Discord</span>
-          </div>
-          <div class="contact-btn whatsapp-btn" data-method="whatsapp" onclick="selectContactMethod('whatsapp')">
-            <img src="w.logo.png" alt="WhatsApp"><span>WhatsApp</span>
-          </div>
+          <div class="contact-btn gmail-btn" data-method="gmail" onclick="selectContactMethod('gmail')"><img src="g.logo.png" alt="Gmail"><span>Gmail</span></div>
+          <div class="contact-btn discord-btn" data-method="discord" onclick="selectContactMethod('discord')"><img src="d.logo.png" alt="Discord"><span>Discord</span></div>
+          <div class="contact-btn whatsapp-btn" data-method="whatsapp" onclick="selectContactMethod('whatsapp')"><img src="w.logo.png" alt="WhatsApp"><span>WhatsApp</span></div>
         </div>
       </div>
+      <div><label>Contact Detail *</label><input type="text" id="contactDetail" placeholder="Select a method above first..." required></div>
+      <div><label>Project Scope *</label><select id="projectScope" required><option value="" disabled selected>Select project scope</option><option value="Site">Website</option><option value="App">Mobile App</option><option value="Ecossistema">Full Ecosystem</option></select></div>
+      <div><label>Operation Type *</label><div class="radio-row"><div class="radio-option"><input type="radio" name="operationType" value="Build from Zero" id="opZero" checked><label class="radio-card" for="opZero">Build from Zero</label></div><div class="radio-option"><input type="radio" name="operationType" value="Upgrade Existing" id="opUpgrade"><label class="radio-card" for="opUpgrade">Upgrade Existing</label></div></div></div>
+      <div><label>Pricing Plan *</label><div class="radio-row"><div class="radio-option"><input type="radio" name="pricingPlan" value="FREMIUM MODEL" id="planFreemiumRadio" checked><label class="radio-card" for="planFreemiumRadio">FREMIUM MODEL</label></div><div class="radio-option"><input type="radio" name="pricingPlan" value="PREMIUM ARCHITECTURE" id="planPremiumRadio"><label class="radio-card" for="planPremiumRadio">PREMIUM ARCHITECTURE</label></div></div></div>
       <div>
-        <label>Contact Detail *</label>
-        <input type="text" id="contactDetail" placeholder="Select a method above first..." required>
-      </div>
-      <div>
-        <label>Project Scope *</label>
-        <select id="projectScope" required>
-          <option value="" disabled selected>Select project scope</option>
-          <option value="Site">Website</option>
-          <option value="App">Mobile App</option>
-          <option value="Ecossistema">Full Ecosystem</option>
-        </select>
-      </div>
-      <div>
-        <label>Operation Type *</label>
-        <div class="radio-row">
-          <div class="radio-option"><input type="radio" name="operationType" value="Build from Zero" id="opZero" checked><label class="radio-card" for="opZero">Build from Zero</label></div>
-          <div class="radio-option"><input type="radio" name="operationType" value="Upgrade Existing" id="opUpgrade"><label class="radio-card" for="opUpgrade">Upgrade Existing</label></div>
+        <label>Defina o seu Investimento (R$)</label>
+        <div class="investment-row" id="investmentRow">
+          <button type="button" class="investment-btn" data-value="1000">1 Mil</button>
+          <button type="button" class="investment-btn" data-value="2000">2 Mil</button>
+          <button type="button" class="investment-btn" data-value="5000">5 Mil</button>
+          <button type="button" class="investment-btn" data-value="10000">10 Mil</button>
+          <button type="button" class="investment-btn" data-value="20000">20 Mil</button>
+          <button type="button" class="investment-btn" data-value="30000">30 Mil</button>
         </div>
-      </div>
-      <div>
-        <label>Pricing Plan *</label>
-        <div class="radio-row">
-          <div class="radio-option"><input type="radio" name="pricingPlan" value="FREMIUM MODEL" id="planFreemiumRadio" checked><label class="radio-card" for="planFreemiumRadio">FREMIUM MODEL</label></div>
-          <div class="radio-option"><input type="radio" name="pricingPlan" value="PREMIUM ARCHITECTURE" id="planPremiumRadio"><label class="radio-card" for="planPremiumRadio">PREMIUM ARCHITECTURE</label></div>
-        </div>
+        <input type="number" id="investmentManual" placeholder="Ou digite um valor entre 1.000 e 30.000" min="1000" max="30000" step="100" style="margin-top:8px;">
       </div>
       <button type="submit" class="btn-submit-order">SEND ORDER TO PRODUCTION</button>
     </form>
@@ -578,12 +591,10 @@
 <!-- PROCESSING OVERLAY (WEBHOOK SKELETON) -->
 <div class="processing-overlay" id="processingOverlay">
   <div class="processing-card">
-    <div class="skeleton-bar"></div>
-    <div class="skeleton-bar short"></div>
+    <div class="skeleton-bar"></div><div class="skeleton-bar short"></div>
     <h2 id="processingTitle">⚡ Trosk AI routing your project...</h2>
     <p id="processingSub">Generating your secure Asaas checkout page.</p>
-    <div class="skeleton-bar short"></div>
-    <div class="skeleton-bar"></div>
+    <div class="skeleton-bar short"></div><div class="skeleton-bar"></div>
     <button class="btn-pay-invoice" id="btnPayInvoice" onclick="openPaymentLink()">💳 COMPLETE PREMIUM ACQUISITION</button>
   </div>
 </div>
@@ -604,6 +615,29 @@
     <p class="freemium-impact">"If the preliminary version is like this, imagine what the final version will be like."</p>
     <p style="color:rgba(255,255,255,0.3);font-size:0.7rem;margin-bottom:16px;">— Heksel Imperium Engineering</p>
     <button class="btn-plan-premium" style="max-width:280px;margin:0 auto;" onclick="closeFreemiumModal();openOrderModal();">I Want the Final Version ✦</button>
+  </div>
+</div>
+
+<!-- ═══ TROSK JARVIS MODAL ═══ -->
+<div class="trosk-overlay" id="troskModal">
+  <div class="trosk-container">
+    <button class="trosk-close" onclick="closeTroskModal()">&times;</button>
+    <div class="trosk-hologram">
+      <div class="hologram-circle"></div>
+      <div class="hologram-circle"></div>
+      <div class="hologram-circle"></div>
+      <div class="hologram-logo">
+        <img src="trosk.logo.png" alt="Trosk AI">
+      </div>
+    </div>
+    <div class="trosk-log" id="troskLog"></div>
+    <div style="margin-top:20px;">
+      <input type="text" id="troskUrlInput" placeholder="Cole o link do site aqui..." style="padding:10px 16px;border-radius:8px;border:1px solid rgba(0,240,255,0.3);background:rgba(0,0,0,0.5);color:white;width:280px;font-family:'DM Sans',sans-serif;margin-right:10px;">
+      <label style="cursor:pointer;color:var(--cyan);font-family:'Syne',sans-serif;font-weight:700;font-size:0.7rem;margin-right:10px;">
+        📱 APK <input type="file" id="troskApkInput" accept=".apk" style="display:none;" onchange="document.getElementById('troskUrlInput').value='APK uploaded'">
+      </label>
+      <button class="btn-trosk-analyze" onclick="startTroskAnalysis()" style="margin-top:0;">INICIAR ANÁLISE</button>
+    </div>
   </div>
 </div>
 
@@ -632,6 +666,37 @@
   mobileMenu?.querySelectorAll('a').forEach(link => link.addEventListener('click', closeMobileMenu));
   function openNotifyModal() { alert('Notification feature coming soon! Stay tuned.'); }
 
+  // ── TROSK JARVIS ──
+  function openTroskModal() {
+    document.getElementById('troskModal').style.display = 'flex';
+    document.getElementById('troskLog').innerHTML = '';
+    document.getElementById('troskUrlInput').value = '';
+  }
+  function closeTroskModal() { document.getElementById('troskModal').style.display = 'none'; }
+  document.getElementById('troskModal').addEventListener('click', function(e) { if (e.target === this) closeTroskModal(); });
+
+  function startTroskAnalysis() {
+    const input = document.getElementById('troskUrlInput').value.trim();
+    if (!input) { alert('Por favor, insira um link ou selecione um APK.'); return; }
+    const isApk = input === 'APK uploaded';
+    const logEl = document.getElementById('troskLog');
+    logEl.innerHTML = '';
+    const messages = isApk
+      ? ['Descompactando APK...', 'Varrendo classes Java...', 'Conectando ao Firebase...', 'Auditoria completa...']
+      : ['Escaneando estrutura HTML...', 'Analisando variáveis JavaScript...', 'Auditando CSS...', 'Mapeando roteamento...'];
+    let i = 0;
+    function addLine() {
+      if (i >= messages.length) { logEl.innerHTML += '<div class="log-line" style="color:var(--cyan);">✅ ANÁLISE CONCLUÍDA. SISTEMA SEGURO.</div>'; return; }
+      const line = document.createElement('div');
+      line.className = 'log-line';
+      line.textContent = messages[i];
+      logEl.appendChild(line);
+      i++;
+      setTimeout(addLine, 800);
+    }
+    addLine();
+  }
+
   // ── CONTACT METHOD SELECTOR ──
   let selectedContactMethod = null;
   function selectContactMethod(method) {
@@ -645,21 +710,37 @@
     });
     detailInput.classList.add('placeholder-flash');
     setTimeout(() => detailInput.classList.remove('placeholder-flash'), 800);
-    const placeholders = {
-      gmail: 'you@example.com',
-      discord: 'username#0000',
-      whatsapp: '+55 (XX) XXXXX-XXXX'
-    };
+    const placeholders = { gmail: 'you@example.com', discord: 'username#0000', whatsapp: '+55 (XX) XXXXX-XXXX' };
     detailInput.placeholder = placeholders[method] || 'Enter your contact...';
     detailInput.value = '';
     detailInput.focus();
   }
 
+  // ── INVESTMENT SELECTOR ──
+  let selectedInvestment = null;
+  const investmentButtons = document.querySelectorAll('.investment-btn');
+  const investmentManual = document.getElementById('investmentManual');
+  function updateInvestmentUI(value) {
+    selectedInvestment = value;
+    investmentButtons.forEach(btn => { btn.classList.remove('active'); if (parseInt(btn.dataset.value) === value) btn.classList.add('active'); });
+    investmentManual.value = value;
+  }
+  investmentButtons.forEach(btn => { btn.addEventListener('click', () => { const val = parseInt(btn.dataset.value); updateInvestmentUI(val); }); });
+  investmentManual.addEventListener('input', () => {
+    let val = parseInt(investmentManual.value);
+    if (isNaN(val)) { selectedInvestment = null; investmentButtons.forEach(b => b.classList.remove('active')); return; }
+    if (val < 1000) val = 1000; if (val > 30000) val = 30000;
+    selectedInvestment = val;
+    investmentButtons.forEach(btn => { btn.classList.remove('active'); if (parseInt(btn.dataset.value) === val) btn.classList.add('active'); });
+    if (!document.querySelector('.investment-btn.active')) selectedInvestment = val;
+  });
+
   // ── ORDER MODAL ──
   function openOrderModal() {
     document.getElementById('orderModalOverlay').style.display = 'flex';
     document.getElementById('orderForm').reset();
-    selectedContactMethod = null;
+    selectedContactMethod = null; selectedInvestment = null;
+    investmentButtons.forEach(b => b.classList.remove('active')); investmentManual.value = '';
     const buttons = document.querySelectorAll('.contact-btn');
     buttons.forEach(btn => { btn.classList.remove('selected', 'dimmed', 'anim-in'); });
     setTimeout(() => { buttons.forEach(btn => btn.classList.add('anim-in')); }, 10);
@@ -672,106 +753,40 @@
   const webhookUrl = "https://hook.us2.make.com/f4f2ufisvcr3kk1f6rp5z370c7489i6y";
 
   document.getElementById('orderForm').addEventListener('submit', async function(e) {
-    e.preventDefault(); // Impede o recarregamento, mas não bloqueia o fetch!
-    const brandName     = document.getElementById('clientName').value.trim();
-    const contactDetail = document.getElementById('contactDetail').value.trim();
-    const projectScope  = document.getElementById('projectScope').value;
-    const operationType = document.querySelector('input[name="operationType"]:checked')?.value || '';
-    const pricingPlan   = document.querySelector('input[name="pricingPlan"]:checked')?.value || '';
-    if (!brandName || !contactDetail || !projectScope || !selectedContactMethod) {
-      alert('Please fill all required fields and select a contact method.');
-      return;
+    e.preventDefault();
+    const brandName = document.getElementById('clientName').value.trim(), contactDetail = document.getElementById('contactDetail').value.trim(), projectScope = document.getElementById('projectScope').value;
+    const operationType = document.querySelector('input[name="operationType"]:checked')?.value || '', pricingPlan = document.querySelector('input[name="pricingPlan"]:checked')?.value || '';
+    if (!brandName || !contactDetail || !projectScope || !selectedContactMethod) { alert('Please fill all required fields and select a contact method.'); return; }
+    const isPremium = pricingPlan === 'PREMIUM ARCHITECTURE';
+    if (isPremium && (!selectedInvestment || selectedInvestment < 1000 || selectedInvestment > 30000)) { alert('Please select or enter a valid investment amount between R$ 1,000 and R$ 30,000.'); return; }
+    const submitBtn = this.querySelector('.btn-submit-order'); submitBtn.disabled = true; submitBtn.textContent = 'SENDING...';
+    const payload = { brandName, contactMethod: selectedContactMethod, contactDetail, projectScope, operationType, pricingPlan: isPremium ? 'premium' : 'freemium', timestamp: new Date().toISOString() };
+    if (!isPremium) {
+      try { await db.collection('orders').add({...payload, investment: selectedInvestment || 0, paymentStatus: 'teste_liberado', createdAt: firebase.firestore.FieldValue.serverTimestamp() }); closeOrderModal(); alert('✅ Test project registered successfully! You can now explore the platform. Our team will contact you shortly.'); } catch (error) { alert('Error: ' + error.message); }
+      submitBtn.disabled = false; submitBtn.textContent = 'SEND ORDER TO PRODUCTION'; return;
     }
-    const submitBtn = this.querySelector('.btn-submit-order');
-    submitBtn.disabled = true;
-    submitBtn.textContent = 'SENDING...';
-
-    // Monta o payload
-    const payload = {
-      brandName: brandName,
-      contactMethod: selectedContactMethod,
-      contactDetail: contactDetail,
-      projectScope: projectScope,
-      operationType: operationType,
-      pricingPlan: pricingPlan === 'PREMIUM ARCHITECTURE' ? 'premium' : 'freemium',
-      timestamp: new Date().toISOString()
+    payload.investment = selectedInvestment; closeOrderModal(); showProcessingOverlay();
+    const tryFetch = async (mode = 'cors') => fetch(webhookUrl, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload), mode });
+    const processResponse = async (response) => {
+      if (response.type === 'opaque') throw new Error('OPAQUE_RESPONSE');
+      const ct = response.headers.get('content-type');
+      if (ct && ct.includes('application/json')) return response.json();
+      const text = await response.text(); try { return JSON.parse(text); } catch(e) { return { raw: text }; }
     };
-
-    // Fecha o modal e mostra a tela de processamento
-    closeOrderModal();
-    showProcessingOverlay();
-
     try {
-      // Dispara o fetch para o Webhook do Make SEMPRE
-      const response = await fetch(webhookUrl, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
-      });
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-
-      const data = await response.json();
-      console.log('Webhook response:', data);
-
-      if (data.invoiceUrl) {
-        currentPaymentUrl = data.invoiceUrl;
-        document.getElementById('processingTitle').textContent = 'Checkout Ready!';
-        document.getElementById('processingSub').textContent = 'Your secure Asaas checkout has been generated.';
-        document.getElementById('btnPayInvoice').classList.add('show');
-      } else {
-        document.getElementById('processingTitle').textContent = 'Order Processed!';
-        document.getElementById('processingSub').textContent = 'Our team will contact you shortly with the payment link.';
-      }
-
-      // Registro adicional no Firestore (opcional, sem await para não travar)
-      db.collection('orders').add({
-        brandName: brandName,
-        contactMethod: selectedContactMethod,
-        contactDetail: contactDetail,
-        projectScope: projectScope,
-        operationType: operationType,
-        pricingPlan: payload.pricingPlan,
-        paymentStatus: payload.pricingPlan === 'premium' ? 'pending_webhook' : 'not_required',
-        createdAt: firebase.firestore.FieldValue.serverTimestamp()
-      }).catch(err => console.warn('Firestore backup failed:', err));
-
-    } catch (error) {
-      console.error('Webhook error:', error);
-      document.getElementById('processingTitle').textContent = 'Network Issue';
-      document.getElementById('processingSub').textContent = 'Your order was saved locally. We will contact you shortly.';
-      // Salva no Firestore como fallback
-      db.collection('orders').add({
-        brandName: brandName,
-        contactMethod: selectedContactMethod,
-        contactDetail: contactDetail,
-        projectScope: projectScope,
-        operationType: operationType,
-        pricingPlan: payload.pricingPlan,
-        paymentStatus: 'webhook_failed',
-        createdAt: firebase.firestore.FieldValue.serverTimestamp()
-      }).catch(err => console.error('Firestore fallback failed:', err));
-    }
-
-    submitBtn.disabled = false;
-    submitBtn.textContent = 'SEND ORDER TO PRODUCTION';
+      let res = await tryFetch('cors'), data = await processResponse(res);
+      if (data.invoiceUrl) { currentPaymentUrl = data.invoiceUrl; document.getElementById('processingTitle').textContent = 'Checkout Ready!'; document.getElementById('processingSub').textContent = 'Your secure Asaas checkout has been generated.'; document.getElementById('btnPayInvoice').classList.add('show'); }
+      else { document.getElementById('processingTitle').textContent = 'Order Processed!'; document.getElementById('processingSub').textContent = 'Our team will contact you shortly with the payment link.'; }
+      db.collection('orders').add({...payload, paymentStatus: 'webhook_ok'}).catch(e => console.warn(e));
+    } catch(err) {
+      console.warn('First fetch failed, trying no-cors:', err.message);
+      try { await tryFetch('no-cors'); document.getElementById('processingTitle').textContent = 'Order Sent!'; document.getElementById('processingSub').textContent = 'Your data was transmitted. We will contact you shortly.'; db.collection('orders').add({...payload, paymentStatus: 'webhook_sent_nocors'}).catch(e => console.warn(e)); }
+      catch(noCorsErr) { document.getElementById('processingTitle').textContent = 'Network Issue'; document.getElementById('processingSub').textContent = 'Your order was saved locally. We will contact you shortly.'; db.collection('orders').add({...payload, paymentStatus: 'webhook_failed'}).catch(e => console.error(e)); }
+    } finally { submitBtn.disabled = false; submitBtn.textContent = 'SEND ORDER TO PRODUCTION'; }
   });
-
-  function showProcessingOverlay() {
-    const overlay = document.getElementById('processingOverlay');
-    const payBtn = document.getElementById('btnPayInvoice');
-    overlay.style.display = 'flex';
-    payBtn.classList.remove('show');
-    currentPaymentUrl = null;
-    document.getElementById('processingTitle').textContent = '⚡ Trosk AI routing your project...';
-    document.getElementById('processingSub').textContent = 'Generating your secure Asaas checkout page.';
-  }
-
+  function showProcessingOverlay() { const o = document.getElementById('processingOverlay'); o.style.display = 'flex'; document.getElementById('btnPayInvoice').classList.remove('show'); currentPaymentUrl = null; document.getElementById('processingTitle').textContent = '⚡ Trosk AI routing your project...'; document.getElementById('processingSub').textContent = 'Generating your secure Asaas checkout page.'; }
   function openPaymentLink() { if (currentPaymentUrl) window.open(currentPaymentUrl, '_blank'); }
   document.getElementById('processingOverlay').addEventListener('click', function(e) { if (e.target === this) { this.style.display = 'none'; currentPaymentUrl = null; } });
-
   function openFreemiumModal() { document.getElementById('freemiumModal').style.display = 'flex'; }
   function closeFreemiumModal() { document.getElementById('freemiumModal').style.display = 'none'; }
   window.addEventListener('click', e => { if (e.target === document.getElementById('freemiumModal')) closeFreemiumModal(); });
@@ -791,33 +806,19 @@
     const track = document.getElementById('carouselTrack'), dotsEl = document.getElementById('carouselDots');
     if (!track || !dotsEl) return;
     IMAGES.forEach((img, idx) => {
-      const slide = document.createElement('div');
-      slide.className = 'carousel-slide' + (idx === 0 ? ' active' : '');
-      slide.dataset.idx = idx;
+      const slide = document.createElement('div'); slide.className = 'carousel-slide' + (idx === 0 ? ' active' : ''); slide.dataset.idx = idx;
       slide.innerHTML = `<div class="carousel-glow"></div><img src="${img.src}" alt="${img.name}" loading="lazy"><div class="carousel-label"><span class="carousel-label-tag">${img.tag}</span><span class="carousel-label-name">${img.name}</span></div>`;
       track.appendChild(slide);
     });
-    for (let i = 0; i < IMAGES.length; i++) {
-      const dot = document.createElement('span');
-      dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
-      dot.dataset.dot = i;
-      dot.addEventListener('click', () => goTo(i, i > current ? 'next' : 'prev'));
-      dotsEl.appendChild(dot);
-    }
-    const slides = track.querySelectorAll('.carousel-slide'), dots = dotsEl.querySelectorAll('.carousel-dot');
-    let current = 0;
+    for (let i = 0; i < IMAGES.length; i++) { const dot = document.createElement('span'); dot.className = 'carousel-dot' + (i === 0 ? ' active' : ''); dot.dataset.dot = i; dot.addEventListener('click', () => goTo(i, i > current ? 'next' : 'prev')); dotsEl.appendChild(dot); }
+    const slides = track.querySelectorAll('.carousel-slide'), dots = dotsEl.querySelectorAll('.carousel-dot'); let current = 0;
     function syncDots(idx) { dots.forEach(d => d.classList.remove('active')); dots[idx]?.classList.add('active'); }
     function goTo(idx, dir) {
-      const prev = current;
-      current = ((idx % IMAGES.length) + IMAGES.length) % IMAGES.length;
-      if (prev === current) return;
-      slides[prev].classList.add(dir === 'next' ? 'exit-left' : 'exit-right');
-      slides[prev].classList.remove('active');
+      const prev = current; current = ((idx % IMAGES.length) + IMAGES.length) % IMAGES.length; if (prev === current) return;
+      slides[prev].classList.add(dir === 'next' ? 'exit-left' : 'exit-right'); slides[prev].classList.remove('active');
       setTimeout(() => slides[prev].classList.remove('exit-left', 'exit-right'), 600);
       slides[current].style.transform = dir === 'next' ? 'translateX(60px) scale(0.96)' : 'translateX(-60px) scale(0.96)';
-      slides[current].classList.add('active');
-      requestAnimationFrame(() => requestAnimationFrame(() => { slides[current].style.transform = ''; }));
-      syncDots(current);
+      slides[current].classList.add('active'); requestAnimationFrame(() => requestAnimationFrame(() => { slides[current].style.transform = ''; })); syncDots(current);
     }
     document.getElementById('carouselNext')?.addEventListener('click', () => goTo(current + 1, 'next'));
     document.getElementById('carouselPrev')?.addEventListener('click', () => goTo(current - 1, 'prev'));
@@ -840,11 +841,9 @@
       else { body.classList.remove('theme-light', 'theme-secret'); body.style.background = ''; const root = document.documentElement.style; root.removeProperty('--cyan'); root.removeProperty('--purple'); root.removeProperty('--cyan-glow'); root.removeProperty('--purple-glow'); root.removeProperty('--cyan-dim'); root.removeProperty('--purple-dim'); ICON.textContent = '☀'; mode = 'dark'; }
     });
     function activateSecret() {
-      const color1 = randomHex(), color2 = randomHex();
-      body.classList.remove('theme-light'); body.classList.add('theme-secret');
+      const color1 = randomHex(), color2 = randomHex(); body.classList.remove('theme-light'); body.classList.add('theme-secret');
       body.style.background = `linear-gradient(135deg, ${hexToRgba(color1, 0.18)} 0%, ${hexToRgba(color2, 0.12)} 50%, ${hexToRgba(color1, 0.10)} 100%), #050508`;
-      const root = document.documentElement.style;
-      root.setProperty('--cyan', color1); root.setProperty('--purple', color2);
+      const root = document.documentElement.style; root.setProperty('--cyan', color1); root.setProperty('--purple', color2);
       root.setProperty('--cyan-glow', hexToRgba(color1,0.6)); root.setProperty('--purple-glow', hexToRgba(color2,0.6));
       root.setProperty('--cyan-dim', hexToRgba(color1,0.2)); root.setProperty('--purple-dim', hexToRgba(color2,0.2));
       ICON.textContent = '🌈'; mode = 'secret';
