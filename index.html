@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>HEKSEL IMPERIUM — NEO Collection 2026</title>
   <link rel="icon" href="1000027280.png" type="image/png">
-  <!-- Firebase SDKs -->
+  <!-- Firebase SDKs (mantidos para Freemium) -->
   <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
   <script>
@@ -184,21 +184,8 @@
     .hero-right { position: relative; z-index: 1; display: flex; align-items: center; justify-content: center; }
 
     /* MANIFESTO SECTION (transparente) */
-    .manifesto-section {
-      padding: 100px 0; text-align: center;
-      background: transparent;
-      border-top: 1px solid rgba(0,240,255,0.1);
-      position: relative; z-index: 1;
-    }
-    .manifesto-text {
-      max-width: 800px; margin: 0 auto;
-      font-family: 'Syne', sans-serif;
-      font-size: 1.6rem; font-weight: 600;
-      line-height: 1.5; color: rgba(255,255,255,0.75);
-      background: linear-gradient(120deg, var(--cyan), var(--purple), #ff2d78);
-      -webkit-background-clip: text; background-clip: text; color: transparent;
-      animation: glowPulse 4s ease-in-out infinite;
-    }
+    .manifesto-section { padding: 100px 0; text-align: center; background: transparent; border-top: 1px solid rgba(0,240,255,0.1); position: relative; z-index: 1; }
+    .manifesto-text { max-width: 800px; margin: 0 auto; font-family: 'Syne', sans-serif; font-size: 1.6rem; font-weight: 600; line-height: 1.5; color: rgba(255,255,255,0.75); background: linear-gradient(120deg, var(--cyan), var(--purple), #ff2d78); -webkit-background-clip: text; background-clip: text; color: transparent; animation: glowPulse 4s ease-in-out infinite; }
 
     /* OUTRAS SEÇÕES */
     .brand-section { padding: 120px 0; text-align: center; background: linear-gradient(180deg, rgba(8,8,18,0.98) 0%, rgba(18,10,34,0.98) 30%, rgba(22,12,42,0.97) 60%, rgba(14,6,28,0.98) 100%); color: white; position: relative; z-index: 1; overflow: hidden; transition: var(--theme-transition); }
@@ -260,53 +247,24 @@
 
     /* ═══ ORDER MODAL PREMIUM ═══ */
     .order-modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.92); backdrop-filter: blur(18px); z-index: 3000; align-items: center; justify-content: center; }
-    .order-modal {
-      background: rgba(14,14,22,0.85); backdrop-filter: blur(16px);
-      border: 1px solid rgba(255,255,255,0.08); border-radius: 20px;
-      padding: 40px 36px 36px; max-width: 580px; width: 94%;
-      max-height: 90vh; overflow-y: auto; text-align: center;
-      box-shadow: 0 0 80px rgba(0,240,255,0.08), 0 0 120px rgba(180,94,255,0.05);
-      animation: modalIn 0.5s cubic-bezier(0.2,0.9,0.4,1.1) forwards; position: relative;
-    }
+    .order-modal { background: rgba(14,14,22,0.85); backdrop-filter: blur(16px); border: 1px solid rgba(255,255,255,0.08); border-radius: 20px; padding: 40px 36px 36px; max-width: 580px; width: 94%; max-height: 90vh; overflow-y: auto; text-align: center; box-shadow: 0 0 80px rgba(0,240,255,0.08), 0 0 120px rgba(180,94,255,0.05); animation: modalIn 0.5s cubic-bezier(0.2,0.9,0.4,1.1) forwards; position: relative; }
     @keyframes modalIn { 0% { opacity: 0; transform: translateY(30px) scale(0.96); } 100% { opacity: 1; transform: translateY(0) scale(1); } }
     .order-modal h2 { font-family: 'Space Mono', monospace; font-size: 1.1rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--white); margin-bottom: 4px; }
     .order-modal .order-subtitle { font-size: 0.72rem; color: #888; margin-bottom: 28px; font-weight: 400; }
     .order-form { display: flex; flex-direction: column; gap: 18px; text-align: left; }
-    .order-form label {
-      font-family: 'Syne', sans-serif; font-weight: 600; font-size: 0.58rem;
-      letter-spacing: 0.14em; color: #888; text-transform: uppercase; margin-bottom: 2px; display: block;
-    }
-    .order-form input, .order-form select {
-      padding: 12px 16px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.10);
-      background: rgba(255,255,255,0.03); color: white; font-family: 'DM Sans', sans-serif;
-      font-size: 0.88rem; outline: none; transition: border-color 0.3s, box-shadow 0.3s; width: 100%;
-    }
+    .order-form label { font-family: 'Syne', sans-serif; font-weight: 600; font-size: 0.58rem; letter-spacing: 0.14em; color: #888; text-transform: uppercase; margin-bottom: 2px; display: block; }
+    .order-form input, .order-form select { padding: 12px 16px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.10); background: rgba(255,255,255,0.03); color: white; font-family: 'DM Sans', sans-serif; font-size: 0.88rem; outline: none; transition: border-color 0.3s, box-shadow 0.3s; width: 100%; }
     .order-form input:focus, .order-form select:focus { border-color: var(--cyan); box-shadow: 0 0 0 3px rgba(0,240,255,0.08); }
     .order-form select option { background: #1a1a2e; color: white; }
     .order-form .radio-row { display: flex; gap: 12px; flex-wrap: wrap; }
     .order-form .radio-option { flex: 1; min-width: 130px; }
     .order-form .radio-option input[type="radio"] { display: none; }
-    .order-form .radio-option label.radio-card {
-      display: block; padding: 13px 10px; border-radius: 10px;
-      border: 1px solid rgba(255,255,255,0.10);
-      background: rgba(255,255,255,0.02); text-align: center;
-      font-family: 'Syne', sans-serif; font-size: 0.66rem; font-weight: 600;
-      letter-spacing: 0.06em; color: rgba(255,255,255,0.5);
-      cursor: pointer; transition: all 0.35s;
-    }
-    .order-form .radio-option input[type="radio"]:checked + label.radio-card {
-      border-color: var(--cyan); background: rgba(0,240,255,0.06); color: var(--cyan);
-      box-shadow: 0 0 16px rgba(0,240,255,0.12); animation: ping 1.4s ease-out infinite;
-    }
+    .order-form .radio-option label.radio-card { display: block; padding: 13px 10px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.10); background: rgba(255,255,255,0.02); text-align: center; font-family: 'Syne', sans-serif; font-size: 0.66rem; font-weight: 600; letter-spacing: 0.06em; color: rgba(255,255,255,0.5); cursor: pointer; transition: all 0.35s; }
+    .order-form .radio-option input[type="radio"]:checked + label.radio-card { border-color: var(--cyan); background: rgba(0,240,255,0.06); color: var(--cyan); box-shadow: 0 0 16px rgba(0,240,255,0.12); animation: ping 1.4s ease-out infinite; }
 
     /* CONTACT METHOD SELECTOR */
     .contact-method-row { display: flex; gap: 12px; justify-content: center; margin-bottom: 4px; }
-    .contact-btn {
-      flex: 1; display: flex; flex-direction: column; align-items: center; gap: 4px;
-      padding: 14px 8px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.10);
-      background: rgba(255,255,255,0.02); cursor: pointer; transition: all 0.4s var(--ease);
-      opacity: 0; transform: translateY(20px); animation-fill-mode: forwards;
-    }
+    .contact-btn { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 14px 8px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.10); background: rgba(255,255,255,0.02); cursor: pointer; transition: all 0.4s var(--ease); opacity: 0; transform: translateY(20px); animation-fill-mode: forwards; }
     .contact-btn.anim-in { animation: fadeInStagger 0.5s var(--ease) forwards; }
     .contact-btn:nth-child(1).anim-in { animation-delay: 0.05s; }
     .contact-btn:nth-child(2).anim-in { animation-delay: 0.15s; }
@@ -617,16 +575,16 @@
   </div>
 </div>
 
-<!-- PROCESSING OVERLAY (SKELETON) -->
+<!-- PROCESSING OVERLAY (WEBHOOK SKELETON) -->
 <div class="processing-overlay" id="processingOverlay">
   <div class="processing-card">
     <div class="skeleton-bar"></div>
     <div class="skeleton-bar short"></div>
-    <h2 id="processingTitle">Processing premium architecture...</h2>
-    <p id="processingSub">Trosk AI is generating your secure checkout via Asaas.</p>
+    <h2 id="processingTitle">⚡ Trosk AI routing your project...</h2>
+    <p id="processingSub">Generating your secure Asaas checkout page.</p>
     <div class="skeleton-bar short"></div>
     <div class="skeleton-bar"></div>
-    <button class="btn-pay-invoice" id="btnPayInvoice" onclick="openPaymentLink()">💳 Pay Invoice via Pix / Card</button>
+    <button class="btn-pay-invoice" id="btnPayInvoice" onclick="openPaymentLink()">💳 COMPLETE PREMIUM ACQUISITION</button>
   </div>
 </div>
 
@@ -711,6 +669,7 @@
   document.getElementById('orderModalOverlay').addEventListener('click', function(e) { if (e.target === this) closeOrderModal(); });
 
   let currentPaymentUrl = null;
+  const webhookUrl = "https://hook.us2.make.com/f4f2ufisvcr3kk1f6rp5z370c7489i6y";
 
   document.getElementById('orderForm').addEventListener('submit', async function(e) {
     e.preventDefault();
@@ -727,59 +686,73 @@
     submitBtn.disabled = true;
     submitBtn.textContent = 'SENDING...';
     const isPremium = pricingPlan === 'PREMIUM ARCHITECTURE';
-    try {
-      const docRef = await db.collection('orders').add({
-        brandName: brandName,
-        contactMethod: selectedContactMethod,
-        contactDetail: contactDetail,
-        projectScope: projectScope,
-        operationType: operationType,
-        pricingPlan: isPremium ? 'premium' : 'freemium',
-        paymentStatus: isPremium ? 'pending_generation' : 'not_required',
-        createdAt: firebase.firestore.FieldValue.serverTimestamp()
-      });
+
+    if (isPremium) {
+      // ── WEBHOOK FLOW ──
       closeOrderModal();
+      showProcessingOverlay();
+      try {
+        const response = await fetch(webhookUrl, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            brandName: brandName,
+            contactMethod: selectedContactMethod,
+            contactDetail: contactDetail,
+            projectScope: projectScope,
+            operationType: operationType,
+            pricingPlan: 'premium',
+            timestamp: new Date().toISOString()
+          })
+        });
+        const data = await response.json();
+        if (data.invoiceUrl) {
+          currentPaymentUrl = data.invoiceUrl;
+          document.getElementById('processingTitle').textContent = 'Checkout Ready!';
+          document.getElementById('processingSub').textContent = 'Your secure Asaas checkout has been generated.';
+          document.getElementById('btnPayInvoice').classList.add('show');
+        } else {
+          document.getElementById('processingTitle').textContent = 'Order Processed!';
+          document.getElementById('processingSub').textContent = 'Our team will contact you shortly with the payment link.';
+        }
+      } catch (error) {
+        document.getElementById('processingTitle').textContent = 'Network Issue';
+        document.getElementById('processingSub').textContent = 'Your order was saved. We will contact you shortly.';
+        console.error('Webhook error:', error);
+      }
       submitBtn.disabled = false;
       submitBtn.textContent = 'SEND ORDER TO PRODUCTION';
-      if (isPremium) {
-        showProcessingOverlay(docRef.id);
-      } else {
+    } else {
+      // ── FREMIUM (Firestore) ──
+      try {
+        await db.collection('orders').add({
+          brandName: brandName,
+          contactMethod: selectedContactMethod,
+          contactDetail: contactDetail,
+          projectScope: projectScope,
+          operationType: operationType,
+          pricingPlan: 'freemium',
+          paymentStatus: 'not_required',
+          createdAt: firebase.firestore.FieldValue.serverTimestamp()
+        });
+        closeOrderModal();
         alert('Project registered successfully! Our team will contact you shortly.');
+      } catch (error) {
+        alert('Error: ' + error.message);
       }
-    } catch (error) {
-      alert('Error: ' + error.message);
       submitBtn.disabled = false;
       submitBtn.textContent = 'SEND ORDER TO PRODUCTION';
     }
   });
 
-  function showProcessingOverlay(docId) {
+  function showProcessingOverlay() {
     const overlay = document.getElementById('processingOverlay');
     const payBtn = document.getElementById('btnPayInvoice');
-    const titleEl = document.getElementById('processingTitle');
-    const subEl = document.getElementById('processingSub');
     overlay.style.display = 'flex';
     payBtn.classList.remove('show');
     currentPaymentUrl = null;
-    titleEl.textContent = 'Processing premium architecture...';
-    subEl.textContent = 'Trosk AI is generating your secure checkout via Asaas.';
-    const unsubscribe = db.collection('orders').doc(docId).onSnapshot((doc) => {
-      if (doc.exists) {
-        const data = doc.data();
-        if (data.paymentUrl) {
-          currentPaymentUrl = data.paymentUrl;
-          titleEl.textContent = 'Checkout Ready!';
-          subEl.textContent = 'Your secure payment link has been generated.';
-          payBtn.classList.add('show');
-          unsubscribe();
-        }
-      }
-    }, (error) => {
-      console.error('onSnapshot error:', error);
-    });
-    setTimeout(() => {
-      if (!currentPaymentUrl) { unsubscribe(); titleEl.textContent = 'Almost there...'; subEl.textContent = 'Still generating...'; }
-    }, 30000);
+    document.getElementById('processingTitle').textContent = '⚡ Trosk AI routing your project...';
+    document.getElementById('processingSub').textContent = 'Generating your secure Asaas checkout page.';
   }
 
   function openPaymentLink() { if (currentPaymentUrl) window.open(currentPaymentUrl, '_blank'); }
@@ -789,7 +762,7 @@
   function closeFreemiumModal() { document.getElementById('freemiumModal').style.display = 'none'; }
   window.addEventListener('click', e => { if (e.target === document.getElementById('freemiumModal')) closeFreemiumModal(); });
 
-  /* CAROUSEL (COM NOMES ATUALIZADOS) */
+  /* CAROUSEL */
   (function initCarousel() {
     const IMAGES = [
       { src: '1000027632-removebg-preview.png', name: 'NEO-KAI 01 FOR FOOTBALL',  tag: '01 / 08' },
