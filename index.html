@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>HEKSEL IMPERIUM — NEO Collection 2026</title>
   <link rel="icon" href="1000027280.png" type="image/png">
-  <!-- Firebase SDKs (mantidos para Freemium) -->
+  <!-- Firebase SDKs (mantidos para registro adicional) -->
   <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
   <script>
@@ -672,7 +672,7 @@
   const webhookUrl = "https://hook.us2.make.com/f4f2ufisvcr3kk1f6rp5z370c7489i6y";
 
   document.getElementById('orderForm').addEventListener('submit', async function(e) {
-    e.preventDefault();
+    e.preventDefault(); // Impede o recarregamento, mas não bloqueia o fetch!
     const brandName     = document.getElementById('clientName').value.trim();
     const contactDetail = document.getElementById('contactDetail').value.trim();
     const projectScope  = document.getElementById('projectScope').value;
@@ -685,64 +685,78 @@
     const submitBtn = this.querySelector('.btn-submit-order');
     submitBtn.disabled = true;
     submitBtn.textContent = 'SENDING...';
-    const isPremium = pricingPlan === 'PREMIUM ARCHITECTURE';
 
-    if (isPremium) {
-      // ── WEBHOOK FLOW ──
-      closeOrderModal();
-      showProcessingOverlay();
-      try {
-        const response = await fetch(webhookUrl, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            brandName: brandName,
-            contactMethod: selectedContactMethod,
-            contactDetail: contactDetail,
-            projectScope: projectScope,
-            operationType: operationType,
-            pricingPlan: 'premium',
-            timestamp: new Date().toISOString()
-          })
-        });
-        const data = await response.json();
-        if (data.invoiceUrl) {
-          currentPaymentUrl = data.invoiceUrl;
-          document.getElementById('processingTitle').textContent = 'Checkout Ready!';
-          document.getElementById('processingSub').textContent = 'Your secure Asaas checkout has been generated.';
-          document.getElementById('btnPayInvoice').classList.add('show');
-        } else {
-          document.getElementById('processingTitle').textContent = 'Order Processed!';
-          document.getElementById('processingSub').textContent = 'Our team will contact you shortly with the payment link.';
-        }
-      } catch (error) {
-        document.getElementById('processingTitle').textContent = 'Network Issue';
-        document.getElementById('processingSub').textContent = 'Your order was saved. We will contact you shortly.';
-        console.error('Webhook error:', error);
+    // Monta o payload
+    const payload = {
+      brandName: brandName,
+      contactMethod: selectedContactMethod,
+      contactDetail: contactDetail,
+      projectScope: projectScope,
+      operationType: operationType,
+      pricingPlan: pricingPlan === 'PREMIUM ARCHITECTURE' ? 'premium' : 'freemium',
+      timestamp: new Date().toISOString()
+    };
+
+    // Fecha o modal e mostra a tela de processamento
+    closeOrderModal();
+    showProcessingOverlay();
+
+    try {
+      // Dispara o fetch para o Webhook do Make SEMPRE
+      const response = await fetch(webhookUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
       }
-      submitBtn.disabled = false;
-      submitBtn.textContent = 'SEND ORDER TO PRODUCTION';
-    } else {
-      // ── FREMIUM (Firestore) ──
-      try {
-        await db.collection('orders').add({
-          brandName: brandName,
-          contactMethod: selectedContactMethod,
-          contactDetail: contactDetail,
-          projectScope: projectScope,
-          operationType: operationType,
-          pricingPlan: 'freemium',
-          paymentStatus: 'not_required',
-          createdAt: firebase.firestore.FieldValue.serverTimestamp()
-        });
-        closeOrderModal();
-        alert('Project registered successfully! Our team will contact you shortly.');
-      } catch (error) {
-        alert('Error: ' + error.message);
+
+      const data = await response.json();
+      console.log('Webhook response:', data);
+
+      if (data.invoiceUrl) {
+        currentPaymentUrl = data.invoiceUrl;
+        document.getElementById('processingTitle').textContent = 'Checkout Ready!';
+        document.getElementById('processingSub').textContent = 'Your secure Asaas checkout has been generated.';
+        document.getElementById('btnPayInvoice').classList.add('show');
+      } else {
+        document.getElementById('processingTitle').textContent = 'Order Processed!';
+        document.getElementById('processingSub').textContent = 'Our team will contact you shortly with the payment link.';
       }
-      submitBtn.disabled = false;
-      submitBtn.textContent = 'SEND ORDER TO PRODUCTION';
+
+      // Registro adicional no Firestore (opcional, sem await para não travar)
+      db.collection('orders').add({
+        brandName: brandName,
+        contactMethod: selectedContactMethod,
+        contactDetail: contactDetail,
+        projectScope: projectScope,
+        operationType: operationType,
+        pricingPlan: payload.pricingPlan,
+        paymentStatus: payload.pricingPlan === 'premium' ? 'pending_webhook' : 'not_required',
+        createdAt: firebase.firestore.FieldValue.serverTimestamp()
+      }).catch(err => console.warn('Firestore backup failed:', err));
+
+    } catch (error) {
+      console.error('Webhook error:', error);
+      document.getElementById('processingTitle').textContent = 'Network Issue';
+      document.getElementById('processingSub').textContent = 'Your order was saved locally. We will contact you shortly.';
+      // Salva no Firestore como fallback
+      db.collection('orders').add({
+        brandName: brandName,
+        contactMethod: selectedContactMethod,
+        contactDetail: contactDetail,
+        projectScope: projectScope,
+        operationType: operationType,
+        pricingPlan: payload.pricingPlan,
+        paymentStatus: 'webhook_failed',
+        createdAt: firebase.firestore.FieldValue.serverTimestamp()
+      }).catch(err => console.error('Firestore fallback failed:', err));
     }
+
+    submitBtn.disabled = false;
+    submitBtn.textContent = 'SEND ORDER TO PRODUCTION';
   });
 
   function showProcessingOverlay() {
