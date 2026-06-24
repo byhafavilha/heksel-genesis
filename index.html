@@ -85,9 +85,12 @@
     body.theme-light .brand-section h2, body.theme-light .brand-section > p { color: #08080d; }
     body.theme-light .brand-section > p { color: rgba(0,0,0,.55); }
     body.theme-light footer { background: #1a1a2e; }
-    body.theme-light .modal-container { background: rgba(255,255,255,.98); border-color: rgba(0,180,220,.2); color: #08080d; }
-    body.theme-light .modal-container h3, body.theme-light label { color: #08080d; }
-    body.theme-light input, body.theme-light textarea { background: rgba(0,0,0,.03); border-color: rgba(0,0,0,.12); color: #08080d; }
+    body.theme-light .order-modal, body.theme-light #notifyModal { background: rgba(255,255,255,0.98); border-color: rgba(0,180,220,0.2); color: #08080d; }
+    body.theme-light .order-modal h2, body.theme-light #notifyModal h2, body.theme-light .order-modal .modal-subtitle, body.theme-light #notifyModal .modal-subtitle { color: #08080d; }
+    body.theme-light .order-modal .close-modal, body.theme-light #notifyModal .close-modal { color: #08080d; }
+    body.theme-light .order-modal .contact-btn, body.theme-light #notifyModal .contact-btn { border-color: rgba(0,0,0,0.1); background: rgba(0,0,0,0.02); }
+    body.theme-light .order-modal .contact-btn span, body.theme-light #notifyModal .contact-btn span { color: #08080d; }
+    body.theme-light .order-modal .contact-btn:hover, body.theme-light #notifyModal .contact-btn:hover { background: rgba(0,0,0,0.04); }
     body.theme-light .package-item { border-color: rgba(0,0,0,.1); }
     body.theme-light .package-item strong { color: #08080d; }
 
@@ -102,6 +105,18 @@
     }
     body.theme-light .btn-gold-nav {
       color: #1a0f00 !important;
+    }
+
+    /* Botão NOTIFY ME dentro do menu no modo claro – fundo escuro, texto branco */
+    body.theme-light .mobile-menu-buttons .btn-outline-nav {
+      background: #08080d;
+      color: #ffffff !important;
+      border-color: #08080d !important;
+    }
+    body.theme-light .mobile-menu-buttons .btn-outline-nav:hover {
+      background: #1a1a2e;
+      color: var(--cyan) !important;
+      border-color: var(--cyan) !important;
     }
 
     body.theme-secret { background: #050508; color: #ffffff; }
@@ -192,7 +207,6 @@
     .mobile-menu a:last-child { border-bottom: none; }
     .mobile-menu a:hover { color: var(--cyan); }
 
-    /* Botões dentro do mobile menu */
     .mobile-menu-buttons {
       display: flex;
       flex-direction: column;
@@ -337,7 +351,6 @@
     .investment-btn { flex: 1; min-width: 60px; padding: 8px 6px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.12); background: rgba(255,255,255,0.02); font-family: 'Syne', sans-serif; font-size: 0.65rem; font-weight: 700; color: rgba(255,255,255,0.5); cursor: pointer; transition: all 0.35s; text-align: center; }
     .investment-btn:hover { border-color: var(--cyan); color: var(--cyan); background: rgba(0,240,255,0.06); }
     .investment-btn.active { border-color: var(--cyan); background: rgba(0,240,255,0.1); color: var(--cyan); box-shadow: 0 0 12px rgba(0,240,255,0.15); animation: ping 1.4s ease-out infinite; }
-    /* Ajuste para valor digitado ficar branco */
     #investmentManual {
       color: white !important;
       -webkit-text-fill-color: white !important;
@@ -492,7 +505,7 @@
     <a href="#brandSection" onclick="closeMobileMenu()">Create</a>
     <a href="#manifesto" onclick="closeMobileMenu()">Manifesto</a>
     <div class="mobile-menu-buttons">
-      <button class="btn-outline-nav" onclick="openNotifyModal(); closeMobileMenu()">Notify Me</button>
+      <button class="btn-outline-nav" onclick="openNotifyModal()">Notify Me</button>
       <button class="btn-gold-nav" onclick="document.getElementById('brandSection').scrollIntoView({behavior:'smooth'}); closeMobileMenu()">VIP Access</button>
     </div>
   </div>
@@ -593,6 +606,27 @@
     <div class="footer-bottom"><span class="footer-copy">© 2026 HEKSEL IMPERIUM — ALL RIGHTS RESERVED.</span></div>
   </div>
 </footer>
+
+<!-- NOTIFY ME MODAL -->
+<div class="modal-overlay" id="notifyModalOverlay">
+  <div class="order-modal" id="notifyModal">
+    <button class="close-modal" onclick="closeNotifyModal()">&times;</button>
+    <h2>Stay Updated</h2>
+    <p class="modal-subtitle">Choose your preferred notification channel</p>
+    <div class="contact-method-row" style="flex-direction:row; margin-top:20px;">
+      <div class="contact-btn gmail-btn" onclick="redirectNotify('gmail')">
+        <img src="g.logo.png" alt="Gmail"><span>Gmail</span>
+      </div>
+      <div class="contact-btn discord-btn" onclick="redirectNotify('discord')">
+        <img src="d.logo.png" alt="Discord"><span>Discord</span>
+      </div>
+      <div class="contact-btn whatsapp-btn" onclick="redirectNotify('whatsapp')">
+        <img src="w.logo.png" alt="WhatsApp"><span>WhatsApp</span>
+      </div>
+    </div>
+    <p style="font-size:0.7rem; color:rgba(255,255,255,0.3); margin-top:12px;">You will be redirected to the selected platform.</p>
+  </div>
+</div>
 
 <!-- MULTI-STEP ORDER MODAL -->
 <div class="modal-overlay" id="orderModalOverlay">
@@ -730,7 +764,31 @@
   document.addEventListener('click', (e) => { if (!hamburgerBtn?.contains(e.target) && !mobileMenu?.contains(e.target)) closeMobileMenu(); });
   mobileMenu?.querySelectorAll('a').forEach(link => link.addEventListener('click', closeMobileMenu));
 
-  function openNotifyModal() { alert('Notification feature coming soon! Stay tuned.'); }
+  // ── NOTIFY MODAL ──
+  function openNotifyModal() {
+    document.getElementById('notifyModalOverlay').style.display = 'flex';
+    closeMobileMenu();
+  }
+  function closeNotifyModal() {
+    document.getElementById('notifyModalOverlay').style.display = 'none';
+  }
+  function redirectNotify(platform) {
+    let url = '';
+    if (platform === 'gmail') {
+      url = 'mailto:hafavilhahafy@gmail.com';
+    } else if (platform === 'whatsapp') {
+      url = 'https://chat.whatsapp.com/G5q3H5MuJSyCmdAOEcf78T?s=cl&p=a&ilr=0';
+    } else if (platform === 'discord') {
+      url = 'https://discord.gg/Y8CNkKFNM';
+    }
+    if (url) {
+      window.open(url, '_blank');
+      closeNotifyModal();
+    }
+  }
+  document.getElementById('notifyModalOverlay').addEventListener('click', function(e) {
+    if (e.target === this) closeNotifyModal();
+  });
 
   // ── GLOBALS ──
   let jarvisDone = false;
