@@ -192,6 +192,27 @@
     .mobile-menu a:last-child { border-bottom: none; }
     .mobile-menu a:hover { color: var(--cyan); }
 
+    /* Botões dentro do mobile menu */
+    .mobile-menu-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 14px;
+      padding-top: 14px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+    .mobile-menu-buttons .btn-outline-nav,
+    .mobile-menu-buttons .btn-gold-nav {
+      width: 100%;
+      justify-content: center;
+      padding: 12px;
+      font-size: 0.7rem;
+      text-align: center;
+    }
+    .mobile-menu-buttons .btn-gold-nav {
+      color: #1a0f00 !important;
+    }
+
     /* HERO CENTRALIZADA */
     .hero { min-height: calc(100vh - 68px); display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; margin-top: 68px; }
     .hero::after { content: ''; position: absolute; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, transparent, rgba(0,240,255,0.15), transparent); animation: scanline 8s linear infinite; pointer-events: none; z-index: 0; }
@@ -316,6 +337,7 @@
     .investment-btn { flex: 1; min-width: 60px; padding: 8px 6px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.12); background: rgba(255,255,255,0.02); font-family: 'Syne', sans-serif; font-size: 0.65rem; font-weight: 700; color: rgba(255,255,255,0.5); cursor: pointer; transition: all 0.35s; text-align: center; }
     .investment-btn:hover { border-color: var(--cyan); color: var(--cyan); background: rgba(0,240,255,0.06); }
     .investment-btn.active { border-color: var(--cyan); background: rgba(0,240,255,0.1); color: var(--cyan); box-shadow: 0 0 12px rgba(0,240,255,0.15); animation: ping 1.4s ease-out infinite; }
+    /* Ajuste para valor digitado ficar branco */
     #investmentManual {
       color: white !important;
       -webkit-text-fill-color: white !important;
@@ -438,6 +460,7 @@
 <div id="cur-ring"></div>
 <div class="animated-bg"></div>
 <script>
+  // Store particles globally so we can update them on theme change
   window._particles = [];
   for (let i = 0; i < 40; i++) {
     const p = document.createElement('div'); p.classList.add('particle');
@@ -462,14 +485,16 @@
   </ul>
   <div class="nav-buttons">
     <div class="hamburger" id="hamburgerBtn"><span></span><span></span><span></span></div>
-    <button class="btn-outline-nav" onclick="openNotifyModal()">Notify Me</button>
-    <button class="btn-gold-nav" onclick="document.getElementById('brandSection').scrollIntoView({behavior:'smooth'})">VIP Access</button>
   </div>
   <div class="mobile-menu" id="mobileMenu">
     <a href="#hero" onclick="closeMobileMenu()">Home</a>
     <a href="#collection" onclick="closeMobileMenu()">Collection</a>
     <a href="#brandSection" onclick="closeMobileMenu()">Create</a>
     <a href="#manifesto" onclick="closeMobileMenu()">Manifesto</a>
+    <div class="mobile-menu-buttons">
+      <button class="btn-outline-nav" onclick="openNotifyModal(); closeMobileMenu()">Notify Me</button>
+      <button class="btn-gold-nav" onclick="document.getElementById('brandSection').scrollIntoView({behavior:'smooth'}); closeMobileMenu()">VIP Access</button>
+    </div>
   </div>
 </nav>
 
@@ -541,9 +566,9 @@
     <h2 class="section-title">Every Line.<br><span class="glow-text">One Empire.</span></h2>
     <p class="section-sub">Laser-engineered performance meets street culture. Six silhouettes. One declaration.</p>
     <div class="card-grid">
-      <div class="prod-card"><img src="1000027639-removebg-preview.png" alt="NEO-KAI FOR FOOTBALL"><div class="prod-info"><div class="prod-name">NEO-KAI 01 FOR FOOTBALL</div><div class="prod-price">$189</div><button class="notify-btn-card" onclick="openNotifyModal()">Notify Me</button></div></div>
+      <div class="prod-card"><img src="1000027639-removebg-preview.png" alt="NEO-KAI Gold"><div class="prod-info"><div class="prod-name">NEO-KAI 01 Gold</div><div class="prod-price">$189</div><button class="notify-btn-card" onclick="openNotifyModal()">Notify Me</button></div></div>
       <div class="prod-card"><img src="1000027638-removebg-preview.png" alt="NEO-KAI Academy"><div class="prod-info"><div class="prod-name">NEO-KAI 01 FOR THE ACADEMY</div><div class="prod-price">$189</div><button class="notify-btn-card" onclick="openNotifyModal()">Notify Me</button></div></div>
-      <div class="prod-card"><img src="1000027632-removebg-preview.png" alt="NEO-KAI RACE"><div class="prod-info"><div class="prod-name">NEO-KAI 01 RACE</div><div class="prod-price">$189</div><button class="notify-btn-card" onclick="openNotifyModal()">Notify Me</button></div></div>
+      <div class="prod-card"><img src="1000027632-removebg-preview.png" alt="NEO-KAI Football"><div class="prod-info"><div class="prod-name">NEO-KAI 01 FOR FOOTBALL</div><div class="prod-price">$189</div><button class="notify-btn-card" onclick="openNotifyModal()">Notify Me</button></div></div>
       <div class="prod-card"><img src="1000027648-removebg-preview.png" alt="NEO-WAI Slipper"><div class="prod-info"><div class="prod-name">NEO-WAI 01 SLIPPER</div><div class="prod-price">$150</div><button class="notify-btn-card" onclick="openNotifyModal()">Coming Soon</button></div></div>
       <div class="prod-card"><img src="1000027649-removebg-preview.png" alt="NEO-WAI Flip"><div class="prod-info"><div class="prod-name">NEO-WAI 01 SPORTS FLIP-FLOPS</div><div class="prod-price">$150</div><button class="notify-btn-card" onclick="openNotifyModal()">Notify Me</button></div></div>
       <div class="prod-card"><img src="1000027651-removebg-preview.png" alt="NEO-LAI Slipper"><div class="prod-info"><div class="prod-name">NEO-LAI 01 SLIPPER WITH SMALL BRIM</div><div class="prod-price">$150</div><button class="notify-btn-card" onclick="openNotifyModal()">Early Access</button></div></div>
@@ -693,9 +718,11 @@
     document.addEventListener('mouseout', e => { if (e.target.tagName === 'A' || e.target.tagName === 'BUTTON' || e.target.closest('button') || e.target.closest('a')) cur.classList.remove('hover'); });
   })();
 
+  // ── NAV SCROLL ──
   const navEl = document.getElementById('nav');
   window.addEventListener('scroll', () => { navEl.classList.toggle('scrolled', window.scrollY > 10); }, { passive: true });
 
+  // ── MOBILE MENU ──
   const hamburgerBtn = document.getElementById('hamburgerBtn');
   const mobileMenu = document.getElementById('mobileMenu');
   hamburgerBtn?.addEventListener('click', (e) => { e.stopPropagation(); mobileMenu.style.display = mobileMenu.style.display === 'flex' ? 'none' : 'flex'; });
@@ -705,6 +732,7 @@
 
   function openNotifyModal() { alert('Notification feature coming soon! Stay tuned.'); }
 
+  // ── GLOBALS ──
   let jarvisDone = false;
   let selectedContactMethod = null;
   let currentPaymentUrl = null;
@@ -717,6 +745,7 @@
   let socialDiscounts = { tiktok: false, instagram: false, x: false };
   const socialIdMap = { tiktok: 'socTikTok', instagram: 'socInstagram', x: 'socX' };
 
+  // ── MULTI-STEP ──
   function goToStep(n) {
     if (n === 2 && !document.getElementById('brandNameInput').value.trim()) { alert('Please enter your brand name.'); return; }
     if (n === 3) {
@@ -947,16 +976,16 @@
   function openPaymentLink() { if (currentPaymentUrl) window.open(currentPaymentUrl, '_blank'); }
   document.getElementById('processingOverlay').addEventListener('click', function(e) { if (e.target === this) { this.style.display = 'none'; currentPaymentUrl = null; } });
 
-  /* CAROUSEL (NOMES ATUALIZADOS) */
+  /* CAROUSEL */
   (function initCarousel() {
     const IMAGES = [
-      { src: '1000027632-removebg-preview.png', name: 'NEO-KAI 01 RACE',  tag: '01 / 08' },
-      { src: '1000027635-removebg-preview.png', name: 'NEO-KAI 01 TO RUN',  tag: '02 / 08' },
-      { src: '1000027638-removebg-preview.png', name: 'NEO-KAI 01 FOR THE ACADEMY',   tag: '03 / 08' },
-      { src: '1000027639-removebg-preview.png', name: 'NEO-KAI 01 FOR FOOTBALL',  tag: '04 / 08' },
+      { src: '1000027632-removebg-preview.png', name: 'NEO-KAI 01 FOR FOOTBALL', tag: '01 / 08' },
+      { src: '1000027635-removebg-preview.png', name: 'NEO-KAI 01 TO RUN', tag: '02 / 08' },
+      { src: '1000027638-removebg-preview.png', name: 'NEO-KAI 01 FOR THE ACADEMY', tag: '03 / 08' },
+      { src: '1000027639-removebg-preview.png', name: 'NEO-KAI 01 Gold', tag: '04 / 08' },
       { src: '1000027648-removebg-preview.png', name: 'NEO-WAI 01 SLIPPER', tag: '05 / 08' },
-      { src: '1000027649-removebg-preview.png', name: 'NEO-WAI 01 SPORTS FLIP-FLOPS',  tag: '06 / 08' },
-      { src: '1000027651-removebg-preview.png', name: 'NEO-LAI 01 SLIPPER WITH SMALL BRIM',tag: '07 / 08' },
+      { src: '1000027649-removebg-preview.png', name: 'NEO-WAI 01 SPORTS FLIP-FLOPS', tag: '06 / 08' },
+      { src: '1000027651-removebg-preview.png', name: 'NEO-LAI 01 SLIPPER WITH SMALL BRIM', tag: '07 / 08' },
       { src: '1000027652-removebg-preview.png', name: 'NEO-KAI 01 FOR HIKING', tag: '08 / 08' }
     ];
     const track = document.getElementById('carouselTrack'), dotsEl = document.getElementById('carouselDots');
@@ -1020,7 +1049,7 @@
       if (mode === 'dark') {
         body.classList.add('theme-light'); body.classList.remove('theme-secret'); body.style.background = '';
         ICON.textContent = '🌙'; mode = 'light';
-        updateParticles('#00f0ff', '#b45eff');
+        updateParticles('#00f0ff', '#b45eff'); // reset to default
       } else if (mode === 'light') {
         body.classList.remove('theme-light', 'theme-secret'); body.style.background = '';
         ICON.textContent = '☀'; mode = 'dark';
