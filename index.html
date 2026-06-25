@@ -302,7 +302,7 @@
     .footer-col a { display: block; color: rgba(255,255,255,0.45); text-decoration: none; font-size: 0.82rem; margin-bottom: 12px; transition: all .25s; }
     .footer-col a:hover { color: var(--cyan); transform: translateX(4px); }
     
-    /* SOCIAL ICONS - CORREÇÃO DE TAMANHO E CENTRALIZAÇÃO */
+    /* SOCIAL ICONS */
     .social-icons {
       display: flex;
       align-items: center;
@@ -706,12 +706,13 @@
     <h2 class="section-title">Every Line.<br><span class="glow-text">One Empire.</span></h2>
     <p class="section-sub">Laser-engineered performance meets street culture. Six silhouettes. One declaration.</p>
     <div class="card-grid">
-      <div class="prod-card"><img src="" alt="NEO-KAI Gold"><div class="prod-info"><div class="prod-name">NEO-KAI 01 Gold</div><div class="prod-price">$189</div><button class="notify-btn-card" onclick="openNotifyModal()">Notify Me</button></div></div>
-      <div class="prod-card"><img src="" alt="NEO-KAI Academy"><div class="prod-info"><div class="prod-name">NEO-KAI 01 FOR THE ACADEMY</div><div class="prod-price">$189</div><button class="notify-btn-card" onclick="openNotifyModal()">Notify Me</button></div></div>
-      <div class="prod-card"><img src="" alt="NEO-KAI Football"><div class="prod-info"><div class="prod-name">NEO-KAI 01 FOR FOOTBALL</div><div class="prod-price">$189</div><button class="notify-btn-card" onclick="openNotifyModal()">Notify Me</button></div></div>
-      <div class="prod-card"><img src="" alt="NEO-WAI Slipper"><div class="prod-info"><div class="prod-name">NEO-WAI 01 SLIPPER</div><div class="prod-price">$150</div><button class="notify-btn-card" onclick="openNotifyModal()">Coming Soon</button></div></div>
-      <div class="prod-card"><img src="" alt="NEO-WAI Flip"><div class="prod-info"><div class="prod-name">NEO-WAI 01 SPORTS FLIP-FLOPS</div><div class="prod-price">$150</div><button class="notify-btn-card" onclick="openNotifyModal()">Notify Me</button></div></div>
-      <div class="prod-card"><img src="" alt="NEO-LAI Slipper"><div class="prod-info"><div class="prod-name">NEO-LAI 01 SLIPPER WITH SMALL BRIM</div><div class="prod-price">$150</div><button class="notify-btn-card" onclick="openNotifyModal()">Early Access</button></div></div>
+      <!-- Preencha os src="" abaixo com os links reais do GitHub -->
+      <div class="prod-card"><img src="" alt="NEO-KAI 01 Gold"><div class="prod-info"><div class="prod-name">NEO-KAI 01 Gold</div><div class="prod-price">$189</div><button class="notify-btn-card" onclick="openNotifyModal()">Notify Me</button></div></div>
+      <div class="prod-card"><img src="" alt="NEO-KAI 01 FOR THE ACADEMY"><div class="prod-info"><div class="prod-name">NEO-KAI 01 FOR THE ACADEMY</div><div class="prod-price">$189</div><button class="notify-btn-card" onclick="openNotifyModal()">Notify Me</button></div></div>
+      <div class="prod-card"><img src="" alt="NEO-KAI 01 FOR FOOTBALL"><div class="prod-info"><div class="prod-name">NEO-KAI 01 FOR FOOTBALL</div><div class="prod-price">$189</div><button class="notify-btn-card" onclick="openNotifyModal()">Notify Me</button></div></div>
+      <div class="prod-card"><img src="" alt="NEO-WAI 01 SLIPPER"><div class="prod-info"><div class="prod-name">NEO-WAI 01 SLIPPER</div><div class="prod-price">$150</div><button class="notify-btn-card" onclick="openNotifyModal()">Coming Soon</button></div></div>
+      <div class="prod-card"><img src="" alt="NEO-WAI 02 SPORTS FLIP-FLOPS"><div class="prod-info"><div class="prod-name">NEO-WAI 02 SPORTS FLIP-FLOPS</div><div class="prod-price">$150</div><button class="notify-btn-card" onclick="openNotifyModal()">Notify Me</button></div></div>
+      <div class="prod-card"><img src="" alt="NEO-LAI 01 SLIPPER WITH SMALL BRIM"><div class="prod-info"><div class="prod-name">NEO-LAI 01 SLIPPER WITH SMALL BRIM</div><div class="prod-price">$150</div><button class="notify-btn-card" onclick="openNotifyModal()">Early Access</button></div></div>
     </div>
   </div>
 </section>
@@ -1161,20 +1162,20 @@
   function openPaymentLink() { if (currentPaymentUrl) window.open(currentPaymentUrl, '_blank'); }
   document.getElementById('processingOverlay').addEventListener('click', function(e) { if (e.target === this) { this.style.display = 'none'; currentPaymentUrl = null; } });
 
-  /* CAROUSEL - 11 IMAGENS ATUALIZADAS */
+  /* CAROUSEL - 11 IMAGENS ATUALIZADAS COM OS NOMES FORNECIDOS */
   (function initCarousel() {
     const IMAGES = [
-      { src: '', name: 'NEO-KAI 01 FOR HIKING', tag: '01 / 11' },
-      { src: '', name: 'NEO-KAI 01 FOR RACING', tag: '02 / 11' },
-      { src: '', name: 'NEO-KAI 01 FOR ACADEMIC', tag: '03 / 11' },
-      { src: '', name: 'NEO-KAI 01 FOR FOOTBALL', tag: '04 / 11' },
-      { src: '', name: 'NEO-WAI 01 SLIPPER FOR LEISURE', tag: '05 / 11' },
-      { src: '', name: 'NEO-WAI 02 SPORTS FLIP-FLOPS', tag: '06 / 11' },
-      { src: '', name: 'NEO-LAI 01 SLIPPER WITH A SHORT BRIM', tag: '07 / 11' },
-      { src: '', name: 'NEO-LAI 02 SLIPPER WITH LONG BRIM', tag: '08 / 11' },
-      { src: '', name: 'NEO-MAI 01 HIGH HEELS', tag: '09 / 11' },
-      { src: '', name: 'NEO-MAI 02 LOW HEELS', tag: '10 / 11' },
-      { src: '', name: 'NEO-VAI 01 LEATHER BOOT', tag: '11 / 11' }
+      { src: 'removebg-preview.png', name: 'NEO-KAI 01 FOR HIKING', tag: '01 / 11' },
+      { src: '1000027635-removebg-preview.png', name: 'NEO-KAI 01 FOR RACING', tag: '02 / 11' },
+      { src: '1000027638-removebg-preview.png', name: 'NEO-KAI 01 FOR ACADEMIC', tag: '03 / 11' },
+      { src: '1000027639-removebg-preview.png', name: 'NEO-KAI 01 FOR FOOTBALL', tag: '04 / 11' },
+      { src: '1000027648-removebg-preview.png', name: 'NEO-WAI 01 SLIPPER FOR LEISURE', tag: '05 / 11' },
+      { src: '1000027649-removebg-preview.png', name: 'NEO-WAI 02 SPORTS FLIP-FLOPS', tag: '06 / 11' },
+      { src: '1000027651-removebg-preview.png', name: 'NEO-LAI 01 SLIPPER WITH A SHORT BRIM', tag: '07 / 11' },
+      { src: '1000027652-removebg-preview.png', name: 'NEO-LAI 02 SLIPPER WITH LONG BRIM', tag: '08 / 11' },
+      { src: '1000030702-removebg-preview.png', name: 'NEO-MAI 01 HIGH HEELS', tag: '09 / 11' },
+      { src: '1000030703-removebg-preview.png', name: 'NEO-MAI 02 LOW HEELS', tag: '10 / 11' },
+      { src: '123 Sem Título_20260625133036.png', name: 'NEO-VAI 01 LEATHER BOOT', tag: '11 / 11' }
     ];
     const track = document.getElementById('carouselTrack'), dotsEl = document.getElementById('carouselDots');
     if (!track || !dotsEl) return;
