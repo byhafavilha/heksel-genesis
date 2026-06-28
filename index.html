@@ -1135,6 +1135,7 @@
   document.getElementById('orderModalOverlay').addEventListener('click', function(e) { if (e.target === this) closeOrderModal(); });
 
   async function submitOrder(forcePlan = null) {
+    // 1. Coleta dos dados do formulário
     const brandName = document.getElementById('brandNameInput').value.trim();
     const contactDetail = document.getElementById('contactDetailInput').value.trim();
     const contactMethod = document.querySelector('input[name="contactMethod"]:checked')?.value || 'gmail';
@@ -1153,8 +1154,23 @@
       finalInvestment = Math.round(investment * (1 - discountCount * 0.10));
     }
 
+    // Criação do objeto payload (usado para ambos os fluxos)
+    const payload = {
+      brandName,
+      contactMethod,
+      contactDetail,
+      operationType,
+      pricingPlan: isPremium ? 'premium' : 'freemium',
+      investment: isPremium ? finalInvestment : 0,
+      discountApplied: isPremium ? discountApplied : 0,
+      timestamp: new Date().toISOString()
+    };
+
     closeOrderModal();
 
+    // ==========================================================
+    // FLUXO FREEMIUM: REGISTRO SIMPLES NO FIREBASE
+    // ==========================================================
     if (!isPremium) {
       document.getElementById('processingOverlay').style.display = 'flex';
       document.getElementById('processingTitle').textContent = '⚡ Trosk AI routing your project...';
@@ -1168,52 +1184,49 @@
     }
 
     // ==========================================================
-    // 4. FLUXO PREMIUM: CHAMADA AO WEBHOOK DO MAKE
+    // FLUXO PREMIUM BLINDADO ANTI-CORS (100% CELULAR)
     // ==========================================================
+    const MAKE_URL = 'https://hook.us2.make.com/f4f2ufisvcr3kk1f6rp5z370c7489i6y';
+    // Usando a ponte pública allorigins.win no formato RAW para suportar POST com JSON
+    const PROXY_URL = 'https://api.allorigins.win/raw?url=' + encodeURIComponent(MAKE_URL);
+
     document.getElementById('processingOverlay').style.display = 'flex';
     document.getElementById('processingTitle').textContent = '⚡ Gerando seu PIX...';
-    document.getElementById('processingSub').textContent = 'Aguardando resposta do Asaas via Make.';
+    document.getElementById('processingSub').textContent = 'Aguardando resposta segura da rede.';
     document.getElementById('btnPayInvoice').classList.remove('show');
 
     try {
-      const payload = {
-        brandName: brandName,
-        contactDetail: contactDetail,
-        contactMethod: contactMethod,
-        operationType: operationType,
-        investment: finalInvestment,
-        discountApplied: discountApplied,
-        dueDate: new Date().toISOString().split('T')[0]
-      };
-
-      // URL do seu Webhook do Make
-      const MAKE_WEBHOOK_URL = 'https://hook.us2.make.com/f4f2ufisvcr3kk1f6rp5z370c7489i6y';
-
-      const response = await fetch(MAKE_WEBHOOK_URL, {
+      const response = await fetch(PROXY_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload),
-        mode: 'cors'
+        body: JSON.stringify(payload)
       });
-
+      
       const data = await response.json();
+      
+      console.log('📦 RESPOSTA DO MAKE (Via Proxy Celular):', data);
 
-      // 🚀 DEPURAÇÃO: Veja no console (F12) o que chegou do Make
-      console.log('📦 RESPOSTA DO MAKE (JSON bruto):', data);
-
-      // 🌟 CORREÇÃO: Leitura EXATA das chaves pixImage e pixPayload
-      const pixImage = data.pixImage;
-      const pixPayload = data.pixPayload;
-
-      // Verifica se os dados vieram e não estão vazios
-      if (!pixImage || !pixPayload || pixImage.length === 0 || pixPayload.length === 0) {
-        console.error('❌ ERRO: As chaves pixImage ou pixPayload chegaram vazias ou são inválidas!');
-        console.log('📌 pixImage recebido:', pixImage);
-        console.log('📌 pixPayload recebido:', pixPayload);
-        throw new Error('Formato de resposta do Make inválido. As chaves pixImage ou pixPayload não foram encontradas.');
+      function deepFind(obj, key) {
+        if (!obj || typeof obj !== 'object') return undefined;
+        if (obj.hasOwnProperty(key)) return obj[key];
+        for (let k in obj) {
+          if (typeof obj[k] === 'object') {
+            let found = deepFind(obj[k], key);
+            if (found !== undefined) return found;
+          }
+        }
+        return undefined;
       }
 
-      // 5. Renderização Dinâmica do QR Code e Cópia e Cola
+      const pixImage = deepFind(data, 'pixImage');
+      const pixPayload = deepFind(data, 'pixPayload');
+
+      if (!pixImage || !pixPayload || pixImage.length === 0 || pixPayload.length === 0) {
+        console.error('❌ Chaves não encontradas no JSON:', data);
+        throw new Error('Formato do Pix não reconhecido na resposta.');
+      }
+
+      // 5. Renderização Dinâmica do QR Code e Cópia e Cola (Mantida sua estrutura original perfeita)
       const processingCard = document.getElementById('processingCard');
       processingCard.innerHTML = `
         <h2 style="color:var(--cyan);">Pagamento PIX gerado!</h2>
@@ -1231,7 +1244,7 @@
       db.collection('orders').add(firestorePayload).catch(e => console.warn(e));
 
     } catch (error) {
-      console.error('Erro na integração com o Make:', error);
+      console.error('Erro na integração com o Proxy:', error);
       document.getElementById('processingTitle').textContent = '❌ Erro no pagamento';
       document.getElementById('processingSub').textContent = error.message || 'Tente novamente mais tarde.';
       document.getElementById('btnPayInvoice').classList.remove('show');
