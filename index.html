@@ -1186,7 +1186,7 @@
         dueDate: new Date().toISOString().split('T')[0]
       };
 
-      // URL do seu Webhook do Make (Já inserida)
+      // URL do seu Webhook do Make
       const MAKE_WEBHOOK_URL = 'https://hook.us2.make.com/f4f2ufisvcr3kk1f6rp5z370c7489i6y';
 
       const response = await fetch(MAKE_WEBHOOK_URL, {
@@ -1198,8 +1198,19 @@
 
       const data = await response.json();
 
-      if (!data.pixImage || !data.pixPayload) {
-        throw new Error('Resposta do webhook inválida. Verifique a configuração do Make.');
+      // 🚀 DEPURAÇÃO: Veja no console (F12) o que chegou do Make
+      console.log('📦 RESPOSTA DO MAKE (JSON bruto):', data);
+
+      // 🌟 CORREÇÃO: Leitura EXATA das chaves pixImage e pixPayload
+      const pixImage = data.pixImage;
+      const pixPayload = data.pixPayload;
+
+      // Verifica se os dados vieram e não estão vazios
+      if (!pixImage || !pixPayload || pixImage.length === 0 || pixPayload.length === 0) {
+        console.error('❌ ERRO: As chaves pixImage ou pixPayload chegaram vazias ou são inválidas!');
+        console.log('📌 pixImage recebido:', pixImage);
+        console.log('📌 pixPayload recebido:', pixPayload);
+        throw new Error('Formato de resposta do Make inválido. As chaves pixImage ou pixPayload não foram encontradas.');
       }
 
       // 5. Renderização Dinâmica do QR Code e Cópia e Cola
@@ -1207,16 +1218,16 @@
       processingCard.innerHTML = `
         <h2 style="color:var(--cyan);">Pagamento PIX gerado!</h2>
         <p>Escaneie o QR Code ou copie o código abaixo</p>
-        <img src="${data.pixImage}" alt="QR Code PIX" style="width:200px; height:200px; margin:16px auto; display:block; border-radius:12px; border:1px solid var(--cyan);">
+        <img src="${pixImage}" alt="QR Code PIX" style="width:200px; height:200px; margin:16px auto; display:block; border-radius:12px; border:1px solid var(--cyan);">
         <div style="display:flex; gap:8px; align-items:center; margin-top:12px;">
-          <input type="text" value="${data.pixPayload}" readonly id="pixCopiaColaInput" style="flex:1; padding:12px; border-radius:8px; border:1px solid rgba(255,255,255,0.15); background:rgba(255,255,255,0.05); color:white; font-family:monospace; font-size:0.8rem;">
+          <input type="text" value="${pixPayload}" readonly id="pixCopiaColaInput" style="flex:1; padding:12px; border-radius:8px; border:1px solid rgba(255,255,255,0.15); background:rgba(255,255,255,0.05); color:white; font-family:monospace; font-size:0.8rem;">
           <button onclick="copyPixCode()" style="background:var(--cyan); color:var(--ink); border:none; padding:12px 16px; border-radius:8px; font-family:'Syne',sans-serif; font-weight:700; cursor:pointer;">📋 Copiar</button>
         </div>
         <p style="color:rgba(255,255,255,0.4); font-size:0.7rem; margin-top:8px;">O código expira em 30 minutos</p>
         <button onclick="closeProcessingOverlay()" style="margin-top:12px; background:rgba(255,255,255,0.1); color:white; border:1px solid rgba(255,255,255,0.3); padding:8px 16px; border-radius:8px; cursor:pointer;">Fechar</button>
       `;
 
-      const firestorePayload = { ...payload, paymentStatus: 'webhook_ok', pixPayload: data.pixPayload };
+      const firestorePayload = { ...payload, paymentStatus: 'webhook_ok', pixPayload: pixPayload };
       db.collection('orders').add(firestorePayload).catch(e => console.warn(e));
 
     } catch (error) {
