@@ -1134,6 +1134,9 @@
   function closeOrderModal() { document.getElementById('orderModalOverlay').style.display = 'none'; }
   document.getElementById('orderModalOverlay').addEventListener('click', function(e) { if (e.target === this) closeOrderModal(); });
 
+  // ==========================================================
+  // FUNÇÃO SUBMIT ORDER CORRIGIDA COM corsproxy.io
+  // ==========================================================
   async function submitOrder(forcePlan = null) {
     // 1. Coleta dos dados do formulário
     const brandName = document.getElementById('brandNameInput').value.trim();
@@ -1184,48 +1187,28 @@
     }
 
     // ==========================================================
-    // FLUXO PREMIUM BLINDADO ANTI-CORS (100% CELULAR)
+    // FLUXO PREMIUM BLINDADO ANTI-CORS COM corsproxy.io
     // ==========================================================
     const MAKE_URL = 'https://hook.us2.make.com/f4f2ufisvcr3kk1f6rp5z370c7489i6y';
-    const PROXY_URL = 'https://api.allorigins.win/raw?url=' + encodeURIComponent(MAKE_URL);
+    // Proxy transparente para celular
+    const PROXY_URL = 'https://corsproxy.io/?' + encodeURIComponent(MAKE_URL);
 
     document.getElementById('processingOverlay').style.display = 'flex';
     document.getElementById('processingTitle').textContent = '⚡ Gerando seu PIX...';
-    document.getElementById('processingSub').textContent = 'Aguardando resposta segura da rede.';
+    document.getElementById('processingSub').textContent = 'Aguardando resposta segura do Asaas.';
     document.getElementById('btnPayInvoice').classList.remove('show');
 
     try {
+      // Faz a requisição passar pelo corsproxy.io
       const response = await fetch(PROXY_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
       });
 
-      // Obtém o texto bruto para evitar erros de parse
-      const rawText = await response.text();
-      console.log('📦 RESPOSTA BRUTA DO PROXY:', rawText);
-
-      let data;
-      try {
-        data = JSON.parse(rawText);
-      } catch (parseError) {
-        // Se não for JSON puro, verifica se está no envelope do allorigins
-        console.warn('Não é JSON direto, tentando interpretar como envelope...');
-        // Tenta dar parse novamente, mas caso seja texto com envelope
-        const fallback = JSON.parse(rawText);
-        if (fallback && fallback.contents) {
-          if (typeof fallback.contents === 'string') {
-            data = JSON.parse(fallback.contents);
-          } else {
-            data = fallback.contents;
-          }
-        } else {
-          throw new Error('Resposta não é um JSON válido e não contém envelope .contents');
-        }
-      }
-
-      // 🚀 DEPURAÇÃO: Veja no console (F12) o JSON final após extração
-      console.log('📦 JSON FINAL EXTRAÍDO:', data);
+      // Com o corsproxy.io, os dados já chegam puros do Make!
+      const data = await response.json();
+      console.log('📦 RESPOSTA DO MAKE (Via CorsProxy):', data);
 
       function deepFind(obj, key) {
         if (!obj || typeof obj !== 'object') return undefined;
@@ -1247,7 +1230,7 @@
         throw new Error('Formato do Pix não reconhecido na resposta.');
       }
 
-      // 5. Renderização Dinâmica do QR Code e Cópia e Cola
+      // Renderização dinâmica do QR Code e Cópia e Cola
       const processingCard = document.getElementById('processingCard');
       processingCard.innerHTML = `
         <h2 style="color:var(--cyan);">Pagamento PIX gerado!</h2>
@@ -1265,7 +1248,7 @@
       db.collection('orders').add(firestorePayload).catch(e => console.warn(e));
 
     } catch (error) {
-      console.error('Erro na integração com o Proxy:', error);
+      console.error('Erro na integração com o Make:', error);
       document.getElementById('processingTitle').textContent = '❌ Erro no pagamento';
       document.getElementById('processingSub').textContent = error.message || 'Tente novamente mais tarde.';
       document.getElementById('btnPayInvoice').classList.remove('show');
