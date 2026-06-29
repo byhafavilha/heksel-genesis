@@ -524,29 +524,30 @@
     .close-modal { position: absolute; top: 14px; right: 18px; font-size: 24px; background: none; border: none; color: rgba(255,255,255,0.35); cursor: pointer; transition: color 0.3s; }
     .close-modal:hover { color: var(--cyan); }
 
-    /* ═══ CONTACT METHOD (CORRIGIDO: TAMANHO UNIFORME) ═══ */
+    /* ═══ CONTACT METHOD (LAYOUT UNIFORME CORRIGIDO) ═══ */
     .contact-method-row {
       display: flex;
+      flex-wrap: wrap;
       gap: 12px;
       justify-content: center;
       margin-bottom: 4px;
-      flex-wrap: wrap;
+      width: 100%;
     }
     .contact-btn {
-      flex: 1;
+      flex: 1 1 80px;
       display: flex;
-      flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 4px;
-      padding: 14px 8px;
+      gap: 10px;
+      padding: 14px 10px;
       border-radius: 12px;
       border: 1px solid rgba(255,255,255,0.10);
       background: rgba(255,255,255,0.02);
       cursor: pointer;
       transition: all 0.4s var(--ease);
-      min-width: 80px;
+      box-sizing: border-box;
       min-height: 80px;
+      width: 100%;
       text-align: center;
     }
     .contact-btn img {
@@ -554,6 +555,7 @@
       height: 32px;
       object-fit: contain;
       transition: transform 0.3s;
+      flex-shrink: 0;
     }
     .contact-btn span {
       font-family: 'Syne', sans-serif;
@@ -695,7 +697,7 @@
       .footer-bottom { justify-content: center; flex-direction: column; align-items: center; gap: 8px; }
       .footer-logo { text-align: center; } .social-icons { justify-content: center; } .footer-copy { text-align: center; }
       .carousel-track { min-height: 360px; } .carousel-slide img { max-width: 85vw; } .carousel-arrow { width: 40px; height: 40px; }
-      .contact-method-row { flex-direction: column; align-items: stretch; }
+      .contact-method-row { flex-direction: row; flex-wrap: wrap; }
       #createAdvanceModal .contact-method-row { flex-direction: row; flex-wrap: wrap; }
       #createAdvanceModal .contact-btn { flex: 1 1 70px; min-height: 70px; }
       .social-discount-row { flex-direction: column; }
@@ -940,7 +942,7 @@
   </div>
 </footer>
 
-<!-- NOTIFY ME MODAL (COM TAMANHOS UNIFORMES) -->
+<!-- NOTIFY ME MODAL -->
 <div class="modal-overlay" id="notifyModalOverlay">
   <div class="order-modal" id="notifyModal">
     <button class="close-modal" onclick="closeNotifyModal()">&times;</button>
@@ -1631,7 +1633,11 @@
   function closeOrderModal() { document.getElementById('orderModalOverlay').style.display = 'none'; }
   document.getElementById('orderModalOverlay').addEventListener('click', function(e) { if (e.target === this) closeOrderModal(); });
 
+  // ==========================================================
+  // FUNÇÃO SUBMIT ORDER (CHAMADA DIRETA AO MAKE - SEM PROXY)
+  // ==========================================================
   async function submitOrder(forcePlan = null) {
+    // 1. Coleta dos dados do formulário
     const brandName = document.getElementById('brandNameInput').value.trim();
     const contactDetail = document.getElementById('contactDetailInput').value.trim();
     const contactMethod = document.querySelector('input[name="contactMethod"]:checked')?.value || 'gmail';
@@ -1650,6 +1656,7 @@
       finalInvestment = Math.round(investment * (1 - discountCount * 0.10));
     }
 
+    // Criação do objeto payload (usado para ambos os fluxos)
     const payload = {
       brandName,
       contactMethod,
@@ -1663,6 +1670,9 @@
 
     closeOrderModal();
 
+    // ==========================================================
+    // FLUXO FREEMIUM: REGISTRO SIMPLES NO FIREBASE
+    // ==========================================================
     if (!isPremium) {
       document.getElementById('processingOverlay').style.display = 'flex';
       document.getElementById('processingTitle').textContent = '⚡ Trosk AI routing your project...';
@@ -1675,6 +1685,9 @@
       return;
     }
 
+    // ==========================================================
+    // FLUXO PREMIUM (CHAMADA DIRETA - SEM PROXY!)
+    // ==========================================================
     const MAKE_URL = 'https://hook.us2.make.com/f4f2ufisvcr3kk1f6rp5z370c7489i6y';
 
     document.getElementById('processingOverlay').style.display = 'flex';
@@ -1689,32 +1702,28 @@
         body: JSON.stringify(payload)
       });
 
+      // Lendo o JSON purinho do Make sem intermediários
       const data = await response.json();
       console.log('📦 DATA PURA DO MAKE:', data);
 
-      const pixImage = data.pixImage || (data.result ? data.result.pixImage : undefined);
-      const pixPayload = data.pixPayload || (data.result ? data.result.pixPayload : undefined);
-
-      if (!pixImage || !pixPayload) {
-        console.error('❌ Chaves não encontradas diretamente:', data);
-        throw new Error('Chaves pixImage ou pixPayload ausentes na resposta ativa.');
+      // Se der erro ou as chaves não existirem, mostre o que veio na tela do celular do Hafa!
+      if (!data.pixImage || !data.pixPayload) {
+        alert("📡 DIAGNÓSTICO DO MAKE:\n" + JSON.stringify(data));
+        throw new Error('Formato do Pix não reconhecido na resposta.');
       }
 
-      const processingCard = document.getElementById('processingCard');
-      processingCard.innerHTML = `
-        <h2 style="color:var(--cyan);">Pagamento PIX gerado!</h2>
-        <p>Escaneie o QR Code ou copie o código abaixo</p>
-        <img src="${pixImage}" alt="QR Code PIX" style="width:200px; height:200px; margin:16px auto; display:block; border-radius:12px; border:1px solid var(--cyan);">
-        <div style="display:flex; gap:8px; align-items:center; margin-top:12px;">
-          <input type="text" value="${pixPayload}" readonly id="pixCopiaColaInput" style="flex:1; padding:12px; border-radius:8px; border:1px solid rgba(255,255,255,0.15); background:rgba(255,255,255,0.05); color:white; font-family:monospace; font-size:0.8rem;">
-          <button onclick="copyPixCode()" style="background:var(--cyan); color:var(--ink); border:none; padding:12px 16px; border-radius:8px; font-family:'Syne',sans-serif; font-weight:700; cursor:pointer;">📋 Copiar</button>
-        </div>
-        <p style="color:rgba(255,255,255,0.4); font-size:0.7rem; margin-top:8px;">O código expira em 30 minutos</p>
-        <button onclick="closeProcessingOverlay()" style="margin-top:12px; background:rgba(255,255,255,0.1); color:white; border:1px solid rgba(255,255,255,0.3); padding:8px 16px; border-radius:8px; cursor:pointer;">Fechar</button>
-      `;
-
-      const firestorePayload = { ...payload, paymentStatus: 'webhook_ok', pixPayload: pixPayload };
-      db.collection('orders').add(firestorePayload).catch(e => console.warn(e));
+      // Renderização do QR Code
+      document.getElementById('processingTitle').textContent = '✅ PIX GERADO!';
+      document.getElementById('processingSub').textContent = 'Efetue o pagamento para ativar sua licença.';
+      
+      const qrImg = document.getElementById('modalQrCode');
+      if (qrImg) qrImg.src = data.pixImage.startsWith('data:') ? data.pixImage : `data:image/png;base64,${data.pixImage}`;
+      
+      const codeInput = document.getElementById('modalPixCode');
+      if (codeInput) codeInput.value = data.pixPayload;
+      
+      document.getElementById('pixSection').style.display = 'block';
+      document.getElementById('btnPayInvoice').classList.add('show');
 
     } catch (error) {
       console.error('Erro na integração:', error);
