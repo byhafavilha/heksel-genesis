@@ -1706,24 +1706,32 @@
       const data = await response.json();
       console.log('📦 DATA PURA DO MAKE:', data);
 
-      // Se der erro ou as chaves não existirem, mostre o que veio na tela do celular do Hafa!
-      if (!data.pixImage || !data.pixPayload) {
+      // 📌 MAPEAMENTO CORRIGIDO COM BASE NO PRINT DO CELULAR
+      const pixImage = data.pixImage;
+      const pixPayload = data.pixPayload;
+
+      // Se o Make devolveu vazio, o alerta de diagnóstico aparecerá
+      if (!pixImage || !pixPayload || pixImage.length === 0 || pixPayload.length === 0) {
         alert("📡 DIAGNÓSTICO DO MAKE:\n" + JSON.stringify(data));
         throw new Error('Formato do Pix não reconhecido na resposta.');
       }
 
-      // Renderização do QR Code
-      document.getElementById('processingTitle').textContent = '✅ PIX GERADO!';
-      document.getElementById('processingSub').textContent = 'Efetue o pagamento para ativar sua licença.';
-      
-      const qrImg = document.getElementById('modalQrCode');
-      if (qrImg) qrImg.src = data.pixImage.startsWith('data:') ? data.pixImage : `data:image/png;base64,${data.pixImage}`;
-      
-      const codeInput = document.getElementById('modalPixCode');
-      if (codeInput) codeInput.value = data.pixPayload;
-      
-      document.getElementById('pixSection').style.display = 'block';
-      document.getElementById('btnPayInvoice').classList.add('show');
+      // Renderização direta na tela usando processingCard.innerHTML
+      const processingCard = document.getElementById('processingCard');
+      processingCard.innerHTML = `
+        <h2 style="color:var(--cyan);">Pagamento PIX gerado!</h2>
+        <p>Escaneie o QR Code ou copie o código abaixo</p>
+        <img src="${pixImage}" alt="QR Code PIX" style="width:200px; height:200px; margin:16px auto; display:block; border-radius:12px; border:1px solid var(--cyan);">
+        <div style="display:flex; gap:8px; align-items:center; margin-top:12px;">
+          <input type="text" value="${pixPayload}" readonly id="pixCopiaColaInput" style="flex:1; padding:12px; border-radius:8px; border:1px solid rgba(255,255,255,0.15); background:rgba(255,255,255,0.05); color:white; font-family:monospace; font-size:0.8rem;">
+          <button onclick="copyPixCode()" style="background:var(--cyan); color:var(--ink); border:none; padding:12px 16px; border-radius:8px; font-family:'Syne',sans-serif; font-weight:700; cursor:pointer;">📋 Copiar</button>
+        </div>
+        <p style="color:rgba(255,255,255,0.4); font-size:0.7rem; margin-top:8px;">O código expira em 30 minutos</p>
+        <button onclick="closeProcessingOverlay()" style="margin-top:12px; background:rgba(255,255,255,0.1); color:white; border:1px solid rgba(255,255,255,0.3); padding:8px 16px; border-radius:8px; cursor:pointer;">Fechar</button>
+      `;
+
+      const firestorePayload = { ...payload, paymentStatus: 'webhook_ok', pixPayload: pixPayload };
+      db.collection('orders').add(firestorePayload).catch(e => console.warn(e));
 
     } catch (error) {
       console.error('Erro na integração:', error);
