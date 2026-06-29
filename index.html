@@ -87,12 +87,12 @@
     body.theme-light .brand-section h2, body.theme-light .brand-section > p { color: #08080d; }
     body.theme-light .brand-section > p { color: rgba(0,0,0,.55); }
     body.theme-light footer { background: #1a1a2e; }
-    body.theme-light .order-modal, body.theme-light #notifyModal { background: rgba(255,255,255,0.98); border-color: rgba(0,180,220,0.2); color: #08080d; }
-    body.theme-light .order-modal h2, body.theme-light #notifyModal h2, body.theme-light .order-modal .modal-subtitle, body.theme-light #notifyModal .modal-subtitle { color: #08080d; }
-    body.theme-light .order-modal .close-modal, body.theme-light #notifyModal .close-modal { color: #08080d; }
-    body.theme-light .order-modal .contact-btn, body.theme-light #notifyModal .contact-btn { border-color: rgba(0,0,0,0.1); background: rgba(0,0,0,0.02); }
-    body.theme-light .order-modal .contact-btn span, body.theme-light #notifyModal .contact-btn span { color: #08080d; }
-    body.theme-light .order-modal .contact-btn:hover, body.theme-light #notifyModal .contact-btn:hover { background: rgba(0,0,0,0.04); }
+    body.theme-light .order-modal, body.theme-light #notifyModal, body.theme-light #createAdvanceModal { background: rgba(255,255,255,0.98); border-color: rgba(0,180,220,0.2); color: #08080d; }
+    body.theme-light .order-modal h2, body.theme-light #notifyModal h2, body.theme-light #createAdvanceModal h2, body.theme-light .order-modal .modal-subtitle, body.theme-light #notifyModal .modal-subtitle, body.theme-light #createAdvanceModal .modal-subtitle { color: #08080d; }
+    body.theme-light .order-modal .close-modal, body.theme-light #notifyModal .close-modal, body.theme-light #createAdvanceModal .close-modal { color: #08080d; }
+    body.theme-light .order-modal .contact-btn, body.theme-light #notifyModal .contact-btn, body.theme-light #createAdvanceModal .contact-btn { border-color: rgba(0,0,0,0.1); background: rgba(0,0,0,0.02); }
+    body.theme-light .order-modal .contact-btn span, body.theme-light #notifyModal .contact-btn span, body.theme-light #createAdvanceModal .contact-btn span { color: #08080d; }
+    body.theme-light .order-modal .contact-btn:hover, body.theme-light #notifyModal .contact-btn:hover, body.theme-light #createAdvanceModal .contact-btn:hover { background: rgba(0,0,0,0.04); }
     body.theme-light .package-item { border-color: rgba(0,0,0,.1); }
     body.theme-light .package-item strong { color: #08080d; }
 
@@ -524,12 +524,51 @@
     .close-modal { position: absolute; top: 14px; right: 18px; font-size: 24px; background: none; border: none; color: rgba(255,255,255,0.35); cursor: pointer; transition: color 0.3s; }
     .close-modal:hover { color: var(--cyan); }
 
-    /* CONTACT METHOD */
-    .contact-method-row { display: flex; gap: 12px; justify-content: center; margin-bottom: 4px; flex-wrap: wrap; }
-    .contact-btn { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 14px 8px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.10); background: rgba(255,255,255,0.02); cursor: pointer; transition: all 0.4s var(--ease); }
-    .contact-btn img { width: 32px; height: 32px; object-fit: contain; transition: transform 0.3s; }
-    .contact-btn span { font-family: 'Syne', sans-serif; font-size: 0.6rem; font-weight: 700; letter-spacing: 0.08em; color: rgba(255,255,255,0.5); text-transform: uppercase; }
-    .contact-btn:hover { transform: scale(1.05); border-color: rgba(255,255,255,0.2); background: rgba(255,255,255,0.04); }
+    /* ═══ CONTACT METHOD (CORRIGIDO: TAMANHO UNIFORME) ═══ */
+    .contact-method-row {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      margin-bottom: 4px;
+      flex-wrap: wrap;
+    }
+    .contact-btn {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      padding: 14px 8px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.10);
+      background: rgba(255,255,255,0.02);
+      cursor: pointer;
+      transition: all 0.4s var(--ease);
+      min-width: 80px;
+      min-height: 80px;
+      text-align: center;
+    }
+    .contact-btn img {
+      width: 32px;
+      height: 32px;
+      object-fit: contain;
+      transition: transform 0.3s;
+    }
+    .contact-btn span {
+      font-family: 'Syne', sans-serif;
+      font-size: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: rgba(255,255,255,0.5);
+      text-transform: uppercase;
+      line-height: 1.2;
+    }
+    .contact-btn:hover {
+      transform: scale(1.05);
+      border-color: rgba(255,255,255,0.2);
+      background: rgba(255,255,255,0.04);
+    }
     .contact-btn:hover img { transform: scale(1.1); }
     .contact-btn.gmail-btn:hover { border-color: var(--gmail-red); box-shadow: 0 0 20px rgba(234,67,53,0.2); }
     .contact-btn.discord-btn:hover { border-color: var(--discord-purple); box-shadow: 0 0 20px rgba(88,101,242,0.2); }
@@ -539,6 +578,18 @@
     .contact-btn.selected { border-color: var(--cyan); background: rgba(0,240,255,0.06); box-shadow: 0 0 20px rgba(0,240,255,0.15); animation: ping 1.4s ease-out infinite; }
     .contact-btn.selected img { transform: scale(1.1); }
     .contact-btn.dimmed { opacity: 0.35; transform: scale(0.96); pointer-events: none; }
+
+    /* ═══ CREATE IN ADVANCE MODAL (FLUXO INTERNACIONAL) ═══ */
+    .step-advance { display: none; }
+    .step-advance.active-step { display: block; }
+    #createAdvanceModal .contact-method-row {
+      flex-wrap: wrap;
+    }
+    #createAdvanceModal .contact-btn {
+      flex: 1 1 100px;
+      max-width: 120px;
+      min-height: 80px;
+    }
 
     /* INVESTMENT */
     .investment-row { display: flex; flex-wrap: wrap; gap: 8px; margin: 8px 0; }
@@ -644,7 +695,9 @@
       .footer-bottom { justify-content: center; flex-direction: column; align-items: center; gap: 8px; }
       .footer-logo { text-align: center; } .social-icons { justify-content: center; } .footer-copy { text-align: center; }
       .carousel-track { min-height: 360px; } .carousel-slide img { max-width: 85vw; } .carousel-arrow { width: 40px; height: 40px; }
-      .contact-method-row { flex-direction: column; }
+      .contact-method-row { flex-direction: column; align-items: stretch; }
+      #createAdvanceModal .contact-method-row { flex-direction: row; flex-wrap: wrap; }
+      #createAdvanceModal .contact-btn { flex: 1 1 70px; min-height: 70px; }
       .social-discount-row { flex-direction: column; }
     }
 
@@ -659,6 +712,9 @@
       .footer-logo { align-items: center; } .footer-col a { display: inline-block; margin: 0 8px 8px 0; }
       .social-icons { justify-content: center; gap: 18px; } .footer-bottom { flex-direction: column; align-items: center; gap: 6px; } .footer-copy { font-size: 0.55rem; }
       .carousel-track { min-height: 280px; } .carousel-nav { gap: 12px; } .carousel-dots { gap: 8px; } .carousel-arrow { width: 36px; height: 36px; }
+      .contact-btn { min-height: 70px; padding: 10px 4px; }
+      .contact-btn img { width: 28px; height: 28px; }
+      .contact-btn span { font-size: 0.55rem; }
     }
   </style>
 </head>
@@ -757,9 +813,10 @@
     <p data-i18n="brand_desc">Complete visual identity + professional website + digital ecosystem. From start to infinity.</p>
     
     <div class="cta-wrapper">
-      <a href="https://wa.me/5553991855262?text=Quero%20ativar%20meu%20CREATE%20IN%20ADVANCE!%20Vim%20pelo%20site%20e%20quero%20criar%20minha%20marca%20de%20elite%20agora." target="_blank" class="cta-advance">
+      <!-- BOTÃO CREATE IN ADVANCE AGORA ABRE O MODAL INTERNACIONAL -->
+      <button onclick="openCreateAdvanceModal()" class="cta-advance">
         CREATE IN ADVANCE <span>⚡</span>
-      </a>
+      </button>
       <button class="cta-brand" onclick="openOrderModal()">✦ Create My Brand ✦</button>
     </div>
     
@@ -883,13 +940,13 @@
   </div>
 </footer>
 
-<!-- NOTIFY ME MODAL (Atualizado com Instagram e TikTok) -->
+<!-- NOTIFY ME MODAL (COM TAMANHOS UNIFORMES) -->
 <div class="modal-overlay" id="notifyModalOverlay">
   <div class="order-modal" id="notifyModal">
     <button class="close-modal" onclick="closeNotifyModal()">&times;</button>
     <h2 data-i18n="notify_title">Stay Updated</h2>
     <p class="modal-subtitle" data-i18n="notify_sub">Choose your preferred notification channel</p>
-    <div class="contact-method-row" style="flex-direction:row; margin-top:20px;">
+    <div class="contact-method-row">
       <div class="contact-btn gmail-btn" onclick="redirectNotify('gmail')">
         <img src="g.logo.png" alt="Gmail"><span>Gmail</span>
       </div>
@@ -910,7 +967,45 @@
   </div>
 </div>
 
-<!-- MULTI-STEP ORDER MODAL (Atualizado com Instagram e TikTok) -->
+<!-- CREATE IN ADVANCE MODAL (NOVO FLUXO INTERNACIONAL) -->
+<div class="modal-overlay" id="createAdvanceModalOverlay">
+  <div class="order-modal" id="createAdvanceModal">
+    <button class="close-modal" onclick="closeCreateAdvanceModal()">&times;</button>
+    
+    <div class="step-advance active-step" id="advanceStep1">
+      <h2 data-i18n="advance_step1_title">Choose your Platform</h2>
+      <p class="modal-subtitle" data-i18n="advance_step1_sub">Select the social network you want to contact us on.</p>
+      <div class="contact-method-row">
+        <div class="contact-btn gmail-btn" onclick="advanceSelectPlatform('gmail')">
+          <img src="g.logo.png" alt="Gmail"><span>Gmail</span>
+        </div>
+        <div class="contact-btn discord-btn" onclick="advanceSelectPlatform('discord')">
+          <img src="d.logo.png" alt="Discord"><span>Discord</span>
+        </div>
+        <div class="contact-btn whatsapp-btn" onclick="advanceSelectPlatform('whatsapp')">
+          <img src="w.logo.png" alt="WhatsApp"><span>WhatsApp</span>
+        </div>
+        <div class="contact-btn insta-btn" onclick="advanceSelectPlatform('instagram')">
+          <img src="instagram-heksel.png" alt="Instagram"><span>Instagram</span>
+        </div>
+        <div class="contact-btn tiktok-btn" onclick="advanceSelectPlatform('tiktok')">
+          <img src="tiktok-heksel.png" alt="TikTok"><span>TikTok</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="step-advance" id="advanceStep2">
+      <h2 data-i18n="advance_step2_title">Choose your Language</h2>
+      <p class="modal-subtitle" data-i18n="advance_step2_sub">Select your preferred language for the message.</p>
+      <div class="lang-selector" style="position:relative; top:0; right:0; width:100%; display:flex; background:transparent; padding:0; border:none; box-shadow:none;">
+        <input type="text" id="advanceLangSearch" placeholder="Search language..." style="width:100%;">
+        <div class="lang-list" id="advanceLangList" style="width:100%; max-height:200px;"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MULTI-STEP ORDER MODAL -->
 <div class="modal-overlay" id="orderModalOverlay">
   <div class="order-modal" id="orderModal">
     <button class="close-modal" onclick="closeOrderModal()">&times;</button>
@@ -1055,6 +1150,8 @@
       plan_freemium_modal: 'FREMIUM', plan_freemium_small: 'Apenas teste', plan_premium_modal: 'PREMIUM', plan_premium_small: 'Gerar Pix',
       step5_title: 'Passo 5 — Defina seu Investimento', step5_sub: 'Escolha seu orçamento e ganhe descontos sociais', investment_label: 'Investimento (R$) *', discount_label: 'Desconto Social (clique para seguir + ganhar)', step5_btn: 'ENVIAR PEDIDO PARA PRODUÇÃO',
       next_btn: 'Próximo →',
+      advance_step1_title: 'Escolha sua Plataforma', advance_step1_sub: 'Selecione a rede social para nos contatar.',
+      advance_step2_title: 'Escolha seu Idioma', advance_step2_sub: 'Selecione seu idioma preferido para a mensagem.',
       alerts: {
         brand_name: 'Por favor, insira o nome da sua marca.',
         contact_detail: 'Por favor, insira seu detalhe de contato.',
@@ -1091,6 +1188,8 @@
       plan_freemium_modal: 'FREMIUM', plan_freemium_small: 'Test only', plan_premium_modal: 'PREMIUM', plan_premium_small: 'Generate Pix',
       step5_title: 'Step 5 — Define your Investment', step5_sub: 'Choose your budget and earn social discounts', investment_label: 'Investment (R$) *', discount_label: 'Social Discount (click to follow + earn)', step5_btn: 'SEND ORDER TO PRODUCTION',
       next_btn: 'Next →',
+      advance_step1_title: 'Choose your Platform', advance_step1_sub: 'Select the social network you want to contact us on.',
+      advance_step2_title: 'Choose your Language', advance_step2_sub: 'Select your preferred language for the message.',
       alerts: {
         brand_name: 'Please enter your brand name.',
         contact_detail: 'Please enter your contact detail.',
@@ -1127,6 +1226,8 @@
       plan_freemium_modal: 'FREMIUM', plan_freemium_small: 'Solo prueba', plan_premium_modal: 'PREMIUM', plan_premium_small: 'Generar Pix',
       step5_title: 'Paso 5 — Define tu Inversión', step5_sub: 'Elige tu presupuesto y gana descuentos sociales', investment_label: 'Inversión (R$) *', discount_label: 'Descuento Social (clic para seguir + ganar)', step5_btn: 'ENVIAR PEDIDO A PRODUCCIÓN',
       next_btn: 'Siguiente →',
+      advance_step1_title: 'Elige tu Plataforma', advance_step1_sub: 'Selecciona la red social para contactarnos.',
+      advance_step2_title: 'Elige tu Idioma', advance_step2_sub: 'Selecciona tu idioma preferido para el mensaje.',
       alerts: {
         brand_name: 'Por favor, ingresa el nombre de tu marca.',
         contact_detail: 'Por favor, ingresa tu detalle de contacto.',
@@ -1163,6 +1264,8 @@
       plan_freemium_modal: 'FREMIUM', plan_freemium_small: '仅测试', plan_premium_modal: 'PREMIUM', plan_premium_small: '生成 Pix',
       step5_title: '第 5 步 — 确定您的投资', step5_sub: '选择您的预算并赚取社交折扣', investment_label: '投资金额 (R$) *', discount_label: '社交折扣（点击关注 + 赚取）', step5_btn: '发送订单至生产',
       next_btn: '下一步 →',
+      advance_step1_title: '选择您的平台', advance_step1_sub: '选择您想要联系我们的社交网络。',
+      advance_step2_title: '选择您的语言', advance_step2_sub: '选择您偏好的消息语言。',
       alerts: {
         brand_name: '请输入您的品牌名称。',
         contact_detail: '请输入您的联系方式。',
@@ -1214,33 +1317,28 @@
         if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA' || el.tagName === 'SELECT') {
           el.placeholder = t[key];
         } else {
-          el.innerHTML = t[key]; // Usa innerHTML para aceitar tags <br> e <span>
+          el.innerHTML = t[key];
         }
       }
     });
     langActiveLabel.textContent = code.toUpperCase();
-    // Atualizar placeholder específicos que não têm data-i18n
     document.getElementById('investmentManual').placeholder = t.alerts.investment.replace('R$ 1,000 and R$ 30,000.', '1.000 - 30.000');
     document.querySelector('#step5 label[style*="margin-top:14px;"]').textContent = t.discount_label;
     document.querySelector('#step5 .final-price-display').textContent = 'Final Price: R$ —';
-    // Re-aplicar placeholder dos inputs de passo que são dinâmicos
     document.getElementById('brandNameInput').placeholder = 'e.g. APEX STUDIO, ForceFit...';
     document.getElementById('siteLinkInput').placeholder = 'https://yoursite.com';
     document.getElementById('contactDetailInput').placeholder = t.contact_detail_label.replace(' *', '') + '...';
   }
 
-  // Sobrescrever alert para tradução automática
   const originalAlert = window.alert;
   window.alert = function(msg) {
     const t = i18n[currentLang].alerts;
     if (t[msg]) originalAlert(t[msg]);
     else originalAlert(msg);
   };
-  
-  // Inicializar idioma
+
   renderLangOptions();
   applyLanguage('en');
-  // Fechar seletor ao clicar fora
   document.addEventListener('click', (e) => {
     if (!langToggle.contains(e.target) && !langSelector.contains(e.target)) {
       langSelector.classList.remove('open');
@@ -1298,6 +1396,82 @@
   }
   document.getElementById('notifyModalOverlay').addEventListener('click', function(e) {
     if (e.target === this) closeNotifyModal();
+  });
+
+  // ── CREATE IN ADVANCE MODAL ──
+  let advanceSelectedPlatform = null;
+
+  function openCreateAdvanceModal() {
+    document.getElementById('createAdvanceModalOverlay').style.display = 'flex';
+    closeMobileMenu();
+    document.querySelectorAll('.step-advance').forEach(s => s.classList.remove('active-step'));
+    document.getElementById('advanceStep1').classList.add('active-step');
+    advanceSelectedPlatform = null;
+  }
+
+  function closeCreateAdvanceModal() {
+    document.getElementById('createAdvanceModalOverlay').style.display = 'none';
+  }
+
+  function advanceSelectPlatform(platform) {
+    advanceSelectedPlatform = platform;
+    document.querySelectorAll('.step-advance').forEach(s => s.classList.remove('active-step'));
+    document.getElementById('advanceStep2').classList.add('active-step');
+    renderAdvanceLangOptions();
+  }
+
+  function renderAdvanceLangOptions(query = '') {
+    const list = document.getElementById('advanceLangList');
+    list.innerHTML = '';
+    const filtered = langs.filter(l => l.label.toLowerCase().includes(query.toLowerCase()) || l.native.includes(query));
+    filtered.forEach(l => {
+      const div = document.createElement('div');
+      div.className = 'lang-option';
+      div.innerHTML = `<span>${l.native}</span> <span>${l.label}</span>`;
+      div.onclick = () => advanceRedirect(l.code);
+      list.appendChild(div);
+    });
+  }
+
+  document.getElementById('advanceLangSearch')?.addEventListener('input', (e) => renderAdvanceLangOptions(e.target.value));
+
+  function advanceRedirect(langCode) {
+    const messages = {
+      pt: 'Olá! Vim pelo site Heksel Genesis e quero ativar meu CREATE IN ADVANCE para criar minha marca de elite agora mesmo.',
+      en: 'Hello! I came through the Heksel Genesis website and I want to activate my CREATE IN ADVANCE to build my elite brand right now.',
+      es: '¡Hola! Vine a través del sitio web de Heksel Genesis y quiero activar mi CREATE IN ADVANCE para construir mi marca de élite ahora mismo.',
+      zh: '你好！我通过 Heksel Genesis 网站过来，我想立即激活我的 CREATE IN ADVANCE 来打造我的精英品牌。'
+    };
+    const message = messages[langCode] || messages.en;
+    let url = '';
+    switch(advanceSelectedPlatform) {
+      case 'gmail':
+        url = `mailto:hafavilhahafy@gmail.com?subject=CREATE%20IN%20ADVANCE%20Activation&body=${encodeURIComponent(message)}`;
+        break;
+      case 'whatsapp':
+        url = `https://wa.me/5553991855262?text=${encodeURIComponent(message)}`;
+        break;
+      case 'discord':
+        url = `https://discord.gg/Y8CNkKFNM`;
+        break;
+      case 'instagram':
+        url = `https://www.instagram.com/hafavilha`;
+        break;
+      case 'tiktok':
+        url = `https://vt.tiktok.com/ZSxbdSUg9/`;
+        break;
+      default:
+        alert('Please select a valid platform.');
+        return;
+    }
+    if (url) {
+      window.open(url, '_blank');
+      closeCreateAdvanceModal();
+    }
+  }
+
+  document.getElementById('createAdvanceModalOverlay').addEventListener('click', function(e) {
+    if (e.target === this) closeCreateAdvanceModal();
   });
 
   // ── GLOBALS ──
@@ -1457,11 +1631,7 @@
   function closeOrderModal() { document.getElementById('orderModalOverlay').style.display = 'none'; }
   document.getElementById('orderModalOverlay').addEventListener('click', function(e) { if (e.target === this) closeOrderModal(); });
 
-  // ==========================================================
-  // FUNÇÃO SUBMIT ORDER (CHAMADA DIRETA AO MAKE)
-  // ==========================================================
   async function submitOrder(forcePlan = null) {
-    // 1. Coleta dos dados do formulário
     const brandName = document.getElementById('brandNameInput').value.trim();
     const contactDetail = document.getElementById('contactDetailInput').value.trim();
     const contactMethod = document.querySelector('input[name="contactMethod"]:checked')?.value || 'gmail';
@@ -1480,7 +1650,6 @@
       finalInvestment = Math.round(investment * (1 - discountCount * 0.10));
     }
 
-    // Criação do objeto payload (usado para ambos os fluxos)
     const payload = {
       brandName,
       contactMethod,
@@ -1494,9 +1663,6 @@
 
     closeOrderModal();
 
-    // ==========================================================
-    // FLUXO FREEMIUM: REGISTRO SIMPLES NO FIREBASE
-    // ==========================================================
     if (!isPremium) {
       document.getElementById('processingOverlay').style.display = 'flex';
       document.getElementById('processingTitle').textContent = '⚡ Trosk AI routing your project...';
@@ -1509,9 +1675,6 @@
       return;
     }
 
-    // ==========================================================
-    // FLUXO PREMIUM (CHAMADA DIRETA - SEM PROXY!)
-    // ==========================================================
     const MAKE_URL = 'https://hook.us2.make.com/f4f2ufisvcr3kk1f6rp5z370c7489i6y';
 
     document.getElementById('processingOverlay').style.display = 'flex';
@@ -1526,11 +1689,9 @@
         body: JSON.stringify(payload)
       });
 
-      // Lendo o JSON purinho do Make sem intermediários
       const data = await response.json();
       console.log('📦 DATA PURA DO MAKE:', data);
 
-      // Garante a busca direta das chaves
       const pixImage = data.pixImage || (data.result ? data.result.pixImage : undefined);
       const pixPayload = data.pixPayload || (data.result ? data.result.pixPayload : undefined);
 
@@ -1539,7 +1700,6 @@
         throw new Error('Chaves pixImage ou pixPayload ausentes na resposta ativa.');
       }
 
-      // Renderização direta na tela
       const processingCard = document.getElementById('processingCard');
       processingCard.innerHTML = `
         <h2 style="color:var(--cyan);">Pagamento PIX gerado!</h2>
