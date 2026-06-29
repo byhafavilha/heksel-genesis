@@ -1135,7 +1135,7 @@
   document.getElementById('orderModalOverlay').addEventListener('click', function(e) { if (e.target === this) closeOrderModal(); });
 
   // ==========================================================
-  // FUNÇÃO SUBMIT ORDER CORRIGIDA COM corsproxy.io
+  // FUNÇÃO SUBMIT ORDER CORRIGIDA COM corsproxy.io E LEITURA DIRETA
   // ==========================================================
   async function submitOrder(forcePlan = null) {
     // 1. Coleta dos dados do formulário
@@ -1190,7 +1190,6 @@
     // FLUXO PREMIUM BLINDADO ANTI-CORS COM corsproxy.io
     // ==========================================================
     const MAKE_URL = 'https://hook.us2.make.com/f4f2ufisvcr3kk1f6rp5z370c7489i6y';
-    // Proxy transparente para celular
     const PROXY_URL = 'https://corsproxy.io/?' + encodeURIComponent(MAKE_URL);
 
     document.getElementById('processingOverlay').style.display = 'flex';
@@ -1199,38 +1198,26 @@
     document.getElementById('btnPayInvoice').classList.remove('show');
 
     try {
-      // Faz a requisição passar pelo corsproxy.io
       const response = await fetch(PROXY_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
       });
 
-      // Com o corsproxy.io, os dados já chegam puros do Make!
+      // Lendo o JSON purinho do Make sem intermediários
       const data = await response.json();
-      console.log('📦 RESPOSTA DO MAKE (Via CorsProxy):', data);
+      console.log('📦 DATA PURA DO MAKE:', data);
 
-      function deepFind(obj, key) {
-        if (!obj || typeof obj !== 'object') return undefined;
-        if (obj.hasOwnProperty(key)) return obj[key];
-        for (let k in obj) {
-          if (typeof obj[k] === 'object') {
-            let found = deepFind(obj[k], key);
-            if (found !== undefined) return found;
-          }
-        }
-        return undefined;
+      // Garante a busca direta das chaves
+      const pixImage = data.pixImage || (data.result ? data.result.pixImage : undefined);
+      const pixPayload = data.pixPayload || (data.result ? data.result.pixPayload : undefined);
+
+      if (!pixImage || !pixPayload) {
+        console.error('❌ Chaves não encontradas diretamente:', data);
+        throw new Error('Chaves pixImage ou pixPayload ausentes na resposta ativa.');
       }
 
-      const pixImage = deepFind(data, 'pixImage');
-      const pixPayload = deepFind(data, 'pixPayload');
-
-      if (!pixImage || !pixPayload || pixImage.length === 0 || pixPayload.length === 0) {
-        console.error('❌ Chaves não encontradas no JSON:', data);
-        throw new Error('Formato do Pix não reconhecido na resposta.');
-      }
-
-      // Renderização dinâmica do QR Code e Cópia e Cola
+      // Renderização direta na tela usando a estrutura dinâmica do site
       const processingCard = document.getElementById('processingCard');
       processingCard.innerHTML = `
         <h2 style="color:var(--cyan);">Pagamento PIX gerado!</h2>
@@ -1248,7 +1235,7 @@
       db.collection('orders').add(firestorePayload).catch(e => console.warn(e));
 
     } catch (error) {
-      console.error('Erro na integração com o Make:', error);
+      console.error('Erro na integração:', error);
       document.getElementById('processingTitle').textContent = '❌ Erro no pagamento';
       document.getElementById('processingSub').textContent = error.message || 'Tente novamente mais tarde.';
       document.getElementById('btnPayInvoice').classList.remove('show');
