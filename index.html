@@ -1638,19 +1638,8 @@
   function closeOrderModal() { document.getElementById('orderModalOverlay').style.display = 'none'; }
   document.getElementById('orderModalOverlay').addEventListener('click', function(e) { if (e.target === this) closeOrderModal(); });
 
-  // ── FUNÇÃO AUXILIAR PARA BUSCA RECURSIVA ──
-  function findValue(obj, keys) {
-    if (typeof obj !== 'object' || obj === null) return null;
-    for (let k in obj) {
-      if (keys.includes(k)) return obj[k];
-      const found = findValue(obj[k], keys);
-      if (found) return found;
-    }
-    return null;
-  }
-
   // ==========================================================
-  // FUNÇÃO SUBMIT ORDER (COM BUSCA RECURSIVA)
+  // FUNÇÃO SUBMIT ORDER (CORREÇÃO DO JSON.PARSE)
   // ==========================================================
   async function submitOrder(forcePlan = null) {
     const brandName = document.getElementById('brandNameInput').value.trim();
@@ -1724,15 +1713,29 @@
         body: JSON.stringify(payload)
       });
 
-      const data = await response.json();
-      console.log("Resposta completa do servidor:", data);
+      // ⚡ LEITURA SEGURA: primeiro pega o texto bruto
+      const text = await response.text();
+      console.log("Resposta bruta (texto):", text);
 
-      // Busca recursiva pelas chaves necessárias
-      let qrCodeSrc = findValue(data, ['pixImage', 'qrCode', 'encodedImage']);
-      let payloadText = findValue(data, ['pixPayload', 'copiaECola', 'payload']);
+      // Converte para JSON com tratamento de erro
+      let responseData;
+      try {
+        responseData = JSON.parse(text);
+      } catch (e) {
+        console.error("A resposta do Make não é um JSON válido:", text);
+        throw new Error("Erro na formatação da resposta do servidor.");
+      }
+
+      console.log("Resposta processada (Objeto JSON):", responseData);
+
+      // Procura as chaves no nível raiz ou dentro de .data
+      const resObj = responseData.data || responseData;
+
+      let qrCodeSrc = resObj.pixImage || resObj.qrCode || resObj.encodedImage || responseData.pixImage;
+      let payloadText = resObj.pixPayload || resObj.copiaECola || resObj.payload || responseData.pixPayload;
 
       if (!qrCodeSrc || !payloadText) {
-        throw new Error("Não foi possível encontrar a imagem ou o código Pix na resposta do servidor. Verifique o log do console.");
+        throw new Error("Dados do Pix não encontrados no objeto JSON.");
       }
 
       // Garante o prefixo base64
@@ -1740,7 +1743,7 @@
         qrCodeSrc = 'data:image/png;base64,' + qrCodeSrc;
       }
 
-      // Injeta nos elementos
+      // Injeta no HTML
       if (qrImg) qrImg.src = qrCodeSrc;
       if (copyInput) copyInput.value = payloadText;
 
