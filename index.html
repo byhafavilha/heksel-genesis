@@ -1,3 +1,5 @@
+</body>
+</html>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -109,7 +111,6 @@
       color: #1a0f00 !important;
     }
 
-    /* Botão NOTIFY ME dentro do menu no modo claro – fundo escuro, texto branco */
     body.theme-light .mobile-menu-buttons .btn-outline-nav {
       background: #08080d;
       color: #ffffff !important;
@@ -814,7 +815,6 @@
     <p data-i18n="brand_desc">Complete visual identity + professional website + digital ecosystem. From start to infinity.</p>
     
     <div class="cta-wrapper">
-      <!-- BOTÃO CREATE IN ADVANCE AGORA ABRE O MODAL INTERNACIONAL -->
       <button onclick="openCreateAdvanceModal()" class="cta-advance">
         CREATE IN ADVANCE <span>⚡</span>
       </button>
@@ -968,7 +968,7 @@
   </div>
 </div>
 
-<!-- CREATE IN ADVANCE MODAL (NOVO FLUXO INTERNACIONAL) -->
+<!-- CREATE IN ADVANCE MODAL -->
 <div class="modal-overlay" id="createAdvanceModalOverlay">
   <div class="order-modal" id="createAdvanceModal">
     <button class="close-modal" onclick="closeCreateAdvanceModal()">&times;</button>
@@ -1107,10 +1107,10 @@
   <div class="jarvis-log" id="jarvisLog"></div>
 </div>
 
-<!-- PROCESSING OVERLAY (ESTRUTURA MELHORADA PARA QR CODE) -->
+<!-- PROCESSING OVERLAY -->
 <div class="processing-overlay" id="processingOverlay">
   <div class="processing-card" id="processingCard">
-    <div class="processing-spinner" id="processingSpinner" style="display:flex; justify-content:center; margin-bottom:16px;">⚡</div>
+    <div class="processing-spinner" id="processingSpinner">⚡</div>
     <h2 id="processingTitle">⚡ Trosk AI routing your project...</h2>
     <p id="processingSub">Generating your secure Asaas checkout page.</p>
     <div id="pixResultContainer" style="display:none;">
@@ -1129,7 +1129,7 @@
 <div class="easter-toast" id="easterToast"><span>🌈 SECRET MODE ACTIVATED!</span></div>
 
 <script>
-  // ── i18n SYSTEM (BÚSSOLA DE IDIOMAS) ──
+  // ── i18n SYSTEM ──
   const i18n = {
     pt: {
       nav_home: 'Início', nav_collection: 'Coleção', nav_create: 'Criar', nav_manifesto: 'Manifesto',
@@ -1641,7 +1641,7 @@
   document.getElementById('orderModalOverlay').addEventListener('click', function(e) { if (e.target === this) closeOrderModal(); });
 
   // ==========================================================
-  // FUNÇÃO SUBMIT ORDER (INTEGRAÇÃO CORRIGIDA COM PIX)
+  // FUNÇÃO SUBMIT ORDER (BLINDADA CONTRA ERROS DE TIPO)
   // ==========================================================
   async function submitOrder(forcePlan = null) {
     const brandName = document.getElementById('brandNameInput').value.trim();
@@ -1678,7 +1678,6 @@
     // FLUXO FREEMIUM
     if (!isPremium) {
       document.getElementById('processingOverlay').style.display = 'flex';
-      // oculta a área de QR e mostra spinner
       document.getElementById('pixResultContainer').style.display = 'none';
       document.getElementById('processingSpinner').style.display = 'block';
       document.getElementById('processingTitle').textContent = '⚡ Trosk AI routing your project...';
@@ -1691,9 +1690,8 @@
       return;
     }
 
-    // FLUXO PREMIUM
+    // FLUXO PREMIUM (INTEGRAÇÃO SEGURA COM PIX)
     const MAKE_URL = 'https://hook.us2.make.com/f4f2ufisvcr3kk1f6rp5z370c7489i6y';
-
     const overlay = document.getElementById('processingOverlay');
     const spinner = document.getElementById('processingSpinner');
     const resultContainer = document.getElementById('pixResultContainer');
@@ -1718,36 +1716,43 @@
       });
 
       const data = await response.json();
-      console.log('📦 DATA PURA DO MAKE:', data);
+      console.log("Retorno bruto do Make:", data);
 
-      const pixImage = data.pixImage || data.qrCode;
-      const pixPayload = data.pixPayload || data.copiaECola;
+      // ── LEITURA FLEXÍVEL E SEGURA ──
+      const res = data.data || data;
+      let qrCodeSrc = res.pixImage || res.qrCode || data.pixImage || data.qrCode;
+      let payloadText = res.pixPayload || res.copiaECola || data.pixPayload || data.copiaECola;
 
-      if (!pixImage || !pixPayload || pixImage.length === 0 || pixPayload.length === 0) {
-        title.textContent = '❌ Erro ao gerar o PIX';
-        sub.textContent = 'Dados incompletos retornados pelo servidor.';
-        spinner.style.display = 'none';
-        return;
+      if (!qrCodeSrc || !payloadText) {
+        throw new Error("Imagem do QR Code ou Código Copia e Cola não encontrados na resposta.");
       }
 
-      // Adiciona prefixo base64 se ausente
-      let qrCodeSrc = pixImage;
-      if (qrCodeSrc && !qrCodeSrc.startsWith('data:')) {
+      // Garante o prefixo base64
+      if (typeof qrCodeSrc === 'string' && !qrCodeSrc.startsWith('data:')) {
         qrCodeSrc = 'data:image/png;base64,' + qrCodeSrc;
       }
 
-      qrImg.src = qrCodeSrc;
-      copyInput.value = pixPayload;
+      // Injeta nos elementos (IDs reais do overlay)
+      if (qrImg) qrImg.src = qrCodeSrc;
+      if (copyInput) copyInput.value = payloadText;
 
       spinner.style.display = 'none';
       resultContainer.style.display = 'block';
       title.textContent = 'Pagamento PIX gerado!';
       sub.textContent = 'Escaneie o QR Code ou copie o código abaixo';
+
+      // Salva pedido no Firebase (opcional)
+      db.collection('orders').add({
+        ...payload,
+        paymentStatus: 'pending',
+        pixPayload: payloadText,
+        createdAt: firebase.firestore.FieldValue.serverTimestamp()
+      }).catch(e => console.warn(e));
     } catch (error) {
       console.error('Erro na integração:', error);
-      title.textContent = '❌ Erro no pagamento';
-      sub.textContent = error.message || 'Ocorreu um erro inesperado.';
       spinner.style.display = 'none';
+      title.textContent = '❌ Erro no pagamento';
+      sub.textContent = error.message || 'Ocorreu um erro inesperado. Tente novamente mais tarde.';
       payBtn.classList.remove('show');
     }
   }
