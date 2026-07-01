@@ -1634,7 +1634,7 @@
   document.getElementById('orderModalOverlay').addEventListener('click', function(e) { if (e.target === this) closeOrderModal(); });
 
   // ==========================================================
-  // FUNÇÃO SUBMIT ORDER (CHAMADA DIRETA AO MAKE - SEM PROXY)
+  // FUNÇÃO SUBMIT ORDER (CORRIGIDA - SEM ALERT DE DIAGNÓSTICO)
   // ==========================================================
   async function submitOrder(forcePlan = null) {
     // 1. Coleta dos dados do formulário
@@ -1707,13 +1707,27 @@
       console.log('📦 DATA PURA DO MAKE:', data);
 
       // 📌 MAPEAMENTO CORRIGIDO COM BASE NO PRINT DO CELULAR
-      const pixImage = data.pixImage;
-      const pixPayload = data.pixPayload;
+      // Aceita pixImage ou qrCode, e pixPayload ou copiaECola
+      const pixImage = data.pixImage || data.qrCode;
+      const pixPayload = data.pixPayload || data.copiaECola;
 
-      // Se o Make devolveu vazio, o alerta de diagnóstico aparecerá
+      // Verifica se os dados vieram preenchidos (se estiverem vazios, mostra erro no overlay)
       if (!pixImage || !pixPayload || pixImage.length === 0 || pixPayload.length === 0) {
-        alert("📡 DIAGNÓSTICO DO MAKE:\n" + JSON.stringify(data));
-        throw new Error('Formato do Pix não reconhecido na resposta.');
+        // Em vez de alert, mostramos uma mensagem de erro amigável no próprio overlay
+        const processingCard = document.getElementById('processingCard');
+        processingCard.innerHTML = `
+          <h2 style="color:var(--accent-orange);">❌ Erro ao gerar o PIX</h2>
+          <p>Ocorreu um erro ao processar o pagamento. Por favor, tente novamente mais tarde ou entre em contato com o suporte.</p>
+          <button onclick="closeProcessingOverlay()" style="margin-top:12px; background:rgba(255,255,255,0.1); color:white; border:1px solid rgba(255,255,255,0.3); padding:8px 16px; border-radius:8px; cursor:pointer;">Fechar</button>
+        `;
+        console.error('Dados do Pix inválidos:', data);
+        return;
+      }
+
+      // Adiciona o prefixo base64 se necessário
+      let imgSrc = pixImage;
+      if (imgSrc && !imgSrc.startsWith('data:') && !imgSrc.startsWith('http')) {
+        imgSrc = 'data:image/png;base64,' + imgSrc;
       }
 
       // Renderização direta na tela usando processingCard.innerHTML
@@ -1721,7 +1735,7 @@
       processingCard.innerHTML = `
         <h2 style="color:var(--cyan);">Pagamento PIX gerado!</h2>
         <p>Escaneie o QR Code ou copie o código abaixo</p>
-        <img src="${pixImage}" alt="QR Code PIX" style="width:200px; height:200px; margin:16px auto; display:block; border-radius:12px; border:1px solid var(--cyan);">
+        <img src="${imgSrc}" alt="QR Code PIX" style="width:200px; height:200px; margin:16px auto; display:block; border-radius:12px; border:1px solid var(--cyan);">
         <div style="display:flex; gap:8px; align-items:center; margin-top:12px;">
           <input type="text" value="${pixPayload}" readonly id="pixCopiaColaInput" style="flex:1; padding:12px; border-radius:8px; border:1px solid rgba(255,255,255,0.15); background:rgba(255,255,255,0.05); color:white; font-family:monospace; font-size:0.8rem;">
           <button onclick="copyPixCode()" style="background:var(--cyan); color:var(--ink); border:none; padding:12px 16px; border-radius:8px; font-family:'Syne',sans-serif; font-weight:700; cursor:pointer;">📋 Copiar</button>
@@ -1735,8 +1749,13 @@
 
     } catch (error) {
       console.error('Erro na integração:', error);
-      document.getElementById('processingTitle').textContent = '❌ Erro no pagamento';
-      document.getElementById('processingSub').textContent = error.message || 'Tente novamente mais tarde.';
+      // Também mostramos o erro no overlay, sem usar alert
+      const processingCard = document.getElementById('processingCard');
+      processingCard.innerHTML = `
+        <h2 style="color:var(--accent-orange);">❌ Erro no pagamento</h2>
+        <p>${error.message || 'Ocorreu um erro inesperado. Tente novamente mais tarde.'}</p>
+        <button onclick="closeProcessingOverlay()" style="margin-top:12px; background:rgba(255,255,255,0.1); color:white; border:1px solid rgba(255,255,255,0.3); padding:8px 16px; border-radius:8px; cursor:pointer;">Fechar</button>
+      `;
       document.getElementById('btnPayInvoice').classList.remove('show');
     }
   }
