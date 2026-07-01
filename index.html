@@ -1105,7 +1105,7 @@
   <div class="jarvis-log" id="jarvisLog"></div>
 </div>
 
-<!-- PROCESSING OVERLAY -->
+<!-- PROCESSING OVERLAY (MODAL DO PIX) -->
 <div class="processing-overlay" id="processingOverlay">
   <div class="processing-card" id="processingCard">
     <div class="processing-spinner" id="processingSpinner">⚡</div>
@@ -1483,7 +1483,6 @@
 
   // ── GLOBALS ──
   let jarvisDone = false;
-  let selectedContactMethod = null;
   let currentPaymentUrl = null;
   const socialLinks = {
     tiktok: 'https://www.tiktok.com/@hafavilha.hafy.oficial?_r=1&_t=ZS-97NNJuPS3TJ',
@@ -1573,27 +1572,6 @@
     });
   });
 
-  function selectContactMethod(method) {
-    selectedContactMethod = method;
-    const buttons = document.querySelectorAll('.contact-btn');
-    const detailInput = document.getElementById('contactDetailInput');
-    buttons.forEach(btn => {
-      btn.classList.remove('selected', 'dimmed');
-      if (btn.dataset.method !== method) btn.classList.add('dimmed');
-      else btn.classList.add('selected');
-    });
-    const placeholders = { 
-      gmail: 'you@example.com', 
-      discord: 'username#0000', 
-      whatsapp: '+55 (XX) XXXXX-XXXX',
-      instagram: '@your_username',
-      tiktok: '@your_tiktok'
-    };
-    detailInput.placeholder = placeholders[method] || 'Enter your contact...';
-    detailInput.value = '';
-    detailInput.focus();
-  }
-
   function startJarvisAnalysis(type) {
     document.getElementById('orderModalOverlay').style.display = 'none';
     const overlay = document.getElementById('jarvisOverlay');
@@ -1631,15 +1609,14 @@
     document.getElementById('appUploadField').style.display = 'none';
     document.getElementById('siteLinkInput').value = '';
     document.getElementById('apkFileInput').value = '';
-    selectedContactMethod = null;
     document.querySelectorAll('.contact-btn').forEach(btn => btn.classList.remove('selected', 'dimmed'));
-    document.getElementById('contactDetailInput').placeholder = 'Select a method above first...';
+    document.getElementById('contactDetailInput').placeholder = 'you@example.com / username#0000 / +55 (XX) XXXXX-XXXX';
   }
   function closeOrderModal() { document.getElementById('orderModalOverlay').style.display = 'none'; }
   document.getElementById('orderModalOverlay').addEventListener('click', function(e) { if (e.target === this) closeOrderModal(); });
 
   // ==========================================================
-  // FUNÇÃO SUBMIT ORDER (CORREÇÃO DO JSON.PARSE)
+  // FUNÇÃO SUBMIT ORDER (EXTRAÇÃO PRECISA DO JSON ANINHADO)
   // ==========================================================
   async function submitOrder(forcePlan = null) {
     const brandName = document.getElementById('brandNameInput').value.trim();
@@ -1688,7 +1665,7 @@
       return;
     }
 
-    // FLUXO PREMIUM
+    // FLUXO PREMIUM (PIX)
     const MAKE_URL = 'https://hook.us2.make.com/f4f2ufisvcr3kk1f6rp5z370c7489i6y';
     const overlay = document.getElementById('processingOverlay');
     const spinner = document.getElementById('processingSpinner');
@@ -1713,46 +1690,55 @@
         body: JSON.stringify(payload)
       });
 
-      // ⚡ LEITURA SEGURA: primeiro pega o texto bruto
-      const text = await response.text();
-      console.log("Resposta bruta (texto):", text);
-
-      // Converte para JSON com tratamento de erro
-      let responseData;
+      // ⚡ PASSO 1: obtém texto bruto e garante conversão para objeto
+      const rawText = await response.text();
+      let parsedData;
       try {
-        responseData = JSON.parse(text);
+        parsedData = JSON.parse(rawText);
       } catch (e) {
-        console.error("A resposta do Make não é um JSON válido:", text);
-        throw new Error("Erro na formatação da resposta do servidor.");
+        // Se falhar, tenta assumir que é o próprio objeto (raro)
+        parsedData = rawText;
       }
 
-      console.log("Resposta processada (Objeto JSON):", responseData);
+      console.log("Dados brutos recebidos:", parsedData);
 
-      // Procura as chaves no nível raiz ou dentro de .data
-      const resObj = responseData.data || responseData;
+      let finalPayload = parsedData;
 
-      let qrCodeSrc = resObj.pixImage || resObj.qrCode || resObj.encodedImage || responseData.pixImage;
-      let payloadText = resObj.pixPayload || resObj.copiaECola || resObj.payload || responseData.pixPayload;
+      // PASSO 2: Desembrulha a chave "body" se existir (formato exato do Make)
+      if (finalPayload && finalPayload.body) {
+        try {
+          finalPayload = typeof finalPayload.body === 'string' ? JSON.parse(finalPayload.body) : finalPayload.body;
+        } catch (e) {
+          console.error("Erro ao fazer parse do body interno:", e);
+        }
+      }
+
+      console.log("Objeto limpo e extraído:", finalPayload);
+
+      // PASSO 3: Coleta os dados do Pix com segurança total
+      let qrCodeSrc = finalPayload.pixImage || finalPayload.qrCode || finalPayload.encodedImage;
+      let payloadText = finalPayload.pixPayload || finalPayload.copiaECola || finalPayload.payload;
 
       if (!qrCodeSrc || !payloadText) {
-        throw new Error("Dados do Pix não encontrados no objeto JSON.");
+        throw new Error("Elementos do Pix não encontrados após desembrulhar o body.");
       }
 
-      // Garante o prefixo base64
+      // PASSO 4: Adiciona prefixo base64 se necessário
       if (typeof qrCodeSrc === 'string' && !qrCodeSrc.startsWith('data:')) {
         qrCodeSrc = 'data:image/png;base64,' + qrCodeSrc;
       }
 
-      // Injeta no HTML
+      // PASSO 5: Injeta no modal
       if (qrImg) qrImg.src = qrCodeSrc;
       if (copyInput) copyInput.value = payloadText;
 
+      // Exibe o modal do Pix
       spinner.style.display = 'none';
       resultContainer.style.display = 'block';
       title.textContent = 'Pagamento PIX gerado!';
       sub.textContent = 'Escaneie o QR Code ou copie o código abaixo';
 
-      // Salva no Firebase
+      // Salva no Firebase (opcional)
       db.collection('orders').add({
         ...payload,
         paymentStatus: 'pending',
