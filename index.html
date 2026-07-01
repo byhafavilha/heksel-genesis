@@ -1105,7 +1105,7 @@
   <div class="jarvis-log" id="jarvisLog"></div>
 </div>
 
-<!-- PROCESSING OVERLAY (MODAL DO PIX) -->
+<!-- PROCESSING OVERLAY -->
 <div class="processing-overlay" id="processingOverlay">
   <div class="processing-card" id="processingCard">
     <div class="processing-spinner" id="processingSpinner">⚡</div>
@@ -1616,7 +1616,7 @@
   document.getElementById('orderModalOverlay').addEventListener('click', function(e) { if (e.target === this) closeOrderModal(); });
 
   // ==========================================================
-  // FUNÇÃO SUBMIT ORDER (EXTRAÇÃO PRECISA DO JSON ANINHADO)
+  // FUNÇÃO SUBMIT ORDER (EXTRAÇÃO VIA REGEX - INDESTRUTÍVEL)
   // ==========================================================
   async function submitOrder(forcePlan = null) {
     const brandName = document.getElementById('brandNameInput').value.trim();
@@ -1665,7 +1665,7 @@
       return;
     }
 
-    // FLUXO PREMIUM (PIX)
+    // FLUXO PREMIUM (PIX VIA REGEX)
     const MAKE_URL = 'https://hook.us2.make.com/f4f2ufisvcr3kk1f6rp5z370c7489i6y';
     const overlay = document.getElementById('processingOverlay');
     const spinner = document.getElementById('processingSpinner');
@@ -1690,45 +1690,37 @@
         body: JSON.stringify(payload)
       });
 
-      // ⚡ PASSO 1: obtém texto bruto e garante conversão para objeto
+      // ⚡ OBTÉM TEXTO BRUTO
       const rawText = await response.text();
-      let parsedData;
-      try {
-        parsedData = JSON.parse(rawText);
-      } catch (e) {
-        // Se falhar, tenta assumir que é o próprio objeto (raro)
-        parsedData = rawText;
-      }
 
-      console.log("Dados brutos recebidos:", parsedData);
+      // Converte para string uniforme (caso seja objeto)
+      let rawDataString = typeof rawText === 'string' ? rawText : JSON.stringify(rawText);
 
-      let finalPayload = parsedData;
+      // Remove escapes comuns que o Make adiciona
+      rawDataString = rawDataString.replace(/\\n/g, '').replace(/\\"/g, '"');
 
-      // PASSO 2: Desembrulha a chave "body" se existir (formato exato do Make)
-      if (finalPayload && finalPayload.body) {
-        try {
-          finalPayload = typeof finalPayload.body === 'string' ? JSON.parse(finalPayload.body) : finalPayload.body;
-        } catch (e) {
-          console.error("Erro ao fazer parse do body interno:", e);
-        }
-      }
+      let qrCodeSrc = "";
+      let payloadText = "";
 
-      console.log("Objeto limpo e extraído:", finalPayload);
+      // Regex para capturar imagem (pixImage, qrCode ou encodedImage)
+      const imgMatch = rawDataString.match(/"(?:pixImage|qrCode|encodedImage)"\s*:\s*"([^"]+)"/);
+      if (imgMatch) qrCodeSrc = imgMatch[1];
 
-      // PASSO 3: Coleta os dados do Pix com segurança total
-      let qrCodeSrc = finalPayload.pixImage || finalPayload.qrCode || finalPayload.encodedImage;
-      let payloadText = finalPayload.pixPayload || finalPayload.copiaECola || finalPayload.payload;
+      // Regex para capturar código copia e cola (pixPayload, copiaECola ou payload)
+      const payloadMatch = rawDataString.match(/"(?:pixPayload|copiaECola|payload)"\s*:\s*"([^"]+)"/);
+      if (payloadMatch) payloadText = payloadMatch[1];
 
       if (!qrCodeSrc || !payloadText) {
-        throw new Error("Elementos do Pix não encontrados após desembrulhar o body.");
+        console.error("DEBUG DO MAKE: Retorno bruto:", rawDataString);
+        throw new Error("Elementos do Pix não encontrados. Verifique o console para detalhes.");
       }
 
-      // PASSO 4: Adiciona prefixo base64 se necessário
-      if (typeof qrCodeSrc === 'string' && !qrCodeSrc.startsWith('data:')) {
+      // Adiciona prefixo base64 se necessário
+      if (!qrCodeSrc.startsWith('data:')) {
         qrCodeSrc = 'data:image/png;base64,' + qrCodeSrc;
       }
 
-      // PASSO 5: Injeta no modal
+      // Injeta no modal
       if (qrImg) qrImg.src = qrCodeSrc;
       if (copyInput) copyInput.value = payloadText;
 
