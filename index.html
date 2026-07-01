@@ -1105,7 +1105,7 @@
   <div class="jarvis-log" id="jarvisLog"></div>
 </div>
 
-<!-- PROCESSING OVERLAY -->
+<!-- PROCESSING OVERLAY (MODAL DO PIX) -->
 <div class="processing-overlay" id="processingOverlay">
   <div class="processing-card" id="processingCard">
     <div class="processing-spinner" id="processingSpinner">⚡</div>
@@ -1616,7 +1616,7 @@
   document.getElementById('orderModalOverlay').addEventListener('click', function(e) { if (e.target === this) closeOrderModal(); });
 
   // ==========================================================
-  // FUNÇÃO SUBMIT ORDER (EXTRAÇÃO VIA REGEX COM DEBUG)
+  // FUNÇÃO SUBMIT ORDER (TRATAMENTO DO RETORNO accepted E EXTRAÇÃO)
   // ==========================================================
   async function submitOrder(forcePlan = null) {
     const brandName = document.getElementById('brandNameInput').value.trim();
@@ -1665,7 +1665,7 @@
       return;
     }
 
-    // FLUXO PREMIUM (PIX VIA REGEX COM DEBUG)
+    // FLUXO PREMIUM
     const MAKE_URL = 'https://hook.us2.make.com/f4f2ufisvcr3kk1f6rp5z370c7489i6y';
     const overlay = document.getElementById('processingOverlay');
     const spinner = document.getElementById('processingSpinner');
@@ -1690,29 +1690,54 @@
         body: JSON.stringify(payload)
       });
 
-      // Obtém texto bruto e prepara para regex
       const rawText = await response.text();
-      let rawDataString = typeof rawText === 'string' ? rawText : JSON.stringify(rawText);
-      rawDataString = rawDataString.replace(/\\n/g, '').replace(/\\"/g, '"');
+      let responseData;
+      try {
+        responseData = JSON.parse(rawText);
+      } catch (e) {
+        throw new Error("Resposta inválida do servidor.");
+      }
 
+      // Verifica se é a resposta de recebimento { accepted: true }
+      if (responseData && responseData.accepted === true) {
+        // Simula processamento: exibe mensagem amigável e depois mostra o modal simulado
+        title.textContent = 'Armazenando pedido...';
+        sub.textContent = 'Gerando seu Pix em instantes...';
+
+        // Após 3 segundos, simula abertura do modal de pagamento com dados de placeholder
+        setTimeout(() => {
+          spinner.style.display = 'none';
+          resultContainer.style.display = 'block';
+          title.textContent = 'Pagamento PIX em processamento';
+          sub.textContent = 'Você receberá o código Pix em instantes. Enquanto isso, utilize os dados abaixo.';
+          // Placeholder visual (QR code fake)
+          qrImg.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200"%3E%3Crect width="200" height="200" fill="%23080d11" rx="12"/%3E%3Ctext x="100" y="100" fill="%2300f0ff" font-family="monospace" font-size="14" text-anchor="middle" dominant-baseline="middle"%3EQR Code em breve%3C/text%3E%3C/svg%3E';
+          copyInput.value = 'Aguardando código Pix...';
+        }, 3000);
+        // Salva no Firebase como pedido aceito
+        db.collection('orders').add({
+          ...payload,
+          paymentStatus: 'accepted',
+          createdAt: firebase.firestore.FieldValue.serverTimestamp()
+        }).catch(e => console.warn(e));
+        return;
+      }
+
+      // Se não for { accepted: true }, procede com a extração via Regex (caso existam dados reais)
+      let rawDataString = rawText.replace(/\\n/g, '').replace(/\\"/g, '"');
       let qrCodeSrc = "";
       let payloadText = "";
 
-      // Regex para imagem
       const imgMatch = rawDataString.match(/"(?:pixImage|qrCode|encodedImage)"\s*:\s*"([^"]+)"/);
       if (imgMatch) qrCodeSrc = imgMatch[1];
 
-      // Regex para código pix
       const payloadMatch = rawDataString.match(/"(?:pixPayload|copiaECola|payload)"\s*:\s*"([^"]+)"/);
       if (payloadMatch) payloadText = payloadMatch[1];
 
-      // DEBUG: exibe o conteúdo bruto se algo não for encontrado
       if (!qrCodeSrc || !payloadText) {
-        alert("CONTEÚDO BRUTO DO MAKE: " + rawDataString);
         throw new Error("Elementos do Pix não encontrados.");
       }
 
-      // Prefixo base64
       if (!qrCodeSrc.startsWith('data:')) {
         qrCodeSrc = 'data:image/png;base64,' + qrCodeSrc;
       }
