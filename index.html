@@ -1,5 +1,3 @@
-</body>
-</html>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -1640,8 +1638,19 @@
   function closeOrderModal() { document.getElementById('orderModalOverlay').style.display = 'none'; }
   document.getElementById('orderModalOverlay').addEventListener('click', function(e) { if (e.target === this) closeOrderModal(); });
 
+  // ── FUNÇÃO AUXILIAR PARA BUSCA RECURSIVA ──
+  function findValue(obj, keys) {
+    if (typeof obj !== 'object' || obj === null) return null;
+    for (let k in obj) {
+      if (keys.includes(k)) return obj[k];
+      const found = findValue(obj[k], keys);
+      if (found) return found;
+    }
+    return null;
+  }
+
   // ==========================================================
-  // FUNÇÃO SUBMIT ORDER (BLINDADA CONTRA ERROS DE TIPO)
+  // FUNÇÃO SUBMIT ORDER (COM BUSCA RECURSIVA)
   // ==========================================================
   async function submitOrder(forcePlan = null) {
     const brandName = document.getElementById('brandNameInput').value.trim();
@@ -1690,7 +1699,7 @@
       return;
     }
 
-    // FLUXO PREMIUM (INTEGRAÇÃO SEGURA COM PIX)
+    // FLUXO PREMIUM
     const MAKE_URL = 'https://hook.us2.make.com/f4f2ufisvcr3kk1f6rp5z370c7489i6y';
     const overlay = document.getElementById('processingOverlay');
     const spinner = document.getElementById('processingSpinner');
@@ -1716,15 +1725,14 @@
       });
 
       const data = await response.json();
-      console.log("Retorno bruto do Make:", data);
+      console.log("Resposta completa do servidor:", data);
 
-      // ── LEITURA FLEXÍVEL E SEGURA ──
-      const res = data.data || data;
-      let qrCodeSrc = res.pixImage || res.qrCode || data.pixImage || data.qrCode;
-      let payloadText = res.pixPayload || res.copiaECola || data.pixPayload || data.copiaECola;
+      // Busca recursiva pelas chaves necessárias
+      let qrCodeSrc = findValue(data, ['pixImage', 'qrCode', 'encodedImage']);
+      let payloadText = findValue(data, ['pixPayload', 'copiaECola', 'payload']);
 
       if (!qrCodeSrc || !payloadText) {
-        throw new Error("Imagem do QR Code ou Código Copia e Cola não encontrados na resposta.");
+        throw new Error("Não foi possível encontrar a imagem ou o código Pix na resposta do servidor. Verifique o log do console.");
       }
 
       // Garante o prefixo base64
@@ -1732,7 +1740,7 @@
         qrCodeSrc = 'data:image/png;base64,' + qrCodeSrc;
       }
 
-      // Injeta nos elementos (IDs reais do overlay)
+      // Injeta nos elementos
       if (qrImg) qrImg.src = qrCodeSrc;
       if (copyInput) copyInput.value = payloadText;
 
@@ -1741,7 +1749,7 @@
       title.textContent = 'Pagamento PIX gerado!';
       sub.textContent = 'Escaneie o QR Code ou copie o código abaixo';
 
-      // Salva pedido no Firebase (opcional)
+      // Salva no Firebase
       db.collection('orders').add({
         ...payload,
         paymentStatus: 'pending',
@@ -1752,7 +1760,7 @@
       console.error('Erro na integração:', error);
       spinner.style.display = 'none';
       title.textContent = '❌ Erro no pagamento';
-      sub.textContent = error.message || 'Ocorreu um erro inesperado. Tente novamente mais tarde.';
+      sub.textContent = error.message || 'Ocorreu um erro inesperado.';
       payBtn.classList.remove('show');
     }
   }
