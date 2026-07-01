@@ -1616,7 +1616,7 @@
   document.getElementById('orderModalOverlay').addEventListener('click', function(e) { if (e.target === this) closeOrderModal(); });
 
   // ==========================================================
-  // FUNÇÃO SUBMIT ORDER (EXTRAÇÃO VIA REGEX - INDESTRUTÍVEL)
+  // FUNÇÃO SUBMIT ORDER (EXTRAÇÃO VIA REGEX COM DEBUG)
   // ==========================================================
   async function submitOrder(forcePlan = null) {
     const brandName = document.getElementById('brandNameInput').value.trim();
@@ -1665,7 +1665,7 @@
       return;
     }
 
-    // FLUXO PREMIUM (PIX VIA REGEX)
+    // FLUXO PREMIUM (PIX VIA REGEX COM DEBUG)
     const MAKE_URL = 'https://hook.us2.make.com/f4f2ufisvcr3kk1f6rp5z370c7489i6y';
     const overlay = document.getElementById('processingOverlay');
     const spinner = document.getElementById('processingSpinner');
@@ -1690,47 +1690,41 @@
         body: JSON.stringify(payload)
       });
 
-      // ⚡ OBTÉM TEXTO BRUTO
+      // Obtém texto bruto e prepara para regex
       const rawText = await response.text();
-
-      // Converte para string uniforme (caso seja objeto)
       let rawDataString = typeof rawText === 'string' ? rawText : JSON.stringify(rawText);
-
-      // Remove escapes comuns que o Make adiciona
       rawDataString = rawDataString.replace(/\\n/g, '').replace(/\\"/g, '"');
 
       let qrCodeSrc = "";
       let payloadText = "";
 
-      // Regex para capturar imagem (pixImage, qrCode ou encodedImage)
+      // Regex para imagem
       const imgMatch = rawDataString.match(/"(?:pixImage|qrCode|encodedImage)"\s*:\s*"([^"]+)"/);
       if (imgMatch) qrCodeSrc = imgMatch[1];
 
-      // Regex para capturar código copia e cola (pixPayload, copiaECola ou payload)
+      // Regex para código pix
       const payloadMatch = rawDataString.match(/"(?:pixPayload|copiaECola|payload)"\s*:\s*"([^"]+)"/);
       if (payloadMatch) payloadText = payloadMatch[1];
 
+      // DEBUG: exibe o conteúdo bruto se algo não for encontrado
       if (!qrCodeSrc || !payloadText) {
-        console.error("DEBUG DO MAKE: Retorno bruto:", rawDataString);
-        throw new Error("Elementos do Pix não encontrados. Verifique o console para detalhes.");
+        alert("CONTEÚDO BRUTO DO MAKE: " + rawDataString);
+        throw new Error("Elementos do Pix não encontrados.");
       }
 
-      // Adiciona prefixo base64 se necessário
+      // Prefixo base64
       if (!qrCodeSrc.startsWith('data:')) {
         qrCodeSrc = 'data:image/png;base64,' + qrCodeSrc;
       }
 
-      // Injeta no modal
       if (qrImg) qrImg.src = qrCodeSrc;
       if (copyInput) copyInput.value = payloadText;
 
-      // Exibe o modal do Pix
       spinner.style.display = 'none';
       resultContainer.style.display = 'block';
       title.textContent = 'Pagamento PIX gerado!';
       sub.textContent = 'Escaneie o QR Code ou copie o código abaixo';
 
-      // Salva no Firebase (opcional)
       db.collection('orders').add({
         ...payload,
         paymentStatus: 'pending',
