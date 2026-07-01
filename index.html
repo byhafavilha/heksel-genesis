@@ -726,7 +726,6 @@
 <div id="cur-ring"></div>
 <div class="animated-bg"></div>
 <script>
-  // Store particles globally so we can update them on theme change
   window._particles = [];
   for (let i = 0; i < 40; i++) {
     const p = document.createElement('div'); p.classList.add('particle');
@@ -1108,12 +1107,20 @@
   <div class="jarvis-log" id="jarvisLog"></div>
 </div>
 
-<!-- PROCESSING OVERLAY -->
+<!-- PROCESSING OVERLAY (ESTRUTURA MELHORADA PARA QR CODE) -->
 <div class="processing-overlay" id="processingOverlay">
   <div class="processing-card" id="processingCard">
-    <div class="processing-spinner" id="processingSpinner"></div>
+    <div class="processing-spinner" id="processingSpinner" style="display:flex; justify-content:center; margin-bottom:16px;">⚡</div>
     <h2 id="processingTitle">⚡ Trosk AI routing your project...</h2>
     <p id="processingSub">Generating your secure Asaas checkout page.</p>
+    <div id="pixResultContainer" style="display:none;">
+      <img id="qrCodeImage" src="" alt="QR Code PIX" style="width:200px; height:200px; margin:16px auto; display:block; border-radius:12px; border:1px solid var(--cyan);">
+      <div style="display:flex; gap:8px; align-items:center; margin-top:12px;">
+        <input type="text" id="pixCopiaColaInput" readonly style="flex:1; padding:12px; border-radius:8px; border:1px solid rgba(255,255,255,0.15); background:rgba(255,255,255,0.05); color:white; font-family:monospace; font-size:0.8rem;">
+        <button onclick="copyPixCode()" style="background:var(--cyan); color:var(--ink); border:none; padding:12px 16px; border-radius:8px; font-family:'Syne',sans-serif; font-weight:700; cursor:pointer;">📋 Copiar</button>
+      </div>
+      <p style="color:rgba(255,255,255,0.4); font-size:0.7rem; margin-top:8px;">O código expira em 30 minutos</p>
+    </div>
     <button class="btn-pay-invoice" id="btnPayInvoice" onclick="openPaymentLink()">💳 COMPLETE PREMIUM ACQUISITION</button>
   </div>
 </div>
@@ -1427,4 +1434,451 @@
     list.innerHTML = '';
     const filtered = langs.filter(l => l.label.toLowerCase().includes(query.toLowerCase()) || l.native.includes(query));
     filtered.forEach(l => {
-     
+      const div = document.createElement('div');
+      div.className = 'lang-option';
+      div.innerHTML = `<span>${l.native}</span> <span>${l.label}</span>`;
+      div.onclick = () => advanceRedirect(l.code);
+      list.appendChild(div);
+    });
+  }
+
+  document.getElementById('advanceLangSearch')?.addEventListener('input', (e) => renderAdvanceLangOptions(e.target.value));
+
+  function advanceRedirect(langCode) {
+    const messages = {
+      pt: 'Olá! Vim pelo site Heksel Genesis e quero ativar meu CREATE IN ADVANCE para criar minha marca de elite agora mesmo.',
+      en: 'Hello! I came through the Heksel Genesis website and I want to activate my CREATE IN ADVANCE to build my elite brand right now.',
+      es: '¡Hola! Vine a través del sitio web de Heksel Genesis y quiero activar mi CREATE IN ADVANCE para construir mi marca de élite ahora mismo.',
+      zh: '你好！我通过 Heksel Genesis 网站过来，我想立即激活我的 CREATE IN ADVANCE 来打造我的精英品牌。'
+    };
+    const message = messages[langCode] || messages.en;
+    let url = '';
+    switch(advanceSelectedPlatform) {
+      case 'gmail':
+        url = `mailto:hafavilhahafy@gmail.com?subject=CREATE%20IN%20ADVANCE%20Activation&body=${encodeURIComponent(message)}`;
+        break;
+      case 'whatsapp':
+        url = `https://wa.me/5553991855262?text=${encodeURIComponent(message)}`;
+        break;
+      case 'discord':
+        url = `https://discord.gg/Y8CNkKFNM`;
+        break;
+      case 'instagram':
+        url = `https://www.instagram.com/hafavilha`;
+        break;
+      case 'tiktok':
+        url = `https://vt.tiktok.com/ZSxbdSUg9/`;
+        break;
+      default:
+        alert('Please select a valid platform.');
+        return;
+    }
+    if (url) {
+      window.open(url, '_blank');
+      closeCreateAdvanceModal();
+    }
+  }
+
+  document.getElementById('createAdvanceModalOverlay').addEventListener('click', function(e) {
+    if (e.target === this) closeCreateAdvanceModal();
+  });
+
+  // ── GLOBALS ──
+  let jarvisDone = false;
+  let selectedContactMethod = null;
+  let currentPaymentUrl = null;
+  const socialLinks = {
+    tiktok: 'https://www.tiktok.com/@hafavilha.hafy.oficial?_r=1&_t=ZS-97NNJuPS3TJ',
+    instagram: 'https://www.instagram.com/hafavilha?igsh=MWplbGN6c3V6ejh0dw==',
+    x: 'https://x.com/Hafavilha'
+  };
+  let socialDiscounts = { tiktok: false, instagram: false, x: false };
+  const socialIdMap = { tiktok: 'socTikTok', instagram: 'socInstagram', x: 'socX' };
+
+  // ── MULTI-STEP ──
+  function goToStep(n) {
+    if (n === 2 && !document.getElementById('brandNameInput').value.trim()) { alert('brand_name'); return; }
+    if (n === 3) {
+      const opType = document.querySelector('input[name="operationType"]:checked')?.value;
+      if ((opType === 'Upgrade Site' || opType === 'Upgrade App') && !jarvisDone) {
+        startJarvisAnalysis(opType);
+        jarvisDone = true;
+        return;
+      }
+      jarvisDone = false;
+    }
+    if (n === 4 && !document.getElementById('contactDetailInput').value.trim()) { alert('contact_detail'); return; }
+    document.querySelectorAll('.step').forEach(s => s.classList.remove('active-step'));
+    document.getElementById('step' + n).classList.add('active-step');
+  }
+
+  function handlePlanSelection() {
+    const plan = document.querySelector('input[name="pricingPlan"]:checked')?.value;
+    if (!plan) { alert('plan'); return; }
+    if (plan === 'FREMIUM MODEL') {
+      closeOrderModal();
+      submitOrder('freemium');
+    } else {
+      document.querySelectorAll('.step').forEach(s => s.classList.remove('active-step'));
+      document.getElementById('step5').classList.add('active-step');
+      document.getElementById('step5').style.display = 'block';
+      updateFinalPrice();
+    }
+  }
+
+  function getInvestmentValue() {
+    const man = parseInt(document.getElementById('investmentManual').value);
+    if (!isNaN(man) && man >= 1000 && man <= 30000) return man;
+    const activeBtn = document.querySelector('.investment-btn.active');
+    if (activeBtn) return parseInt(activeBtn.dataset.value);
+    return null;
+  }
+
+  function updateFinalPrice() {
+    const inv = getInvestmentValue();
+    if (!inv) { document.getElementById('finalPriceDisplay').textContent = 'Final Price: R$ —'; return; }
+    const discountCount = Object.values(socialDiscounts).filter(v => v).length;
+    const discount = discountCount * 0.10;
+    const final = Math.round(inv * (1 - discount));
+    document.getElementById('finalPriceDisplay').textContent = `Final Price: R$ ${final.toLocaleString()} (${discount*100}% off)`;
+  }
+
+  function activateSocial(platform) {
+    window.open(socialLinks[platform], '_blank');
+    socialDiscounts[platform] = true;
+    document.getElementById(socialIdMap[platform]).classList.add('activated');
+    updateFinalPrice();
+  }
+
+  document.querySelectorAll('.investment-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.investment-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById('investmentManual').value = btn.dataset.value;
+      updateFinalPrice();
+    });
+  });
+  document.getElementById('investmentManual').addEventListener('input', () => {
+    let v = parseInt(document.getElementById('investmentManual').value);
+    if (isNaN(v)) return;
+    document.querySelectorAll('.investment-btn').forEach(b => {
+      b.classList.remove('active');
+      if (parseInt(b.dataset.value) === v) b.classList.add('active');
+    });
+    updateFinalPrice();
+  });
+
+  document.querySelectorAll('input[name="operationType"]').forEach(r => {
+    r.addEventListener('change', () => {
+      document.getElementById('siteLinkField').style.display = r.value === 'Upgrade Site' ? 'block' : 'none';
+      document.getElementById('appUploadField').style.display = r.value === 'Upgrade App' ? 'block' : 'none';
+    });
+  });
+
+  function selectContactMethod(method) {
+    selectedContactMethod = method;
+    const buttons = document.querySelectorAll('.contact-btn');
+    const detailInput = document.getElementById('contactDetailInput');
+    buttons.forEach(btn => {
+      btn.classList.remove('selected', 'dimmed');
+      if (btn.dataset.method !== method) btn.classList.add('dimmed');
+      else btn.classList.add('selected');
+    });
+    const placeholders = { 
+      gmail: 'you@example.com', 
+      discord: 'username#0000', 
+      whatsapp: '+55 (XX) XXXXX-XXXX',
+      instagram: '@your_username',
+      tiktok: '@your_tiktok'
+    };
+    detailInput.placeholder = placeholders[method] || 'Enter your contact...';
+    detailInput.value = '';
+    detailInput.focus();
+  }
+
+  function startJarvisAnalysis(type) {
+    document.getElementById('orderModalOverlay').style.display = 'none';
+    const overlay = document.getElementById('jarvisOverlay');
+    const log = document.getElementById('jarvisLog');
+    overlay.style.display = 'flex';
+    log.innerHTML = '';
+    const messages = type === 'Upgrade Site'
+      ? ['Escaneando estrutura HTML...', 'Analisando variáveis JavaScript...', 'Auditando CSS...', 'Mapeando roteamento...', 'Conectando ao Firebase...', 'Análise completa!']
+      : ['Descompactando APK...', 'Varrendo classes Java...', 'Conectando ao Firebase...', 'Auditando manifestos...', 'Verificando dependências...', 'Análise completa!'];
+    let i = 0;
+    const interval = setInterval(() => {
+      if (i >= messages.length) {
+        clearInterval(interval);
+        setTimeout(() => { overlay.style.display = 'none'; document.getElementById('orderModalOverlay').style.display = 'flex'; goToStep(3); }, 800);
+        return;
+      }
+      const span = document.createElement('span'); span.textContent = messages[i]; log.appendChild(span); log.scrollTop = log.scrollHeight; i++;
+    }, 700);
+  }
+
+  function openOrderModal() {
+    jarvisDone = false;
+    document.getElementById('orderModalOverlay').style.display = 'flex';
+    document.querySelectorAll('.step').forEach(s => s.classList.remove('active-step'));
+    document.getElementById('step1').classList.add('active-step');
+    document.getElementById('step5').style.display = 'none';
+    document.getElementById('brandNameInput').value = '';
+    document.getElementById('contactDetailInput').value = '';
+    document.getElementById('investmentManual').value = '';
+    document.querySelectorAll('.investment-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.social-discount-btn').forEach(b => b.classList.remove('activated'));
+    socialDiscounts = { tiktok: false, instagram: false, x: false };
+    document.getElementById('finalPriceDisplay').textContent = 'Final Price: R$ —';
+    document.getElementById('siteLinkField').style.display = 'none';
+    document.getElementById('appUploadField').style.display = 'none';
+    document.getElementById('siteLinkInput').value = '';
+    document.getElementById('apkFileInput').value = '';
+    selectedContactMethod = null;
+    document.querySelectorAll('.contact-btn').forEach(btn => btn.classList.remove('selected', 'dimmed'));
+    document.getElementById('contactDetailInput').placeholder = 'Select a method above first...';
+  }
+  function closeOrderModal() { document.getElementById('orderModalOverlay').style.display = 'none'; }
+  document.getElementById('orderModalOverlay').addEventListener('click', function(e) { if (e.target === this) closeOrderModal(); });
+
+  // ==========================================================
+  // FUNÇÃO SUBMIT ORDER (INTEGRAÇÃO CORRIGIDA COM PIX)
+  // ==========================================================
+  async function submitOrder(forcePlan = null) {
+    const brandName = document.getElementById('brandNameInput').value.trim();
+    const contactDetail = document.getElementById('contactDetailInput').value.trim();
+    const contactMethod = document.querySelector('input[name="contactMethod"]:checked')?.value || 'gmail';
+    const operationType = document.querySelector('input[name="operationType"]:checked')?.value || '';
+    const pricingPlan = forcePlan || document.querySelector('input[name="pricingPlan"]:checked')?.value || '';
+    const isPremium = pricingPlan === 'PREMIUM ARCHITECTURE';
+    let finalInvestment = 0, discountApplied = 0;
+
+    if (!brandName || !contactDetail) { alert('fill_fields'); return; }
+
+    if (isPremium) {
+      const investment = getInvestmentValue();
+      if (!investment || investment < 1000 || investment > 30000) { alert('investment'); return; }
+      const discountCount = Object.values(socialDiscounts).filter(v => v).length;
+      discountApplied = discountCount * 10;
+      finalInvestment = Math.round(investment * (1 - discountCount * 0.10));
+    }
+
+    const payload = {
+      brandName,
+      contactMethod,
+      contactDetail,
+      operationType,
+      pricingPlan: isPremium ? 'premium' : 'freemium',
+      investment: isPremium ? finalInvestment : 0,
+      discountApplied: isPremium ? discountApplied : 0,
+      timestamp: new Date().toISOString()
+    };
+
+    closeOrderModal();
+
+    // FLUXO FREEMIUM
+    if (!isPremium) {
+      document.getElementById('processingOverlay').style.display = 'flex';
+      // oculta a área de QR e mostra spinner
+      document.getElementById('pixResultContainer').style.display = 'none';
+      document.getElementById('processingSpinner').style.display = 'block';
+      document.getElementById('processingTitle').textContent = '⚡ Trosk AI routing your project...';
+      document.getElementById('processingSub').textContent = 'Setting up your test environment...';
+      setTimeout(() => {
+        document.getElementById('processingTitle').textContent = 'Test project registered!';
+        document.getElementById('processingSub').textContent = 'Our team will contact you shortly.';
+        db.collection('orders').add({...payload, paymentStatus: 'test_only', createdAt: firebase.firestore.FieldValue.serverTimestamp()}).catch(() => {});
+      }, 1500);
+      return;
+    }
+
+    // FLUXO PREMIUM
+    const MAKE_URL = 'https://hook.us2.make.com/f4f2ufisvcr3kk1f6rp5z370c7489i6y';
+
+    const overlay = document.getElementById('processingOverlay');
+    const spinner = document.getElementById('processingSpinner');
+    const resultContainer = document.getElementById('pixResultContainer');
+    const qrImg = document.getElementById('qrCodeImage');
+    const copyInput = document.getElementById('pixCopiaColaInput');
+    const title = document.getElementById('processingTitle');
+    const sub = document.getElementById('processingSub');
+    const payBtn = document.getElementById('btnPayInvoice');
+
+    overlay.style.display = 'flex';
+    spinner.style.display = 'block';
+    resultContainer.style.display = 'none';
+    title.textContent = '⚡ Gerando seu PIX...';
+    sub.textContent = 'Aguardando resposta do Asaas.';
+    payBtn.classList.remove('show');
+
+    try {
+      const response = await fetch(MAKE_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+
+      const data = await response.json();
+      console.log('📦 DATA PURA DO MAKE:', data);
+
+      const pixImage = data.pixImage || data.qrCode;
+      const pixPayload = data.pixPayload || data.copiaECola;
+
+      if (!pixImage || !pixPayload || pixImage.length === 0 || pixPayload.length === 0) {
+        title.textContent = '❌ Erro ao gerar o PIX';
+        sub.textContent = 'Dados incompletos retornados pelo servidor.';
+        spinner.style.display = 'none';
+        return;
+      }
+
+      // Adiciona prefixo base64 se ausente
+      let qrCodeSrc = pixImage;
+      if (qrCodeSrc && !qrCodeSrc.startsWith('data:')) {
+        qrCodeSrc = 'data:image/png;base64,' + qrCodeSrc;
+      }
+
+      qrImg.src = qrCodeSrc;
+      copyInput.value = pixPayload;
+
+      spinner.style.display = 'none';
+      resultContainer.style.display = 'block';
+      title.textContent = 'Pagamento PIX gerado!';
+      sub.textContent = 'Escaneie o QR Code ou copie o código abaixo';
+    } catch (error) {
+      console.error('Erro na integração:', error);
+      title.textContent = '❌ Erro no pagamento';
+      sub.textContent = error.message || 'Ocorreu um erro inesperado.';
+      spinner.style.display = 'none';
+      payBtn.classList.remove('show');
+    }
+  }
+
+  function closeProcessingOverlay() {
+    document.getElementById('processingOverlay').style.display = 'none';
+  }
+
+  function copyPixCode() {
+    const input = document.getElementById('pixCopiaColaInput');
+    if (!input) return;
+    input.select();
+    input.setSelectionRange(0, 99999);
+    document.execCommand('copy');
+    alert('Código PIX copiado!');
+  }
+
+  function openPaymentLink() { if (currentPaymentUrl) window.open(currentPaymentUrl, '_blank'); }
+
+  document.getElementById('processingOverlay').addEventListener('click', function(e) {
+    if (e.target === this) {
+      this.style.display = 'none';
+      currentPaymentUrl = null;
+    }
+  });
+
+  /* CAROUSEL */
+  (function initCarousel() {
+    const IMAGES = [
+      { src: '1000027632-removebg-preview.png', name: 'NEO-KAI 01 FOR HIKING', tag: '01 / 11' },
+      { src: '1000027635-removebg-preview.png', name: 'NEO-KAI 01 FOR RACING', tag: '02 / 11' },
+      { src: '1000027638-removebg-preview.png', name: 'NEO-KAI 01 FOR ACADEMIC', tag: '03 / 11' },
+      { src: '1000027639-removebg-preview.png', name: 'NEO-KAI 01 FOR FOOTBALL', tag: '04 / 11' },
+      { src: '1000027648-removebg-preview.png', name: 'NEO-WAI 01 SLIPPER FOR LEISURE', tag: '05 / 11' },
+      { src: '1000027649-removebg-preview.png', name: 'NEO-WAI 02 SPORTS FLIP-FLOPS', tag: '06 / 11' },
+      { src: '1000027651-removebg-preview.png', name: 'NEO-LAI 01 SLIPPER WITH A SHORT BRIM', tag: '07 / 11' },
+      { src: '1000027652-removebg-preview.png', name: 'NEO-LAI 02 SLIPPER WITH LONG BRIM', tag: '08 / 11' },
+      { src: '1000030702-removebg-preview.png', name: 'NEO-MAI 01 HIGH HEELS', tag: '09 / 11' },
+      { src: '1000030703-removebg-preview.png', name: 'NEO-MAI 02 LOW HEELS', tag: '10 / 11' },
+      { src: '123 Sem Título_20260625133036.png', name: 'NEO-VAI 01 LEATHER BOOT', tag: '11 / 11' }
+    ];
+    const track = document.getElementById('carouselTrack'), dotsEl = document.getElementById('carouselDots');
+    if (!track || !dotsEl) return;
+    IMAGES.forEach((img, idx) => {
+      const slide = document.createElement('div');
+      slide.className = 'carousel-slide' + (idx === 0 ? ' active' : '');
+      slide.dataset.idx = idx;
+      slide.innerHTML = `<div class="carousel-glow"></div><img src="${img.src}" alt="${img.name}" loading="lazy"><div class="carousel-label"><span class="carousel-label-tag">${img.tag}</span><span class="carousel-label-name">${img.name}</span></div>`;
+      track.appendChild(slide);
+    });
+    for (let i = 0; i < IMAGES.length; i++) {
+      const dot = document.createElement('span');
+      dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+      dot.dataset.dot = i;
+      dot.addEventListener('click', () => goTo(i, i > current ? 'next' : 'prev'));
+      dotsEl.appendChild(dot);
+    }
+    const slides = track.querySelectorAll('.carousel-slide'), dots = dotsEl.querySelectorAll('.carousel-dot');
+    let current = 0;
+    function syncDots(idx) { dots.forEach(d => d.classList.remove('active')); dots[idx]?.classList.add('active'); }
+    function goTo(idx, dir) {
+      const prev = current; current = ((idx % IMAGES.length) + IMAGES.length) % IMAGES.length;
+      if (prev === current) return;
+      slides[prev].classList.add(dir === 'next' ? 'exit-left' : 'exit-right');
+      slides[prev].classList.remove('active');
+      setTimeout(() => slides[prev].classList.remove('exit-left', 'exit-right'), 600);
+      slides[current].style.transform = dir === 'next' ? 'translateX(60px) scale(0.96)' : 'translateX(-60px) scale(0.96)';
+      slides[current].classList.add('active');
+      requestAnimationFrame(() => requestAnimationFrame(() => { slides[current].style.transform = ''; }));
+      syncDots(current);
+    }
+    document.getElementById('carouselNext')?.addEventListener('click', () => goTo(current + 1, 'next'));
+    document.getElementById('carouselPrev')?.addEventListener('click', () => goTo(current - 1, 'prev'));
+    let autoTimer = setInterval(() => goTo((current + 1) % IMAGES.length, 'next'), 4500);
+    document.getElementById('heroCarousel')?.addEventListener('mouseenter', () => clearInterval(autoTimer));
+    document.getElementById('heroCarousel')?.addEventListener('mouseleave', () => { clearInterval(autoTimer); autoTimer = setInterval(() => goTo((current + 1) % IMAGES.length, 'next'), 4500); });
+  })();
+
+  /* THEME TOGGLE */
+  (function initTheme() {
+    const FAB = document.getElementById('themeFab'), ICON = document.getElementById('themeIcon'), TOAST = document.getElementById('easterToast'), body = document.body;
+
+    function randomHex() { return '#' + Math.floor(Math.random()*16777215).toString(16).padStart(6, '0'); }
+    function hexToRgba(hex, alpha) { const r = parseInt(hex.slice(1,3),16), g = parseInt(hex.slice(3,5),16), b = parseInt(hex.slice(5,7),16); return `rgba(${r},${g},${b},${alpha})`; }
+
+    let mode = 'dark', clickTimes = [], toastTimer;
+
+    function updateParticles(cyanHex, purpleHex) {
+      const particles = window._particles || [];
+      const cyRgba = `rgba(${parseInt(cyanHex.slice(1,3),16)},${parseInt(cyanHex.slice(3,5),16)},${parseInt(cyanHex.slice(5,7),16)},0.7)`;
+      const puRgba = `rgba(${parseInt(purpleHex.slice(1,3),16)},${parseInt(purpleHex.slice(3,5),16)},${parseInt(purpleHex.slice(5,7),16)},0.15)`;
+      particles.forEach(p => {
+        p.style.background = `radial-gradient(circle, ${cyRgba}, ${puRgba})`;
+      });
+    }
+
+    FAB?.addEventListener('click', () => {
+      const now = Date.now(); clickTimes.push(now); clickTimes = clickTimes.filter(t => now - t < 1200);
+      if (clickTimes.length >= 3) { clickTimes = []; activateSecret(); return; }
+      if (mode === 'dark') {
+        body.classList.add('theme-light'); body.classList.remove('theme-secret'); body.style.background = '';
+        ICON.textContent = '🌙'; mode = 'light';
+        updateParticles('#00f0ff', '#b45eff');
+      } else if (mode === 'light') {
+        body.classList.remove('theme-light', 'theme-secret'); body.style.background = '';
+        ICON.textContent = '☀'; mode = 'dark';
+        updateParticles('#00f0ff', '#b45eff');
+      } else {
+        body.classList.remove('theme-light', 'theme-secret'); body.style.background = '';
+        const root = document.documentElement.style;
+        root.removeProperty('--cyan'); root.removeProperty('--purple');
+        root.removeProperty('--cyan-glow'); root.removeProperty('--purple-glow');
+        root.removeProperty('--cyan-dim'); root.removeProperty('--purple-dim');
+        ICON.textContent = '☀'; mode = 'dark';
+        updateParticles('#00f0ff', '#b45eff');
+      }
+    });
+
+    function activateSecret() {
+      const color1 = randomHex(), color2 = randomHex();
+      body.classList.remove('theme-light'); body.classList.add('theme-secret');
+      body.style.background = `linear-gradient(135deg, ${hexToRgba(color1, 0.18)} 0%, ${hexToRgba(color2, 0.12)} 50%, ${hexToRgba(color1, 0.10)} 100%), #050508`;
+      const root = document.documentElement.style;
+      root.setProperty('--cyan', color1); root.setProperty('--purple', color2);
+      root.setProperty('--cyan-glow', hexToRgba(color1,0.6)); root.setProperty('--purple-glow', hexToRgba(color2,0.6));
+      root.setProperty('--cyan-dim', hexToRgba(color1,0.2)); root.setProperty('--purple-dim', hexToRgba(color2,0.2));
+      ICON.textContent = '🌈'; mode = 'secret';
+      updateParticles(color1, color2);
+      if (TOAST) { TOAST.querySelector('span').textContent = `🌈 SECRET — ${color1} × ${color2}`; TOAST.classList.add('show'); clearTimeout(toastTimer); toastTimer = setTimeout(() => TOAST.classList.remove('show'), 3000); }
+    }
+  })();
+</script>
+</body>
+</html>
