@@ -632,17 +632,7 @@
     .jarvis-log span { display: block; animation: logFade 1.5s ease-in-out; }
     @keyframes logFade { 0% { opacity: 0; transform: translateY(10px); } 20% { opacity: 1; transform: translateY(0); } 80% { opacity: 1; } 100% { opacity: 0.3; } }
 
-    /* PROCESSING OVERLAY */
-    .processing-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.95); backdrop-filter: blur(24px); z-index: 6000; align-items: center; justify-content: center; }
-    .processing-card { background: rgba(14,14,24,0.98); border: 1px solid rgba(0,240,255,0.3); border-radius: 28px; padding: 44px 32px 36px; max-width: 500px; width: 92%; text-align: center; box-shadow: 0 0 80px rgba(0,240,255,0.12); animation: successBounce 0.5s cubic-bezier(0.2,0.9,0.4,1.1) forwards; position: relative; }
-    @keyframes successBounce { 0% { opacity: 0; transform: scale(0.85) translateY(20px); } 100% { opacity: 1; transform: scale(1) translateY(0); } }
-    .processing-card h2 { font-family: 'Syne', sans-serif; font-size: 1.2rem; font-weight: 700; color: rgba(255,255,255,0.8); margin-bottom: 6px; }
-    .processing-card p { font-size: 0.78rem; color: rgba(255,255,255,0.4); margin-bottom: 18px; line-height: 1.6; }
-    .btn-pay-invoice { display: none; background: linear-gradient(135deg, #25D366, #1db954); color: white; padding: 14px 30px; border: none; border-radius: 12px; font-family: 'Syne', sans-serif; font-weight: 800; font-size: 0.8rem; text-transform: uppercase; cursor: pointer; transition: all var(--transition); box-shadow: 0 0 30px rgba(37,211,102,0.3); align-items: center; gap: 8px; }
-    .btn-pay-invoice.show { display: inline-flex; }
-    .btn-pay-invoice:hover { transform: translateY(-3px); box-shadow: 0 0 40px rgba(37,211,102,0.5); }
-
-    /* CAROUSEL */
+    /* CAROUSEL - PROFISSIONAL */
     .hero-carousel { position: relative; width: 100%; max-width: 640px; display: flex; flex-direction: column; align-items: center; gap: 16px; }
     .carousel-track { position: relative; width: 100%; min-height: 500px; display: flex; align-items: center; justify-content: center; }
     .carousel-slide { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity .55s var(--ease), transform .55s var(--ease); transform: translateX(60px) scale(0.96); }
@@ -1041,63 +1031,27 @@
       <p class="modal-subtitle" data-i18n="step3_sub">Your contact and billing info</p>
       <label data-i18n="fullname_label">Full Name *</label>
       <input type="text" id="fullNameInput" placeholder="Your complete name" required>
-      <label data-i18n="cpf_label">CPF/CNPJ *</label>
-      <input type="text" id="cpfCnpjInput" placeholder="000.000.000-00" required>
+      <label data-i18n="cpf_label">CPF/CNPJ</label>
+      <input type="text" id="cpfCnpjInput" placeholder="000.000.000-00">
       <label data-i18n="email_label">Email *</label>
       <input type="email" id="emailInput" placeholder="you@example.com" required>
       <hr style="border-color:rgba(255,255,255,0.1); margin:16px 0;">
       <label data-i18n="step3_contact_method">How should we contact you?</label>
       <div class="radio-row" style="justify-content:center;">
-        <div class="radio-option"><input type="radio" name="contactMethod" value="gmail" id="cmGmail" checked><label class="radio-card" for="cmGmail"><img src="g.logo.png" style="width:28px;display:block;margin:0 auto 4px;" alt="Gmail">Gmail</label></div>
-        <div class="radio-option"><input type="radio" name="contactMethod" value="discord" id="cmDiscord"><label class="radio-card" for="cmDiscord"><img src="d.logo.png" style="width:28px;display:block;margin:0 auto 4px;" alt="Discord">Discord</label></div>
-        <div class="radio-option"><input type="radio" name="contactMethod" value="whatsapp" id="cmWhatsapp"><label class="radio-card" for="cmWhatsapp"><img src="w.logo.png" style="width:28px;display:block;margin:0 auto 4px;" alt="WhatsApp">WhatsApp</label></div>
-        <div class="radio-option"><input type="radio" name="contactMethod" value="instagram" id="cmInsta"><label class="radio-card" for="cmInsta"><img src="instagram-heksel.png" style="width:28px;display:block;margin:0 auto 4px;" alt="Instagram">Instagram</label></div>
-        <div class="radio-option"><input type="radio" name="contactMethod" value="tiktok" id="cmTikTok"><label class="radio-card" for="cmTikTok"><img src="tiktok-heksel.png" style="width:28px;display:block;margin:0 auto 4px;" alt="TikTok">TikTok</label></div>
+        <div class="radio-option"><input type="radio" name="contactMethod" value="whatsapp" id="cmWhatsapp" checked><label class="radio-card" for="cmWhatsapp"><img src="w.logo.png" style="width:28px;display:block;margin:0 auto 4px;" alt="WhatsApp">WhatsApp</label></div>
+        <div class="radio-option"><input type="radio" name="contactMethod" value="telegram" id="cmTelegram"><label class="radio-card" for="cmTelegram"><img src="d.logo.png" style="width:28px;display:block;margin:0 auto 4px;" alt="Telegram">Telegram</label></div>
       </div>
-      <label data-i18n="contact_detail_label">Contact Detail *</label>
-      <input type="text" id="contactDetailInput" placeholder="you@example.com / username#0000 / +55 (XX) XXXXX-XXXX" required>
       <button class="btn-next-step" onclick="goToStep(4)" data-i18n="next_btn">Next →</button>
     </div>
 
     <div class="step" id="step4">
       <h2 data-i18n="step4_title">Step 4 — Choose Your Plan</h2>
-      <p class="modal-subtitle" data-i18n="step4_sub">Freemium (test only) or Premium (generates Pix payment)</p>
+      <p class="modal-subtitle" data-i18n="step4_sub">Freemium (test only) or Premium (get commercial proposal)</p>
       <div class="radio-row">
         <div class="radio-option"><input type="radio" name="pricingPlan" value="FREMIUM MODEL" id="planFreemiumRadio" checked><label class="radio-card" for="planFreemiumRadio" data-i18n="plan_freemium_modal">FREMIUM<br><small data-i18n="plan_freemium_small">Test only</small></label></div>
-        <div class="radio-option"><input type="radio" name="pricingPlan" value="PREMIUM ARCHITECTURE" id="planPremiumRadio"><label class="radio-card" for="planPremiumRadio" data-i18n="plan_premium_modal">PREMIUM<br><small data-i18n="plan_premium_small">Generate Pix</small></label></div>
+        <div class="radio-option"><input type="radio" name="pricingPlan" value="PREMIUM ARCHITECTURE" id="planPremiumRadio"><label class="radio-card" for="planPremiumRadio" data-i18n="plan_premium_modal">PREMIUM<br><small data-i18n="plan_premium_small">Commercial</small></label></div>
       </div>
-      <button class="btn-next-step" id="planNextBtn" onclick="handlePlanSelection()" data-i18n="next_btn">Next →</button>
-    </div>
-
-    <div class="step" id="step5" style="display:none;">
-      <h2 data-i18n="step5_title">Step 5 — Define your Investment</h2>
-      <p class="modal-subtitle" data-i18n="step5_sub">Choose your budget and earn social discounts</p>
-      <label data-i18n="investment_label">Investment (R$) *</label>
-      <div class="investment-row" id="investmentRow">
-        <button type="button" class="investment-btn" data-value="1000">1 Mil</button>
-        <button type="button" class="investment-btn" data-value="2000">2 Mil</button>
-        <button type="button" class="investment-btn" data-value="5000">5 Mil</button>
-        <button type="button" class="investment-btn" data-value="10000">10 Mil</button>
-        <button type="button" class="investment-btn" data-value="20000">20 Mil</button>
-        <button type="button" class="investment-btn" data-value="30000">30 Mil</button>
-      </div>
-      <input type="number" id="investmentManual" placeholder="Or enter a value (1,000 - 30,000)" min="1000" max="30000" step="100" style="margin-top:6px;">
-
-      <label style="margin-top:14px;" data-i18n="discount_label">Social Discount (click to follow + earn)</label>
-      <div class="social-discount-row">
-        <button type="button" class="social-discount-btn" id="socTikTok" onclick="activateSocial('tiktok')">
-          <img src="tiktok-heksel.png" alt="TikTok"><span>TikTok -10%</span>
-        </button>
-        <button type="button" class="social-discount-btn" id="socInstagram" onclick="activateSocial('instagram')">
-          <img src="instagram-heksel.png" alt="Instagram"><span>Instagram -10%</span>
-        </button>
-        <button type="button" class="social-discount-btn" id="socX" onclick="activateSocial('x')">
-          <img src="x-heksel.png" alt="X"><span>X -10%</span>
-        </button>
-      </div>
-      <div class="final-price-display" id="finalPriceDisplay">Final Price: R$ —</div>
-
-      <button class="btn-next-step" onclick="submitOrder()" data-i18n="step5_btn">SEND ORDER TO PRODUCTION</button>
+      <button class="btn-next-step" onclick="submitOrder()" data-i18n="next_btn">Start Conversation</button>
     </div>
   </div>
 </div>
@@ -1111,24 +1065,6 @@
     <img src="trosk.logo.png" alt="Trosk AI" class="jarvis-logo">
   </div>
   <div class="jarvis-log" id="jarvisLog"></div>
-</div>
-
-<!-- PROCESSING OVERLAY -->
-<div class="processing-overlay" id="processingOverlay">
-  <div class="processing-card" id="processingCard">
-    <div class="processing-spinner" id="processingSpinner">⚡</div>
-    <h2 id="processingTitle">⚡ Trosk AI routing your project...</h2>
-    <p id="processingSub">Generating your secure Asaas checkout page.</p>
-    <div id="pixResultContainer" style="display:none;">
-      <img id="qrCodeImage" src="" alt="QR Code PIX" style="width:200px; height:200px; margin:16px auto; display:block; border-radius:12px; border:1px solid var(--cyan);">
-      <div style="display:flex; gap:8px; align-items:center; margin-top:12px;">
-        <input type="text" id="pixCopiaColaInput" readonly style="flex:1; padding:12px; border-radius:8px; border:1px solid rgba(255,255,255,0.15); background:rgba(255,255,255,0.05); color:white; font-family:monospace; font-size:0.8rem;">
-        <button onclick="copyPixCode()" style="background:var(--cyan); color:var(--ink); border:none; padding:12px 16px; border-radius:8px; font-family:'Syne',sans-serif; font-weight:700; cursor:pointer;">📋 Copiar</button>
-      </div>
-      <p style="color:rgba(255,255,255,0.4); font-size:0.7rem; margin-top:8px;">O código expira em 30 minutos</p>
-    </div>
-    <button class="btn-pay-invoice" id="btnPayInvoice" onclick="openPaymentLink()">💳 COMPLETE PREMIUM ACQUISITION</button>
-  </div>
 </div>
 
 <button class="theme-fab" id="themeFab" title="Switch theme" type="button"><span class="theme-icon" id="themeIcon">☀</span></button>
@@ -1151,7 +1087,7 @@
       perk_1: '⚡ Ultra profissional', perk_2: '🎨 Identidade visual',
       perk_3: '📱 100% responsivo', perk_4: '🚀 Entrega rápida',
       freemium_label: 'Visualização ao Vivo', freemium_title: 'Freemium', freemium_l1: 'Simulação interativa de app', freemium_l2: 'Pré-visualização do design final', freemium_l3: 'Teste de recursos', freemium_l4: 'Sem compromisso', freemium_btn: 'Experimente Agora',
-      premium_label: 'Acesso Total', premium_title: 'Premium', premium_l1: 'Site + loja completos', premium_l2: 'Identidade visual exclusiva', premium_l3: 'Ecossistema digital', premium_l4: 'Suporte vitalício', premium_btn: 'Contrate Premium',
+      premium_label: 'Acesso Total', premium_title: 'Premium', premium_l1: 'Site + loja completos', premium_l2: 'Identidade visual exclusiva', premium_l3: 'Ecossistema digital', premium_l4: 'Suporte vitalício', premium_btn: 'Hire Premium',
       collection_tag: '⚡ Coleção NEO — Lançamento 01',
       collection_title: 'Cada Linha.<br><span class="glow-text">Um Império.</span>',
       collection_desc: 'Performance projetada a laser encontra a cultura de rua. Seis silhuetas. Uma declaração.',
@@ -1160,18 +1096,14 @@
       notify_title: 'Fique Atualizado', notify_sub: 'Escolha seu canal de notificação preferido', notify_redirect: 'Você será redirecionado para a plataforma selecionada.',
       step1_title: 'Passo 1', step1_sub: 'Qual é o nome da sua marca ou app?', step1_label: 'Nome da Marca / App *',
       step2_title: 'Passo 2', step2_sub: 'O que você precisa?', op_zero: 'Construir do Zero', op_site: 'Atualizar Site', op_app: 'Atualizar App', site_link_label: 'Link do Site *', apk_label: 'Upload APK',
-      step3_title: 'Passo 3', step3_sub: 'Seus dados de contato e cobrança', fullname_label: 'Nome Completo *', cpf_label: 'CPF/CNPJ *', email_label: 'E-mail *', step3_contact_method: 'Como devemos entrar em contato?', contact_detail_label: 'Detalhe de Contato *',
-      step4_title: 'Passo 4 — Escolha seu Plano', step4_sub: 'Freemium (apenas teste) ou Premium (gera Pix)',
-      plan_freemium_modal: 'FREMIUM', plan_freemium_small: 'Apenas teste', plan_premium_modal: 'PREMIUM', plan_premium_small: 'Gerar Pix',
-      step5_title: 'Passo 5 — Defina seu Investimento', step5_sub: 'Escolha seu orçamento e ganhe descontos sociais', investment_label: 'Investimento (R$) *', discount_label: 'Desconto Social (clique para seguir + ganhar)', step5_btn: 'ENVIAR PEDIDO PARA PRODUÇÃO',
-      next_btn: 'Próximo →',
+      step3_title: 'Passo 3', step3_sub: 'Seus dados de contato', fullname_label: 'Nome Completo *', cpf_label: 'CPF/CNPJ', email_label: 'E-mail *', step3_contact_method: 'Como devemos entrar em contato?',
+      step4_title: 'Passo 4 — Escolha seu Plano', step4_sub: 'Freemium (apenas teste) ou Premium (proposta comercial)',
+      plan_freemium_modal: 'FREMIUM', plan_freemium_small: 'Apenas teste', plan_premium_modal: 'PREMIUM', plan_premium_small: 'Comercial',
+      next_btn: 'Iniciar Conversa',
       advance_step1_title: 'Escolha sua Plataforma', advance_step1_sub: 'Selecione a rede social para nos contatar.',
       advance_step2_title: 'Escolha seu Idioma', advance_step2_sub: 'Selecione seu idioma preferido para a mensagem.',
       alerts: {
-        brand_name: 'Por favor, insira o nome da sua marca.',
-        contact_detail: 'Por favor, insira seu detalhe de contato.',
-        plan: 'Por favor, selecione um plano.',
-        fill_fields: 'Preencha todos os campos.',
+        fill_fields: 'Preencha todos os campos obrigatórios.',
         investment: 'O investimento deve estar entre R$ 1.000 e R$ 30.000.'
       }
     },
@@ -1198,18 +1130,14 @@
       notify_title: 'Stay Updated', notify_sub: 'Choose your preferred notification channel', notify_redirect: 'You will be redirected to the selected platform.',
       step1_title: 'Step 1', step1_sub: 'What\'s your brand or app name?', step1_label: 'Brand / App Name *',
       step2_title: 'Step 2', step2_sub: 'What do you need?', op_zero: 'Build from Zero', op_site: 'Upgrade Site', op_app: 'Upgrade App', site_link_label: 'Site Link *', apk_label: 'APK Upload',
-      step3_title: 'Step 3', step3_sub: 'Your contact and billing info', fullname_label: 'Full Name *', cpf_label: 'CPF/CNPJ *', email_label: 'Email *', step3_contact_method: 'How should we contact you?', contact_detail_label: 'Contact Detail *',
-      step4_title: 'Step 4 — Choose Your Plan', step4_sub: 'Freemium (test only) or Premium (generates Pix payment)',
-      plan_freemium_modal: 'FREMIUM', plan_freemium_small: 'Test only', plan_premium_modal: 'PREMIUM', plan_premium_small: 'Generate Pix',
-      step5_title: 'Step 5 — Define your Investment', step5_sub: 'Choose your budget and earn social discounts', investment_label: 'Investment (R$) *', discount_label: 'Social Discount (click to follow + earn)', step5_btn: 'SEND ORDER TO PRODUCTION',
-      next_btn: 'Next →',
+      step3_title: 'Step 3', step3_sub: 'Your contact info', fullname_label: 'Full Name *', cpf_label: 'CPF/CNPJ', email_label: 'Email *', step3_contact_method: 'How should we contact you?',
+      step4_title: 'Step 4 — Choose Your Plan', step4_sub: 'Freemium (test only) or Premium (get commercial proposal)',
+      plan_freemium_modal: 'FREMIUM', plan_freemium_small: 'Test only', plan_premium_modal: 'PREMIUM', plan_premium_small: 'Commercial',
+      next_btn: 'Start Conversation',
       advance_step1_title: 'Choose your Platform', advance_step1_sub: 'Select the social network you want to contact us on.',
       advance_step2_title: 'Choose your Language', advance_step2_sub: 'Select your preferred language for the message.',
       alerts: {
-        brand_name: 'Please enter your brand name.',
-        contact_detail: 'Please enter your contact detail.',
-        plan: 'Please select a plan.',
-        fill_fields: 'Fill all fields.',
+        fill_fields: 'Please fill in all required fields.',
         investment: 'Investment must be between R$ 1,000 and R$ 30,000.'
       }
     },
@@ -1236,57 +1164,15 @@
       notify_title: 'Mantente Actualizado', notify_sub: 'Elige tu canal de notificación preferido', notify_redirect: 'Serás redirigido a la plataforma seleccionada.',
       step1_title: 'Paso 1', step1_sub: '¿Cuál es el nombre de tu marca o app?', step1_label: 'Nombre de la Marca / App *',
       step2_title: 'Paso 2', step2_sub: '¿Qué necesitas?', op_zero: 'Construir desde Cero', op_site: 'Actualizar Sitio', op_app: 'Actualizar App', site_link_label: 'Enlace del Sitio *', apk_label: 'Subir APK',
-      step3_title: 'Paso 3', step3_sub: 'Tus datos de contacto y facturación', fullname_label: 'Nombre Completo *', cpf_label: 'CPF/CNPJ *', email_label: 'Correo Electrónico *', step3_contact_method: '¿Cómo debemos contactarte?', contact_detail_label: 'Detalle de Contacto *',
-      step4_title: 'Paso 4 — Elige tu Plan', step4_sub: 'Freemium (solo prueba) o Premium (genera Pix)',
-      plan_freemium_modal: 'FREMIUM', plan_freemium_small: 'Solo prueba', plan_premium_modal: 'PREMIUM', plan_premium_small: 'Generar Pix',
-      step5_title: 'Paso 5 — Define tu Inversión', step5_sub: 'Elige tu presupuesto y gana descuentos sociales', investment_label: 'Inversión (R$) *', discount_label: 'Descuento Social (clic para seguir + ganar)', step5_btn: 'ENVIAR PEDIDO A PRODUCCIÓN',
-      next_btn: 'Siguiente →',
+      step3_title: 'Paso 3', step3_sub: 'Tus datos de contacto', fullname_label: 'Nombre Completo *', cpf_label: 'CPF/CNPJ', email_label: 'Correo Electrónico *', step3_contact_method: '¿Cómo debemos contactarte?',
+      step4_title: 'Paso 4 — Elige tu Plan', step4_sub: 'Freemium (solo prueba) o Premium (propuesta comercial)',
+      plan_freemium_modal: 'FREMIUM', plan_freemium_small: 'Solo prueba', plan_premium_modal: 'PREMIUM', plan_premium_small: 'Comercial',
+      next_btn: 'Iniciar Conversación',
       advance_step1_title: 'Elige tu Plataforma', advance_step1_sub: 'Selecciona la red social para contactarnos.',
       advance_step2_title: 'Elige tu Idioma', advance_step2_sub: 'Selecciona tu idioma preferido para el mensaje.',
       alerts: {
-        brand_name: 'Por favor, ingresa el nombre de tu marca.',
-        contact_detail: 'Por favor, ingresa tu detalle de contacto.',
-        plan: 'Por favor, selecciona un plan.',
-        fill_fields: 'Completa todos los campos.',
+        fill_fields: 'Completa todos los campos obligatorios.',
         investment: 'La inversión debe estar entre R$ 1.000 y R$ 30.000.'
-      }
-    },
-    zh: {
-      nav_home: '首页', nav_collection: '系列', nav_create: '创建', nav_manifesto: '宣言',
-      notify_btn: '通知我', vip_btn: 'VIP 访问',
-      hero_badge: 'NEO 系列 2026',
-      hero_title: '从起点<br><span class="glow-text">到无限</span>',
-      hero_desc: '三条主线。一个帝国。性能、家居与数字奢华 — 每一步都是力量的宣言。',
-      explore_all: '探索全部', explore_genesis: '探索我们的起源',
-      stat_builders: '建造者', stat_lines: '系列', stat_drop: '发售',
-      studio_label: '✦ Heksel 服务',
-      brand_title_1: '想要这样的网站？', brand_title_2: '打造你的品牌。',
-      brand_desc: '完整的视觉识别 + 专业网站 + 数字生态系统。从开始到无限。',
-      perk_1: '⚡ 超专业', perk_2: '🎨 视觉识别',
-      perk_3: '📱 100% 响应式', perk_4: '🚀 快速交付',
-      freemium_label: '实时预览', freemium_title: 'Freemium', freemium_l1: '交互式应用模拟', freemium_l2: '最终设计预览', freemium_l3: '功能测试', freemium_l4: '无承诺', freemium_btn: '立即尝试',
-      premium_label: '全功能访问', premium_title: 'Premium', premium_l1: '完整网站 + 商店', premium_l2: '专属视觉识别', premium_l3: '数字生态系统', premium_l4: '终身支持', premium_btn: '雇用高级服务',
-      collection_tag: '⚡ NEO 系列 — 首次发售',
-      collection_title: '每条主线。<br><span class="glow-text">一个帝国。</span>',
-      collection_desc: '激光工程性能遇上街头文化。六种剪影。一项宣言。',
-      footer_desc: '巴西设计。<br>全球工程。',
-      footer_collection: '系列', footer_studio: '工作室', footer_studio_1: 'Heksel 工作室', footer_studio_2: '定制构建', footer_studio_3: '内部圈子', footer_support: '支持',
-      notify_title: '保持更新', notify_sub: '选择您偏好的通知渠道', notify_redirect: '您将被重定向到所选平台。',
-      step1_title: '第 1 步', step1_sub: '您的品牌或应用名称是什么？', step1_label: '品牌 / 应用名称 *',
-      step2_title: '第 2 步', step2_sub: '您需要什么？', op_zero: '从零构建', op_site: '升级网站', op_app: '升级应用', site_link_label: '网站链接 *', apk_label: '上传 APK',
-      step3_title: '第 3 步', step3_sub: '联系方式和账单信息', fullname_label: '全名 *', cpf_label: 'CPF/CNPJ *', email_label: '电子邮件 *', step3_contact_method: '我们如何联系您？', contact_detail_label: '联系方式 *',
-      step4_title: '第 4 步 — 选择您的计划', step4_sub: 'Freemium（仅测试）或 Premium（生成 Pix 支付）',
-      plan_freemium_modal: 'FREMIUM', plan_freemium_small: '仅测试', plan_premium_modal: 'PREMIUM', plan_premium_small: '生成 Pix',
-      step5_title: '第 5 步 — 确定您的投资', step5_sub: '选择您的预算并赚取社交折扣', investment_label: '投资金额 (R$) *', discount_label: '社交折扣（点击关注 + 赚取）', step5_btn: '发送订单至生产',
-      next_btn: '下一步 →',
-      advance_step1_title: '选择您的平台', advance_step1_sub: '选择您想要联系我们的社交网络。',
-      advance_step2_title: '选择您的语言', advance_step2_sub: '选择您偏好的消息语言。',
-      alerts: {
-        brand_name: '请输入您的品牌名称。',
-        contact_detail: '请输入您的联系方式。',
-        plan: '请选择一个计划。',
-        fill_fields: '请填写所有字段。',
-        investment: '投资额必须在 R$ 1,000 至 R$ 30,000 之间。'
       }
     }
   };
@@ -1301,8 +1187,7 @@
   const langs = [
     { code: 'pt', label: 'Português', native: 'Português' },
     { code: 'en', label: 'English', native: 'English' },
-    { code: 'es', label: 'Español', native: 'Español' },
-    { code: 'zh', label: '中文', native: '中文' }
+    { code: 'es', label: 'Español', native: 'Español' }
   ];
 
   function renderLangOptions(query = '') {
@@ -1337,14 +1222,6 @@
       }
     });
     langActiveLabel.textContent = code.toUpperCase();
-    document.getElementById('investmentManual').placeholder = t.alerts.investment.replace('R$ 1,000 and R$ 30,000.', '1.000 - 30.000');
-    document.querySelector('#step5 label[style*="margin-top:14px;"]').textContent = t.discount_label;
-    document.querySelector('#step5 .final-price-display').textContent = 'Final Price: R$ —';
-    document.getElementById('brandNameInput').placeholder = 'e.g. APEX STUDIO, ForceFit...';
-    document.getElementById('siteLinkInput').placeholder = 'https://yoursite.com';
-    document.getElementById('fullNameInput').placeholder = t.fullname_label?.replace(' *', '') || 'Full Name';
-    document.getElementById('emailInput').placeholder = 'you@example.com';
-    document.getElementById('contactDetailInput').placeholder = t.contact_detail_label.replace(' *', '') + '...';
   }
 
   const originalAlert = window.alert;
@@ -1456,8 +1333,7 @@
     const messages = {
       pt: 'Olá! Vim pelo site Heksel Genesis e quero ativar meu CREATE IN ADVANCE para criar minha marca de elite agora mesmo.',
       en: 'Hello! I came through the Heksel Genesis website and I want to activate my CREATE IN ADVANCE to build my elite brand right now.',
-      es: '¡Hola! Vine a través del sitio web de Heksel Genesis y quiero activar mi CREATE IN ADVANCE para construir mi marca de élite ahora mismo.',
-      zh: '你好！我通过 Heksel Genesis 网站过来，我想立即激活我的 CREATE IN ADVANCE 来打造我的精英品牌。'
+      es: '¡Hola! Vine a través del sitio web de Heksel Genesis y quiero activar mi CREATE IN ADVANCE para construir mi marca de élite ahora mismo.'
     };
     const message = messages[langCode] || messages.en;
     let url = '';
@@ -1468,14 +1344,8 @@
       case 'whatsapp':
         url = `https://wa.me/5553991855262?text=${encodeURIComponent(message)}`;
         break;
-      case 'discord':
-        url = `https://discord.gg/Y8CNkKFNM`;
-        break;
-      case 'instagram':
-        url = `https://www.instagram.com/hafavilha`;
-        break;
-      case 'tiktok':
-        url = `https://vt.tiktok.com/ZSxbdSUg9/`;
+      case 'telegram':
+        url = `https://t.me/SEU_LINK_TELEGRAM?text=${encodeURIComponent(message)}`; // Ajuste seu link do Telegram
         break;
       default:
         alert('Please select a valid platform.');
@@ -1493,18 +1363,10 @@
 
   // ── GLOBALS ──
   let jarvisDone = false;
-  let currentPaymentUrl = null;
-  const socialLinks = {
-    tiktok: 'https://www.tiktok.com/@hafavilha.hafy.oficial?_r=1&_t=ZS-97NNJuPS3TJ',
-    instagram: 'https://www.instagram.com/hafavilha?igsh=MWplbGN6c3V6ejh0dw==',
-    x: 'https://x.com/Hafavilha'
-  };
-  let socialDiscounts = { tiktok: false, instagram: false, x: false };
-  const socialIdMap = { tiktok: 'socTikTok', instagram: 'socInstagram', x: 'socX' };
 
   // ── MULTI-STEP ──
   function goToStep(n) {
-    if (n === 2 && !document.getElementById('brandNameInput').value.trim()) { alert('brand_name'); return; }
+    if (n === 2 && !document.getElementById('brandNameInput').value.trim()) { alert('fill_fields'); return; }
     if (n === 3) {
       const opType = document.querySelector('input[name="operationType"]:checked')?.value;
       if ((opType === 'Upgrade Site' || opType === 'Upgrade App') && !jarvisDone) {
@@ -1514,75 +1376,12 @@
       }
       jarvisDone = false;
     }
-    if (n === 4 && (!document.getElementById('fullNameInput').value.trim() || !document.getElementById('emailInput').value.trim() || !document.getElementById('contactDetailInput').value.trim())) {
+    if (n === 4 && (!document.getElementById('fullNameInput').value.trim() || !document.getElementById('emailInput').value.trim())) {
       alert('fill_fields'); return;
     }
     document.querySelectorAll('.step').forEach(s => s.classList.remove('active-step'));
     document.getElementById('step' + n).classList.add('active-step');
   }
-
-  function handlePlanSelection() {
-    const plan = document.querySelector('input[name="pricingPlan"]:checked')?.value;
-    if (!plan) { alert('plan'); return; }
-    if (plan === 'FREMIUM MODEL') {
-      closeOrderModal();
-      submitOrder('freemium');
-    } else {
-      document.querySelectorAll('.step').forEach(s => s.classList.remove('active-step'));
-      document.getElementById('step5').classList.add('active-step');
-      document.getElementById('step5').style.display = 'block';
-      updateFinalPrice();
-    }
-  }
-
-  function getInvestmentValue() {
-    const man = parseInt(document.getElementById('investmentManual').value);
-    if (!isNaN(man) && man >= 1000 && man <= 30000) return man;
-    const activeBtn = document.querySelector('.investment-btn.active');
-    if (activeBtn) return parseInt(activeBtn.dataset.value);
-    return null;
-  }
-
-  function updateFinalPrice() {
-    const inv = getInvestmentValue();
-    if (!inv) { document.getElementById('finalPriceDisplay').textContent = 'Final Price: R$ —'; return; }
-    const discountCount = Object.values(socialDiscounts).filter(v => v).length;
-    const discount = discountCount * 0.10;
-    const final = Math.round(inv * (1 - discount));
-    document.getElementById('finalPriceDisplay').textContent = `Final Price: R$ ${final.toLocaleString()} (${discount*100}% off)`;
-  }
-
-  function activateSocial(platform) {
-    window.open(socialLinks[platform], '_blank');
-    socialDiscounts[platform] = true;
-    document.getElementById(socialIdMap[platform]).classList.add('activated');
-    updateFinalPrice();
-  }
-
-  document.querySelectorAll('.investment-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      document.querySelectorAll('.investment-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      document.getElementById('investmentManual').value = btn.dataset.value;
-      updateFinalPrice();
-    });
-  });
-  document.getElementById('investmentManual').addEventListener('input', () => {
-    let v = parseInt(document.getElementById('investmentManual').value);
-    if (isNaN(v)) return;
-    document.querySelectorAll('.investment-btn').forEach(b => {
-      b.classList.remove('active');
-      if (parseInt(b.dataset.value) === v) b.classList.add('active');
-    });
-    updateFinalPrice();
-  });
-
-  document.querySelectorAll('input[name="operationType"]').forEach(r => {
-    r.addEventListener('change', () => {
-      document.getElementById('siteLinkField').style.display = r.value === 'Upgrade Site' ? 'block' : 'none';
-      document.getElementById('appUploadField').style.display = r.value === 'Upgrade App' ? 'block' : 'none';
-    });
-  });
 
   function startJarvisAnalysis(type) {
     document.getElementById('orderModalOverlay').style.display = 'none';
@@ -1609,190 +1408,67 @@
     document.getElementById('orderModalOverlay').style.display = 'flex';
     document.querySelectorAll('.step').forEach(s => s.classList.remove('active-step'));
     document.getElementById('step1').classList.add('active-step');
-    document.getElementById('step5').style.display = 'none';
     document.getElementById('brandNameInput').value = '';
     document.getElementById('fullNameInput').value = '';
     document.getElementById('cpfCnpjInput').value = '';
     document.getElementById('emailInput').value = '';
-    document.getElementById('contactDetailInput').value = '';
-    document.getElementById('investmentManual').value = '';
-    document.querySelectorAll('.investment-btn').forEach(b => b.classList.remove('active'));
-    document.querySelectorAll('.social-discount-btn').forEach(b => b.classList.remove('activated'));
-    socialDiscounts = { tiktok: false, instagram: false, x: false };
-    document.getElementById('finalPriceDisplay').textContent = 'Final Price: R$ —';
     document.getElementById('siteLinkField').style.display = 'none';
     document.getElementById('appUploadField').style.display = 'none';
     document.getElementById('siteLinkInput').value = '';
     document.getElementById('apkFileInput').value = '';
-    document.querySelectorAll('.contact-btn').forEach(btn => btn.classList.remove('selected', 'dimmed'));
-    document.getElementById('contactDetailInput').placeholder = 'you@example.com / username#0000 / +55 (XX) XXXXX-XXXX';
   }
   function closeOrderModal() { document.getElementById('orderModalOverlay').style.display = 'none'; }
   document.getElementById('orderModalOverlay').addEventListener('click', function(e) { if (e.target === this) closeOrderModal(); });
 
   // ==========================================================
-  // FUNÇÃO SUBMIT ORDER (COM E-MAIL SEPARADO E TRATAMENTO accepted)
+  // FUNÇÃO SUBMIT ORDER (REDIRECIONAMENTO WHATSAPP/TELEGRAM)
   // ==========================================================
-  async function submitOrder(forcePlan = null) {
+  function submitOrder() {
     const brandName = document.getElementById('brandNameInput').value.trim();
     const fullName = document.getElementById('fullNameInput').value.trim();
-    const cpfCnpj = document.getElementById('cpfCnpjInput').value.replace(/\D/g, '');
     const email = document.getElementById('emailInput').value.trim();
-    const contactDetail = document.getElementById('contactDetailInput').value.trim();
-    const contactMethod = document.querySelector('input[name="contactMethod"]:checked')?.value || 'gmail';
-    const operationType = document.querySelector('input[name="operationType"]:checked')?.value || '';
-    const pricingPlan = forcePlan || document.querySelector('input[name="pricingPlan"]:checked')?.value || '';
-    const isPremium = pricingPlan === 'PREMIUM ARCHITECTURE';
-    let finalInvestment = 0, discountApplied = 0;
+    const contactMethod = document.querySelector('input[name="contactMethod"]:checked')?.value || 'whatsapp';
+    const pricingPlan = document.querySelector('input[name="pricingPlan"]:checked')?.value || 'FREMIUM MODEL';
 
-    if (!brandName || !fullName || !cpfCnpj || !email || !contactDetail) { alert('fill_fields'); return; }
-
-    if (isPremium) {
-      const investment = getInvestmentValue();
-      if (!investment || investment < 1000 || investment > 30000) { alert('investment'); return; }
-      const discountCount = Object.values(socialDiscounts).filter(v => v).length;
-      discountApplied = discountCount * 10;
-      finalInvestment = Math.round(investment * (1 - discountCount * 0.10));
-    }
-
-    const payload = {
-      nomeCompleto: fullName,
-      email: email,
-      cpfCnpj: cpfCnpj,
-      brandName,
-      contactMethod,
-      contactDetail,
-      operationType,
-      pricingPlan: isPremium ? 'premium' : 'freemium',
-      investment: isPremium ? finalInvestment : 0,
-      discountApplied: isPremium ? discountApplied : 0,
-      timestamp: new Date().toISOString()
-    };
-
-    closeOrderModal();
-
-    // FLUXO FREEMIUM
-    if (!isPremium) {
-      document.getElementById('processingOverlay').style.display = 'flex';
-      document.getElementById('pixResultContainer').style.display = 'none';
-      document.getElementById('processingSpinner').style.display = 'block';
-      document.getElementById('processingTitle').textContent = '⚡ Trosk AI routing your project...';
-      document.getElementById('processingSub').textContent = 'Setting up your test environment...';
-      setTimeout(() => {
-        document.getElementById('processingTitle').textContent = 'Test project registered!';
-        document.getElementById('processingSub').textContent = 'Our team will contact you shortly.';
-        db.collection('orders').add({...payload, paymentStatus: 'test_only', createdAt: firebase.firestore.FieldValue.serverTimestamp()}).catch(() => {});
-      }, 1500);
+    if (!brandName || !fullName || !email) {
+      alert('fill_fields');
       return;
     }
 
-    // FLUXO PREMIUM
-    const MAKE_URL = 'https://hook.us2.make.com/f4f2ufisvcr3kk1f6rp5z370c7489i6y';
-    const overlay = document.getElementById('processingOverlay');
-    const spinner = document.getElementById('processingSpinner');
-    const resultContainer = document.getElementById('pixResultContainer');
-    const qrImg = document.getElementById('qrCodeImage');
-    const copyInput = document.getElementById('pixCopiaColaInput');
-    const title = document.getElementById('processingTitle');
-    const sub = document.getElementById('processingSub');
-    const payBtn = document.getElementById('btnPayInvoice');
+    // Mensagens personalizadas por idioma
+    const messages = {
+      pt: `Olá! Acabei de fazer o pedido do plano ${pricingPlan} para a minha marca ${brandName}. Quero dar andamento ao pagamento e atendimento!`,
+      en: `Hello! I just ordered the ${pricingPlan} plan for my brand ${brandName}. I want to proceed with the payment and onboarding!`,
+      es: `¡Hola! Acabo de solicitar el plan ${pricingPlan} para mi marca ${brandName}. ¡Quiero proceder con el pago y atendimiento!`
+    };
+    const message = messages[currentLang] || messages.en;
 
-    overlay.style.display = 'flex';
-    spinner.style.display = 'block';
-    resultContainer.style.display = 'none';
-    title.textContent = '⚡ Gerando seu PIX...';
-    sub.textContent = 'Aguardando resposta do Asaas.';
-    payBtn.classList.remove('show');
+    // Salvar lead no Firebase
+    db.collection('orders').add({
+      brandName,
+      fullName,
+      email,
+      contactMethod,
+      pricingPlan,
+      timestamp: new Date().toISOString(),
+      lang: currentLang
+    }).catch(() => {});
 
-    try {
-      const response = await fetch(MAKE_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
-      });
-
-      const rawText = await response.text();
-      let responseData;
-      try {
-        responseData = JSON.parse(rawText);
-      } catch (e) {
-        throw new Error("Resposta inválida do servidor.");
-      }
-
-      if (responseData && responseData.accepted === true) {
-        title.textContent = 'Armazenando pedido...';
-        sub.textContent = 'Gerando seu Pix em instantes...';
-        setTimeout(() => {
-          spinner.style.display = 'none';
-          resultContainer.style.display = 'block';
-          title.textContent = 'Pagamento PIX em processamento';
-          sub.textContent = 'Você receberá o código Pix em instantes. Enquanto isso, utilize os dados abaixo.';
-          qrImg.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200"%3E%3Crect width="200" height="200" fill="%23080d11" rx="12"/%3E%3Ctext x="100" y="100" fill="%2300f0ff" font-family="monospace" font-size="14" text-anchor="middle" dominant-baseline="middle"%3EQR Code em breve%3C/text%3E%3C/svg%3E';
-          copyInput.value = 'Aguardando código Pix...';
-        }, 3000);
-        db.collection('orders').add({...payload, paymentStatus: 'accepted', createdAt: firebase.firestore.FieldValue.serverTimestamp()}).catch(() => {});
-        return;
-      }
-
-      let rawDataString = rawText.replace(/\\n/g, '').replace(/\\"/g, '"');
-      let qrCodeSrc = "";
-      let payloadText = "";
-
-      const imgMatch = rawDataString.match(/"(?:pixImage|qrCode|encodedImage)"\s*:\s*"([^"]+)"/);
-      if (imgMatch) qrCodeSrc = imgMatch[1];
-
-      const payloadMatch = rawDataString.match(/"(?:pixPayload|copiaECola|payload)"\s*:\s*"([^"]+)"/);
-      if (payloadMatch) payloadText = payloadMatch[1];
-
-      if (!qrCodeSrc || !payloadText) {
-        throw new Error("Elementos do Pix não encontrados.");
-      }
-
-      if (!qrCodeSrc.startsWith('data:')) {
-        qrCodeSrc = 'data:image/png;base64,' + qrCodeSrc;
-      }
-
-      if (qrImg) qrImg.src = qrCodeSrc;
-      if (copyInput) copyInput.value = payloadText;
-
-      spinner.style.display = 'none';
-      resultContainer.style.display = 'block';
-      title.textContent = 'Pagamento PIX gerado!';
-      sub.textContent = 'Escaneie o QR Code ou copie o código abaixo';
-
-      db.collection('orders').add({...payload, paymentStatus: 'pending', pixPayload: payloadText, createdAt: firebase.firestore.FieldValue.serverTimestamp()}).catch(() => {});
-    } catch (error) {
-      console.error('Erro na integração:', error);
-      spinner.style.display = 'none';
-      title.textContent = '❌ Erro no pagamento';
-      sub.textContent = error.message || 'Ocorreu um erro inesperado.';
-      payBtn.classList.remove('show');
+    // Redirecionar conforme o método de contato
+    let url = '';
+    if (contactMethod === 'whatsapp') {
+      url = `https://wa.me/5553991855262?text=${encodeURIComponent(message)}`;
+    } else if (contactMethod === 'telegram') {
+      url = `https://t.me/SEU_LINK_TELEGRAM?text=${encodeURIComponent(message)}`; // Ajuste seu link do Telegram
     }
-  }
 
-  function closeProcessingOverlay() {
-    document.getElementById('processingOverlay').style.display = 'none';
-  }
-
-  function copyPixCode() {
-    const input = document.getElementById('pixCopiaColaInput');
-    if (!input) return;
-    input.select();
-    input.setSelectionRange(0, 99999);
-    document.execCommand('copy');
-    alert('Código PIX copiado!');
-  }
-
-  function openPaymentLink() { if (currentPaymentUrl) window.open(currentPaymentUrl, '_blank'); }
-
-  document.getElementById('processingOverlay').addEventListener('click', function(e) {
-    if (e.target === this) {
-      this.style.display = 'none';
-      currentPaymentUrl = null;
+    if (url) {
+      window.open(url, '_blank');
     }
-  });
+    closeOrderModal();
+  }
 
-  /* CAROUSEL */
+  /* CAROUSEL PROFISSIONAL */
   (function initCarousel() {
     const IMAGES = [
       { src: '1000027632-removebg-preview.png', name: 'NEO-KAI 01 FOR HIKING', tag: '01 / 11' },
@@ -1809,13 +1485,24 @@
     ];
     const track = document.getElementById('carouselTrack'), dotsEl = document.getElementById('carouselDots');
     if (!track || !dotsEl) return;
+
+    // Cria slides
     IMAGES.forEach((img, idx) => {
       const slide = document.createElement('div');
       slide.className = 'carousel-slide' + (idx === 0 ? ' active' : '');
       slide.dataset.idx = idx;
-      slide.innerHTML = `<div class="carousel-glow"></div><img src="${img.src}" alt="${img.name}" loading="lazy"><div class="carousel-label"><span class="carousel-label-tag">${img.tag}</span><span class="carousel-label-name">${img.name}</span></div>`;
+      slide.innerHTML = `
+        <div class="carousel-glow"></div>
+        <img src="${img.src}" alt="${img.name}" loading="lazy">
+        <div class="carousel-label">
+          <span class="carousel-label-tag">${img.tag}</span>
+          <span class="carousel-label-name">${img.name}</span>
+        </div>
+      `;
       track.appendChild(slide);
     });
+
+    // Cria dots
     for (let i = 0; i < IMAGES.length; i++) {
       const dot = document.createElement('span');
       dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
@@ -1823,25 +1510,43 @@
       dot.addEventListener('click', () => goTo(i, i > current ? 'next' : 'prev'));
       dotsEl.appendChild(dot);
     }
+
     const slides = track.querySelectorAll('.carousel-slide'), dots = dotsEl.querySelectorAll('.carousel-dot');
     let current = 0;
-    function syncDots(idx) { dots.forEach(d => d.classList.remove('active')); dots[idx]?.classList.add('active'); }
+
+    function syncDots(idx) {
+      dots.forEach(d => d.classList.remove('active'));
+      dots[idx]?.classList.add('active');
+    }
+
     function goTo(idx, dir) {
-      const prev = current; current = ((idx % IMAGES.length) + IMAGES.length) % IMAGES.length;
+      const prev = current;
+      current = ((idx % IMAGES.length) + IMAGES.length) % IMAGES.length;
       if (prev === current) return;
+
+      // Transição suave
       slides[prev].classList.add(dir === 'next' ? 'exit-left' : 'exit-right');
       slides[prev].classList.remove('active');
       setTimeout(() => slides[prev].classList.remove('exit-left', 'exit-right'), 600);
+
       slides[current].style.transform = dir === 'next' ? 'translateX(60px) scale(0.96)' : 'translateX(-60px) scale(0.96)';
       slides[current].classList.add('active');
-      requestAnimationFrame(() => requestAnimationFrame(() => { slides[current].style.transform = ''; }));
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => { slides[current].style.transform = ''; });
+      });
+
       syncDots(current);
     }
+
     document.getElementById('carouselNext')?.addEventListener('click', () => goTo(current + 1, 'next'));
     document.getElementById('carouselPrev')?.addEventListener('click', () => goTo(current - 1, 'prev'));
+
     let autoTimer = setInterval(() => goTo((current + 1) % IMAGES.length, 'next'), 4500);
     document.getElementById('heroCarousel')?.addEventListener('mouseenter', () => clearInterval(autoTimer));
-    document.getElementById('heroCarousel')?.addEventListener('mouseleave', () => { clearInterval(autoTimer); autoTimer = setInterval(() => goTo((current + 1) % IMAGES.length, 'next'), 4500); });
+    document.getElementById('heroCarousel')?.addEventListener('mouseleave', () => {
+      clearInterval(autoTimer);
+      autoTimer = setInterval(() => goTo((current + 1) % IMAGES.length, 'next'), 4500);
+    });
   })();
 
   /* THEME TOGGLE */
