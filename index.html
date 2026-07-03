@@ -998,16 +998,21 @@
       <button class="btn-next-step" onclick="goToStep(3)" data-i18n="next_btn">Next →</button>
     </div>
 
-    <!-- ETAPA 3 ATUALIZADA COM TODAS AS OPÇÕES -->
+    <!-- ETAPA 3 COM EMAIL CONDICIONAL -->
     <div class="step" id="step3">
       <h2 data-i18n="step3_title">Step 3</h2>
-      <p class="modal-subtitle" data-i18n="step3_sub">Your contact and billing info</p>
+      <p class="modal-subtitle" data-i18n="step3_sub">Your contact info</p>
       <label data-i18n="fullname_label">Full Name *</label>
       <input type="text" id="fullNameInput" placeholder="Your complete name" required>
       <label data-i18n="cpf_label">CPF/CNPJ</label>
       <input type="text" id="cpfCnpjInput" placeholder="000.000.000-00">
-      <label data-i18n="email_label">Email *</label>
-      <input type="email" id="emailInput" placeholder="you@example.com" required>
+      
+      <!-- Container do E-mail (inicialmente oculto) -->
+      <div id="emailFieldContainer" style="display:none;">
+        <label data-i18n="email_label">Email *</label>
+        <input type="email" id="emailInput" placeholder="you@example.com">
+      </div>
+
       <hr style="border-color:rgba(255,255,255,0.1); margin:16px 0;">
       <label data-i18n="step3_contact_method">How should we contact you?</label>
       <div class="radio-row" style="justify-content:center;">
@@ -1346,6 +1351,23 @@
   // ── GLOBALS ──
   let jarvisDone = false;
 
+  // Função para mostrar/ocultar campo de e-mail conforme o método de contato
+  function toggleEmailField() {
+    const contactMethod = document.querySelector('input[name="contactMethod"]:checked')?.value;
+    const emailContainer = document.getElementById('emailFieldContainer');
+    if (emailContainer) {
+      emailContainer.style.display = (contactMethod === 'gmail') ? 'block' : 'none';
+    }
+  }
+
+  // Adicionar event listener aos radio buttons
+  document.querySelectorAll('input[name="contactMethod"]').forEach(radio => {
+    radio.addEventListener('change', toggleEmailField);
+  });
+
+  // Chamar a função na inicialização para definir o estado inicial
+  toggleEmailField();
+
   // ── MULTI-STEP ──
   function goToStep(n) {
     if (n === 2 && !document.getElementById('brandNameInput').value.trim()) { alert('fill_fields'); return; }
@@ -1358,8 +1380,12 @@
       }
       jarvisDone = false;
     }
-    if (n === 4 && (!document.getElementById('fullNameInput').value.trim() || !document.getElementById('emailInput').value.trim())) {
-      alert('fill_fields'); return;
+    if (n === 4) {
+      const contactMethod = document.querySelector('input[name="contactMethod"]:checked')?.value;
+      const fullName = document.getElementById('fullNameInput').value.trim();
+      const email = document.getElementById('emailInput').value.trim();
+      if (!fullName) { alert('fill_fields'); return; }
+      if (contactMethod === 'gmail' && !email) { alert('fill_fields'); return; }
     }
     document.querySelectorAll('.step').forEach(s => s.classList.remove('active-step'));
     document.getElementById('step' + n).classList.add('active-step');
@@ -1398,6 +1424,9 @@
     document.getElementById('appUploadField').style.display = 'none';
     document.getElementById('siteLinkInput').value = '';
     document.getElementById('apkFileInput').value = '';
+    // Resetar para WhatsApp e ocultar email
+    document.getElementById('cmWhatsapp').checked = true;
+    toggleEmailField();
   }
   function closeOrderModal() { document.getElementById('orderModalOverlay').style.display = 'none'; }
   document.getElementById('orderModalOverlay').addEventListener('click', function(e) { if (e.target === this) closeOrderModal(); });
@@ -1412,7 +1441,12 @@
     const contactMethod = document.querySelector('input[name="contactMethod"]:checked')?.value || 'whatsapp';
     const pricingPlan = document.querySelector('input[name="pricingPlan"]:checked')?.value || 'FREMIUM MODEL';
 
-    if (!brandName || !fullName || !email) {
+    // Validação: fullName sempre obrigatório, e-mail obrigatório apenas para Gmail
+    if (!brandName || !fullName) {
+      alert('fill_fields');
+      return;
+    }
+    if (contactMethod === 'gmail' && !email) {
       alert('fill_fields');
       return;
     }
@@ -1429,7 +1463,7 @@
     db.collection('orders').add({
       brandName,
       fullName,
-      email,
+      email: contactMethod === 'gmail' ? email : null,
       contactMethod,
       pricingPlan,
       timestamp: new Date().toISOString(),
@@ -1443,13 +1477,13 @@
         url = `https://wa.me/5553991855262?text=${encodeURIComponent(message)}`;
         break;
       case 'discord':
-        url = `https://discord.gg/Y8CNkKFNM`; // Link do servidor Discord
+        url = `https://discord.gg/Y8CNkKFNM`;
         break;
       case 'instagram':
-        url = `https://instagram.com/hafavilha`; // Perfil do Instagram (pode usar direct link se existir)
+        url = `https://instagram.com/hafavilha`;
         break;
       case 'tiktok':
-        url = `https://vt.tiktok.com/ZSxbdSUg9/`; // Link do TikTok
+        url = `https://vt.tiktok.com/ZSxbdSUg9/`;
         break;
       case 'gmail':
         url = `mailto:hafavilhahafy@gmail.com?subject=Pedido%20Rota%20702&body=${encodeURIComponent(message)}`;
