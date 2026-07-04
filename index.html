@@ -592,46 +592,6 @@
       min-height: 80px;
     }
 
-    /* INVESTMENT */
-    .investment-row { display: flex; flex-wrap: wrap; gap: 8px; margin: 8px 0; }
-    .investment-btn { flex: 1; min-width: 60px; padding: 8px 6px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.12); background: rgba(255,255,255,0.02); font-family: 'Syne', sans-serif; font-size: 0.65rem; font-weight: 700; color: rgba(255,255,255,0.5); cursor: pointer; transition: all 0.35s; text-align: center; }
-    .investment-btn:hover { border-color: var(--cyan); color: var(--cyan); background: rgba(0,240,255,0.06); }
-    .investment-btn.active { border-color: var(--cyan); background: rgba(0,240,255,0.1); color: var(--cyan); box-shadow: 0 0 12px rgba(0,240,255,0.15); animation: ping 1.4s ease-out infinite; }
-    #investmentManual {
-      color: white !important;
-      -webkit-text-fill-color: white !important;
-      opacity: 1;
-    }
-    #investmentManual::placeholder {
-      color: rgba(255,255,255,0.35);
-      -webkit-text-fill-color: rgba(255,255,255,0.35);
-    }
-
-    /* SOCIAL DISCOUNT */
-    .social-discount-row { display: flex; gap: 10px; justify-content: center; margin: 8px 0; }
-    .social-discount-btn { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 12px 6px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.02); cursor: pointer; transition: all 0.35s; }
-    .social-discount-btn img { width: 28px; height: 28px; object-fit: contain; transition: transform 0.3s; }
-    .social-discount-btn span { font-family: 'Syne', sans-serif; font-size: 0.55rem; font-weight: 700; letter-spacing: 0.06em; color: rgba(255,255,255,0.45); text-transform: uppercase; }
-    .social-discount-btn:hover { border-color: var(--cyan); background: rgba(0,240,255,0.04); }
-    .social-discount-btn.activated { border-color: #25D366; background: rgba(37,211,102,0.08); box-shadow: 0 0 16px rgba(37,211,102,0.2); }
-    .social-discount-btn.activated span { color: #25D366; }
-
-    .final-price-display { margin-top: 12px; font-family: 'Space Mono', monospace; font-size: 1.1rem; color: var(--cyan); text-align: center; }
-
-    /* JARVIS */
-    .jarvis-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.96); z-index: 5000; align-items: center; justify-content: center; flex-direction: column; }
-    .jarvis-core { position: relative; width: 280px; height: 280px; display: flex; align-items: center; justify-content: center; }
-    .jarvis-ring { position: absolute; border-radius: 50%; border: 1px solid rgba(0,240,255,0.2); animation: jarvisSpin 3s linear infinite; }
-    .jarvis-ring:nth-child(1) { width: 100%; height: 100%; border-top-color: rgba(0,240,255,0.6); animation-duration: 4s; }
-    .jarvis-ring:nth-child(2) { width: 80%; height: 80%; border-right-color: rgba(0,240,255,0.5); animation-duration: 6s; animation-direction: reverse; }
-    .jarvis-ring:nth-child(3) { width: 60%; height: 60%; border-bottom-color: rgba(180,94,255,0.5); animation-duration: 8s; }
-    @keyframes jarvisSpin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-    .jarvis-logo { width: 100px; height: 100px; border-radius: 50%; object-fit: contain; z-index: 2; animation: jarvisGlow 2s ease-in-out infinite; filter: drop-shadow(0 0 20px rgba(0,240,255,0.6)); }
-    @keyframes jarvisGlow { 0%,100% { filter: drop-shadow(0 0 20px rgba(0,240,255,0.6)); } 50% { filter: drop-shadow(0 0 40px rgba(0,240,255,1)) drop-shadow(0 0 60px rgba(180,94,255,0.6)); } }
-    .jarvis-log { margin-top: 24px; font-family: 'Space Mono', monospace; font-size: 0.65rem; color: rgba(0,240,255,0.6); letter-spacing: 0.1em; text-align: center; min-height: 60px; }
-    .jarvis-log span { display: block; animation: logFade 1.5s ease-in-out; }
-    @keyframes logFade { 0% { opacity: 0; transform: translateY(10px); } 20% { opacity: 1; transform: translateY(0); } 80% { opacity: 1; } 100% { opacity: 0.3; } }
-
     /* CAROUSEL - PROFISSIONAL */
     .hero-carousel { position: relative; width: 100%; max-width: 640px; display: flex; flex-direction: column; align-items: center; gap: 16px; }
     .carousel-track { position: relative; width: 100%; min-height: 500px; display: flex; align-items: center; justify-content: center; }
@@ -998,20 +958,12 @@
       <button class="btn-next-step" onclick="goToStep(3)" data-i18n="next_btn">Next →</button>
     </div>
 
-    <!-- ETAPA 3 COM EMAIL CONDICIONAL -->
+    <!-- ETAPA 3 SIMPLIFICADA -->
     <div class="step" id="step3">
       <h2 data-i18n="step3_title">Step 3</h2>
-      <p class="modal-subtitle" data-i18n="step3_sub">Your contact info</p>
-      <label data-i18n="fullname_label">Full Name *</label>
-      <input type="text" id="fullNameInput" placeholder="Your complete name" required>
-      <label data-i18n="cpf_label">CPF/CNPJ</label>
-      <input type="text" id="cpfCnpjInput" placeholder="000.000.000-00">
-      
-      <!-- Container do E-mail (inicialmente oculto) -->
-      <div id="emailFieldContainer" style="display:none;">
-        <label data-i18n="email_label">Email *</label>
-        <input type="email" id="emailInput" placeholder="you@example.com">
-      </div>
+      <p class="modal-subtitle" data-i18n="step3_sub">Your info</p>
+      <label data-i18n="fullname_label">Your Name *</label>
+      <input type="text" id="fullNameInput" placeholder="Enter your name" required>
 
       <hr style="border-color:rgba(255,255,255,0.1); margin:16px 0;">
       <label data-i18n="step3_contact_method">How should we contact you?</label>
@@ -1022,6 +974,21 @@
         <div class="radio-option"><input type="radio" name="contactMethod" value="tiktok" id="cmTikTok"><label class="radio-card" for="cmTikTok"><img src="tiktok-heksel.png" style="width:28px;display:block;margin:0 auto 4px;" alt="TikTok">TikTok</label></div>
         <div class="radio-option"><input type="radio" name="contactMethod" value="gmail" id="cmGmail"><label class="radio-card" for="cmGmail"><img src="g.logo.png" style="width:28px;display:block;margin:0 auto 4px;" alt="Gmail">Gmail</label></div>
       </div>
+
+      <!-- Campo dinâmico que muda conforme a seleção -->
+      <div id="contactDetailContainer">
+        <!-- WhatsApp input (padrão) -->
+        <input type="text" id="whatsappInput" placeholder="Your phone number with DDD" style="display:block;">
+        <!-- Discord input -->
+        <input type="text" id="discordInput" placeholder="Your Discord ID" style="display:none;">
+        <!-- Instagram input -->
+        <input type="text" id="instagramInput" placeholder="Your Instagram @" style="display:none;">
+        <!-- TikTok input -->
+        <input type="text" id="tiktokInput" placeholder="Your TikTok @" style="display:none;">
+        <!-- Gmail input -->
+        <input type="email" id="gmailInput" placeholder="Your Gmail address" style="display:none;">
+      </div>
+
       <button class="btn-next-step" onclick="goToStep(4)" data-i18n="next_btn">Next →</button>
     </div>
 
@@ -1077,15 +1044,14 @@
       notify_title: 'Fique Atualizado', notify_sub: 'Escolha seu canal de notificação preferido', notify_redirect: 'Você será redirecionado para a plataforma selecionada.',
       step1_title: 'Passo 1', step1_sub: 'Qual é o nome da sua marca ou app?', step1_label: 'Nome da Marca / App *',
       step2_title: 'Passo 2', step2_sub: 'O que você precisa?', op_zero: 'Construir do Zero', op_site: 'Atualizar Site', op_app: 'Atualizar App', site_link_label: 'Link do Site *', apk_label: 'Upload APK',
-      step3_title: 'Passo 3', step3_sub: 'Seus dados de contato', fullname_label: 'Nome Completo *', cpf_label: 'CPF/CNPJ', email_label: 'E-mail *', step3_contact_method: 'Como devemos entrar em contato?',
+      step3_title: 'Passo 3', step3_sub: 'Seus dados', fullname_label: 'Seu Nome *', step3_contact_method: 'Como podemos te contatar?',
       step4_title: 'Passo 4 — Escolha seu Plano', step4_sub: 'Freemium (apenas teste) ou Premium (proposta comercial)',
       plan_freemium_modal: 'FREMIUM', plan_freemium_small: 'Apenas teste', plan_premium_modal: 'PREMIUM', plan_premium_small: 'Comercial',
       next_btn: 'Iniciar Conversa',
       advance_step1_title: 'Escolha sua Plataforma', advance_step1_sub: 'Selecione a rede social para nos contatar.',
       advance_step2_title: 'Escolha seu Idioma', advance_step2_sub: 'Selecione seu idioma preferido para a mensagem.',
       alerts: {
-        fill_fields: 'Preencha todos os campos obrigatórios.',
-        investment: 'O investimento deve estar entre R$ 1.000 e R$ 30.000.'
+        fill_fields: 'Preencha todos os campos obrigatórios.'
       }
     },
     en: {
@@ -1111,15 +1077,14 @@
       notify_title: 'Stay Updated', notify_sub: 'Choose your preferred notification channel', notify_redirect: 'You will be redirected to the selected platform.',
       step1_title: 'Step 1', step1_sub: 'What\'s your brand or app name?', step1_label: 'Brand / App Name *',
       step2_title: 'Step 2', step2_sub: 'What do you need?', op_zero: 'Build from Zero', op_site: 'Upgrade Site', op_app: 'Upgrade App', site_link_label: 'Site Link *', apk_label: 'APK Upload',
-      step3_title: 'Step 3', step3_sub: 'Your contact info', fullname_label: 'Full Name *', cpf_label: 'CPF/CNPJ', email_label: 'Email *', step3_contact_method: 'How should we contact you?',
+      step3_title: 'Step 3', step3_sub: 'Your info', fullname_label: 'Your Name *', step3_contact_method: 'How should we contact you?',
       step4_title: 'Step 4 — Choose Your Plan', step4_sub: 'Freemium (test only) or Premium (get commercial proposal)',
       plan_freemium_modal: 'FREMIUM', plan_freemium_small: 'Test only', plan_premium_modal: 'PREMIUM', plan_premium_small: 'Commercial',
       next_btn: 'Start Conversation',
       advance_step1_title: 'Choose your Platform', advance_step1_sub: 'Select the social network you want to contact us on.',
       advance_step2_title: 'Choose your Language', advance_step2_sub: 'Select your preferred language for the message.',
       alerts: {
-        fill_fields: 'Please fill in all required fields.',
-        investment: 'Investment must be between R$ 1,000 and R$ 30,000.'
+        fill_fields: 'Please fill in all required fields.'
       }
     },
     es: {
@@ -1145,15 +1110,14 @@
       notify_title: 'Mantente Actualizado', notify_sub: 'Elige tu canal de notificación preferido', notify_redirect: 'Serás redirigido a la plataforma seleccionada.',
       step1_title: 'Paso 1', step1_sub: '¿Cuál es el nombre de tu marca o app?', step1_label: 'Nombre de la Marca / App *',
       step2_title: 'Paso 2', step2_sub: '¿Qué necesitas?', op_zero: 'Construir desde Cero', op_site: 'Actualizar Sitio', op_app: 'Actualizar App', site_link_label: 'Enlace del Sitio *', apk_label: 'Subir APK',
-      step3_title: 'Paso 3', step3_sub: 'Tus datos de contacto', fullname_label: 'Nombre Completo *', cpf_label: 'CPF/CNPJ', email_label: 'Correo Electrónico *', step3_contact_method: '¿Cómo debemos contactarte?',
+      step3_title: 'Paso 3', step3_sub: 'Tus datos', fullname_label: 'Tu Nombre *', step3_contact_method: '¿Cómo podemos contactarte?',
       step4_title: 'Paso 4 — Elige tu Plan', step4_sub: 'Freemium (solo prueba) o Premium (propuesta comercial)',
       plan_freemium_modal: 'FREMIUM', plan_freemium_small: 'Solo prueba', plan_premium_modal: 'PREMIUM', plan_premium_small: 'Comercial',
       next_btn: 'Iniciar Conversación',
       advance_step1_title: 'Elige tu Plataforma', advance_step1_sub: 'Selecciona la red social para contactarnos.',
       advance_step2_title: 'Elige tu Idioma', advance_step2_sub: 'Selecciona tu idioma preferido para el mensaje.',
       alerts: {
-        fill_fields: 'Completa todos los campos obligatorios.',
-        investment: 'La inversión debe estar entre R$ 1.000 y R$ 30.000.'
+        fill_fields: 'Completa todos los campos obligatorios.'
       }
     }
   };
@@ -1351,22 +1315,37 @@
   // ── GLOBALS ──
   let jarvisDone = false;
 
-  // Função para mostrar/ocultar campo de e-mail conforme o método de contato
-  function toggleEmailField() {
-    const contactMethod = document.querySelector('input[name="contactMethod"]:checked')?.value;
-    const emailContainer = document.getElementById('emailFieldContainer');
-    if (emailContainer) {
-      emailContainer.style.display = (contactMethod === 'gmail') ? 'block' : 'none';
+  // Função para mostrar/ocultar campos de contato conforme método
+  function toggleContactInput() {
+    const method = document.querySelector('input[name="contactMethod"]:checked')?.value;
+    // Oculta todos
+    document.getElementById('whatsappInput').style.display = 'none';
+    document.getElementById('discordInput').style.display = 'none';
+    document.getElementById('instagramInput').style.display = 'none';
+    document.getElementById('tiktokInput').style.display = 'none';
+    document.getElementById('gmailInput').style.display = 'none';
+
+    // Mostra o correspondente
+    const inputMap = {
+      whatsapp: 'whatsappInput',
+      discord: 'discordInput',
+      instagram: 'instagramInput',
+      tiktok: 'tiktokInput',
+      gmail: 'gmailInput'
+    };
+    const inputId = inputMap[method];
+    if (inputId) {
+      document.getElementById(inputId).style.display = 'block';
     }
   }
 
-  // Adicionar event listener aos radio buttons
+  // Adiciona listener aos radio buttons
   document.querySelectorAll('input[name="contactMethod"]').forEach(radio => {
-    radio.addEventListener('change', toggleEmailField);
+    radio.addEventListener('change', toggleContactInput);
   });
 
-  // Chamar a função na inicialização para definir o estado inicial
-  toggleEmailField();
+  // Inicializa estado
+  toggleContactInput();
 
   // ── MULTI-STEP ──
   function goToStep(n) {
@@ -1383,9 +1362,17 @@
     if (n === 4) {
       const contactMethod = document.querySelector('input[name="contactMethod"]:checked')?.value;
       const fullName = document.getElementById('fullNameInput').value.trim();
-      const email = document.getElementById('emailInput').value.trim();
       if (!fullName) { alert('fill_fields'); return; }
-      if (contactMethod === 'gmail' && !email) { alert('fill_fields'); return; }
+      // Obtém o valor do campo visível
+      let contactValue = '';
+      switch(contactMethod) {
+        case 'whatsapp': contactValue = document.getElementById('whatsappInput').value.trim(); break;
+        case 'discord': contactValue = document.getElementById('discordInput').value.trim(); break;
+        case 'instagram': contactValue = document.getElementById('instagramInput').value.trim(); break;
+        case 'tiktok': contactValue = document.getElementById('tiktokInput').value.trim(); break;
+        case 'gmail': contactValue = document.getElementById('gmailInput').value.trim(); break;
+      }
+      if (!contactValue) { alert('fill_fields'); return; }
     }
     document.querySelectorAll('.step').forEach(s => s.classList.remove('active-step'));
     document.getElementById('step' + n).classList.add('active-step');
@@ -1418,15 +1405,18 @@
     document.getElementById('step1').classList.add('active-step');
     document.getElementById('brandNameInput').value = '';
     document.getElementById('fullNameInput').value = '';
-    document.getElementById('cpfCnpjInput').value = '';
-    document.getElementById('emailInput').value = '';
+    document.getElementById('whatsappInput').value = '';
+    document.getElementById('discordInput').value = '';
+    document.getElementById('instagramInput').value = '';
+    document.getElementById('tiktokInput').value = '';
+    document.getElementById('gmailInput').value = '';
     document.getElementById('siteLinkField').style.display = 'none';
     document.getElementById('appUploadField').style.display = 'none';
     document.getElementById('siteLinkInput').value = '';
     document.getElementById('apkFileInput').value = '';
-    // Resetar para WhatsApp e ocultar email
+    // Reset para WhatsApp
     document.getElementById('cmWhatsapp').checked = true;
-    toggleEmailField();
+    toggleContactInput();
   }
   function closeOrderModal() { document.getElementById('orderModalOverlay').style.display = 'none'; }
   document.getElementById('orderModalOverlay').addEventListener('click', function(e) { if (e.target === this) closeOrderModal(); });
@@ -1437,16 +1427,20 @@
   function submitOrder() {
     const brandName = document.getElementById('brandNameInput').value.trim();
     const fullName = document.getElementById('fullNameInput').value.trim();
-    const email = document.getElementById('emailInput').value.trim();
     const contactMethod = document.querySelector('input[name="contactMethod"]:checked')?.value || 'whatsapp';
     const pricingPlan = document.querySelector('input[name="pricingPlan"]:checked')?.value || 'FREMIUM MODEL';
 
-    // Validação: fullName sempre obrigatório, e-mail obrigatório apenas para Gmail
-    if (!brandName || !fullName) {
-      alert('fill_fields');
-      return;
+    // Coleta o valor do campo visível
+    let contactValue = '';
+    switch(contactMethod) {
+      case 'whatsapp': contactValue = document.getElementById('whatsappInput').value.trim(); break;
+      case 'discord': contactValue = document.getElementById('discordInput').value.trim(); break;
+      case 'instagram': contactValue = document.getElementById('instagramInput').value.trim(); break;
+      case 'tiktok': contactValue = document.getElementById('tiktokInput').value.trim(); break;
+      case 'gmail': contactValue = document.getElementById('gmailInput').value.trim(); break;
     }
-    if (contactMethod === 'gmail' && !email) {
+
+    if (!brandName || !fullName || !contactValue) {
       alert('fill_fields');
       return;
     }
@@ -1463,8 +1457,8 @@
     db.collection('orders').add({
       brandName,
       fullName,
-      email: contactMethod === 'gmail' ? email : null,
       contactMethod,
+      contactValue,
       pricingPlan,
       timestamp: new Date().toISOString(),
       lang: currentLang
@@ -1474,19 +1468,19 @@
     let url = '';
     switch(contactMethod) {
       case 'whatsapp':
-        url = `https://wa.me/5553991855262?text=${encodeURIComponent(message)}`;
+        url = `https://wa.me/55${contactValue.replace(/\D/g, '')}?text=${encodeURIComponent(message)}`;
         break;
       case 'discord':
         url = `https://discord.gg/Y8CNkKFNM`;
         break;
       case 'instagram':
-        url = `https://instagram.com/hafavilha`;
+        url = `https://instagram.com/${contactValue.replace('@', '')}`;
         break;
       case 'tiktok':
-        url = `https://vt.tiktok.com/ZSxbdSUg9/`;
+        url = `https://tiktok.com/@${contactValue.replace('@', '')}`;
         break;
       case 'gmail':
-        url = `mailto:hafavilhahafy@gmail.com?subject=Pedido%20Rota%20702&body=${encodeURIComponent(message)}`;
+        url = `mailto:${contactValue}?subject=Pedido%20Rota%20702&body=${encodeURIComponent(message)}`;
         break;
       default:
         url = `https://wa.me/5553991855262?text=${encodeURIComponent(message)}`;
