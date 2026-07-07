@@ -159,7 +159,7 @@
         @keyframes bgMove { 0% { transform: translate(0, 0); } 100% { transform: translate(4%, 4%); } }
         @keyframes pulseBg { 0%, 100% { opacity: 0.4; } 50% { opacity: 1; } }
 
-        #particle-canvas {
+        #cosmos-canvas {
             position: fixed;
             top: 0;
             left: 0;
@@ -167,6 +167,7 @@
             height: 100vh;
             z-index: -1;
             pointer-events: none;
+            background: transparent;
         }
 
         @keyframes fadeUp { 0% { opacity: 0; transform: translateY(40px); filter: blur(6px); } 100% { opacity: 1; transform: translateY(0); filter: blur(0); } }
@@ -732,7 +733,40 @@
             transition: all 0.5s var(--ease);
         }
         .safe-space-icon-row { display: flex; justify-content: center; gap: 16px; margin-bottom: 24px; flex-wrap: wrap; }
-        .safe-space-icon { width: 48px; height: 48px; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.03); }
+        .safe-space-icon { 
+            width: 48px; height: 48px; border-radius: 14px; 
+            display: flex; align-items: center; justify-content: center; 
+            font-size: 1.2rem; 
+            border: 1px solid rgba(255,255,255,0.1); 
+            background: rgba(255,255,255,0.03);
+            animation: safeFloat 3s ease-in-out infinite;
+            transition: all 0.4s var(--ease);
+        }
+        .safe-space-icon:nth-child(1) { animation-delay: 0s; }
+        .safe-space-icon:nth-child(2) { animation-delay: 0.2s; }
+        .safe-space-icon:nth-child(3) { animation-delay: 0.4s; }
+        .safe-space-icon:nth-child(4) { animation-delay: 0.6s; }
+        .safe-space-icon:nth-child(5) { animation-delay: 0.8s; }
+        .safe-space-icon:nth-child(6) { animation-delay: 1.0s; }
+
+        @keyframes safeFloat {
+            0%, 100% { transform: translateY(0) scale(1); }
+            30% { transform: translateY(-6px) scale(1.08); }
+            60% { transform: translateY(0) scale(1); }
+        }
+
+        .safe-space-icon:hover {
+            animation-play-state: paused;
+            transform: scale(1.35) translateY(-8px) !important;
+            cursor: pointer;
+        }
+        .safe-space-icon:nth-child(1):hover { border-color: #ff2d78; box-shadow: 0 0 28px rgba(255,45,120,0.7), 0 8px 24px rgba(255,45,120,0.3); }
+        .safe-space-icon:nth-child(2):hover { border-color: #ff8c00; box-shadow: 0 0 28px rgba(255,140,0,0.7), 0 8px 24px rgba(255,140,0,0.3); }
+        .safe-space-icon:nth-child(3):hover { border-color: #ffd700; box-shadow: 0 0 28px rgba(255,215,0,0.7), 0 8px 24px rgba(255,215,0,0.3); }
+        .safe-space-icon:nth-child(4):hover { border-color: #00c864; box-shadow: 0 0 28px rgba(0,200,100,0.7), 0 8px 24px rgba(0,200,100,0.3); }
+        .safe-space-icon:nth-child(5):hover { border-color: #00b4ff; box-shadow: 0 0 28px rgba(0,180,255,0.7), 0 8px 24px rgba(0,180,255,0.3); }
+        .safe-space-icon:nth-child(6):hover { border-color: var(--purple); box-shadow: 0 0 28px rgba(180,94,255,0.7), 0 8px 24px rgba(180,94,255,0.3); }
+
         .safe-space-title { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.8rem; margin-bottom: 16px; background: linear-gradient(135deg, var(--white) 0%, rgba(255,255,255,0.8) 50%, var(--cyan) 100%); -webkit-background-clip: text; background-clip: text; color: transparent; }
         .safe-space-text { font-family: 'DM Sans', sans-serif; font-size: 0.95rem; line-height: 1.8; color: rgba(255,255,255,0.55); max-width: 550px; margin: 0 auto 20px; font-weight: 300; }
         .safe-space-accent { display: inline-block; width: 60px; height: 2px; background: linear-gradient(90deg, #ff2d78, #ff8c00, #ffd700, #00c864, #00b4ff, var(--purple)); border-radius: 2px; margin-top: 8px; opacity: 0.7; }
@@ -777,10 +811,35 @@
         .footer-col a { display: block; color: rgba(255,255,255,0.45); text-decoration: none; font-size: 0.82rem; margin-bottom: 12px; transition: all .25s; }
         .footer-col a:hover { color: var(--cyan); transform: translateX(4px); }
         .social-icons { display: flex; align-items: center; justify-content: center; gap: 16px; margin-top: 22px; flex-wrap: wrap; }
-        .social-icons a { width: 44px; height: 44px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; transition: all .35s var(--ease); }
-        .social-icons a:hover { border-color: var(--cyan); background: rgba(0,240,255,0.08); box-shadow: 0 0 20px rgba(0,240,255,0.2); transform: translateY(-4px); }
-        .social-icons img { width: 24px; height: 24px; object-fit: contain; filter: brightness(0) invert(1); opacity: 0.55; transition: opacity .3s; }
+        .social-icons a { 
+            width: 52px; height: 52px; 
+            border-radius: 12px; 
+            border: 1px solid rgba(255,255,255,0.1); 
+            display: flex; align-items: center; justify-content: center; 
+            transition: all .35s var(--ease); 
+            overflow: visible; 
+            position: relative;
+            background: transparent;
+        }
+        .social-icons a:hover { 
+            border-color: var(--cyan); 
+            background: rgba(0,240,255,0.08); 
+            box-shadow: 0 0 20px rgba(0,240,255,0.2); 
+            transform: translateY(-4px); 
+        }
+        .social-icons img { 
+            width: 36px; height: 36px; 
+            object-fit: contain; 
+            filter: brightness(0) invert(1); 
+            opacity: 0.8; 
+            transition: opacity .3s; 
+            display: block; 
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+        }
         .social-icons a:hover img { opacity: 1; }
+
         .footer-bottom { border-top: 1px solid rgba(255,255,255,0.06); padding-top: 28px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
         .footer-copy { font-family: 'Space Mono', monospace; font-size: 0.6rem; color: rgba(255,255,255,0.2); letter-spacing: 0.08em; }
 
@@ -877,7 +936,7 @@
 <div id="cur"></div>
 <div id="cur-ring"></div>
 <div class="animated-bg"></div>
-<canvas id="particle-canvas"></canvas>
+<canvas id="cosmos-canvas"></canvas>
 
 <nav id="nav">
     <a href="#" class="logo"><img src="1000027280.png" alt="Heksel"><span>HEKSEL</span></a>
@@ -1176,84 +1235,191 @@
 <div class="easter-toast" id="easterToast"><span>🌈 SECRET MODE ACTIVATED!</span></div>
 
 <script>
-    // ═══════════════ PARTICLE CANVAS SYSTEM ═══════════════
+    // ═══════════════ COSMOS CANVAS 2D ENGINE ═══════════════
     (function() {
-        const canvas = document.getElementById('particle-canvas');
+        const canvas = document.getElementById('cosmos-canvas');
         const ctx = canvas.getContext('2d');
-        let particles = [];
-        const PARTICLE_COUNT = 80;
-        window.themeCyan = '#00f0ff';
-        window.themePurple = '#b45eff';
+        let width, height;
+        
+        // Cores dinâmicas do tema
+        window.cosmosColors = {
+            cyan: '#00f0ff',
+            purple: '#b45eff'
+        };
 
-        function hexToRgb(hex) {
-            const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-            return result ? {
-                r: parseInt(result[1], 16),
-                g: parseInt(result[2], 16),
-                b: parseInt(result[3], 16)
-            } : { r: 0, g: 240, b: 255 };
-        }
-        function lerpColor(c1, c2, factor) {
-            const r = Math.round(c1.r + (c2.r - c1.r) * factor);
-            const g = Math.round(c1.g + (c2.g - c1.g) * factor);
-            const b = Math.round(c1.b + (c2.b - c1.b) * factor);
-            return `rgb(${r}, ${g}, ${b})`;
-        }
-
-        class Particle {
-            constructor() { this.reset(true); }
-            reset(randomY = false) {
-                this.x = Math.random() * canvas.width;
-                this.y = randomY ? Math.random() * canvas.height : canvas.height + 10;
-                this.size = Math.random() * 2.5 + 1.2;
-                this.speed = Math.random() * 0.4 + 0.25;
-                this.opacity = Math.random() * 0.5 + 0.25;
-                this.colorFactor = Math.random();
-                this.updateColor();
-                this.angle = Math.random() * Math.PI * 2;
-                this.wiggleSpeed = Math.random() * 0.02 + 0.005;
-            }
-            updateColor() {
-                const c1 = hexToRgb(window.themeCyan);
-                const c2 = hexToRgb(window.themePurple);
-                this.color = lerpColor(c1, c2, this.colorFactor);
-            }
-            update() {
-                this.y -= this.speed;
-                this.x += Math.sin(this.angle) * 0.3;
-                this.angle += this.wiggleSpeed;
-                if (this.y < -10) { this.y = canvas.height + 10; this.x = Math.random() * canvas.width; }
-                if (this.x < -10) this.x = canvas.width + 10;
-                if (this.x > canvas.width + 10) this.x = -10;
-            }
-            draw(ctx) {
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.shadowBlur = 12;
-                ctx.shadowColor = this.color;
-                ctx.fillStyle = this.color.replace('rgb', 'rgba').replace(')', `, ${this.opacity})`);
-                ctx.fill();
-                ctx.shadowBlur = 0;
-            }
+        // Camadas de estrelas para parallax
+        const starsLayers = [
+            { count: 300, speed: 0.02, sizeRange: [0.5, 1.2], opacity: 0.9 },  // fundo distante
+            { count: 150, speed: 0.05, sizeRange: [1.0, 2.0], opacity: 0.7 },  // meio
+            { count: 60,  speed: 0.1,  sizeRange: [1.5, 3.0], opacity: 0.5 }    // primeiro plano
+        ];
+        const starsData = [];
+        
+        // Inicializa estrelas
+        function initStars() {
+            starsData.length = 0;
+            starsLayers.forEach(layer => {
+                const layerStars = [];
+                for (let i = 0; i < layer.count; i++) {
+                    layerStars.push({
+                        x: Math.random() * width,
+                        y: Math.random() * height,
+                        size: layer.sizeRange[0] + Math.random() * (layer.sizeRange[1] - layer.sizeRange[0]),
+                        speed: layer.speed * (0.8 + Math.random() * 0.4),
+                        opacity: layer.opacity * (0.6 + Math.random() * 0.4),
+                        twinkle: Math.random() * Math.PI * 2
+                    });
+                }
+                starsData.push(layerStars);
+            });
         }
 
-        function initParticles() {
-            particles = [];
-            for (let i = 0; i < PARTICLE_COUNT; i++) particles.push(new Particle());
-            window.canvasParticles = particles;
+        // Cometa desenhado com gradientes
+        function drawComet(ctx, x, y, angle, nucleusColor, tailColor1, tailColor2, progress) {
+            ctx.save();
+            ctx.translate(x, y);
+            ctx.rotate(angle);
+            
+            // Núcleo brilhante
+            const nucleusGrad = ctx.createRadialGradient(0, 0, 0, 0, 0, 12);
+            nucleusGrad.addColorStop(0, nucleusColor);
+            nucleusGrad.addColorStop(0.5, nucleusColor + 'cc');
+            nucleusGrad.addColorStop(1, 'transparent');
+            ctx.beginPath();
+            ctx.arc(0, 0, 12, 0, Math.PI * 2);
+            ctx.fillStyle = nucleusGrad;
+            ctx.fill();
+            
+            // Cauda de poeira e íons
+            const tailLength = 80 + Math.sin(progress * 2) * 15;
+            const tailGrad = ctx.createLinearGradient(0, 0, -tailLength, 0);
+            tailGrad.addColorStop(0, tailColor1);
+            tailGrad.addColorStop(0.6, tailColor2);
+            tailGrad.addColorStop(1, 'transparent');
+            
+            ctx.beginPath();
+            ctx.moveTo(0, -6);
+            ctx.lineTo(-tailLength, -1.5);
+            ctx.lineTo(-tailLength, 1.5);
+            ctx.lineTo(0, 6);
+            ctx.closePath();
+            ctx.fillStyle = tailGrad;
+            ctx.fill();
+            
+            // Brilho adicional
+            const glowGrad = ctx.createLinearGradient(0, 0, -tailLength * 0.5, 0);
+            glowGrad.addColorStop(0, 'rgba(255,255,255,0.4)');
+            glowGrad.addColorStop(1, 'transparent');
+            ctx.beginPath();
+            ctx.moveTo(0, -2);
+            ctx.lineTo(-tailLength * 0.5, -0.5);
+            ctx.lineTo(-tailLength * 0.5, 0.5);
+            ctx.lineTo(0, 2);
+            ctx.closePath();
+            ctx.fillStyle = glowGrad;
+            ctx.fill();
+            
+            ctx.restore();
         }
+
+        // Nebulosas de fundo suaves
+        function drawNebula(ctx, x, y, radius, color1, color2) {
+            const grad = ctx.createRadialGradient(x, y, radius * 0.2, x, y, radius);
+            grad.addColorStop(0, color1);
+            grad.addColorStop(0.7, color2);
+            grad.addColorStop(1, 'transparent');
+            ctx.beginPath();
+            ctx.arc(x, y, radius, 0, Math.PI * 2);
+            ctx.fillStyle = grad;
+            ctx.fill();
+        }
+
+        // Atualiza canvas
         function resizeCanvas() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-            particles.forEach(p => { p.x = Math.min(canvas.width, Math.max(0, p.x)); p.y = Math.min(canvas.height, Math.max(0, p.y)); });
+            width = window.innerWidth;
+            height = window.innerHeight;
+            canvas.width = width;
+            canvas.height = height;
+            initStars();
         }
+
+        let comet67P = { x: 0, y: 0, angle: 0, progress: 0 };
+        let cometNEOWISE = { x: 0, y: 0, angle: 0, progress: 0 };
+
         function animate() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            particles.forEach(p => { p.update(); p.draw(ctx); });
+            ctx.clearRect(0, 0, width, height);
+            
+            // Nebulosas estáticas de fundo
+            drawNebula(ctx, width * 0.2, height * 0.3, 350, 
+                `rgba(${parseInt(window.cosmosColors.purple.slice(1,3),16)}, ${parseInt(window.cosmosColors.purple.slice(3,5),16)}, ${parseInt(window.cosmosColors.purple.slice(5,7),16)}, 0.05)`,
+                `rgba(${parseInt(window.cosmosColors.cyan.slice(1,3),16)}, ${parseInt(window.cosmosColors.cyan.slice(3,5),16)}, ${parseInt(window.cosmosColors.cyan.slice(5,7),16)}, 0.02)`
+            );
+            drawNebula(ctx, width * 0.7, height * 0.7, 300,
+                `rgba(${parseInt(window.cosmosColors.cyan.slice(1,3),16)}, ${parseInt(window.cosmosColors.cyan.slice(3,5),16)}, ${parseInt(window.cosmosColors.cyan.slice(5,7),16)}, 0.04)`,
+                `rgba(${parseInt(window.cosmosColors.purple.slice(1,3),16)}, ${parseInt(window.cosmosColors.purple.slice(3,5),16)}, ${parseInt(window.cosmosColors.purple.slice(5,7),16)}, 0.03)`
+            );
+
+            // Estrelas parallax
+            starsData.forEach((layerStars, index) => {
+                const speed = starsLayers[index].speed;
+                layerStars.forEach(star => {
+                    // movimento lento para simular profundidade
+                    star.x -= star.speed * 0.2;
+                    if (star.x < -10) star.x = width + 10;
+                    star.y += Math.sin(star.twinkle) * 0.1;
+                    
+                    const alpha = star.opacity * (0.7 + 0.3 * Math.sin(performance.now() * 0.002 + star.twinkle));
+                    ctx.beginPath();
+                    ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
+                    ctx.fillStyle = `rgba(255,255,255,${alpha})`;
+                    ctx.fill();
+                });
+            });
+
+            // Cometa 67P (passagem diagonal)
+            comet67P.progress += 0.0008;
+            if (comet67P.progress > 1) comet67P.progress = 0;
+            const start67P = { x: width * 1.2, y: height * 0.1 };
+            const end67P = { x: -width * 0.2, y: height * 0.9 };
+            comet67P.x = start67P.x + (end67P.x - start67P.x) * comet67P.progress;
+            comet67P.y = start67P.y + (end67P.y - start67P.y) * comet67P.progress;
+            comet67P.angle = Math.atan2(end67P.y - start67P.y, end67P.x - start67P.x) + Math.PI;
+            
+            drawComet(ctx, comet67P.x, comet67P.y, comet67P.angle, 
+                window.cosmosColors.purple, 
+                `rgba(${parseInt(window.cosmosColors.purple.slice(1,3),16)}, ${parseInt(window.cosmosColors.purple.slice(3,5),16)}, ${parseInt(window.cosmosColors.purple.slice(5,7),16)}, 0.15)`,
+                `rgba(${parseInt(window.cosmosColors.cyan.slice(1,3),16)}, ${parseInt(window.cosmosColors.cyan.slice(3,5),16)}, ${parseInt(window.cosmosColors.cyan.slice(5,7),16)}, 0.1)`,
+                comet67P.progress
+            );
+
+            // Cometa NEOWISE
+            cometNEOWISE.progress += 0.0006;
+            if (cometNEOWISE.progress > 1) cometNEOWISE.progress = 0;
+            const startNEOWISE = { x: -width * 0.2, y: height * 0.15 };
+            const endNEOWISE = { x: width * 1.2, y: height * 0.85 };
+            cometNEOWISE.x = startNEOWISE.x + (endNEOWISE.x - startNEOWISE.x) * cometNEOWISE.progress;
+            cometNEOWISE.y = startNEOWISE.y + (endNEOWISE.y - startNEOWISE.y) * cometNEOWISE.progress;
+            cometNEOWISE.angle = Math.atan2(endNEOWISE.y - startNEOWISE.y, endNEOWISE.x - startNEOWISE.x);
+            
+            drawComet(ctx, cometNEOWISE.x, cometNEOWISE.y, cometNEOWISE.angle,
+                window.cosmosColors.cyan,
+                `rgba(${parseInt(window.cosmosColors.cyan.slice(1,3),16)}, ${parseInt(window.cosmosColors.cyan.slice(3,5),16)}, ${parseInt(window.cosmosColors.cyan.slice(5,7),16)}, 0.15)`,
+                `rgba(${parseInt(window.cosmosColors.purple.slice(1,3),16)}, ${parseInt(window.cosmosColors.purple.slice(3,5),16)}, ${parseInt(window.cosmosColors.purple.slice(5,7),16)}, 0.1)`,
+                cometNEOWISE.progress
+            );
+
             requestAnimationFrame(animate);
         }
-        resizeCanvas(); initParticles(); animate();
+
         window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+        animate();
+
+        // Função para atualizar cores (chamada pelo tema)
+        window.updateCosmosColors = function(color1Hex, color2Hex) {
+            window.cosmosColors.cyan = color1Hex;
+            window.cosmosColors.purple = color2Hex;
+        };
     })();
 
     // ═══════════════ TRANSLATIONS ═══════════════
@@ -1671,37 +1837,49 @@
         alert('Your order has been prepared! Check the console for details.');
     };
 
-    // ═══════════════ THEME TOGGLE ═══════════════
+    // ═══════════════ THEME TOGGLE (ATUALIZA O COSMOS) ═══════════════
     (function initTheme() {
         const FAB = document.getElementById('themeFab'), ICON = document.getElementById('themeIcon'), TOAST = document.getElementById('easterToast'), body = document.body;
         function randomHex() { return '#' + Math.floor(Math.random()*16777215).toString(16).padStart(6, '0'); }
         function hexToRgba(hex, alpha) { const r = parseInt(hex.slice(1,3),16), g = parseInt(hex.slice(3,5),16), b = parseInt(hex.slice(5,7),16); return `rgba(${r},${g},${b},${alpha})`; }
         let mode = 'dark', clickTimes = [], toastTimer;
+
         FAB?.addEventListener('click', () => {
             const now = Date.now(); clickTimes.push(now); clickTimes = clickTimes.filter(t => now - t < 1200);
             if (clickTimes.length >= 3) { clickTimes = []; activateSecret(); return; }
-            if (mode === 'dark') { body.classList.add('theme-light'); body.classList.remove('theme-secret'); ICON.textContent = '🌙'; mode = 'light'; }
-            else if (mode === 'light') { body.classList.remove('theme-light', 'theme-secret'); ICON.textContent = '☀'; mode = 'dark'; }
-            else { body.classList.remove('theme-light', 'theme-secret'); ICON.textContent = '☀'; mode = 'dark'; }
-            window.updateParticles('#00f0ff', '#b45eff');
+            if (mode === 'dark') {
+                body.classList.add('theme-light'); body.classList.remove('theme-secret');
+                ICON.textContent = '🌙'; mode = 'light';
+                window.updateCosmosColors('#00f0ff', '#b45eff');
+            } else if (mode === 'light') {
+                body.classList.remove('theme-light', 'theme-secret');
+                ICON.textContent = '☀'; mode = 'dark';
+                window.updateCosmosColors('#00f0ff', '#b45eff');
+            } else {
+                body.classList.remove('theme-light', 'theme-secret');
+                ICON.textContent = '☀'; mode = 'dark';
+                window.updateCosmosColors('#00f0ff', '#b45eff');
+            }
         });
+
         function activateSecret() {
             const color1 = randomHex(), color2 = randomHex();
             body.classList.remove('theme-light'); body.classList.add('theme-secret');
             body.style.background = `linear-gradient(135deg, ${hexToRgba(color1,0.18)}, ${hexToRgba(color2,0.12)}), #050508`;
             const root = document.documentElement.style;
             root.setProperty('--cyan', color1); root.setProperty('--purple', color2);
+            root.setProperty('--cyan-glow', hexToRgba(color1,0.6)); root.setProperty('--purple-glow', hexToRgba(color2,0.6));
+            root.setProperty('--cyan-dim', hexToRgba(color1,0.2)); root.setProperty('--purple-dim', hexToRgba(color2,0.2));
             ICON.textContent = '🌈'; mode = 'secret';
-            window.updateParticles(color1, color2);
-            if (TOAST) { TOAST.querySelector('span').textContent = `🌈 SECRET — ${color1} × ${color2}`; TOAST.classList.add('show'); clearTimeout(toastTimer); toastTimer = setTimeout(() => TOAST.classList.remove('show'), 3000); }
+            window.updateCosmosColors(color1, color2);
+            if (TOAST) {
+                TOAST.querySelector('span').textContent = `🌈 SECRET — ${color1} × ${color2}`;
+                TOAST.classList.add('show');
+                clearTimeout(toastTimer);
+                toastTimer = setTimeout(() => TOAST.classList.remove('show'), 3000);
+            }
         }
     })();
-
-    window.updateParticles = function(cyanHex, purpleHex) {
-        window.themeCyan = cyanHex;
-        window.themePurple = purpleHex;
-        if (window.canvasParticles) window.canvasParticles.forEach(p => p.updateColor());
-    };
 </script>
 </body>
 </html>
