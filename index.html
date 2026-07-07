@@ -366,7 +366,7 @@
     .stat-divider { width: 1px; background: rgba(0,240,255,0.15); align-self: stretch; }
     .hero-right { position: relative; z-index: 1; display: flex; align-items: center; justify-content: center; }
 
-    /* MEO-NAI PRODUCT VIEWER (no hero) */
+    /* MEO-NAI PRODUCT VIEWER (no hero) — IMAGE PEEK EFFECT */
     .product-viewer {
       background: rgba(14, 14, 22, 0.7);
       backdrop-filter: blur(20px);
@@ -382,7 +382,7 @@
       justify-content: center;
       align-items: center;
       min-height: 450px;
-      overflow: visible !important;
+      overflow: visible !important;  /* permite vazamento da imagem */
       position: relative;
     }
 
@@ -432,7 +432,7 @@
       object-fit: contain;
       filter: drop-shadow(0 0 12px rgba(168,85,247,0.3));
       border-radius: 16px;
-      transform: translateY(-50%);
+      transform: translateY(-50%);  /* TOPO DA IMAGEM VAZA, PARTE BAIXA CENTRALIZADA */
     }
     .viewer-badge {
       margin-top: 12px;
@@ -1217,7 +1217,7 @@
   </div>
 </nav>
 
-<!-- HERO COM MEO-NAI NO LUGAR DO CARROSSEL -->
+<!-- HERO COM MEO-NAI -->
 <section class="hero" id="hero">
   <div class="section-inner">
     <div class="hero-left">
@@ -1240,7 +1240,6 @@
       </div>
     </div>
     <div class="hero-right">
-      <!-- MEO-NAI SWEATSHIRT PRODUCT VIEWER -->
       <div class="product-viewer">
         <h2 style="font-family:'Syne',sans-serif;font-weight:800;font-size:1.1rem;letter-spacing:0.12em;display:inline-flex;align-items:center;gap:10px;">
           MEO-NAI SWEATSHIRT?
@@ -1298,7 +1297,7 @@
   <p style="font-size:0.7rem; color:rgba(255,255,255,0.4); margin-top:10px;">Payment via Asaas. Your order goes to Printful once confirmed.</p>
 </div>
 
-<!-- MANIFESTO (HISTÓRIA DA HEKSEL) -->
+<!-- MANIFESTO -->
 <section class="manifesto-section" id="manifesto">
   <div class="section-inner">
     <p class="manifesto-text">"Heksel Genesis is the ultimate gateway to digital sovereignty. We don't just build code; we template the future of elite branding. This is where your digital identity is conceived, conceptualized, and prepared for high-end deployment via Heksel Studio."</p>
@@ -1349,6 +1348,7 @@
     <h2 class="section-title">Every Line.<br><span class="glow-text">One Empire.</span></h2>
     <p class="section-sub">Laser-engineered performance meets street culture. Six silhouettes. One declaration.</p>
     <div class="card-grid">
+      <!-- Todos os cards de produto permanecem os mesmos -->
       <div class="prod-card"><img src="1000027632-removebg-preview.png" alt="NEO-KAI 01 FOR HIKING"><div class="prod-info"><div class="prod-name">NEO-KAI 01 FOR HIKING</div><div class="prod-price">$189</div><button class="notify-btn-card" onclick="openNotifyModal()">Notify Me</button></div></div>
       <div class="prod-card"><img src="1000027635-removebg-preview.png" alt="NEO-KAI 01 FOR RACING"><div class="prod-info"><div class="prod-name">NEO-KAI 01 FOR RACING</div><div class="prod-price">$189</div><button class="notify-btn-card" onclick="openNotifyModal()">Notify Me</button></div></div>
       <div class="prod-card"><img src="1000027638-removebg-preview.png" alt="NEO-KAI 01 FOR ACADEMIC"><div class="prod-info"><div class="prod-name">NEO-KAI 01 FOR ACADEMIC</div><div class="prod-price">$189</div><button class="notify-btn-card" onclick="openNotifyModal()">Notify Me</button></div></div>
