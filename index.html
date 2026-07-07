@@ -366,7 +366,7 @@
     .stat-divider { width: 1px; background: rgba(0,240,255,0.15); align-self: stretch; }
     .hero-right { position: relative; z-index: 1; display: flex; align-items: center; justify-content: center; }
 
-    /* MEO-NAI PRODUCT VIEWER (no hero) — IMAGE PEEK AJUSTADO */
+    /* MEO-NAI PRODUCT VIEWER (no hero) — IMAGEM LIMPA, TÍTULO SOBREPOSTO NO TOPO */
     .product-viewer {
       background: rgba(14, 14, 22, 0.7);
       backdrop-filter: blur(20px);
@@ -386,17 +386,28 @@
       position: relative;
     }
 
+    /* Título agora absoluto no topo, sobreposto à imagem */
     .product-viewer h2 {
-      position: relative;
-      z-index: 1;
+      position: absolute;
+      top: 12px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 5;
       background: rgba(14, 14, 22, 0.85);
-      padding: 4px 12px;
+      padding: 6px 18px;
       border-radius: 8px;
-      backdrop-filter: blur(4px);
-      margin-bottom: 16px;
+      backdrop-filter: blur(8px);
+      margin: 0;
       display: inline-flex;
       align-items: center;
       gap: 10px;
+      white-space: nowrap;
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 1.1rem;
+      letter-spacing: 0.12em;
+      color: white;
+      border: 1px solid rgba(168,85,247,0.3);
     }
 
     .viewer-slides {
@@ -407,6 +418,7 @@
       align-items: center;
       justify-content: center;
       z-index: 0;
+      padding-top: 60px; /* espaço para o título overlay */
     }
     .viewer-slide {
       position: absolute;
@@ -433,8 +445,6 @@
       filter: drop-shadow(0 0 12px rgba(168,85,247,0.3));
       border-radius: 16px;
       transform: none;
-      /* ⬇️ Margem negativa para que o badge cubra a parte inferior da imagem */
-      margin-bottom: -25px;
     }
     .viewer-badge {
       margin-top: 12px;
@@ -450,7 +460,6 @@
       border: 1px solid rgba(168, 85, 247, 0.3);
       position: relative;
       z-index: 1;
-      /* Garante que o badge fique sobre a imagem */
     }
     .viewer-nav {
       display: flex;
@@ -499,6 +508,8 @@
       cursor: pointer;
       transition: all 0.3s ease;
       flex-shrink: 0;
+      position: relative;
+      z-index: 6;
     }
     .info-trigger-btn:hover {
       background: rgba(168, 85, 247, 0.25);
@@ -1135,6 +1146,7 @@
       .btn-primary, .btn-order { width: 100%; justify-content: center; }
       .hero-stats { gap: 24px; justify-content: center; width: 100%; } .stat-divider { height: 24px; }
       .product-viewer { max-width: 100%; }
+      .product-viewer h2 { font-size: 0.9rem; padding: 4px 12px; }
       #customization-panel { max-width: 100%; }
       .manifesto-section { padding: 60px 0; } .manifesto-text { font-size: 1.2rem; }
       .safe-space-section { padding: 50px 0; }
@@ -1244,7 +1256,8 @@
     </div>
     <div class="hero-right">
       <div class="product-viewer">
-        <h2 style="font-family:'Syne',sans-serif;font-weight:800;font-size:1.1rem;letter-spacing:0.12em;display:inline-flex;align-items:center;gap:10px;">
+        <!-- Título agora fixo no topo, sobre a imagem -->
+        <h2>
           MEO-NAI SWEATSHIRT?
           <button id="info-trigger" class="info-trigger-btn" title="Collector Pack Details">?</button>
         </h2>
