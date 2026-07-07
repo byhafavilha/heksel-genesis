@@ -219,12 +219,13 @@
     .nav-links a::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 1.5px; background: linear-gradient(90deg, var(--cyan), var(--purple)); transition: width .35s var(--ease); }
     .nav-links a:hover, .nav-links a.active { color: var(--white); }
     .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
-    .nav-buttons { display: flex; gap: 10px; align-items: center; }
+    .nav-buttons { display: flex; gap: 10px; align-items: center; position: relative; }
     .hamburger { display: none; flex-direction: column; justify-content: center; align-items: center; width: 40px; height: 40px; border-radius: 10px; background: rgba(255,255,255,0.04); border: 1.5px solid rgba(255,255,255,0.18); cursor: pointer; gap: 5px; transition: all 0.3s; padding: 8px; }
     .hamburger span { display: block; width: 20px; height: 2px; background: rgba(255,255,255,0.75); border-radius: 2px; transition: all 0.3s; }
     .hamburger:hover { border-color: var(--cyan); background: rgba(0,240,255,0.08); }
     .hamburger:hover span { background: var(--cyan); }
     .mobile-menu { display: none; position: absolute; top: calc(100% + 8px); right: 5%; background: rgba(14,14,22,0.98); backdrop-filter: blur(30px); border: 1px solid rgba(0,240,255,0.25); border-radius: 16px; padding: 20px 24px; flex-direction: column; gap: 14px; box-shadow: 0 20px 40px rgba(0,0,0,0.6), 0 0 30px rgba(0,240,255,0.15); animation: menuIn 0.3s var(--ease-bounce); z-index: 900; min-width: 180px; }
+    .mobile-menu.active { display: flex; }
     @keyframes menuIn { 0% { opacity: 0; transform: translateY(-10px) scale(0.96); } 100% { opacity: 1; transform: translateY(0) scale(1); } }
     .mobile-menu a { text-decoration: none; font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.75rem; letter-spacing: 0.12em; color: rgba(255,255,255,0.75); text-transform: uppercase; transition: color 0.3s; padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,0.08); }
     .mobile-menu a:last-child { border-bottom: none; }
@@ -250,59 +251,67 @@
       color: #1a0f00 !important;
     }
 
-    /* ═══ SELETOR DE IDIOMAS (BÚSSOLA) ═══ */
-    .lang-selector {
-      position: fixed;
-      top: 76px;
-      right: 5%;
-      z-index: 850;
-      width: 240px;
-      background: rgba(14,14,22,0.92);
-      backdrop-filter: blur(20px);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 12px;
-      padding: 12px 16px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    /* ═══ SELETOR DE IDIOMAS DROPDOWN (UNIVERSAL) ═══ */
+    .lang-dropdown {
+      position: absolute;
+      top: calc(100% + 8px);
+      right: 0;
+      width: 260px;
+      background: rgba(14,14,22,0.98);
+      backdrop-filter: blur(24px);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 14px;
+      padding: 14px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.7), 0 0 30px rgba(0,240,255,0.12);
       display: none;
       flex-direction: column;
-      gap: 10px;
+      gap: 12px;
+      z-index: 950;
+      animation: menuIn 0.25s var(--ease-bounce);
     }
-    .lang-selector.open { display: flex; }
-    .lang-selector input {
+    .lang-dropdown.open { display: flex; }
+    .lang-dropdown input {
       width: 100%;
-      padding: 8px 12px;
+      padding: 10px 12px;
       border-radius: 8px;
       border: 1px solid rgba(255,255,255,0.1);
-      background: rgba(255,255,255,0.03);
+      background: rgba(255,255,255,0.05);
       color: white;
       font-family: 'DM Sans', sans-serif;
-      font-size: 0.85rem;
+      font-size: 0.8rem;
       outline: none;
       transition: border-color 0.3s;
     }
-    .lang-selector input:focus { border-color: var(--cyan); }
-    .lang-selector input::placeholder { color: rgba(255,255,255,0.3); }
-    .lang-selector .lang-list {
+    .lang-dropdown input:focus { border-color: var(--cyan); }
+    .lang-dropdown input::placeholder { color: rgba(255,255,255,0.3); }
+    .lang-list {
       display: flex;
       flex-direction: column;
-      gap: 4px;
-      max-height: 200px;
+      gap: 3px;
+      max-height: 240px;
       overflow-y: auto;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(0,240,255,0.3) transparent;
     }
-    .lang-selector .lang-option {
+    .lang-list::-webkit-scrollbar { width: 4px; }
+    .lang-list::-webkit-scrollbar-thumb { background: rgba(0,240,255,0.3); border-radius: 4px; }
+    .lang-option {
       display: flex;
       align-items: center;
       gap: 10px;
-      padding: 8px 10px;
-      border-radius: 8px;
+      padding: 9px 10px;
+      border-radius: 10px;
       cursor: pointer;
-      transition: background 0.3s;
+      transition: background 0.2s, color 0.2s;
       color: rgba(255,255,255,0.75);
-      font-size: 0.85rem;
+      font-size: 0.78rem;
       font-weight: 600;
+      border: 1px solid transparent;
     }
-    .lang-selector .lang-option:hover { background: rgba(0,240,255,0.08); color: var(--cyan); }
-    .lang-selector .lang-option span { font-weight: 400; color: rgba(255,255,255,0.4); font-size: 0.75rem; }
+    .lang-option:hover { background: rgba(0,240,255,0.08); color: var(--cyan); border-color: rgba(0,240,255,0.15); }
+    .lang-option.active { background: rgba(0,240,255,0.1); border-color: var(--cyan); color: var(--cyan); }
+    .lang-option span { font-weight: 400; color: rgba(255,255,255,0.35); font-size: 0.68rem; margin-left: auto; }
+
     .lang-toggle {
       display: flex;
       align-items: center;
@@ -317,6 +326,7 @@
       transition: all 0.3s var(--ease);
       font-family: 'Syne', sans-serif;
       font-weight: 700;
+      white-space: nowrap;
     }
     .lang-toggle:hover { border-color: var(--cyan); color: var(--white); background: rgba(0,240,255,0.08); }
 
@@ -340,14 +350,14 @@
     .stat-divider { width: 1px; background: rgba(0,240,255,0.15); align-self: stretch; }
     .hero-right { position: relative; z-index: 1; display: flex; align-items: center; justify-content: center; }
 
-    /* MEO-NAI PRODUCT VIEWER (no hero) */
+    /* MEO-NAI PRODUCT VIEWER (no hero) — FIX: melhor dimensionamento */
     .product-viewer {
       background: rgba(14, 14, 22, 0.7);
       backdrop-filter: blur(20px);
       border: 1px solid rgba(168, 85, 247, 0.3);
       border-radius: 24px;
-      padding: 24px;
-      max-width: 500px;
+      padding: 16px;               /* padding reduzido */
+      max-width: 650px;            /* mais largo */
       width: 100%;
       text-align: center;
       box-shadow: 0 0 40px rgba(168, 85, 247, 0.15);
@@ -355,7 +365,7 @@
     .viewer-slides {
       position: relative;
       width: 100%;
-      min-height: 380px;
+      min-height: 300px;           /* altura reduzida */
       display: flex;
       align-items: center;
       justify-content: center;
@@ -376,8 +386,9 @@
       pointer-events: auto;
     }
     .viewer-slide img {
-      max-width: 100%;
-      max-height: 340px;
+      width: 100%;
+      max-width: 600px;            /* imagem preenche bem o espaço */
+      height: auto;
       object-fit: contain;
       filter: drop-shadow(0 0 12px rgba(168,85,247,0.3));
       border-radius: 16px;
@@ -981,7 +992,7 @@
       * { cursor: auto !important; } #cur, #cur-ring { display: none !important; }
       nav { padding: 0 5%; height: 60px; } .nav-links { display: none; } .hamburger { display: flex; }
       .btn-outline-nav, .btn-gold-nav { padding: 8px 16px; font-size: 0.6rem; }
-      .lang-selector { top: 68px; width: 200px; right: 2.5%; }
+      .lang-dropdown { right: 0; width: 230px; }
       .hero { min-height: calc(100vh - 60px); margin-top: 60px; padding: 20px 0; }
       .hero .section-inner { grid-template-columns: 1fr; text-align: center; justify-items: center; gap: 30px; padding: 0 24px; }
       .hero-left { display: flex; flex-direction: column; align-items: center; width: 100%; order: 1; }
@@ -1060,6 +1071,10 @@
   </ul>
   <div class="nav-buttons">
     <button class="lang-toggle" id="langToggle">🌐 <span id="langActiveLabel">EN</span></button>
+    <div class="lang-dropdown" id="langDropdown">
+      <input type="text" id="langSearch" placeholder="Search language...">
+      <div class="lang-list" id="langList"></div>
+    </div>
     <div class="hamburger" id="hamburgerBtn"><span></span><span></span><span></span></div>
   </div>
   <div class="mobile-menu" id="mobileMenu">
@@ -1329,24 +1344,107 @@
 <div class="easter-toast" id="easterToast"><span>🌈 SECRET MODE ACTIVATED!</span></div>
 
 <script>
-  // ── i18n SYSTEM ──
+  // ═══════════════════════════════════════════════
+  //  SELETOR DE IDIOMAS UNIVERSAL (COM BUSCA)
+  // ═══════════════════════════════════════════════
+  const LANGUAGES = [
+    { code: "en", name: "English", native: "English" },
+    { code: "pt", name: "Portuguese", native: "Português" },
+    { code: "es", name: "Spanish", native: "Español" },
+    { code: "fr", name: "French", native: "Français" },
+    { code: "de", name: "German", native: "Deutsch" },
+    { code: "it", name: "Italian", native: "Italiano" },
+    { code: "ru", name: "Russian", native: "Русский" },
+    { code: "zh", name: "Chinese", native: "中文" },
+    { code: "ja", name: "Japanese", native: "日本語" },
+    { code: "ko", name: "Korean", native: "한국어" },
+    { code: "ar", name: "Arabic", native: "العربية" },
+    { code: "hi", name: "Hindi", native: "हिन्दी" },
+    { code: "nl", name: "Dutch", native: "Nederlands" },
+    { code: "sv", name: "Swedish", native: "Svenska" },
+    { code: "pl", name: "Polish", native: "Polski" },
+    { code: "tr", name: "Turkish", native: "Türkçe" },
+    { code: "uk", name: "Ukrainian", native: "Українська" },
+    { code: "th", name: "Thai", native: "ไทย" },
+    { code: "id", name: "Indonesian", native: "Bahasa Indonesia" },
+    { code: "ms", name: "Malay", native: "Bahasa Melayu" },
+    { code: "vi", name: "Vietnamese", native: "Tiếng Việt" },
+    { code: "fil", name: "Filipino", native: "Filipino" },
+    { code: "he", name: "Hebrew", native: "עברית" },
+    { code: "el", name: "Greek", native: "Ελληνικά" },
+    { code: "cs", name: "Czech", native: "Čeština" },
+    { code: "ro", name: "Romanian", native: "Română" },
+    { code: "hu", name: "Hungarian", native: "Magyar" },
+    { code: "fi", name: "Finnish", native: "Suomi" },
+    { code: "da", name: "Danish", native: "Dansk" },
+    { code: "no", name: "Norwegian", native: "Norsk" }
+  ];
+
   let currentLang = 'en';
-  const langSelector = document.getElementById('langSelector');
   const langToggle = document.getElementById('langToggle');
+  const langActiveLabel = document.getElementById('langActiveLabel');
+  const langDropdown = document.getElementById('langDropdown');
   const langSearch = document.getElementById('langSearch');
   const langList = document.getElementById('langList');
-  const langActiveLabel = document.getElementById('langActiveLabel');
-  const langs = [
-    { code: 'pt', label: 'Português', native: 'Português' },
-    { code: 'en', label: 'English', native: 'English' },
-    { code: 'es', label: 'Español', native: 'Español' }
-  ];
-  function renderLangOptions(query = '') { /* simplified */ }
+
+  function renderLangOptions(query = '') {
+    const filtered = LANGUAGES.filter(l =>
+      l.name.toLowerCase().includes(query.toLowerCase()) ||
+      l.native.toLowerCase().includes(query.toLowerCase()) ||
+      l.code.toLowerCase().includes(query.toLowerCase())
+    );
+    langList.innerHTML = filtered.map(l => `
+      <div class="lang-option ${l.code === currentLang ? 'active' : ''}" data-code="${l.code}">
+        <span>${l.native}</span>
+        <span>${l.name}</span>
+      </div>
+    `).join('');
+
+    // adiciona evento de clique em cada opção
+    langList.querySelectorAll('.lang-option').forEach(opt => {
+      opt.addEventListener('click', () => {
+        const code = opt.dataset.code;
+        applyLanguage(code);
+        langDropdown.classList.remove('open');
+      });
+    });
+  }
+
+  function applyLanguage(code) {
+    currentLang = code;
+    const lang = LANGUAGES.find(l => l.code === code);
+    if (langActiveLabel) langActiveLabel.textContent = code.toUpperCase();
+    // recria a lista para atualizar o destaque
+    renderLangOptions(langSearch.value);
+  }
+
+  // abre/fecha dropdown
+  langToggle.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const isOpen = langDropdown.classList.contains('open');
+    if (isOpen) {
+      langDropdown.classList.remove('open');
+    } else {
+      langDropdown.classList.add('open');
+      langSearch.value = '';
+      renderLangOptions();
+      setTimeout(() => langSearch.focus(), 50);
+    }
+  });
+
+  // fecha ao clicar fora
+  document.addEventListener('click', (e) => {
+    if (!langToggle.contains(e.target) && !langDropdown.contains(e.target)) {
+      langDropdown.classList.remove('open');
+    }
+  });
+
+  // busca ao digitar
   langSearch.addEventListener('input', () => renderLangOptions(langSearch.value));
-  langToggle.addEventListener('click', () => { langSelector.classList.toggle('open'); if (langSelector.classList.contains('open')) { langSearch.value = ''; renderLangOptions(); langSearch.focus(); } });
-  function applyLanguage(code) { currentLang = code; /* ... */ }
-  renderLangOptions(); applyLanguage('en');
-  document.addEventListener('click', (e) => { if (!langToggle.contains(e.target) && !langSelector.contains(e.target)) langSelector.classList.remove('open'); });
+
+  // inicializa
+  renderLangOptions();
+  applyLanguage('en');
 
   // ── CURSOR ──
   (function(){ const cur = document.getElementById('cur'), ring = document.getElementById('cur-ring'); if (!cur || !ring) return; let mx = 0, my = 0, cx = 0, cy = 0; document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; }); setInterval(() => { cx += (mx - cx) * 0.2; cy += (my - cy) * 0.2; cur.style.left = cx + 'px'; cur.style.top = cy + 'px'; ring.style.left = mx + 'px'; ring.style.top = my + 'px'; }, 16); document.addEventListener('mouseover', e => { if (e.target.tagName === 'A' || e.target.tagName === 'BUTTON' || e.target.closest('button') || e.target.closest('a')) cur.classList.add('hover'); }); document.addEventListener('mouseout', e => { if (e.target.tagName === 'A' || e.target.tagName === 'BUTTON' || e.target.closest('button') || e.target.closest('a')) cur.classList.remove('hover'); }); })();
@@ -1355,12 +1453,32 @@
   const navEl = document.getElementById('nav');
   window.addEventListener('scroll', () => { navEl.classList.toggle('scrolled', window.scrollY > 10); }, { passive: true });
 
-  // ── MOBILE MENU ──
-  const hamburgerBtn = document.getElementById('hamburgerBtn'), mobileMenu = document.getElementById('mobileMenu');
-  hamburgerBtn?.addEventListener('click', (e) => { e.stopPropagation(); mobileMenu.style.display = mobileMenu.style.display === 'flex' ? 'none' : 'flex'; });
-  function closeMobileMenu() { if (mobileMenu) mobileMenu.style.display = 'none'; }
-  document.addEventListener('click', (e) => { if (!hamburgerBtn?.contains(e.target) && !mobileMenu?.contains(e.target)) closeMobileMenu(); });
-  mobileMenu?.querySelectorAll('a').forEach(link => link.addEventListener('click', closeMobileMenu));
+  // ── MOBILE MENU (CORRIGIDO) ──
+  const hamburgerBtn = document.getElementById('hamburgerBtn');
+  const mobileMenu = document.getElementById('mobileMenu');
+
+  if (hamburgerBtn && mobileMenu) {
+    hamburgerBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      mobileMenu.classList.toggle('active');
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!hamburgerBtn.contains(e.target) && !mobileMenu.contains(e.target)) {
+        mobileMenu.classList.remove('active');
+      }
+    });
+
+    mobileMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.remove('active');
+      });
+    });
+  }
+
+  function closeMobileMenu() {
+    if (mobileMenu) mobileMenu.classList.remove('active');
+  }
 
   // ── NOTIFY MODAL ──
   function openNotifyModal() { document.getElementById('notifyModalOverlay').style.display = 'flex'; closeMobileMenu(); }
@@ -1378,7 +1496,6 @@
   document.getElementById('createAdvanceModalOverlay').addEventListener('click', function(e) { if (e.target === this) closeCreateAdvanceModal(); });
 
   // ── MULTI-STEP (brand creation) ──
-  let jarvisDone = false;
   function toggleContactInput() {
     const method = document.querySelector('input[name="contactMethod"]:checked')?.value;
     document.getElementById('whatsappInput').style.display = method === 'whatsapp' ? 'block' : 'none';
@@ -1391,7 +1508,6 @@
   toggleContactInput();
 
   function goToStep(n) { document.querySelectorAll('.step').forEach(s => s.classList.remove('active-step')); document.getElementById('step' + n).classList.add('active-step'); }
-  function startJarvisAnalysis(type) { /* ... */ }
   function openOrderModal() {
     document.getElementById('orderModalOverlay').style.display = 'flex';
     document.querySelectorAll('.step').forEach(s => s.classList.remove('active-step'));
