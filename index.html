@@ -171,9 +171,7 @@
     .btn-primary:hover { background: rgba(0,240,255,0.12); border-color: var(--cyan); box-shadow: 0 0 30px rgba(0,240,255,0.25); transform: translateY(-4px); color: var(--cyan); }
     .btn-outline-nav { padding: 9px 20px; border-radius: 50px; border: 1.5px solid rgba(255,255,255,0.2); background: transparent; font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.65rem; letter-spacing: 0.1em; color: rgba(255,255,255,0.8); text-transform: uppercase; }
     .btn-outline-nav:hover { background: rgba(255,255,255,0.08); border-color: var(--cyan); color: var(--cyan); box-shadow: 0 0 16px rgba(0,240,255,0.2); transform: translateY(-2px); }
-    .btn-outline-explore { padding: 14px 28px; border-radius: 10px; border: 1.5px solid rgba(255,255,255,0.25); background: rgba(255,255,255,0.03); font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.72rem; letter-spacing: 0.1em; color: rgba(255,255,255,0.85); text-transform: uppercase; backdrop-filter: blur(8px); display: inline-flex; align-items: center; justify-content: center; }
-    .btn-outline-explore:hover { background: rgba(0,240,255,0.08); border-color: var(--cyan); color: var(--cyan); box-shadow: 0 0 20px rgba(0,240,255,0.2); transform: translateY(-3px); }
-    .btn-custom {
+    .btn-order {
       padding: 14px 28px;
       border-radius: 10px;
       background: linear-gradient(135deg, var(--neon-purple), #6b21a8);
@@ -190,9 +188,9 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 8px;
+      text-align: center;
     }
-    .btn-custom:hover {
+    .btn-order:hover {
       transform: translateY(-4px);
       box-shadow: 0 0 30px rgba(168,85,247,0.6);
     }
@@ -333,7 +331,8 @@
     @keyframes blink { 0%,100%{opacity:1} 50%{opacity:.2} }
     .hero-left h1 { font-family: 'Syne', sans-serif; font-weight: 800; font-size: clamp(3.2rem, 6.5vw, 6rem); line-height: 0.9; letter-spacing: -0.03em; margin-bottom: 28px; color: var(--white); animation: fadeUp 0.9s 0.2s var(--ease) forwards; opacity: 0; }
     .hero-left p { font-size: 1.05rem; color: rgba(255,255,255,0.55); max-width: 400px; margin-bottom: 40px; line-height: 1.75; font-weight: 300; animation: fadeUp 0.9s 0.4s var(--ease) forwards; opacity: 0; }
-    .hero-actions { display: flex; flex-direction: column; gap: 16px; align-items: center; margin-bottom: 52px; animation: fadeUp 0.9s 0.6s var(--ease) forwards; opacity: 0; }
+    .hero-actions { display: flex; flex-direction: column; gap: 16px; align-items: center; margin-bottom: 52px; animation: fadeUp 0.9s 0.6s var(--ease) forwards; opacity: 0; width: 100%; }
+    .hero-actions-inner { display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; width: 100%; }
     .hero-stats { display: flex; gap: 40px; animation: fadeUp 0.9s 0.8s var(--ease) forwards; opacity: 0; }
     .stat-item { text-align: center; }
     .stat-num { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.6rem; background: linear-gradient(135deg, var(--cyan), var(--purple)); -webkit-background-clip: text; background-clip: text; color: transparent; }
@@ -552,6 +551,10 @@
       box-shadow: 0 0 30px rgba(37, 211, 102, 0.6);
     }
 
+    /* MANIFESTO SECTION (transparente) */
+    .manifesto-section { padding: 100px 0; text-align: center; background: transparent; border-top: 1px solid rgba(0,240,255,0.1); position: relative; z-index: 1; }
+    .manifesto-text { max-width: 800px; margin: 0 auto; font-family: 'Syne', sans-serif; font-size: 1.6rem; font-weight: 600; line-height: 1.5; color: rgba(255,255,255,0.75); background: linear-gradient(120deg, var(--cyan), var(--purple), #ff2d78); -webkit-background-clip: text; background-clip: text; color: transparent; animation: glowPulse 4s ease-in-out infinite; }
+
     /* ═══ ESPAÇO SEGURO ═══ */
     .safe-space-section {
       padding: 80px 0;
@@ -677,10 +680,6 @@
     body.theme-light .safe-space-text {
       color: rgba(0,0,0,0.5);
     }
-
-    /* MANIFESTO SECTION (transparente) */
-    .manifesto-section { padding: 100px 0; text-align: center; background: transparent; border-top: 1px solid rgba(0,240,255,0.1); position: relative; z-index: 1; }
-    .manifesto-text { max-width: 800px; margin: 0 auto; font-family: 'Syne', sans-serif; font-size: 1.6rem; font-weight: 600; line-height: 1.5; color: rgba(255,255,255,0.75); background: linear-gradient(120deg, var(--cyan), var(--purple), #ff2d78); -webkit-background-clip: text; background-clip: text; color: transparent; animation: glowPulse 4s ease-in-out infinite; }
 
     /* OUTRAS SEÇÕES */
     .brand-section { padding: 120px 0; text-align: center; background: linear-gradient(180deg, rgba(8,8,18,0.98) 0%, rgba(18,10,34,0.98) 30%, rgba(22,12,42,0.97) 60%, rgba(14,6,28,0.98) 100%); color: white; position: relative; z-index: 1; overflow: hidden; transition: var(--theme-transition); }
@@ -989,8 +988,9 @@
       .hero-right { order: 0; width: 100%; }
       .hero-left h1 { font-size: clamp(2.4rem, 10vw, 3.8rem); margin-bottom: 20px; }
       .hero-left p { max-width: 100%; margin-bottom: 30px; }
-      .hero-actions { width: 100%; flex-direction: column; gap: 12px; align-items: center; }
-      .btn-primary, .btn-outline-explore, .btn-custom { width: 100%; justify-content: center; }
+      .hero-actions { width: 100%; }
+      .hero-actions-inner { width: 100%; flex-direction: column; gap: 12px; }
+      .btn-primary, .btn-order { width: 100%; justify-content: center; }
       .hero-stats { gap: 24px; justify-content: center; width: 100%; } .stat-divider { height: 24px; }
       .product-viewer { max-width: 100%; }
       #customization-panel { max-width: 100%; }
@@ -1082,9 +1082,11 @@
       <h1>From beginning<br><span class="glow-text">to infinity</span></h1>
       <p>Three lines. One empire. Performance, home wear and digital luxury — every step is a statement of power.</p>
       <div class="hero-actions">
-        <button class="btn-custom" onclick="document.getElementById('meoSection').scrollIntoView({behavior:'smooth'}); setTimeout(openCustomization, 500);">✦ START CUSTOMIZING ✦</button>
-        <button class="btn-primary" onclick="document.getElementById('collection').scrollIntoView({behavior:'smooth'})">Explore All <span>→</span></button>
-        <button class="btn-outline-explore" onclick="document.getElementById('manifesto').scrollIntoView({behavior:'smooth'})">Explore Our Genesis</button>
+        <button class="btn-order" onclick="openCustomization()">✦ START CUSTOMIZING ✦</button>
+        <div class="hero-actions-inner">
+          <button class="btn-primary" onclick="document.getElementById('collection').scrollIntoView({behavior:'smooth'})">Explore All <span>→</span></button>
+          <button class="btn-primary" onclick="document.getElementById('manifesto').scrollIntoView({behavior:'smooth'})">Explore Our Genesis <span>→</span></button>
+        </div>
       </div>
       <div class="hero-stats">
         <div class="stat-item"><span class="stat-num">1K+</span><span class="stat-label">Builders</span></div>
@@ -1096,12 +1098,12 @@
     </div>
     <div class="hero-right">
       <!-- MEO-NAI SWEATSHIRT PRODUCT VIEWER -->
-      <div class="product-viewer" id="meoSection">
+      <div class="product-viewer">
         <h2 style="font-family:'Syne',sans-serif;font-weight:800;font-size:1.1rem;letter-spacing:0.12em;margin-bottom:12px;">MEO-NAI SWEATSHIRT</h2>
         <div class="viewer-slides">
           <div class="viewer-slide active" id="slideFront">
             <img src="meo-example-showcase.png" alt="Front View">
-            <div class="viewer-badge">FRONT VIEW: PUT YOUR IMAGE HERE</div>
+            <div class="viewer-badge">YOUR SELECTED IMAGES WILL LOOK LIKE THIS</div>
           </div>
           <div class="viewer-slide" id="slideBack">
             <img src="meo-custom-canvas.png" alt="Back View">
@@ -1112,35 +1114,36 @@
           <button id="btnFrontView" class="active-view" onclick="switchView('front')">Front</button>
           <button id="btnBackView" onclick="switchView('back')">Back</button>
         </div>
-        <!-- CUSTOMIZATION PANEL (oculto) -->
-        <div id="customization-panel">
-          <div class="upload-group">
-            <div class="upload-box highlight" id="frontUploadBox">
-              <label>Front Design</label>
-              <input type="file" id="frontFileInput" accept="image/*" onchange="handleFileSelect('front')">
-            </div>
-            <div class="upload-box" id="backUploadBox">
-              <label>Back Design</label>
-              <input type="file" id="backFileInput" accept="image/*" onchange="handleFileSelect('back')">
-            </div>
-          </div>
-          <div class="shipping-form">
-            <label>Full Name</label><input type="text" id="fullName" placeholder="Your Name" class="full-width">
-            <label>Email</label><input type="email" id="email" placeholder="you@example.com" class="full-width">
-            <label>Shipping Address</label><input type="text" id="address" placeholder="Street, number" class="full-width">
-            <label>City</label><input type="text" id="city" placeholder="City">
-            <label>Postal Code</label><input type="text" id="postalCode" placeholder="Postal Code">
-            <label>Country</label><input type="text" id="country" placeholder="Country">
-          </div>
-          <button class="btn-checkout" onclick="secureYourPiece()">✦ SECURE YOUR PIECE ✦</button>
-          <p style="font-size:0.7rem; color:rgba(255,255,255,0.4); margin-top:10px;">Payment via Asaas. Your order goes to Printful once confirmed.</p>
-        </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- MANIFESTO SECTION (RESTORED) -->
+<!-- CUSTOMIZATION PANEL (oculto) -->
+<div id="customization-panel" style="margin: 20px auto 0; max-width: 500px;">
+  <div class="upload-group">
+    <div class="upload-box highlight" id="frontUploadBox">
+      <label>Front Design</label>
+      <input type="file" id="frontFileInput" accept="image/*" onchange="handleFileSelect('front')">
+    </div>
+    <div class="upload-box" id="backUploadBox">
+      <label>Back Design</label>
+      <input type="file" id="backFileInput" accept="image/*" onchange="handleFileSelect('back')">
+    </div>
+  </div>
+  <div class="shipping-form">
+    <label>Full Name</label><input type="text" id="fullName" placeholder="Your Name" class="full-width">
+    <label>Email</label><input type="email" id="email" placeholder="you@example.com" class="full-width">
+    <label>Shipping Address</label><input type="text" id="address" placeholder="Street, number" class="full-width">
+    <label>City</label><input type="text" id="city" placeholder="City">
+    <label>Postal Code</label><input type="text" id="postalCode" placeholder="Postal Code">
+    <label>Country</label><input type="text" id="country" placeholder="Country">
+  </div>
+  <button class="btn-checkout" onclick="secureYourPiece()">✦ SECURE YOUR PIECE ✦</button>
+  <p style="font-size:0.7rem; color:rgba(255,255,255,0.4); margin-top:10px;">Payment via Asaas. Your order goes to Printful once confirmed.</p>
+</div>
+
+<!-- MANIFESTO (HISTÓRIA DA HEKSEL) -->
 <section class="manifesto-section" id="manifesto">
   <div class="section-inner">
     <p class="manifesto-text">"Heksel Genesis is the ultimate gateway to digital sovereignty. We don't just build code; we template the future of elite branding. This is where your digital identity is conceived, conceptualized, and prepared for high-end deployment via Heksel Studio."</p>
