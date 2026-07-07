@@ -350,7 +350,7 @@
     .stat-divider { width: 1px; background: rgba(0,240,255,0.15); align-self: stretch; }
     .hero-right { position: relative; z-index: 1; display: flex; align-items: center; justify-content: center; }
 
-    /* MEO-NAI PRODUCT VIEWER (no hero) — FIX: centralização absoluta */
+    /* MEO-NAI PRODUCT VIEWER (no hero) — FIX: topo das imagens para fora do card */
     .product-viewer {
       background: rgba(14, 14, 22, 0.7);
       backdrop-filter: blur(20px);
@@ -361,14 +361,12 @@
       width: 100%;
       text-align: center;
       box-shadow: 0 0 40px rgba(168, 85, 247, 0.15);
-
-      /* Flex centering */
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
       min-height: 450px;
-      overflow: hidden;
+      /* Removido overflow: hidden para permitir que a imagem transborde no topo */
     }
     .viewer-slides {
       position: relative;
@@ -377,6 +375,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      /* Sem overflow hidden aqui também para não cortar a imagem */
     }
     .viewer-slide {
       position: absolute;
@@ -402,6 +401,8 @@
       object-fit: contain;
       filter: drop-shadow(0 0 12px rgba(168,85,247,0.3));
       border-radius: 16px;
+      /* Empurra a imagem para cima, fazendo o topo sair do card */
+      transform: translateY(-50px);
     }
     .viewer-badge {
       margin-top: 12px;
