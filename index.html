@@ -432,8 +432,9 @@
       object-fit: contain;
       filter: drop-shadow(0 0 12px rgba(168,85,247,0.3));
       border-radius: 16px;
-      /* REMOVIDO transform: translateY(-30%) para a imagem ficar mais abaixo, preenchendo o espaço */
       transform: none;
+      /* ⬇️ Margem negativa para que o badge cubra a parte inferior da imagem */
+      margin-bottom: -25px;
     }
     .viewer-badge {
       margin-top: 12px;
@@ -449,6 +450,7 @@
       border: 1px solid rgba(168, 85, 247, 0.3);
       position: relative;
       z-index: 1;
+      /* Garante que o badge fique sobre a imagem */
     }
     .viewer-nav {
       display: flex;
