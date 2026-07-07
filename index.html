@@ -366,60 +366,37 @@
     .stat-divider { width: 1px; background: rgba(0,240,255,0.15); align-self: stretch; }
     .hero-right { position: relative; z-index: 1; display: flex; align-items: center; justify-content: center; }
 
-    /* MEO-NAI PRODUCT VIEWER (no hero) — IMAGEM LIMPA, TÍTULO SOBREPOSTO NO TOPO */
+    /* ═══════════════ PRODUCT VIEWER (CORRIGIDO) ═══════════════ */
     .product-viewer {
       background: rgba(14, 14, 22, 0.7);
       backdrop-filter: blur(20px);
       border: 1px solid rgba(168, 85, 247, 0.3);
       border-radius: 24px;
-      padding: 16px;
+      padding: 0;
       max-width: 650px;
       width: 100%;
       text-align: center;
       box-shadow: 0 0 40px rgba(168, 85, 247, 0.15);
       display: flex;
       flex-direction: column;
-      justify-content: center;
       align-items: center;
       min-height: 450px;
-      overflow: visible !important;
+      overflow: hidden;
       position: relative;
-    }
-
-    /* Título agora absoluto no topo, sobreposto à imagem */
-    .product-viewer h2 {
-      position: absolute;
-      top: 12px;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 5;
-      background: rgba(14, 14, 22, 0.85);
-      padding: 6px 18px;
-      border-radius: 8px;
-      backdrop-filter: blur(8px);
-      margin: 0;
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      white-space: nowrap;
-      font-family: 'Syne', sans-serif;
-      font-weight: 800;
-      font-size: 1.1rem;
-      letter-spacing: 0.12em;
-      color: white;
-      border: 1px solid rgba(168,85,247,0.3);
     }
 
     .viewer-slides {
       position: relative;
       width: 100%;
-      min-height: 300px;
+      flex: 1;
       display: flex;
       align-items: center;
       justify-content: center;
       z-index: 0;
-      padding-top: 60px; /* espaço para o título overlay */
+      min-height: 0;
+      overflow: hidden;
     }
+
     .viewer-slide {
       position: absolute;
       inset: 0;
@@ -435,39 +412,73 @@
       opacity: 1;
       pointer-events: auto;
     }
+
     .viewer-slide img {
       display: block;
-      margin: 0 auto;
       width: 100%;
-      max-width: 600px;
-      height: auto;
-      object-fit: contain;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
       filter: drop-shadow(0 0 12px rgba(168,85,247,0.3));
       border-radius: 16px;
-      transform: none;
+      margin-bottom: -80px;
     }
-    .viewer-badge {
-      margin-top: 12px;
-      font-family: 'Space Mono', monospace;
-      font-size: 0.65rem;
-      font-weight: 700;
-      letter-spacing: 0.12em;
-      color: var(--neon-purple);
-      text-transform: uppercase;
-      background: rgba(168, 85, 247, 0.15);
+
+    .viewer-title-overlay {
+      position: absolute;
+      top: 16px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 15;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(14, 14, 22, 0.85);
       padding: 6px 16px;
-      border-radius: 50px;
-      border: 1px solid rgba(168, 85, 247, 0.3);
-      position: relative;
-      z-index: 1;
+      border-radius: 8px;
+      backdrop-filter: blur(4px);
+      color: var(--white);
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 1.1rem;
+      letter-spacing: 0.12em;
+      white-space: nowrap;
     }
+
+    .info-trigger-btn {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      border: 1.5px solid var(--neon-purple);
+      background: rgba(168, 85, 247, 0.12);
+      color: var(--neon-purple);
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 0.9rem;
+      line-height: 1;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      flex-shrink: 0;
+    }
+    .info-trigger-btn:hover {
+      background: rgba(168, 85, 247, 0.25);
+      box-shadow: 0 0 16px rgba(168,85,247,0.5);
+      transform: scale(1.1);
+    }
+
     .viewer-nav {
       display: flex;
       gap: 16px;
       justify-content: center;
-      margin-top: 16px;
+      padding: 16px 0 12px;
       position: relative;
-      z-index: 1;
+      z-index: 5;
+      width: 100%;
+      background: rgba(14,14,22,0.6);
+      backdrop-filter: blur(8px);
     }
     .viewer-nav button {
       background: rgba(255,255,255,0.04);
@@ -490,31 +501,18 @@
       box-shadow: 0 0 16px rgba(168,85,247,0.3);
     }
 
-    /* ═══ BOTÃO INFO TRIGGER & COLLECTOR MODAL ═══ */
-    .info-trigger-btn {
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      border: 1.5px solid var(--neon-purple);
-      background: rgba(168, 85, 247, 0.08);
+    .viewer-badge-bottom {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
       color: var(--neon-purple);
-      font-family: 'Syne', sans-serif;
-      font-weight: 800;
-      font-size: 0.9rem;
-      line-height: 1;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      flex-shrink: 0;
-      position: relative;
-      z-index: 6;
-    }
-    .info-trigger-btn:hover {
-      background: rgba(168, 85, 247, 0.25);
-      box-shadow: 0 0 16px rgba(168,85,247,0.5);
-      transform: scale(1.1);
+      text-transform: uppercase;
+      background: rgba(168, 85, 247, 0.15);
+      padding: 6px 16px;
+      border-radius: 50px;
+      border: 1px solid rgba(168, 85, 247, 0.3);
+      margin: 8px 0 12px;
     }
 
     #collector-info-modal {
@@ -523,20 +521,21 @@
       border-radius: 12px;
       box-shadow: 0 0 15px rgba(168, 85, 247, 0.2);
       text-align: left;
-      width: 100%;
+      width: calc(100% - 32px);
       max-width: 600px;
       overflow: hidden;
       max-height: 0;
       opacity: 0;
       transition: max-height 0.5s ease, opacity 0.4s ease, margin 0.4s ease, padding 0.4s ease;
       padding: 0;
-      margin: 0;
+      margin: 0 16px;
+      order: 10;
     }
     #collector-info-modal.show {
       max-height: 500px;
       opacity: 1;
       padding: 25px;
-      margin-top: 20px;
+      margin: 16px;
     }
 
     .price-large {
@@ -1146,7 +1145,6 @@
       .btn-primary, .btn-order { width: 100%; justify-content: center; }
       .hero-stats { gap: 24px; justify-content: center; width: 100%; } .stat-divider { height: 24px; }
       .product-viewer { max-width: 100%; }
-      .product-viewer h2 { font-size: 0.9rem; padding: 4px 12px; }
       #customization-panel { max-width: 100%; }
       .manifesto-section { padding: 60px 0; } .manifesto-text { font-size: 1.2rem; }
       .safe-space-section { padding: 50px 0; }
@@ -1256,11 +1254,20 @@
     </div>
     <div class="hero-right">
       <div class="product-viewer">
-        <!-- Título agora fixo no topo, sobre a imagem -->
-        <h2>
-          MEO-NAI SWEATSHIRT?
-          <button id="info-trigger" class="info-trigger-btn" title="Collector Pack Details">?</button>
-        </h2>
+        <!-- Título e botão sobrepostos à imagem -->
+        <div class="viewer-slides">
+          <div class="viewer-title-overlay">
+            MEO-NAI SWEATSHIRT?
+            <button id="info-trigger" class="info-trigger-btn" title="Collector Pack Details">?</button>
+          </div>
+          <div class="viewer-slide active" id="slideFront">
+            <img src="meo-example-showcase.png" alt="Front View">
+          </div>
+          <div class="viewer-slide" id="slideBack">
+            <img src="meo-custom-canvas.png" alt="Back View">
+          </div>
+        </div>
+        <!-- Modal de informações -->
         <div id="collector-info-modal">
           <div class="price-large">R$ 300,00</div>
           <ul class="collector-list">
@@ -1270,20 +1277,13 @@
             <li><span class="icon">✉️</span><strong>Handcrafted Serialized Letter</strong> – Custom thank-you card with your unique serial number (e.g., "You are customer #10"), locking your collector position.</li>
           </ul>
         </div>
-        <div class="viewer-slides">
-          <div class="viewer-slide active" id="slideFront">
-            <img src="meo-example-showcase.png" alt="Front View">
-            <div class="viewer-badge">YOUR SELECTED IMAGES WILL LOOK LIKE THIS</div>
-          </div>
-          <div class="viewer-slide" id="slideBack">
-            <img src="meo-custom-canvas.png" alt="Back View">
-            <div class="viewer-badge">BACK VIEW: ADD YOUR FAVORITE IMAGE</div>
-          </div>
-        </div>
+        <!-- Navegação Front/Back -->
         <div class="viewer-nav">
           <button id="btnFrontView" class="active-view" onclick="switchView('front')">Front</button>
           <button id="btnBackView" onclick="switchView('back')">Back</button>
         </div>
+        <!-- Badge abaixo da navegação -->
+        <div class="viewer-badge-bottom">YOUR SELECTED IMAGES WILL LOOK LIKE THIS</div>
       </div>
     </div>
   </div>
@@ -1364,7 +1364,6 @@
     <h2 class="section-title">Every Line.<br><span class="glow-text">One Empire.</span></h2>
     <p class="section-sub">Laser-engineered performance meets street culture. Six silhouettes. One declaration.</p>
     <div class="card-grid">
-      <!-- Cards mantidos integralmente -->
       <div class="prod-card"><img src="1000027632-removebg-preview.png" alt="NEO-KAI 01 FOR HIKING"><div class="prod-info"><div class="prod-name">NEO-KAI 01 FOR HIKING</div><div class="prod-price">$189</div><button class="notify-btn-card" onclick="openNotifyModal()">Notify Me</button></div></div>
       <div class="prod-card"><img src="1000027635-removebg-preview.png" alt="NEO-KAI 01 FOR RACING"><div class="prod-info"><div class="prod-name">NEO-KAI 01 FOR RACING</div><div class="prod-price">$189</div><button class="notify-btn-card" onclick="openNotifyModal()">Notify Me</button></div></div>
       <div class="prod-card"><img src="1000027638-removebg-preview.png" alt="NEO-KAI 01 FOR ACADEMIC"><div class="prod-info"><div class="prod-name">NEO-KAI 01 FOR ACADEMIC</div><div class="prod-price">$189</div><button class="notify-btn-card" onclick="openNotifyModal()">Notify Me</button></div></div>
@@ -1718,13 +1717,9 @@
     if (view === 'front') {
       document.getElementById('slideFront').classList.add('active');
       document.getElementById('btnFrontView').classList.add('active-view');
-      document.getElementById('frontUploadBox').classList.add('highlight');
-      document.getElementById('backUploadBox').classList.remove('highlight');
     } else {
       document.getElementById('slideBack').classList.add('active');
       document.getElementById('btnBackView').classList.add('active-view');
-      document.getElementById('backUploadBox').classList.add('highlight');
-      document.getElementById('frontUploadBox').classList.remove('highlight');
     }
     currentView = view;
   }
@@ -1791,9 +1786,7 @@
     alert('Your order has been prepared! Check the console for details.');
   }
 
-  // ═══════════════════════════════════════════
-  //  Toggle do Collector Info Modal
-  // ═══════════════════════════════════════════
+  // Toggle do Collector Info Modal
   document.getElementById('info-trigger').addEventListener('click', function() {
     document.getElementById('collector-info-modal').classList.toggle('show');
   });
