@@ -121,6 +121,14 @@
       border-color: var(--cyan) !important;
     }
 
+    /* 🟣 LIGHT THEME: título do produto e parágrafo em branco */
+    body.theme-light .product-viewer h2 {
+      color: #ffffff !important;
+    }
+    body.theme-light .hero-left p {
+      color: #ffffff !important;
+    }
+
     body.theme-secret { background: #050508; color: #ffffff; }
     body.theme-secret nav { background: rgba(0,0,0,.5); }
     body.theme-secret .prod-card { background: rgba(0,0,0,.35); border-color: rgba(255,255,255,.12); }
@@ -131,6 +139,14 @@
     }
     body.theme-secret .btn-gold-nav {
       color: #1a0f00 !important;
+    }
+
+    /* 🟣 SECRET THEME: título colorido (cor do tema) e parágrafo branco */
+    body.theme-secret .product-viewer h2 {
+      color: var(--cyan) !important;
+    }
+    body.theme-secret .hero-left p {
+      color: #ffffff !important;
     }
 
     * { cursor: none; }
@@ -350,7 +366,7 @@
     .stat-divider { width: 1px; background: rgba(0,240,255,0.15); align-self: stretch; }
     .hero-right { position: relative; z-index: 1; display: flex; align-items: center; justify-content: center; }
 
-    /* MEO-NAI PRODUCT VIEWER (no hero) — FIX: topo das imagens para fora do card */
+    /* MEO-NAI PRODUCT VIEWER (no hero) */
     .product-viewer {
       background: rgba(14, 14, 22, 0.7);
       backdrop-filter: blur(20px);
@@ -366,8 +382,23 @@
       justify-content: center;
       align-items: center;
       min-height: 450px;
-      /* Removido overflow: hidden para permitir que a imagem transborde no topo */
+      overflow: visible !important;
+      position: relative;
     }
+
+    .product-viewer h2 {
+      position: relative;
+      z-index: 1;
+      background: rgba(14, 14, 22, 0.85);
+      padding: 4px 12px;
+      border-radius: 8px;
+      backdrop-filter: blur(4px);
+      margin-bottom: 16px;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+
     .viewer-slides {
       position: relative;
       width: 100%;
@@ -375,7 +406,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      /* Sem overflow hidden aqui também para não cortar a imagem */
+      z-index: 0;
     }
     .viewer-slide {
       position: absolute;
@@ -401,8 +432,7 @@
       object-fit: contain;
       filter: drop-shadow(0 0 12px rgba(168,85,247,0.3));
       border-radius: 16px;
-      /* Empurra a imagem para cima, fazendo o topo sair do card */
-      transform: translateY(-50px);
+      transform: translateY(-50%);
     }
     .viewer-badge {
       margin-top: 12px;
@@ -416,12 +446,16 @@
       padding: 6px 16px;
       border-radius: 50px;
       border: 1px solid rgba(168, 85, 247, 0.3);
+      position: relative;
+      z-index: 1;
     }
     .viewer-nav {
       display: flex;
       gap: 16px;
       justify-content: center;
       margin-top: 16px;
+      position: relative;
+      z-index: 1;
     }
     .viewer-nav button {
       background: rgba(255,255,255,0.04);
@@ -442,6 +476,89 @@
       border-color: var(--neon-purple);
       color: var(--neon-purple);
       box-shadow: 0 0 16px rgba(168,85,247,0.3);
+    }
+
+    /* ═══ BOTÃO INFO TRIGGER & COLLECTOR MODAL ═══ */
+    .info-trigger-btn {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: 1.5px solid var(--neon-purple);
+      background: rgba(168, 85, 247, 0.08);
+      color: var(--neon-purple);
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 0.9rem;
+      line-height: 1;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      flex-shrink: 0;
+    }
+    .info-trigger-btn:hover {
+      background: rgba(168, 85, 247, 0.25);
+      box-shadow: 0 0 16px rgba(168,85,247,0.5);
+      transform: scale(1.1);
+    }
+
+    #collector-info-modal {
+      background-color: #1a1a1a;
+      border: 1px solid var(--neon-purple);
+      border-radius: 12px;
+      box-shadow: 0 0 15px rgba(168, 85, 247, 0.2);
+      text-align: left;
+      width: 100%;
+      max-width: 600px;
+      overflow: hidden;
+      max-height: 0;
+      opacity: 0;
+      transition: max-height 0.5s ease, opacity 0.4s ease, margin 0.4s ease, padding 0.4s ease;
+      padding: 0;
+      margin: 0;
+    }
+    #collector-info-modal.show {
+      max-height: 500px;
+      opacity: 1;
+      padding: 25px;
+      margin-top: 20px;
+    }
+
+    .price-large {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: 2rem;
+      background: linear-gradient(135deg, var(--purple), var(--cyan));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      margin-bottom: 16px;
+    }
+
+    .collector-list {
+      list-style: none;
+      padding: 0;
+      color: rgba(255,255,255,0.8);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.85rem;
+      line-height: 1.6;
+    }
+    .collector-list li {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+      padding: 8px 12px;
+      background: rgba(255,255,255,0.03);
+      border-radius: 8px;
+      border: 1px solid rgba(168,85,247,0.15);
+    }
+    .collector-list li .icon {
+      font-size: 1.2rem;
+      width: 28px;
+      text-align: center;
+      color: var(--neon-purple);
     }
 
     /* CUSTOMIZATION PANEL (INITIALLY HIDDEN) */
@@ -1125,7 +1242,19 @@
     <div class="hero-right">
       <!-- MEO-NAI SWEATSHIRT PRODUCT VIEWER -->
       <div class="product-viewer">
-        <h2 style="font-family:'Syne',sans-serif;font-weight:800;font-size:1.1rem;letter-spacing:0.12em;margin-bottom:12px;">MEO-NAI SWEATSHIRT</h2>
+        <h2 style="font-family:'Syne',sans-serif;font-weight:800;font-size:1.1rem;letter-spacing:0.12em;display:inline-flex;align-items:center;gap:10px;">
+          MEO-NAI SWEATSHIRT?
+          <button id="info-trigger" class="info-trigger-btn" title="Collector Pack Details">?</button>
+        </h2>
+        <div id="collector-info-modal">
+          <div class="price-large">R$ 300,00</div>
+          <ul class="collector-list">
+            <li><span class="icon">🟪</span><strong>Premium Custom Sweatshirt</strong> – Dual-print (Bone Front / Furry Back) engineered heavyweight cotton.</li>
+            <li><span class="icon">🔑</span><strong>Heksel Genesis Keychain</strong> – Perfect accessory for your backpack, bag, or car mirror.</li>
+            <li><span class="icon">💎</span><strong>Official Genesis Sticker Pack</strong> – High-fidelity vinyl stickers to customize your laptop or gear.</li>
+            <li><span class="icon">✉️</span><strong>Handcrafted Serialized Letter</strong> – Custom thank-you card with your unique serial number (e.g., "You are customer #10"), locking your collector position.</li>
+          </ul>
+        </div>
         <div class="viewer-slides">
           <div class="viewer-slide active" id="slideFront">
             <img src="meo-example-showcase.png" alt="Front View">
@@ -1645,6 +1774,13 @@
     console.log('Printful Order Payload (with Asaas hook):', JSON.stringify(orderPayload, null, 2));
     alert('Your order has been prepared! Check the console for details.');
   }
+
+  // ═══════════════════════════════════════════
+  //  Toggle do Collector Info Modal
+  // ═══════════════════════════════════════════
+  document.getElementById('info-trigger').addEventListener('click', function() {
+    document.getElementById('collector-info-modal').classList.toggle('show');
+  });
 
   /* THEME TOGGLE */
   (function initTheme() {
