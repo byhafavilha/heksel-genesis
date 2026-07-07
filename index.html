@@ -350,22 +350,30 @@
     .stat-divider { width: 1px; background: rgba(0,240,255,0.15); align-self: stretch; }
     .hero-right { position: relative; z-index: 1; display: flex; align-items: center; justify-content: center; }
 
-    /* MEO-NAI PRODUCT VIEWER (no hero) — FIX: melhor dimensionamento */
+    /* MEO-NAI PRODUCT VIEWER (no hero) — FIX: centralização absoluta */
     .product-viewer {
       background: rgba(14, 14, 22, 0.7);
       backdrop-filter: blur(20px);
       border: 1px solid rgba(168, 85, 247, 0.3);
       border-radius: 24px;
-      padding: 16px;               /* padding reduzido */
-      max-width: 650px;            /* mais largo */
+      padding: 16px;
+      max-width: 650px;
       width: 100%;
       text-align: center;
       box-shadow: 0 0 40px rgba(168, 85, 247, 0.15);
+
+      /* Flex centering */
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 450px;
+      overflow: hidden;
     }
     .viewer-slides {
       position: relative;
       width: 100%;
-      min-height: 300px;           /* altura reduzida */
+      min-height: 300px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -386,8 +394,10 @@
       pointer-events: auto;
     }
     .viewer-slide img {
+      display: block;
+      margin: 0 auto;
       width: 100%;
-      max-width: 600px;            /* imagem preenche bem o espaço */
+      max-width: 600px;
       height: auto;
       object-fit: contain;
       filter: drop-shadow(0 0 12px rgba(168,85,247,0.3));
@@ -1400,7 +1410,6 @@
       </div>
     `).join('');
 
-    // adiciona evento de clique em cada opção
     langList.querySelectorAll('.lang-option').forEach(opt => {
       opt.addEventListener('click', () => {
         const code = opt.dataset.code;
@@ -1414,11 +1423,9 @@
     currentLang = code;
     const lang = LANGUAGES.find(l => l.code === code);
     if (langActiveLabel) langActiveLabel.textContent = code.toUpperCase();
-    // recria a lista para atualizar o destaque
     renderLangOptions(langSearch.value);
   }
 
-  // abre/fecha dropdown
   langToggle.addEventListener('click', (e) => {
     e.stopPropagation();
     const isOpen = langDropdown.classList.contains('open');
@@ -1432,17 +1439,14 @@
     }
   });
 
-  // fecha ao clicar fora
   document.addEventListener('click', (e) => {
     if (!langToggle.contains(e.target) && !langDropdown.contains(e.target)) {
       langDropdown.classList.remove('open');
     }
   });
 
-  // busca ao digitar
   langSearch.addEventListener('input', () => renderLangOptions(langSearch.value));
 
-  // inicializa
   renderLangOptions();
   applyLanguage('en');
 
