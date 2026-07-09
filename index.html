@@ -553,6 +553,18 @@
             margin-bottom: 16px;
         }
 
+        .gift-text {
+            font-size: 0.8rem;
+            color: var(--cyan);
+            text-align: center;
+            margin-bottom: 16px;
+            font-family: 'Space Mono', monospace;
+            background: rgba(0,240,255,0.05);
+            padding: 8px;
+            border-radius: 8px;
+            border: 1px solid rgba(0,240,255,0.15);
+        }
+
         .collector-list {
             list-style: none;
             padding: 0;
@@ -590,12 +602,12 @@
             border: 1px solid rgba(168, 85, 247, 0.3);
             border-radius: 24px;
             padding: 0 24px;
-            max-width: 500px;
+            max-width: 550px;
             margin: 0 auto;
         }
         #customization-panel.open {
             opacity: 1;
-            max-height: 1200px;
+            max-height: 1600px;
             padding: 24px;
             margin-top: 30px;
         }
@@ -699,6 +711,135 @@
             margin-bottom: -6px;
         }
         .shipping-form .full-width { grid-column: span 2; }
+
+        /* NOVOS SELETORES */
+        .customization-options {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            margin: 20px 0;
+        }
+        .customization-options label {
+            font-family: 'Syne', sans-serif;
+            font-size: 0.6rem;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            color: rgba(255,255,255,0.5);
+            text-transform: uppercase;
+            display: block;
+            margin-bottom: 4px;
+        }
+        .color-selector {
+            display: flex;
+            gap: 12px;
+        }
+        .color-option {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 10px rgba(0,0,0,0.3);
+        }
+        .color-option:hover {
+            transform: scale(1.1);
+            border-color: rgba(255,255,255,0.5);
+        }
+        .color-option.selected {
+            border-color: var(--cyan);
+            box-shadow: 0 0 15px var(--cyan-glow);
+        }
+        .position-selector {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .position-btn {
+            flex: 1;
+            min-width: 120px;
+            padding: 10px 12px;
+            border-radius: 8px;
+            border: 1px solid rgba(255,255,255,0.15);
+            background: rgba(255,255,255,0.03);
+            color: rgba(255,255,255,0.7);
+            font-family: 'Syne', sans-serif;
+            font-size: 0.65rem;
+            font-weight: 600;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .position-btn:hover {
+            background: rgba(168,85,247,0.1);
+            border-color: var(--neon-purple);
+        }
+        .position-btn.selected {
+            border-color: var(--cyan);
+            background: rgba(0,240,255,0.1);
+            color: var(--cyan);
+        }
+        .size-selector {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        .size-btn {
+            padding: 8px 14px;
+            border-radius: 50px;
+            border: 1px solid rgba(255,255,255,0.15);
+            background: rgba(255,255,255,0.03);
+            color: rgba(255,255,255,0.7);
+            font-family: 'Syne', sans-serif;
+            font-size: 0.65rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .size-btn:hover {
+            background: rgba(168,85,247,0.1);
+            border-color: var(--neon-purple);
+        }
+        .size-btn.selected {
+            border-color: var(--cyan);
+            background: rgba(0,240,255,0.1);
+            color: var(--cyan);
+        }
+        .custom-size-input {
+            display: none;
+            margin-top: 8px;
+            width: 100%;
+            padding: 10px 14px;
+            border-radius: 8px;
+            border: 1px solid rgba(255,255,255,0.15);
+            background: rgba(255,255,255,0.05);
+            color: white;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.85rem;
+        }
+
+        /* VISUALIZADOR DO MOLETOM */
+        .moletom-preview {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+            margin: 0 auto 20px;
+            border-radius: 20px;
+            overflow: hidden;
+            background: #111;
+            box-shadow: 0 0 30px rgba(168,85,247,0.3);
+        }
+        .moletom-preview img {
+            width: 100%;
+            height: auto;
+            display: block;
+            mix-blend-mode: multiply;
+            transition: background 0.3s ease;
+        }
+        .moletom-preview[data-color="Preto"] { background: #000; }
+        .moletom-preview[data-color="Branco"] { background: #fff; }
+        .moletom-preview[data-color="Cinza"] { background: #888; }
 
         .btn-checkout {
             margin-top: 20px;
@@ -983,9 +1124,9 @@
             .lang-dropdown { right: 0; width: 230px; }
             /* Centralização absoluta no mobile (TikTok e similares) */
             .hero { 
-                height: 100dvh; /* viewport dinâmica para evitar barras */
+                height: 100dvh; 
                 margin-top: 0; 
-                padding-top: 60px; /* compensa a navbar */
+                padding-top: 60px; 
                 display: flex; 
                 align-items: center; 
                 justify-content: center; 
@@ -1001,7 +1142,7 @@
                 max-width: 100%;
                 margin: 0 auto;
                 height: 100%;
-                overflow-y: auto; /* caso o conteúdo exceda, mas evitamos isso com tamanhos reduzidos */
+                overflow-y: auto;
             }
             .hero-left { 
                 display: flex; 
@@ -1071,7 +1212,6 @@
     </style>
 </head>
 <body>
-
 <div id="cur"></div>
 <div id="cur-ring"></div>
 <div class="animated-bg"></div>
@@ -1144,6 +1284,7 @@
                 <div id="collector-info-modal">
                     <button class="collector-close" id="collector-close-btn">&times;</button>
                     <div class="price-large">R$ 300,00</div>
+                    <div class="gift-text">Inclui: Carta Personalizada 🃏 + Adesivo Exclusivo Heksel + Fragrância Especial Imperium 🧪</div>
                     <ul class="collector-list">
                         <li><span class="icon">🟪</span><span><strong data-i18n="item1_title">Premium Custom Sweatshirt</strong> – <span data-i18n="item1_desc">Dual-print (Bone Front / Furry Back) engineered heavyweight cotton.</span></span></li>
                         <li><span class="icon">🔑</span><span><strong data-i18n="item2_title">Heksel Genesis Keychain</strong> – <span data-i18n="item2_desc">Perfect accessory for your backpack, bag, or car mirror.</span></span></li>
@@ -1161,8 +1302,13 @@
     </div>
 </section>
 
-<!-- CUSTOMIZATION PANEL (com seletor de tamanho) -->
-<div id="customization-panel" style="margin: 20px auto 0; max-width: 500px;">
+<!-- CUSTOMIZATION PANEL -->
+<div id="customization-panel" style="margin: 20px auto 0; max-width: 550px;">
+    <!-- PREVIEW DO MOLETOM -->
+    <div class="moletom-preview" id="moletomPreview" data-color="Preto">
+        <img src="moletom-base.png" alt="Moletom">
+    </div>
+
     <div class="upload-group">
         <div class="upload-box highlight" id="frontUploadBox">
             <label data-i18n="front_design">Front Design</label>
@@ -1175,30 +1321,66 @@
             <img id="backPreview" class="upload-preview" alt="Back Preview">
         </div>
     </div>
-    <div class="shipping-form">
-        <label data-i18n="size">Size</label>
-        <select id="sizeSelect" class="full-width">
-            <option value="S">S</option>
-            <option value="M" selected>M</option>
-            <option value="L">L</option>
-            <option value="XL">XL</option>
-        </select>
-        <label data-i18n="full_name">Full Name</label><input type="text" id="fullName" placeholder="Your Name" data-i18n-placeholder="your_name" class="full-width">
-        <label data-i18n="email">Email</label><input type="email" id="email" placeholder="you@example.com" class="full-width">
-        <label data-i18n="address">Shipping Address</label><input type="text" id="address" placeholder="Street, number" data-i18n-placeholder="street_number" class="full-width">
-        <label data-i18n="city">City</label><input type="text" id="city" placeholder="City" data-i18n-placeholder="city_placeholder">
-        <label data-i18n="postal_code">Postal Code</label><input type="text" id="postalCode" placeholder="Postal Code" data-i18n-placeholder="postal_code_placeholder">
-        <label data-i18n="country">Country</label><input type="text" id="country" placeholder="Country" data-i18n-placeholder="country_placeholder">
+
+    <div class="customization-options">
+        <div>
+            <label>Cor do Moletom</label>
+            <div class="color-selector" id="colorSelector">
+                <div class="color-option selected" data-color="Preto" style="background: #000;"></div>
+                <div class="color-option" data-color="Branco" style="background: #fff;"></div>
+                <div class="color-option" data-color="Cinza" style="background: #888;"></div>
+            </div>
+            <input type="hidden" id="selectedColor" value="Preto">
+        </div>
+        <div>
+            <label>Estilo do Moletom</label>
+            <div class="style-selector" id="styleSelector">
+                <div class="style-btn selected" data-style="normal">Normal</div>
+                <div class="style-btn" data-style="esportivo">Esportivo</div>
+                <div class="style-btn" data-style="fashion">Fashion / Moda</div>
+                <div class="style-btn" data-style="inverno">Inverno</div>
+            </div>
+            <input type="hidden" id="selectedStyle" value="normal">
+        </div>
+        <div>
+            <label>Posição do Design</label>
+            <div class="position-selector" id="positionSelector">
+                <div class="position-btn selected" data-position="centralizada">Estampa Centralizada Grande</div>
+                <div class="position-btn" data-position="peito">Logo no Peito (Esquerdo)</div>
+            </div>
+            <input type="hidden" id="selectedPosition" value="centralizada">
+        </div>
+        <div>
+            <label>Tamanho</label>
+            <div class="size-selector" id="sizeSelector">
+                <button class="size-btn selected" data-size="P">P</button>
+                <button class="size-btn" data-size="M">M</button>
+                <button class="size-btn" data-size="G">G</button>
+                <button class="size-btn" data-size="GG">GG</button>
+                <button class="size-btn" data-size="XG">XG</button>
+                <button class="size-btn" id="otherSizeBtn">Outro (Digitar)</button>
+            </div>
+            <input type="text" id="customSizeInput" class="custom-size-input" placeholder="Digite seu tamanho...">
+            <input type="hidden" id="selectedSize" value="P">
+        </div>
     </div>
-    <button class="btn-checkout" onclick="secureYourPiece()" data-i18n="secure_piece">✦ SECURE YOUR PIECE ✦</button>
-    <p style="font-size:0.7rem; color:rgba(255,255,255,0.4); margin-top:10px;" data-i18n="payment_note">Payment via Asaas. Your order goes to Printful once confirmed.</p>
+
+    <div class="shipping-form">
+        <label data-i18n="full_name">Full Name</label><input type="text" id="fullName" placeholder="Your Name" class="full-width">
+        <label data-i18n="email">Email</label><input type="email" id="email" placeholder="you@example.com" class="full-width">
+        <label data-i18n="address">Shipping Address</label><input type="text" id="address" placeholder="Street, number" class="full-width">
+        <label data-i18n="city">City</label><input type="text" id="city" placeholder="City">
+        <label data-i18n="postal_code">Postal Code</label><input type="text" id="postalCode" placeholder="Postal Code">
+        <label data-i18n="country">Country</label><input type="text" id="country" placeholder="Country">
+    </div>
+    <button class="btn-checkout" onclick="secureYourPiece()">✦ SECURE YOUR PIECE ✦</button>
+    <p style="font-size:0.7rem; color:rgba(255,255,255,0.4); margin-top:10px;">Payment via Asaas. Your order goes to Printful once confirmed.</p>
 </div>
 
 <!-- LOADING OVERLAY -->
 <div class="loading-overlay" id="loadingOverlay">
     <div class="loading-log" id="loadingLog"></div>
 </div>
-
 <!-- RECEIPT CARD -->
 <div class="receipt-card" id="receiptCard">
     <h3>🎉 ORDER CONFIRMED</h3>
@@ -1396,7 +1578,7 @@
 <div class="easter-toast" id="easterToast"><span>🌈 SECRET MODE ACTIVATED!</span></div>
 
 <script>
-    // ═══════════════ COSMOS CANVAS 2D ENGINE ═══════════════
+    // ═══════════════ COSMOS CANVAS 2D ENGINE (SEU FUNDO ORIGINAL) ═══════════════
     (function() {
         const canvas = document.getElementById('cosmos-canvas');
         const ctx = canvas.getContext('2d');
@@ -1568,7 +1750,7 @@
         };
     })();
 
-    // ═══════════════ TRANSLATIONS ═══════════════
+    // ═══════════════ TRANSLATIONS (mantidas) ═══════════════
     const translations = {
         en: {
             nav_home: "Home", nav_collection: "Collection", nav_create: "Create", nav_manifesto: "Manifesto",
@@ -1980,7 +2162,90 @@
         if (panel.classList.contains('open')) setTimeout(() => panel.scrollIntoView({ behavior: 'smooth', block: 'center' }), 100);
     };
 
-    // ── CHECKOUT INTEGRADO (FIRESTORE BACKUP + CLOUD FUNCTION) ──
+    // ═══════════════ INICIALIZAÇÃO DOS NOVOS SELETORES ═══════════════
+    (function() {
+        // Cor
+        const colorOptions = document.querySelectorAll('.color-option');
+        const selectedColorInput = document.getElementById('selectedColor');
+        const moletomPreview = document.getElementById('moletomPreview');
+        colorOptions.forEach(opt => {
+            opt.addEventListener('click', () => {
+                colorOptions.forEach(o => o.classList.remove('selected'));
+                opt.classList.add('selected');
+                const color = opt.dataset.color;
+                selectedColorInput.value = color;
+                if (moletomPreview) moletomPreview.setAttribute('data-color', color);
+            });
+        });
+
+        // Estilo
+        const styleBtns = document.querySelectorAll('.style-btn');
+        const selectedStyleInput = document.getElementById('selectedStyle');
+        styleBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                styleBtns.forEach(b => b.classList.remove('selected'));
+                btn.classList.add('selected');
+                selectedStyleInput.value = btn.dataset.style;
+            });
+        });
+
+        // Posição
+        const positionBtns = document.querySelectorAll('.position-btn');
+        const selectedPositionInput = document.getElementById('selectedPosition');
+        positionBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                positionBtns.forEach(b => b.classList.remove('selected'));
+                btn.classList.add('selected');
+                selectedPositionInput.value = btn.dataset.position;
+            });
+        });
+
+        // Tamanho
+        const sizeBtns = document.querySelectorAll('.size-btn');
+        const selectedSizeInput = document.getElementById('selectedSize');
+        const customSizeInput = document.getElementById('customSizeInput');
+        const otherSizeBtn = document.getElementById('otherSizeBtn');
+        let isCustomSize = false;
+
+        sizeBtns.forEach(btn => {
+            if (btn === otherSizeBtn) {
+                btn.addEventListener('click', () => {
+                    isCustomSize = !isCustomSize;
+                    if (isCustomSize) {
+                        customSizeInput.style.display = 'block';
+                        btn.classList.add('selected');
+                        sizeBtns.forEach(b => { if (b !== btn) b.classList.remove('selected'); });
+                        selectedSizeInput.value = '';
+                    } else {
+                        customSizeInput.style.display = 'none';
+                        btn.classList.remove('selected');
+                        const anySelected = [...sizeBtns].some(b => b.classList.contains('selected') && b !== btn);
+                        if (!anySelected) {
+                            sizeBtns[0].classList.add('selected');
+                            selectedSizeInput.value = sizeBtns[0].dataset.size;
+                        }
+                    }
+                });
+            } else {
+                btn.addEventListener('click', () => {
+                    if (isCustomSize) {
+                        isCustomSize = false;
+                        customSizeInput.style.display = 'none';
+                        otherSizeBtn.classList.remove('selected');
+                    }
+                    sizeBtns.forEach(b => b.classList.remove('selected'));
+                    btn.classList.add('selected');
+                    selectedSizeInput.value = btn.dataset.size;
+                });
+            }
+        });
+
+        customSizeInput.addEventListener('input', () => {
+            if (isCustomSize) selectedSizeInput.value = customSizeInput.value;
+        });
+    })();
+
+    // ── CHECKOUT ATUALIZADO ──
     window.secureYourPiece = async function() {
         const fullName = document.getElementById('fullName').value.trim();
         const email = document.getElementById('email').value.trim();
@@ -1988,7 +2253,10 @@
         const city = document.getElementById('city').value.trim();
         const postalCode = document.getElementById('postalCode').value.trim();
         const country = document.getElementById('country').value.trim();
-        const size = document.getElementById('sizeSelect').value;
+        const selectedColor = document.getElementById('selectedColor').value;
+        const selectedStyle = document.getElementById('selectedStyle').value;
+        const selectedPosition = document.getElementById('selectedPosition').value;
+        const selectedSize = document.getElementById('selectedSize').value;
 
         if (!fullName || !email || !address || !city || !postalCode || !country) {
             alert('Please fill all shipping fields.');
@@ -2002,25 +2270,11 @@
             alert('Error: Front and Back designs must be unique to avoid duplication.');
             return;
         }
-
-        // Salva backup no Firestore ANTES de chamar a cloud function
-        try {
-            await db.collection('heksel_orders').add({
-                fullName,
-                email,
-                address,
-                city,
-                postalCode,
-                country,
-                size,
-                status: 'pending',
-                createdAt: firebase.firestore.FieldValue.serverTimestamp()
-            });
-        } catch (e) {
-            console.warn('Firestore backup failed, continuing...', e);
+        if (!selectedSize) {
+            alert('Please select a size or enter a custom size.');
+            return;
         }
 
-        // Overlay de carregamento
         const overlay = document.getElementById('loadingOverlay');
         const logDiv = document.getElementById('loadingLog');
         overlay.classList.add('active');
@@ -2044,7 +2298,6 @@
             }
         }, 800);
 
-        // Converte arquivos para base64
         const toBase64 = file => new Promise((resolve, reject) => {
             const reader = new FileReader();
             reader.onload = () => resolve(reader.result);
@@ -2056,6 +2309,21 @@
             const frontDesign = await toBase64(frontFile);
             const backDesign = await toBase64(backFile);
 
+            await db.collection('heksel_orders').add({
+                fullName,
+                email,
+                address,
+                city,
+                postalCode,
+                country,
+                size: selectedSize,
+                color: selectedColor,
+                style: selectedStyle,
+                position: selectedPosition,
+                status: 'pending',
+                createdAt: firebase.firestore.FieldValue.serverTimestamp()
+            });
+
             const cloudFunctionUrl = 'https://us-central1-heksel-imperio.cloudfunctions.net/processHekselOrder';
             const payload = {
                 fullName,
@@ -2064,7 +2332,10 @@
                 city,
                 postalCode,
                 country,
-                size,
+                size: selectedSize,
+                color: selectedColor,
+                style: selectedStyle,
+                position: selectedPosition,
                 frontDesign,
                 backDesign
             };
@@ -2076,13 +2347,17 @@
             });
 
             const result = await response.json();
-            if (!response.ok) {
-                throw new Error(result.error || 'Order failed');
-            }
+            if (!response.ok) throw new Error(result.error || 'Order failed');
 
-            // Exibe recibo premium
             const receiptCard = document.getElementById('receiptCard');
-            document.getElementById('receiptDetails').innerHTML = `Name: ${fullName}<br>Size: ${size}<br>Order ID: ${Math.floor(Math.random()*1000000)}`;
+            document.getElementById('receiptDetails').innerHTML = `
+                Name: ${fullName}<br>
+                Size: ${selectedSize}<br>
+                Color: ${selectedColor}<br>
+                Style: ${selectedStyle}<br>
+                Position: ${selectedPosition}<br>
+                Order ID: ${Math.floor(Math.random()*1000000)}
+            `;
             receiptCard.classList.add('show');
             overlay.classList.remove('active');
             logDiv.innerHTML = '';
