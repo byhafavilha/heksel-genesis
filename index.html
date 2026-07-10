@@ -379,6 +379,37 @@
         .prod-name { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 0.9rem; color: var(--white); margin-bottom: 6px; }
         .prod-price { font-family: 'Space Mono', monospace; font-size: 0.8rem; color: var(--gold); font-weight: 700; }
 
+        /* Estilo SHORTLY - Efeito de antecipação */
+        .prod-price.shortly {
+            font-family: 'Syne', sans-serif !important;
+            font-size: 0.7rem !important;
+            font-weight: 800 !important;
+            letter-spacing: 0.2em !important;
+            color: var(--cyan) !important;
+            background: rgba(0, 240, 255, 0.07);
+            border: 1.5px solid rgba(0, 240, 255, 0.35);
+            padding: 6px 14px;
+            border-radius: 6px;
+            display: inline-block;
+            text-transform: uppercase;
+            animation: shortlyPulse 2s ease-in-out infinite;
+            box-shadow: 0 0 12px rgba(0, 240, 255, 0.15);
+        }
+        @keyframes shortlyPulse {
+            0%, 100% { 
+                box-shadow: 0 0 8px rgba(0, 240, 255, 0.1); 
+                border-color: rgba(0, 240, 255, 0.35); 
+                color: var(--cyan);
+                text-shadow: 0 0 0px transparent;
+            }
+            50% { 
+                box-shadow: 0 0 22px rgba(0, 240, 255, 0.4), 0 0 40px rgba(180, 94, 255, 0.2); 
+                border-color: rgba(0, 240, 255, 0.8); 
+                color: #ffffff;
+                text-shadow: 0 0 12px rgba(0, 240, 255, 0.8);
+            }
+        }
+
         footer { background: rgba(4,4,8,0.99); padding: 80px 0 36px; color: rgba(255,255,255,0.6); border-top: 1px solid rgba(0,240,255,0.08); transition: var(--theme-transition); }
         .footer-grid { display: grid; grid-template-columns: 1.4fr repeat(3, 1fr); gap: 48px; margin-bottom: 48px; }
         .footer-logo img { height: 26px; margin-bottom: 14px; }
@@ -700,24 +731,24 @@
     </div>
 </section>
 
-<!-- COLLECTION SECTION -->
+<!-- COLLECTION SECTION ATUALIZADA COM SHORTLY -->
 <section class="collection" id="collection">
     <div class="section-inner">
         <span class="section-tag" data-i18n="collection_tag">⚡ NEO Collection — Drop 01</span>
         <h2 class="section-title"><span data-i18n="collection_title_1">Every Line.</span><br><span class="glow-text" data-i18n="collection_title_2">One Empire.</span></h2>
         <p class="section-sub" data-i18n="collection_sub">Laser-engineered performance meets street culture. Six silhouettes. One declaration.</p>
         <div class="card-grid">
-            <div class="prod-card"><img src="1000027632-removebg-preview.png" alt="NEO-KAI 01 FOR HIKING"><div class="prod-info"><div class="prod-name">NEO-KAI 01 FOR HIKING</div><div class="prod-price">$189</div><button class="notify-btn-card" onclick="openNotifyModal()" data-i18n="notify_me">Notify Me</button></div></div>
-            <div class="prod-card"><img src="1000027635-removebg-preview.png" alt="NEO-KAI 01 FOR RACING"><div class="prod-info"><div class="prod-name">NEO-KAI 01 FOR RACING</div><div class="prod-price">$189</div><button class="notify-btn-card" onclick="openNotifyModal()" data-i18n="notify_me">Notify Me</button></div></div>
-            <div class="prod-card"><img src="1000027638-removebg-preview.png" alt="NEO-KAI 01 FOR ACADEMIC"><div class="prod-info"><div class="prod-name">NEO-KAI 01 FOR ACADEMIC</div><div class="prod-price">$189</div><button class="notify-btn-card" onclick="openNotifyModal()" data-i18n="notify_me">Notify Me</button></div></div>
-            <div class="prod-card"><img src="1000027639-removebg-preview.png" alt="NEO-KAI 01 FOR FOOTBALL"><div class="prod-info"><div class="prod-name">NEO-KAI 01 FOR FOOTBALL</div><div class="prod-price">$189</div><button class="notify-btn-card" onclick="openNotifyModal()" data-i18n="notify_me">Notify Me</button></div></div>
-            <div class="prod-card"><img src="1000027648-removebg-preview.png" alt="NEO-WAI 01 SLIPPER FOR LEISURE"><div class="prod-info"><div class="prod-name">NEO-WAI 01 SLIPPER FOR LEISURE</div><div class="prod-price">$150</div><button class="notify-btn-card" onclick="openNotifyModal()" data-i18n="notify_me">Notify Me</button></div></div>
-            <div class="prod-card"><img src="1000027649-removebg-preview.png" alt="NEO-WAI 02 SPORTS FLIP-FLOPS"><div class="prod-info"><div class="prod-name">NEO-WAI 02 SPORTS FLIP-FLOPS</div><div class="prod-price">$150</div><button class="notify-btn-card" onclick="openNotifyModal()" data-i18n="notify_me">Notify Me</button></div></div>
-            <div class="prod-card"><img src="1000027651-removebg-preview.png" alt="NEO-LAI 01 SLIPPER WITH A SHORT BRIM"><div class="prod-info"><div class="prod-name">NEO-LAI 01 SLIPPER WITH A SHORT BRIM</div><div class="prod-price">$150</div><button class="notify-btn-card" onclick="openNotifyModal()" data-i18n="notify_me">Notify Me</button></div></div>
-            <div class="prod-card"><img src="1000027652-removebg-preview.png" alt="NEO-LAI 02 SLIPPER WITH LONG BRIM"><div class="prod-info"><div class="prod-name">NEO-LAI 02 SLIPPER WITH LONG BRIM</div><div class="prod-price">$150</div><button class="notify-btn-card" onclick="openNotifyModal()" data-i18n="notify_me">Notify Me</button></div></div>
-            <div class="prod-card"><img src="1000030702-removebg-preview.png" alt="NEO-MAI 01 HIGH HEELS"><div class="prod-info"><div class="prod-name">NEO-MAI 01 HIGH HEELS</div><div class="prod-price">$220</div><button class="notify-btn-card" onclick="openNotifyModal()" data-i18n="notify_me">Notify Me</button></div></div>
-            <div class="prod-card"><img src="1000030703-removebg-preview.png" alt="NEO-MAI 02 LOW HEELS"><div class="prod-info"><div class="prod-name">NEO-MAI 02 LOW HEELS</div><div class="prod-price">$220</div><button class="notify-btn-card" onclick="openNotifyModal()" data-i18n="notify_me">Notify Me</button></div></div>
-            <div class="prod-card"><img src="123 Sem Título_20260625133036.png" alt="NEO-VAI 01 LEATHER BOOT"><div class="prod-info"><div class="prod-name">NEO-VAI 01 LEATHER BOOT</div><div class="prod-price">$250</div><button class="notify-btn-card" onclick="openNotifyModal()" data-i18n="notify_me">Notify Me</button></div></div>
+            <div class="prod-card"><img src="1000027632-removebg-preview.png" alt="NEO-KAI 01 FOR HIKING"><div class="prod-info"><div class="prod-name">NEO-KAI 01 FOR HIKING</div><div class="prod-price shortly">SHORTLY</div><button class="notify-btn-card" onclick="openNotifyModal()" data-i18n="notify_me">Notify Me</button></div></div>
+            <div class="prod-card"><img src="1000027635-removebg-preview.png" alt="NEO-KAI 01 FOR RACING"><div class="prod-info"><div class="prod-name">NEO-KAI 01 FOR RACING</div><div class="prod-price shortly">SHORTLY</div><button class="notify-btn-card" onclick="openNotifyModal()" data-i18n="notify_me">Notify Me</button></div></div>
+            <div class="prod-card"><img src="1000027638-removebg-preview.png" alt="NEO-KAI 01 FOR ACADEMIC"><div class="prod-info"><div class="prod-name">NEO-KAI 01 FOR ACADEMIC</div><div class="prod-price shortly">SHORTLY</div><button class="notify-btn-card" onclick="openNotifyModal()" data-i18n="notify_me">Notify Me</button></div></div>
+            <div class="prod-card"><img src="1000027639-removebg-preview.png" alt="NEO-KAI 01 FOR FOOTBALL"><div class="prod-info"><div class="prod-name">NEO-KAI 01 FOR FOOTBALL</div><div class="prod-price shortly">SHORTLY</div><button class="notify-btn-card" onclick="openNotifyModal()" data-i18n="notify_me">Notify Me</button></div></div>
+            <div class="prod-card"><img src="1000027648-removebg-preview.png" alt="NEO-WAI 01 SLIPPER FOR LEISURE"><div class="prod-info"><div class="prod-name">NEO-WAI 01 SLIPPER FOR LEISURE</div><div class="prod-price shortly">SHORTLY</div><button class="notify-btn-card" onclick="openNotifyModal()" data-i18n="notify_me">Notify Me</button></div></div>
+            <div class="prod-card"><img src="1000027649-removebg-preview.png" alt="NEO-WAI 02 SPORTS FLIP-FLOPS"><div class="prod-info"><div class="prod-name">NEO-WAI 02 SPORTS FLIP-FLOPS</div><div class="prod-price shortly">SHORTLY</div><button class="notify-btn-card" onclick="openNotifyModal()" data-i18n="notify_me">Notify Me</button></div></div>
+            <div class="prod-card"><img src="1000027651-removebg-preview.png" alt="NEO-LAI 01 SLIPPER WITH A SHORT BRIM"><div class="prod-info"><div class="prod-name">NEO-LAI 01 SLIPPER WITH A SHORT BRIM</div><div class="prod-price shortly">SHORTLY</div><button class="notify-btn-card" onclick="openNotifyModal()" data-i18n="notify_me">Notify Me</button></div></div>
+            <div class="prod-card"><img src="1000027652-removebg-preview.png" alt="NEO-LAI 02 SLIPPER WITH LONG BRIM"><div class="prod-info"><div class="prod-name">NEO-LAI 02 SLIPPER WITH LONG BRIM</div><div class="prod-price shortly">SHORTLY</div><button class="notify-btn-card" onclick="openNotifyModal()" data-i18n="notify_me">Notify Me</button></div></div>
+            <div class="prod-card"><img src="1000030702-removebg-preview.png" alt="NEO-MAI 01 HIGH HEELS"><div class="prod-info"><div class="prod-name">NEO-MAI 01 HIGH HEELS</div><div class="prod-price shortly">SHORTLY</div><button class="notify-btn-card" onclick="openNotifyModal()" data-i18n="notify_me">Notify Me</button></div></div>
+            <div class="prod-card"><img src="1000030703-removebg-preview.png" alt="NEO-MAI 02 LOW HEELS"><div class="prod-info"><div class="prod-name">NEO-MAI 02 LOW HEELS</div><div class="prod-price shortly">SHORTLY</div><button class="notify-btn-card" onclick="openNotifyModal()" data-i18n="notify_me">Notify Me</button></div></div>
+            <div class="prod-card"><img src="123 Sem Título_20260625133036.png" alt="NEO-VAI 01 LEATHER BOOT"><div class="prod-info"><div class="prod-name">NEO-VAI 01 LEATHER BOOT</div><div class="prod-price shortly">SHORTLY</div><button class="notify-btn-card" onclick="openNotifyModal()" data-i18n="notify_me">Notify Me</button></div></div>
         </div>
     </div>
 </section>
@@ -1075,28 +1106,19 @@
 
     // ═══════════════ INICIALIZAÇÃO DOS SELETORES ═══════════════
     (function() {
-        // Color Picker
         const colorPicker = document.getElementById('colorPicker');
         const colorHexDisplay = document.getElementById('colorHexDisplay');
         const selectedColorHexInput = document.getElementById('selectedColorHex');
         const moletomPreview = document.getElementById('moletomPreview');
-
         function updateSweaterColor(hex) {
             if (moletomPreview) moletomPreview.style.background = hex;
             if (colorHexDisplay) colorHexDisplay.textContent = hex;
             if (selectedColorHexInput) selectedColorHexInput.value = hex;
         }
-
-        if (colorPicker) {
-            colorPicker.addEventListener('input', () => updateSweaterColor(colorPicker.value));
-            updateSweaterColor(colorPicker.value);
-        }
-
-        // Estilo (troca dinâmica da imagem)
+        if (colorPicker) { colorPicker.addEventListener('input', () => updateSweaterColor(colorPicker.value)); updateSweaterColor(colorPicker.value); }
         const styleBtns = document.querySelectorAll('.style-btn');
         const selectedStyleInput = document.getElementById('selectedStyle');
         const moletomImage = document.getElementById('moletomImage');
-
         styleBtns.forEach(btn => {
             btn.addEventListener('click', () => {
                 styleBtns.forEach(b => b.classList.remove('selected'));
@@ -1107,13 +1129,9 @@
                 }
             });
         });
-
-        // Posição
         const positionBtns = document.querySelectorAll('.position-btn');
         const selectedPositionInput = document.getElementById('selectedPosition');
         positionBtns.forEach(btn => { btn.addEventListener('click', () => { positionBtns.forEach(b => b.classList.remove('selected')); btn.classList.add('selected'); selectedPositionInput.value = btn.dataset.position; }); });
-
-        // Tamanho
         const sizeBtns = document.querySelectorAll('.size-btn');
         const selectedSizeInput = document.getElementById('selectedSize');
         const customSizeInput = document.getElementById('customSizeInput');
@@ -1137,17 +1155,14 @@
         const city = document.getElementById('city').value.trim();
         const postalCode = document.getElementById('postalCode').value.trim();
         const country = document.getElementById('country').value.trim();
-
         const selectedColorHex = document.getElementById('selectedColorHex').value;
         const selectedStyle = document.getElementById('selectedStyle').value;
         const selectedPosition = document.getElementById('selectedPosition').value;
         const selectedSize = document.getElementById('selectedSize').value;
         const leftSleeve = document.getElementById('leftSleeveCheck').checked;
         const rightSleeve = document.getElementById('rightSleeveCheck').checked;
-
         if (!fullName || !email || !address || !city || !postalCode || !country) { alert('Please fill all shipping fields.'); return; }
         if (!selectedSize) { alert('Please select a size or enter a custom size.'); return; }
-
         const overlay = document.getElementById('loadingOverlay');
         const logDiv = document.getElementById('loadingLog');
         overlay.classList.add('active');
@@ -1155,9 +1170,7 @@
         const messages = ['💸 [FINANCIAL INBOUND] Validating transaction...','🔐 [ENCRYPTION] Securing payload...','🏭 [HEKSEL FACTORY] Spinning production...','🧵 [MATERIAL] Picking premium cotton...','🖨️ [PRINT HEAD] Calibrating...'];
         let i = 0;
         const interval = setInterval(() => { if (i < messages.length) { const span = document.createElement('span'); span.textContent = messages[i]; logDiv.appendChild(span); i++; } else clearInterval(interval); }, 800);
-
         try {
-            // Backup Firestore (apenas metadados)
             await db.collection('heksel_orders').add({
                 fullName, email, address, city, postalCode, country,
                 size: selectedSize, colorHex: selectedColorHex, style: selectedStyle,
@@ -1165,8 +1178,6 @@
                 status: 'pending',
                 createdAt: firebase.firestore.FieldValue.serverTimestamp()
             });
-
-            // Webhook do Make com payload LEVE (sem Base64)
             const makeWebhookUrl = 'https://hook.us2.make.com/olcbiuxmt0knul3cuxpqauw5fsp1nsj5';
             const lightPayload = {
                 fullName, email, address, city, postalCode, country,
@@ -1181,15 +1192,12 @@
                 gifts: "Carta Personalizada 🃏 + Adesivo Exclusivo Heksel + Fragrância Especial Imperium 🧪",
                 timestamp: new Date().toISOString()
             };
-
             const response = await fetch(makeWebhookUrl, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(lightPayload)
             });
-
             if (!response.ok) throw new Error('Webhook failed');
-
             const receiptCard = document.getElementById('receiptCard');
             document.getElementById('receiptDetails').innerHTML = `
                 Name: ${fullName}<br>
