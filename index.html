@@ -552,7 +552,7 @@
     </div>
 </section>
 
-<!-- CUSTOMIZATION PANEL COM TROCA DINÂMICA DE IMAGEM -->
+<!-- CUSTOMIZATION PANEL COM IMAGENS CORRETAS -->
 <div id="customization-panel" style="margin: 20px auto 0; max-width: 550px;">
     <div class="moletom-preview" id="moletomPreview" style="background: #000000;">
         <img id="moletomImage" src="1000031474.png" alt="Moletom" style="mix-blend-mode: multiply;">
@@ -1102,7 +1102,6 @@
                 styleBtns.forEach(b => b.classList.remove('selected'));
                 btn.classList.add('selected');
                 selectedStyleInput.value = btn.dataset.style;
-                // Troca a imagem conforme o estilo
                 if (moletomImage && btn.dataset.image) {
                     moletomImage.src = btn.dataset.image;
                 }
@@ -1158,7 +1157,7 @@
         const interval = setInterval(() => { if (i < messages.length) { const span = document.createElement('span'); span.textContent = messages[i]; logDiv.appendChild(span); i++; } else clearInterval(interval); }, 800);
 
         try {
-            // Backup Firestore (apenas metadados leves)
+            // Backup Firestore (apenas metadados)
             await db.collection('heksel_orders').add({
                 fullName, email, address, city, postalCode, country,
                 size: selectedSize, colorHex: selectedColorHex, style: selectedStyle,
