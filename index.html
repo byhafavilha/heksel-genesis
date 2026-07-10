@@ -233,13 +233,8 @@
         .stat-divider { width: 1px; background: rgba(0,240,255,0.15); align-self: stretch; }
         .hero-right { position: relative; z-index: 1; display: flex; align-items: center; justify-content: center; }
 
-        /* PRODUCT VIEWER (FLEXBOX CENTERING ABSOLUTO) */
-        .product-viewer {
-            background: rgba(14, 14, 22, 0.7); backdrop-filter: blur(20px); border: 1px solid rgba(168, 85, 247, 0.3);
-            border-radius: 24px; max-width: 650px; width: 100%; text-align: center;
-            box-shadow: 0 0 40px rgba(168, 85, 247, 0.15); display: flex !important; flex-direction: column;
-            align-items: center; justify-content: center !important; overflow: hidden; position: relative;
-        }
+        /* PRODUCT VIEWER */
+        .product-viewer { background: rgba(14, 14, 22, 0.7); backdrop-filter: blur(20px); border: 1px solid rgba(168, 85, 247, 0.3); border-radius: 24px; max-width: 650px; width: 100%; text-align: center; box-shadow: 0 0 40px rgba(168, 85, 247, 0.15); display: flex !important; flex-direction: column; align-items: center; justify-content: center !important; overflow: hidden; position: relative; }
         .viewer-slides { position: relative; width: 100%; flex: 1; display: flex; align-items: center; justify-content: center; z-index: 0; min-height: 0; overflow: hidden; }
         .viewer-slide { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.4s ease-in-out; }
         .viewer-slide.active { opacity: 1; pointer-events: auto; position: relative; }
@@ -557,11 +552,10 @@
     </div>
 </section>
 
-<!-- CUSTOMIZATION PANEL COM COLOR PICKER E MANGAS -->
+<!-- CUSTOMIZATION PANEL COM TROCA DINÂMICA DE IMAGEM -->
 <div id="customization-panel" style="margin: 20px auto 0; max-width: 550px;">
-    <!-- PREVIEW DO MOLETOM COM COR DINÂMICA -->
     <div class="moletom-preview" id="moletomPreview" style="background: #000000;">
-        <img src="moletom-base.png" alt="Moletom">
+        <img id="moletomImage" src="1000031474.png" alt="Moletom" style="mix-blend-mode: multiply;">
     </div>
 
     <div class="upload-group">
@@ -578,7 +572,6 @@
     </div>
 
     <div class="customization-options">
-        <!-- PALETA LIVRE DE CORES -->
         <div>
             <label>Cor do Moletom (Escolha Qualquer Tom)</label>
             <div class="color-picker-wrapper">
@@ -588,19 +581,17 @@
             <input type="hidden" id="selectedColorHex" value="#000000">
         </div>
 
-        <!-- ESTILO DO MOLETOM -->
         <div>
             <label>Estilo do Moletom</label>
             <div class="style-selector" id="styleSelector">
-                <div class="style-btn selected" data-style="normal">Normal</div>
-                <div class="style-btn" data-style="esportivo">Esportivo</div>
-                <div class="style-btn" data-style="fashion">Fashion / Moda</div>
-                <div class="style-btn" data-style="inverno">Inverno</div>
+                <div class="style-btn selected" data-style="normal" data-image="1000031474.png">Normal</div>
+                <div class="style-btn" data-style="esportivo" data-image="1000031514.png">Esportivo</div>
+                <div class="style-btn" data-style="fashion" data-image="1000031516.png">Fashion / Moda</div>
+                <div class="style-btn" data-style="inverno" data-image="1000031525.png">Inverno</div>
             </div>
             <input type="hidden" id="selectedStyle" value="normal">
         </div>
 
-        <!-- POSIÇÃO DO DESIGN -->
         <div>
             <label>Posição do Design</label>
             <div class="position-selector" id="positionSelector">
@@ -610,7 +601,6 @@
             <input type="hidden" id="selectedPosition" value="centralizada">
         </div>
 
-        <!-- ESTAMPA NAS MANGAS -->
         <div>
             <label>Customização das Mangas</label>
             <div class="sleeve-options">
@@ -625,7 +615,6 @@
             </div>
         </div>
 
-        <!-- TAMANHO -->
         <div>
             <label>Tamanho</label>
             <div class="size-selector" id="sizeSelector">
@@ -650,7 +639,7 @@
         <label data-i18n="country">Country</label><input type="text" id="country" placeholder="Country" data-i18n-placeholder="country_placeholder">
     </div>
     <button class="btn-checkout" onclick="secureYourPiece()" data-i18n="secure_piece">✦ COMPRAR AGORA ✦</button>
-    <p style="font-size:0.7rem; color:rgba(255,255,255,0.4); margin-top:10px;" data-i18n="payment_note">Payment via Asaas. Your order goes to Printful once confirmed.</p>
+    <p style="font-size:0.7rem; color:rgba(255,255,255,0.4); margin-top:10px;">Payment via Asaas. Your order goes to Printful once confirmed.</p>
 </div>
 
 <!-- LOADING OVERLAY -->
@@ -1103,10 +1092,22 @@
             updateSweaterColor(colorPicker.value);
         }
 
-        // Estilo
+        // Estilo (troca dinâmica da imagem)
         const styleBtns = document.querySelectorAll('.style-btn');
         const selectedStyleInput = document.getElementById('selectedStyle');
-        styleBtns.forEach(btn => { btn.addEventListener('click', () => { styleBtns.forEach(b => b.classList.remove('selected')); btn.classList.add('selected'); selectedStyleInput.value = btn.dataset.style; }); });
+        const moletomImage = document.getElementById('moletomImage');
+
+        styleBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                styleBtns.forEach(b => b.classList.remove('selected'));
+                btn.classList.add('selected');
+                selectedStyleInput.value = btn.dataset.style;
+                // Troca a imagem conforme o estilo
+                if (moletomImage && btn.dataset.image) {
+                    moletomImage.src = btn.dataset.image;
+                }
+            });
+        });
 
         // Posição
         const positionBtns = document.querySelectorAll('.position-btn');
@@ -1129,7 +1130,7 @@
         customSizeInput.addEventListener('input', () => { if (isCustomSize) selectedSizeInput.value = customSizeInput.value; });
     })();
 
-    // ═══════════════ CHECKOUT COM WEBHOOK DO MAKE ═══════════════
+    // ═══════════════ CHECKOUT LEVE (SEM IMAGENS BASE64) ═══════════════
     window.secureYourPiece = async function() {
         const fullName = document.getElementById('fullName').value.trim();
         const email = document.getElementById('email').value.trim();
@@ -1146,8 +1147,6 @@
         const rightSleeve = document.getElementById('rightSleeveCheck').checked;
 
         if (!fullName || !email || !address || !city || !postalCode || !country) { alert('Please fill all shipping fields.'); return; }
-        if (!frontFile || !backFile) { alert('Please upload designs for both Front and Back.'); return; }
-        if (frontFile.name === backFile.name && frontFile.size === backFile.size && frontFile.lastModified === backFile.lastModified) { alert('Error: Front and Back designs must be unique to avoid duplication.'); return; }
         if (!selectedSize) { alert('Please select a size or enter a custom size.'); return; }
 
         const overlay = document.getElementById('loadingOverlay');
@@ -1158,36 +1157,28 @@
         let i = 0;
         const interval = setInterval(() => { if (i < messages.length) { const span = document.createElement('span'); span.textContent = messages[i]; logDiv.appendChild(span); i++; } else clearInterval(interval); }, 800);
 
-        const toBase64 = file => new Promise((resolve, reject) => { const reader = new FileReader(); reader.onload = () => resolve(reader.result); reader.onerror = reject; reader.readAsDataURL(file); });
-
         try {
-            const frontDesign = await toBase64(frontFile);
-            const backDesign = await toBase64(backFile);
-
-            // Backup Firestore
+            // Backup Firestore (apenas metadados leves)
             await db.collection('heksel_orders').add({
                 fullName, email, address, city, postalCode, country,
                 size: selectedSize, colorHex: selectedColorHex, style: selectedStyle,
                 position: selectedPosition, leftSleeve, rightSleeve,
-                frontDesign, backDesign,
                 status: 'pending',
                 createdAt: firebase.firestore.FieldValue.serverTimestamp()
             });
 
-            // Envio para o Webhook do Make
+            // Webhook do Make com payload LEVE (sem Base64)
             const makeWebhookUrl = 'https://hook.us2.make.com/olcbiuxmt0knul3cuxpqauw5fsp1nsj5';
-            const webhookPayload = {
+            const lightPayload = {
                 fullName, email, address, city, postalCode, country,
-                size: selectedSize,
                 colorHex: selectedColorHex,
+                size: selectedSize,
                 style: selectedStyle,
-                position: selectedPosition,
-                leftSleeve,
-                rightSleeve,
-                frontDesign,
-                backDesign,
+                chestPrintStyle: selectedPosition,
+                leftSleevePrint: leftSleeve,
+                rightSleevePrint: rightSleeve,
+                totalValue: "R$ 300,00",
                 product: "MEO-NAI Sweatshirt",
-                price: "R$ 300,00",
                 gifts: "Carta Personalizada 🃏 + Adesivo Exclusivo Heksel + Fragrância Especial Imperium 🧪",
                 timestamp: new Date().toISOString()
             };
@@ -1195,7 +1186,7 @@
             const response = await fetch(makeWebhookUrl, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(webhookPayload)
+                body: JSON.stringify(lightPayload)
             });
 
             if (!response.ok) throw new Error('Webhook failed');
