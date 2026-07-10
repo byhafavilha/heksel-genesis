@@ -1147,7 +1147,7 @@
         customSizeInput.addEventListener('input', () => { if (isCustomSize) selectedSizeInput.value = customSizeInput.value; });
     })();
 
-    // ═══════════════ CHECKOUT LEVE (SEM IMAGENS BASE64) ═══════════════
+    // ═══════════════ CHECKOUT LEVE (NOVO LINK MAKE) ═══════════════
     window.secureYourPiece = async function() {
         const fullName = document.getElementById('fullName').value.trim();
         const email = document.getElementById('email').value.trim();
@@ -1178,7 +1178,8 @@
                 status: 'pending',
                 createdAt: firebase.firestore.FieldValue.serverTimestamp()
             });
-            const makeWebhookUrl = 'https://hook.us2.make.com/cuijl325qrnxbjhkmp9bolezh2qrkxew'; // NOVO LINK
+            // NOVO LINK DO MAKE ATUALIZADO AQUI
+            const makeWebhookUrl = 'https://hook.us2.make.com/cuijl325qrnxbjhkmp9bolezh2qrkxew';
             const lightPayload = {
                 fullName, email, address, city, postalCode, country,
                 colorHex: selectedColorHex,
