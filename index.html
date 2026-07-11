@@ -321,10 +321,58 @@
         .loading-log { margin-top: 40px; font-family: 'Space Mono', monospace; font-size: 0.8rem; color: var(--cyan); text-align: center; min-height: 100px; line-height: 1.8; }
         .loading-log span { display: block; animation: logFade 1.5s ease-in-out; }
         @keyframes logFade { 0% { opacity: 0; transform: translateY(10px); } 20% { opacity: 1; transform: translateY(0); } 80% { opacity: 1; } 100% { opacity: 0.3; } }
-        .receipt-card { display: none; background: rgba(20,20,30,0.95); border: 1px solid var(--cyan); border-radius: 20px; padding: 40px; max-width: 400px; text-align: center; box-shadow: 0 0 60px rgba(0,240,255,0.3); position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 10001; }
+
+        /* RECEIPT CARD (PIX) */
+        .receipt-card { display: none; background: rgba(20,20,30,0.95); border: 1px solid var(--cyan); border-radius: 20px; padding: 40px 30px; max-width: 420px; text-align: center; box-shadow: 0 0 60px rgba(0,240,255,0.3); position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 10001; backdrop-filter: blur(20px); }
         .receipt-card.show { display: block; }
-        .receipt-card h3 { font-size: 1.8rem; color: var(--cyan); margin-bottom: 20px; }
-        .receipt-card p { color: rgba(255,255,255,0.7); margin: 10px 0; }
+        .receipt-card h3 { font-size: 1.8rem; color: var(--cyan); margin-bottom: 20px; font-family: 'Syne', sans-serif; }
+        .receipt-card .pix-qr { width: 200px; height: 200px; margin: 0 auto 20px; border-radius: 12px; border: 2px solid rgba(0,240,255,0.4); box-shadow: 0 0 20px rgba(0,240,255,0.3); }
+        .receipt-card .pix-input-wrap { position: relative; margin: 0 auto 20px; max-width: 300px; }
+        .receipt-card input#pixCopiaColaInput {
+            width: 100%;
+            padding: 12px 14px;
+            border-radius: 8px;
+            border: 1px solid rgba(0,240,255,0.4);
+            background: rgba(0,240,255,0.05);
+            color: var(--cyan);
+            font-family: 'Space Mono', monospace;
+            font-size: 0.75rem;
+            text-align: center;
+            outline: none;
+            transition: all 0.3s;
+            cursor: pointer;
+            pointer-events: all;
+        }
+        .receipt-card input#pixCopiaColaInput:hover {
+            border-color: var(--cyan);
+            box-shadow: 0 0 16px rgba(0,240,255,0.4);
+            background: rgba(0,240,255,0.1);
+        }
+        .receipt-card .copy-hint {
+            font-size: 0.65rem;
+            color: rgba(255,255,255,0.4);
+            margin-bottom: 16px;
+            font-family: 'Space Mono', monospace;
+            letter-spacing: 0.05em;
+        }
+        .receipt-card button.close-receipt {
+            background: linear-gradient(135deg, var(--purple), var(--cyan));
+            border: none;
+            color: white;
+            padding: 12px 32px;
+            border-radius: 50px;
+            font-family: 'Syne', sans-serif;
+            font-weight: 800;
+            font-size: 0.75rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .receipt-card button.close-receipt:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 20px rgba(180,94,255,0.6);
+        }
 
         /* MANIFESTO SECTION */
         .manifesto-section { padding: 100px 0; text-align: center; background: transparent; border-top: 1px solid rgba(0,240,255,0.1); position: relative; z-index: 1; }
@@ -379,7 +427,7 @@
         .prod-name { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 0.9rem; color: var(--white); margin-bottom: 6px; }
         .prod-price { font-family: 'Space Mono', monospace; font-size: 0.8rem; color: var(--gold); font-weight: 700; }
 
-        /* Estilo SHORTLY - Efeito de antecipação */
+        /* Estilo SHORTLY */
         .prod-price.shortly {
             font-family: 'Syne', sans-serif !important;
             font-size: 0.7rem !important;
@@ -677,12 +725,17 @@
 <div class="loading-overlay" id="loadingOverlay">
     <div class="loading-log" id="loadingLog"></div>
 </div>
-<!-- RECEIPT CARD -->
+
+<!-- RECEIPT CARD (NOVO COM PIX) -->
 <div class="receipt-card" id="receiptCard">
     <h3>🎉 ORDER CONFIRMED</h3>
-    <p>Your custom MEO-NAI Sweatshirt is now in production.</p>
-    <p id="receiptDetails"></p>
-    <button class="btn-order" onclick="document.getElementById('receiptCard').classList.remove('show')">CLOSE</button>
+    <p style="color:rgba(255,255,255,0.7); font-size:0.85rem; margin-bottom: 18px;">Scan the QR Code or use the code below to pay via PIX</p>
+    <img id="pixQrCodeImg" class="pix-qr" src="" alt="QR Code PIX">
+    <div class="pix-input-wrap">
+        <input type="text" id="pixCopiaColaInput" readonly value="" placeholder="PIX Copia e Cola">
+        <div class="copy-hint">Click to copy code</div>
+    </div>
+    <button class="close-receipt" onclick="document.getElementById('receiptCard').classList.remove('show')">CLOSE</button>
 </div>
 
 <!-- MANIFESTO SECTION -->
@@ -1147,7 +1200,7 @@
         customSizeInput.addEventListener('input', () => { if (isCustomSize) selectedSizeInput.value = customSizeInput.value; });
     })();
 
-    // ═══════════════ CHECKOUT LEVE (NOVO LINK DO MAKE) ═══════════════
+    // ═══════════════ CHECKOUT COM NOVO WEBHOOK E PIX ═══════════════
     window.secureYourPiece = async function() {
         const fullName = document.getElementById('fullName').value.trim();
         const email = document.getElementById('email').value.trim();
@@ -1178,7 +1231,6 @@
                 status: 'pending',
                 createdAt: firebase.firestore.FieldValue.serverTimestamp()
             });
-            // NOVO LINK DO MAKE ATUALIZADO
             const makeWebhookUrl = 'https://hook.us2.make.com/cuijl325qrnxbjhkmp9bolezh2qrkxew';
             const lightPayload = {
                 fullName, email, address, city, postalCode, country,
@@ -1199,17 +1251,19 @@
                 body: JSON.stringify(lightPayload)
             });
             if (!response.ok) throw new Error('Webhook failed');
+            const data = await response.json();
+            const qrCodeImg = document.getElementById('pixQrCodeImg');
+            const pixInput = document.getElementById('pixCopiaColaInput');
+            if (data.qrCode) qrCodeImg.src = data.qrCode;
+            if (data.copiaECola) {
+                pixInput.value = data.copiaECola;
+                pixInput.addEventListener('click', function copyPix() {
+                    pixInput.select();
+                    document.execCommand('copy');
+                    alert('PIX code copied!');
+                });
+            }
             const receiptCard = document.getElementById('receiptCard');
-            document.getElementById('receiptDetails').innerHTML = `
-                Name: ${fullName}<br>
-                Size: ${selectedSize}<br>
-                Color: ${selectedColorHex}<br>
-                Style: ${selectedStyle}<br>
-                Position: ${selectedPosition}<br>
-                Left Sleeve: ${leftSleeve ? 'Yes' : 'No'}<br>
-                Right Sleeve: ${rightSleeve ? 'Yes' : 'No'}<br>
-                Order ID: ${Math.floor(Math.random()*1000000)}
-            `;
             receiptCard.classList.add('show');
             overlay.classList.remove('active');
             logDiv.innerHTML = '';
