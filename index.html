@@ -1147,7 +1147,7 @@
         customSizeInput.addEventListener('input', () => { if (isCustomSize) selectedSizeInput.value = customSizeInput.value; });
     })();
 
-    // ═══════════════ CHECKOUT LEVE (NOVO LINK MAKE) ═══════════════
+    // ═══════════════ CHECKOUT LEVE (NOVO LINK DO MAKE) ═══════════════
     window.secureYourPiece = async function() {
         const fullName = document.getElementById('fullName').value.trim();
         const email = document.getElementById('email').value.trim();
@@ -1178,7 +1178,7 @@
                 status: 'pending',
                 createdAt: firebase.firestore.FieldValue.serverTimestamp()
             });
-            // NOVO LINK DO MAKE ATUALIZADO AQUI
+            // NOVO LINK DO MAKE ATUALIZADO
             const makeWebhookUrl = 'https://hook.us2.make.com/cuijl325qrnxbjhkmp9bolezh2qrkxew';
             const lightPayload = {
                 fullName, email, address, city, postalCode, country,
