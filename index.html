@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>HEKSEL IMPERIUM — NEO Collection 2026</title>
     <link rel="icon" href="1000027280.png" type="image/png">
-    <!-- Firebase SDKs -->
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
     <script>
@@ -25,7 +24,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:wght@300;400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
     <style>
         /* ═══════════════════════════════════════════════
-           RESET + CYBERPUNK LUXURY VARIABLES (completo)
+           RESET + CYBERPUNK LUXURY VARIABLES
         ═══════════════════════════════════════════════ */
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -213,7 +212,7 @@
         .lang-toggle { display: flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); padding: 6px 12px; border-radius: 50px; color: rgba(255,255,255,0.7); font-size: 0.75rem; cursor: pointer; transition: all 0.3s var(--ease); font-family: 'Syne', sans-serif; font-weight: 700; white-space: nowrap; }
         .lang-toggle:hover { border-color: var(--cyan); color: var(--white); background: rgba(0,240,255,0.08); }
 
-        /* HERO COM MEO-NAI CENTRALIZADO */
+        /* HERO */
         .hero { min-height: calc(100vh - 68px); display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; margin-top: 68px; }
         .hero::after { content: ''; position: absolute; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, transparent, rgba(0,240,255,0.15), transparent); animation: scanline 8s linear infinite; pointer-events: none; z-index: 0; }
         .section-inner { width: 100%; max-width: 1400px; margin: 0 auto; padding: 0 5%; }
@@ -265,6 +264,55 @@
         #customization-panel { opacity: 0; max-height: 0; overflow: hidden; transition: all 0.5s ease-in-out; margin-top: 0; background: rgba(14, 14, 22, 0.7); backdrop-filter: blur(20px); border: 1px solid rgba(168, 85, 247, 0.3); border-radius: 24px; padding: 0 24px; max-width: 550px; margin: 0 auto; }
         #customization-panel.open { opacity: 1; max-height: 2000px; padding: 24px; margin-top: 30px; }
 
+        /* ═══════════════════════════════════════════════
+           TROSKIA 3D HOLOGRAM LOGO (Infinite Rotation)
+        ═══════════════════════════════════════════════ */
+        .troskia-logo-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            margin: 10px 0 25px 0;
+            padding: 15px 0;
+            /* Perspectiva 3D para criar o efeito de holograma profundo */
+            perspective: 1200px;
+        }
+        .troskia-logo-img {
+            max-width: 200px;
+            width: 100%;
+            height: auto;
+            /* 1. Rotação Infinita 3D (360°) super suave e lenta */
+            animation: troskiaSpin 12s linear infinite;
+            transform-style: preserve-3d;
+            backface-visibility: hidden;
+            /* 2. Brilho Cyberpunk Neon (Roxo + Ciano ao redor dos caracteres) */
+            filter: drop-shadow(0 0 8px rgba(0, 240, 255, 0.6)) 
+                    drop-shadow(0 0 25px rgba(180, 94, 255, 0.8)) 
+                    drop-shadow(0 0 50px rgba(0, 240, 255, 0.2));
+            transition: filter 0.5s ease;
+            border-radius: 8px;
+        }
+        @keyframes troskiaSpin {
+            0%   { transform: rotateY(0deg); }
+            100% { transform: rotateY(360deg); }
+        }
+        /* Efeito de brilho pulsante extra no drop-shadow para um visual mais vivo */
+        @keyframes troskiaGlowPulse {
+            0%, 100% {
+                filter: drop-shadow(0 0 8px rgba(0, 240, 255, 0.6)) drop-shadow(0 0 25px rgba(180, 94, 255, 0.8)) drop-shadow(0 0 50px rgba(0, 240, 255, 0.2));
+            }
+            50% {
+                filter: drop-shadow(0 0 12px rgba(0, 240, 255, 0.9)) drop-shadow(0 0 35px rgba(180, 94, 255, 1.0)) drop-shadow(0 0 60px rgba(0, 240, 255, 0.4));
+            }
+        }
+        /* Aplicamos um pulso de brilho suave junto com a rotação para dar efeito de holograma ativo */
+        .troskia-logo-img {
+            animation: troskiaSpin 12s linear infinite, troskiaGlowPulse 3s ease-in-out infinite;
+        }
+        @media (max-width: 800px) {
+            .troskia-logo-img { max-width: 150px; }
+        }
+
         .upload-group { margin: 20px 0; display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
         .upload-box { flex: 1; min-width: 180px; background: rgba(255,255,255,0.03); border: 1px solid rgba(168,85,247,0.25); border-radius: 12px; padding: 12px; text-align: center; transition: all 0.3s ease; }
         .upload-box.highlight { border-color: var(--neon-purple); box-shadow: 0 0 12px rgba(168,85,247,0.3); }
@@ -278,14 +326,97 @@
         .shipping-form input, .shipping-form select { width: 100%; padding: 12px 16px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.03); color: white; font-family: 'DM Sans', sans-serif; font-size: 0.85rem; outline: none; }
         .shipping-form input:focus, .shipping-form select:focus { border-color: var(--neon-purple); box-shadow: 0 0 0 2px rgba(168,85,247,0.2); }
         .shipping-form select option { background: #1a1a2e; color: white; }
-        .shipping-form label { font-family: 'Syne', sans-serif; font-size: 0.6rem; font-weight: 600; letter-spacing: 0.08em; color: rgba(255,255,255,0.5); text-transform: uppercase; grid-column: span 2; margin-bottom: -6px; }
+        .shipping-form label { font-family: 'Syne', sans-serif; font-size: 0.6rem; font-weight: 600; letter-spacing: 0.08em; color: rgba(255,255,255,0.5); text-transform: uppercase; grid-column: span 2; margin-bottom: -6px; display: flex; align-items: center; gap: 8px; }
         .shipping-form .full-width { grid-column: span 2; }
 
-        /* NOVOS SELETORES */
+        /* BOTÃO (?) PULSANTE E VISÍVEL */
+        .help-tip-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            border: 2px solid var(--neon-purple);
+            background: rgba(168, 85, 247, 0.1);
+            color: var(--neon-purple);
+            font-family: 'Syne', sans-serif;
+            font-weight: 800;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            flex-shrink: 0;
+            line-height: 1;
+            padding: 0;
+            animation: helpBtnPulse 2.5s ease-in-out infinite;
+            box-shadow: 0 0 8px rgba(168, 85, 247, 0.3);
+        }
+        @keyframes helpBtnPulse {
+            0%, 100% { box-shadow: 0 0 8px rgba(168, 85, 247, 0.3); border-color: var(--neon-purple); }
+            50% { box-shadow: 0 0 20px rgba(168, 85, 247, 0.8), 0 0 35px rgba(168, 85, 247, 0.4); border-color: #d4a5ff; }
+        }
+        .help-tip-btn:hover, .help-tip-btn:focus-visible {
+            background: var(--neon-purple);
+            color: #ffffff;
+            box-shadow: 0 0 25px rgba(168, 85, 247, 0.9);
+            transform: scale(1.15);
+            animation: none;
+        }
+        .help-tip-btn.active {
+            background: var(--neon-purple);
+            color: #ffffff;
+            box-shadow: 0 0 25px rgba(168, 85, 247, 0.9);
+            animation: none;
+        }
+
+        /* TOOLTIP */
+        .help-tooltip {
+            position: absolute;
+            z-index: 9999;
+            background: rgba(10, 10, 20, 0.98);
+            backdrop-filter: blur(16px);
+            border: 1.5px solid rgba(168, 85, 247, 0.6);
+            border-radius: 12px;
+            padding: 14px 18px;
+            max-width: 280px;
+            width: max-content;
+            color: rgba(255, 255, 255, 0.9);
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.78rem;
+            line-height: 1.6;
+            font-weight: 400;
+            box-shadow: 0 0 30px rgba(168, 85, 247, 0.4), 0 8px 24px rgba(0, 0, 0, 0.8);
+            pointer-events: none;
+            opacity: 0;
+            transform: translateY(6px) scale(0.96);
+            transition: opacity 0.3s ease, transform 0.3s var(--ease-bounce);
+        }
+        .help-tooltip.visible {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+            pointer-events: auto;
+        }
+        .help-tooltip::before {
+            content: '';
+            position: absolute;
+            top: -8px;
+            left: 20px;
+            width: 14px;
+            height: 14px;
+            background: rgba(10, 10, 20, 0.98);
+            border-left: 1.5px solid rgba(168, 85, 247, 0.6);
+            border-top: 1.5px solid rgba(168, 85, 247, 0.6);
+            transform: rotate(45deg);
+        }
+
+        @media (max-width: 800px) {
+            .help-tooltip { max-width: 220px; font-size: 0.7rem; }
+        }
+
         .customization-options { display: flex; flex-direction: column; gap: 16px; margin: 20px 0; }
         .customization-options label { font-family: 'Syne', sans-serif; font-size: 0.6rem; font-weight: 600; letter-spacing: 0.08em; color: rgba(255,255,255,0.5); text-transform: uppercase; display: block; margin-bottom: 4px; }
 
-        /* COLOR PICKER */
         .color-picker-wrapper { display: flex; align-items: center; gap: 12px; }
         .color-picker-input { width: 50px; height: 50px; border: none; border-radius: 10px; cursor: pointer; background: transparent; padding: 0; }
         .color-picker-input::-webkit-color-swatch-wrapper { padding: 0; }
@@ -302,27 +433,23 @@
         .size-btn.selected { border-color: var(--cyan); background: rgba(0,240,255,0.1); color: var(--cyan); }
         .custom-size-input { display: none; margin-top: 8px; width: 100%; padding: 10px 14px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.15); background: rgba(255,255,255,0.05); color: white; font-family: 'DM Sans', sans-serif; font-size: 0.85rem; }
 
-        /* CHECKBOXES PARA MANGAS */
         .sleeve-options { display: flex; gap: 20px; align-items: center; flex-wrap: wrap; }
         .sleeve-option { display: flex; align-items: center; gap: 8px; }
         .sleeve-option input[type="checkbox"] { width: 18px; height: 18px; accent-color: var(--cyan); cursor: pointer; }
         .sleeve-option label { font-family: 'Syne', sans-serif; font-size: 0.7rem; font-weight: 600; color: rgba(255,255,255,0.7); cursor: pointer; margin-bottom: 0 !important; }
 
-        /* VISUALIZADOR DO MOLETOM */
         .moletom-preview { position: relative; width: 100%; max-width: 500px; margin: 0 auto 20px; border-radius: 20px; overflow: hidden; background: #111; box-shadow: 0 0 30px rgba(168,85,247,0.3); transition: background 0.3s ease; }
         .moletom-preview img { width: 100%; height: auto; display: block; mix-blend-mode: multiply; }
 
         .btn-checkout { margin-top: 20px; background: linear-gradient(135deg, #25D366, #1db954); color: white; border: none; padding: 14px 36px; border-radius: 12px; font-family: 'Syne', sans-serif; font-weight: 800; font-size: 0.78rem; letter-spacing: 0.14em; text-transform: uppercase; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 0 20px rgba(37, 211, 102, 0.3); }
         .btn-checkout:hover { transform: translateY(-2px); box-shadow: 0 0 30px rgba(37, 211, 102, 0.6); }
 
-        /* LOADING OVERLAY */
         .loading-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.95); backdrop-filter: blur(20px); z-index: 10000; flex-direction: column; align-items: center; justify-content: center; font-family: 'Syne', sans-serif; }
         .loading-overlay.active { display: flex; }
         .loading-log { margin-top: 40px; font-family: 'Space Mono', monospace; font-size: 0.8rem; color: var(--cyan); text-align: center; min-height: 100px; line-height: 1.8; }
         .loading-log span { display: block; animation: logFade 1.5s ease-in-out; }
         @keyframes logFade { 0% { opacity: 0; transform: translateY(10px); } 20% { opacity: 1; transform: translateY(0); } 80% { opacity: 1; } 100% { opacity: 0.3; } }
 
-        /* RECEIPT CARD (PIX) */
         .receipt-card { display: none; background: rgba(20,20,30,0.95); border: 1px solid var(--cyan); border-radius: 20px; padding: 40px 30px; max-width: 420px; text-align: center; box-shadow: 0 0 60px rgba(0,240,255,0.3); position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 10001; backdrop-filter: blur(20px); }
         .receipt-card.show { display: block; }
         .receipt-card h3 { font-size: 1.8rem; color: var(--cyan); margin-bottom: 20px; font-family: 'Syne', sans-serif; }
@@ -341,7 +468,6 @@
             outline: none;
             transition: all 0.3s;
             cursor: pointer;
-            pointer-events: all;
         }
         .receipt-card input#pixCopiaColaInput:hover {
             border-color: var(--cyan);
@@ -374,11 +500,9 @@
             box-shadow: 0 0 20px rgba(180,94,255,0.6);
         }
 
-        /* MANIFESTO SECTION */
         .manifesto-section { padding: 100px 0; text-align: center; background: transparent; border-top: 1px solid rgba(0,240,255,0.1); position: relative; z-index: 1; }
         .manifesto-text { max-width: 800px; margin: 0 auto; font-family: 'Syne', sans-serif; font-size: 1.6rem; font-weight: 600; line-height: 1.5; color: rgba(255,255,255,0.75); background: linear-gradient(120deg, var(--cyan), var(--purple), #ff2d78); -webkit-background-clip: text; background-clip: text; color: transparent; animation: glowPulse 4s ease-in-out infinite; }
 
-        /* SAFE SPACE SECTION */
         .safe-space-section { padding: 80px 0; text-align: center; position: relative; z-index: 1; overflow: hidden; border-top: 1px solid rgba(255,255,255,0.04); border-bottom: 1px solid rgba(255,255,255,0.04); background: radial-gradient(ellipse 60% 50% at 50% 50%, rgba(180,94,255,0.04), transparent 70%); }
         .safe-space-card { position: relative; z-index: 1; max-width: 700px; margin: 0 auto; padding: 48px 36px; border: 1px solid rgba(255,255,255,0.06); border-radius: 24px; background: rgba(14,14,24,0.7); backdrop-filter: blur(20px); transition: all 0.5s var(--ease); }
         .safe-space-icon-row { display: flex; justify-content: center; gap: 16px; margin-bottom: 24px; flex-wrap: wrap; }
@@ -396,7 +520,6 @@
         .safe-space-text { font-family: 'DM Sans', sans-serif; font-size: 0.95rem; line-height: 1.8; color: rgba(255,255,255,0.55); max-width: 550px; margin: 0 auto 20px; font-weight: 300; }
         .safe-space-accent { display: inline-block; width: 60px; height: 2px; background: linear-gradient(90deg, #ff2d78, #ff8c00, #ffd700, #00c864, #00b4ff, var(--purple)); border-radius: 2px; margin-top: 8px; opacity: 0.7; }
 
-        /* OUTRAS SEÇÕES */
         .brand-section { padding: 120px 0; text-align: center; background: linear-gradient(180deg, rgba(8,8,18,0.98) 0%, rgba(18,10,34,0.98) 30%, rgba(22,12,42,0.97) 60%, rgba(14,6,28,0.98) 100%); color: white; position: relative; z-index: 1; overflow: hidden; transition: var(--theme-transition); }
         .brand-section h2 { font-family: 'Syne', sans-serif; font-size: clamp(2.2rem, 5.5vw, 4rem); font-weight: 800; line-height: 1.05; margin-bottom: 22px; }
         .brand-section > p { color: rgba(255,255,255,0.45); max-width: 580px; margin: 0 auto 40px; font-size: 1.05rem; font-weight: 300; line-height: 1.75; }
@@ -427,7 +550,6 @@
         .prod-name { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 0.9rem; color: var(--white); margin-bottom: 6px; }
         .prod-price { font-family: 'Space Mono', monospace; font-size: 0.8rem; color: var(--gold); font-weight: 700; }
 
-        /* Estilo SHORTLY */
         .prod-price.shortly {
             font-family: 'Syne', sans-serif !important;
             font-size: 0.7rem !important;
@@ -475,7 +597,6 @@
         .footer-bottom { border-top: 1px solid rgba(255,255,255,0.06); padding-top: 28px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
         .footer-copy { font-family: 'Space Mono', monospace; font-size: 0.6rem; color: rgba(255,255,255,0.2); letter-spacing: 0.08em; }
 
-        /* MODAIS */
         .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.92); backdrop-filter: blur(18px); z-index: 3000; align-items: center; justify-content: center; }
         .order-modal { background: rgba(14,14,22,0.85); backdrop-filter: blur(16px); border: 1px solid rgba(255,255,255,0.08); border-radius: 20px; padding: 40px 36px 36px; max-width: 580px; width: 94%; max-height: 90vh; overflow-y: auto; text-align: center; box-shadow: 0 0 80px rgba(0,240,255,0.08); position: relative; animation: modalIn 0.4s ease; }
         @keyframes modalIn { 0% { opacity: 0; transform: translateY(30px) scale(0.96); } 100% { opacity: 1; transform: translateY(0) scale(1); } }
@@ -497,14 +618,12 @@
         .contact-btn span { font-family: 'Syne', sans-serif; font-size: 0.6rem; font-weight: 700; color: rgba(255,255,255,0.5); text-transform: uppercase; }
         .contact-btn:hover { transform: scale(1.05); border-color: rgba(255,255,255,0.2); background: rgba(255,255,255,0.04); }
 
-        /* CTA AVANÇADA */
         .cta-wrapper { display: flex; flex-direction: column; align-items: center; gap: 16px; width: 100%; margin-bottom: 16px; }
         .cta-advance { display: inline-flex; align-items: center; justify-content: center; gap: 12px; padding: 18px 48px; border-radius: 12px; font-family: 'Syne', sans-serif; font-weight: 800; font-size: 0.88rem; letter-spacing: 0.12em; text-transform: uppercase; color: #ffffff; background: rgba(255,255,255,0.04); backdrop-filter: blur(12px); border: 1.5px solid rgba(255,255,255,0.1); transition: all 0.4s var(--ease); position: relative; overflow: hidden; min-width: 240px; box-shadow: 0 0 20px rgba(0,240,255,0.05); text-shadow: 0 0 10px rgba(0,240,255,0.1); }
         .cta-advance::before { content: ''; position: absolute; inset: -2px; border-radius: 14px; padding: 2px; background: linear-gradient(135deg, rgba(0,240,255,0.4), rgba(201,168,76,0.3), rgba(0,240,255,0.4)); -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0); mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0); -webkit-mask-composite: xor; mask-composite: exclude; transition: all 0.4s var(--ease); z-index: -1; }
         .cta-advance:hover { transform: translateY(-4px); box-shadow: 0 0 40px rgba(0,240,255,0.2); border-color: transparent; }
         .cta-advance:hover::before { background: linear-gradient(135deg, var(--cyan), var(--gold-light), var(--cyan)); filter: blur(2px); }
 
-        /* THEME FAB */
         .theme-fab { position: fixed; bottom: 32px; right: 28px; z-index: 9000; width: 52px; height: 52px; border-radius: 50%; background: rgba(14,14,24,.85); border: 1.5px solid rgba(0,240,255,.25); backdrop-filter: blur(20px); display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all .4s var(--ease); box-shadow: 0 0 20px rgba(0,240,255,.1); }
         .theme-fab:hover { border-color: var(--cyan); box-shadow: 0 0 30px var(--cyan-glow); transform: scale(1.1) rotate(15deg); }
         .theme-icon { font-size: 1.3rem; }
@@ -631,8 +750,15 @@
     </div>
 </section>
 
-<!-- CUSTOMIZATION PANEL COM IMAGENS CORRETAS -->
+<!-- CUSTOMIZATION PANEL COM IMAGENS CORRETAS E TOOLTIPS VISÍVEIS -->
 <div id="customization-panel" style="margin: 20px auto 0; max-width: 550px;">
+    
+    <!-- 🌟 TROSKIA 3D HOLOGRAM LOGO (INTEGRAÇÃO SOLICITADA) -->
+    <div class="troskia-logo-wrapper">
+        <img src="ascii-art.png" alt="TroskIA Logo" class="troskia-logo-img">
+    </div>
+    <!-- FIM DA INTEGRAÇÃO TROSKIA -->
+
     <div class="moletom-preview" id="moletomPreview" style="background: #000000;">
         <img id="moletomImage" src="1000031474.png" alt="Moletom" style="mix-blend-mode: multiply;">
     </div>
@@ -711,11 +837,12 @@
 
     <div class="shipping-form">
         <label data-i18n="full_name">Full Name</label><input type="text" id="fullName" placeholder="Your Name" data-i18n-placeholder="your_name" class="full-width">
-        <label data-i18n="email">Email</label><input type="email" id="email" placeholder="you@example.com" class="full-width">
-        <label data-i18n="address">Shipping Address</label><input type="text" id="address" placeholder="Street, number" data-i18n-placeholder="street_number" class="full-width">
-        <label data-i18n="city">City</label><input type="text" id="city" placeholder="City" data-i18n-placeholder="city_placeholder">
-        <label data-i18n="postal_code">Postal Code</label><input type="text" id="postalCode" placeholder="Postal Code" data-i18n-placeholder="postal_code_placeholder">
-        <label data-i18n="country">Country</label><input type="text" id="country" placeholder="Country" data-i18n-placeholder="country_placeholder">
+        <label data-i18n="email">Email <button type="button" class="help-tip-btn" data-tip="email">?</button></label><input type="email" id="email" placeholder="you@example.com" class="full-width">
+        <label data-i18n="cpf">CPF <button type="button" class="help-tip-btn" data-tip="cpf">?</button></label><input type="text" id="cpf" placeholder="000.000.000-00" data-i18n-placeholder="cpf_placeholder" class="full-width">
+        <label data-i18n="address">Shipping Address <button type="button" class="help-tip-btn" data-tip="address">?</button></label><input type="text" id="address" placeholder="Street, number" data-i18n-placeholder="street_number" class="full-width">
+        <label data-i18n="city">City <button type="button" class="help-tip-btn" data-tip="city">?</button></label><input type="text" id="city" placeholder="City" data-i18n-placeholder="city_placeholder">
+        <label data-i18n="postal_code">Postal Code <button type="button" class="help-tip-btn" data-tip="postalCode">?</button></label><input type="text" id="postalCode" placeholder="Postal Code" data-i18n-placeholder="postal_code_placeholder">
+        <label data-i18n="country">Country <button type="button" class="help-tip-btn" data-tip="country">?</button></label><input type="text" id="country" placeholder="Country" data-i18n-placeholder="country_placeholder">
     </div>
     <button class="btn-checkout" onclick="secureYourPiece()" data-i18n="secure_piece">✦ COMPRAR AGORA ✦</button>
     <p style="font-size:0.7rem; color:rgba(255,255,255,0.4); margin-top:10px;">Payment via Asaas. Your order goes to Printful once confirmed.</p>
@@ -726,7 +853,7 @@
     <div class="loading-log" id="loadingLog"></div>
 </div>
 
-<!-- RECEIPT CARD (NOVO COM PIX) -->
+<!-- RECEIPT CARD (PIX) -->
 <div class="receipt-card" id="receiptCard">
     <h3>🎉 ORDER CONFIRMED</h3>
     <p style="color:rgba(255,255,255,0.7); font-size:0.85rem; margin-bottom: 18px;">Scan the QR Code or use the code below to pay via PIX</p>
@@ -926,6 +1053,9 @@
 <button class="theme-fab" id="themeFab" title="Switch theme" type="button"><span class="theme-icon" id="themeIcon">☀</span></button>
 <div class="easter-toast" id="easterToast"><span>🌈 SECRET MODE ACTIVATED!</span></div>
 
+<!-- TOOLTIP GLOBAL -->
+<div id="helpTooltip" class="help-tooltip"></div>
+
 <script>
     // ═══════════════ COSMOS CANVAS 2D ENGINE ═══════════════
     (function() {
@@ -1037,6 +1167,7 @@
             item3_title: "Official Genesis Sticker Pack", item3_desc: "High-fidelity vinyl stickers to customize your laptop or gear.",
             item4_title: "Handcrafted Serialized Letter", item4_desc: "Custom thank-you card with your unique serial number (e.g., \"You are customer #10\"), locking your collector position.",
             size: "Size", front_design: "Front Design", back_design: "Back Design", full_name: "Full Name", email: "Email",
+            cpf: "CPF", cpf_placeholder: "000.000.000-00",
             address: "Shipping Address", city: "City", postal_code: "Postal Code", country: "Country",
             your_name: "Your Name", street_number: "Street, number", city_placeholder: "City",
             postal_code_placeholder: "Postal Code", country_placeholder: "Country",
@@ -1200,10 +1331,113 @@
         customSizeInput.addEventListener('input', () => { if (isCustomSize) selectedSizeInput.value = customSizeInput.value; });
     })();
 
-    // ═══════════════ CHECKOUT COM NOVO WEBHOOK E PIX ═══════════════
+    // ═══════════════ TOOLTIPS DE AJUDA (VISÍVEIS E FUNCIONAIS) ═══════════════
+    (function() {
+        const tooltip = document.getElementById('helpTooltip');
+        const buttons = document.querySelectorAll('.help-tip-btn');
+        let activeBtn = null;
+
+        const tooltipTexts = {
+            email: 'Usamos seu e-mail exclusivamente para enviar o código de rastreio do seu moletom e as atualizações do envio. Zero spam.',
+            cpf: 'Exigência do Banco Central do Brasil para a emissão segura e instantânea do seu QR Code PIX oficial via Asaas. Seus dados são criptografados.',
+            address: 'O endereço onde a nossa transportadora de elite vai entregar a sua peça exclusiva Heksel Genesis em mãos.',
+            city: 'Necessário para calcular a rota logística mais rápida até a sua região.',
+            postalCode: 'Essencial para a indexação correta nos Correios/Transportadora, garantindo que seu pacote não sofra desvios.',
+            country: 'A Heksel Genesis envia para todo o mundo. Confirmar o país garante a emissão correta da nota fiscal de transporte.'
+        };
+
+        function positionTooltip(btn) {
+            const rect = btn.getBoundingClientRect();
+            const tooltipH = tooltip.offsetHeight;
+            const tooltipW = tooltip.offsetWidth;
+            const scrollX = window.scrollX || document.documentElement.scrollLeft;
+            const scrollY = window.scrollY || document.documentElement.scrollTop;
+
+            let left = rect.left + scrollX - 10;
+            let top = rect.bottom + scrollY + 8;
+
+            // Não deixa sair pela direita
+            if (left + tooltipW > document.documentElement.clientWidth + scrollX - 20) {
+                left = document.documentElement.clientWidth + scrollX - tooltipW - 20;
+            }
+            if (left < scrollX + 10) left = scrollX + 10;
+
+            // Não deixa sair por baixo (flip para cima)
+            if (top + tooltipH > document.documentElement.clientHeight + scrollY - 20) {
+                top = rect.top + scrollY - tooltipH - 8;
+                tooltip.style.setProperty('--arrow-top', 'auto');
+                tooltip.style.setProperty('--arrow-bottom', '-8px');
+            } else {
+                tooltip.style.setProperty('--arrow-top', '-8px');
+                tooltip.style.setProperty('--arrow-bottom', 'auto');
+            }
+
+            tooltip.style.top = top + 'px';
+            tooltip.style.left = left + 'px';
+        }
+
+        function showTooltip(btn) {
+            const tipKey = btn.getAttribute('data-tip');
+            if (tooltipTexts[tipKey]) {
+                tooltip.textContent = tooltipTexts[tipKey];
+                positionTooltip(btn);
+                tooltip.classList.add('visible');
+                btn.classList.add('active');
+                activeBtn = btn;
+            }
+        }
+
+        function hideTooltip() {
+            tooltip.classList.remove('visible');
+            if (activeBtn) {
+                activeBtn.classList.remove('active');
+                activeBtn = null;
+            }
+        }
+
+        buttons.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                if (activeBtn === btn) {
+                    hideTooltip();
+                } else {
+                    hideTooltip();
+                    showTooltip(btn);
+                }
+            });
+            btn.addEventListener('mouseenter', () => {
+                if (activeBtn !== btn) {
+                    hideTooltip();
+                    showTooltip(btn);
+                }
+            });
+            btn.addEventListener('mouseleave', () => {
+                if (activeBtn === btn) return;
+                hideTooltip();
+            });
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!e.target.classList.contains('help-tip-btn') && !tooltip.contains(e.target)) {
+                hideTooltip();
+            }
+        });
+
+        window.addEventListener('scroll', () => {
+            if (activeBtn) positionTooltip(activeBtn);
+        }, { passive: true });
+
+        window.addEventListener('resize', () => {
+            if (activeBtn) positionTooltip(activeBtn);
+        });
+    })();
+
+    // ═══════════════ CHECKOUT COM NOVO WEBHOOK, PIX E CPF ═══════════════
     window.secureYourPiece = async function() {
         const fullName = document.getElementById('fullName').value.trim();
         const email = document.getElementById('email').value.trim();
+        const cpf = document.getElementById('cpf').value.trim();
         const address = document.getElementById('address').value.trim();
         const city = document.getElementById('city').value.trim();
         const postalCode = document.getElementById('postalCode').value.trim();
@@ -1214,8 +1448,13 @@
         const selectedSize = document.getElementById('selectedSize').value;
         const leftSleeve = document.getElementById('leftSleeveCheck').checked;
         const rightSleeve = document.getElementById('rightSleeveCheck').checked;
-        if (!fullName || !email || !address || !city || !postalCode || !country) { alert('Please fill all shipping fields.'); return; }
+
+        if (!fullName || !email || !cpf || !address || !city || !postalCode || !country) {
+            alert('Please fill all shipping fields, including CPF.');
+            return;
+        }
         if (!selectedSize) { alert('Please select a size or enter a custom size.'); return; }
+
         const overlay = document.getElementById('loadingOverlay');
         const logDiv = document.getElementById('loadingLog');
         overlay.classList.add('active');
@@ -1223,17 +1462,19 @@
         const messages = ['💸 [FINANCIAL INBOUND] Validating transaction...','🔐 [ENCRYPTION] Securing payload...','🏭 [HEKSEL FACTORY] Spinning production...','🧵 [MATERIAL] Picking premium cotton...','🖨️ [PRINT HEAD] Calibrating...'];
         let i = 0;
         const interval = setInterval(() => { if (i < messages.length) { const span = document.createElement('span'); span.textContent = messages[i]; logDiv.appendChild(span); i++; } else clearInterval(interval); }, 800);
+
         try {
             await db.collection('heksel_orders').add({
-                fullName, email, address, city, postalCode, country,
+                fullName, email, cpf, address, city, postalCode, country,
                 size: selectedSize, colorHex: selectedColorHex, style: selectedStyle,
                 position: selectedPosition, leftSleeve, rightSleeve,
                 status: 'pending',
                 createdAt: firebase.firestore.FieldValue.serverTimestamp()
             });
+
             const makeWebhookUrl = 'https://hook.us2.make.com/cuijl325qrnxbjhkmp9bolezh2qrkxew';
             const lightPayload = {
-                fullName, email, address, city, postalCode, country,
+                fullName, email, cpf, address, city, postalCode, country,
                 colorHex: selectedColorHex,
                 size: selectedSize,
                 style: selectedStyle,
@@ -1245,12 +1486,15 @@
                 gifts: "Carta Personalizada 🃏 + Adesivo Exclusivo Heksel + Fragrância Especial Imperium 🧪",
                 timestamp: new Date().toISOString()
             };
+
             const response = await fetch(makeWebhookUrl, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(lightPayload)
             });
+
             if (!response.ok) throw new Error('Webhook failed');
+
             const data = await response.json();
             const qrCodeImg = document.getElementById('pixQrCodeImg');
             const pixInput = document.getElementById('pixCopiaColaInput');
@@ -1263,6 +1507,7 @@
                     alert('PIX code copied!');
                 });
             }
+
             const receiptCard = document.getElementById('receiptCard');
             receiptCard.classList.add('show');
             overlay.classList.remove('active');
